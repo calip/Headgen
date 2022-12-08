@@ -1,0 +1,76 @@
+{
+  "appId": 1,
+  "appName": "Pixgen",
+  "admin": true,
+  "layout": {
+    "width": 4000,
+    "height": 6000,
+    "padding": 10,
+    "dpc": 100
+  },
+  "templates": [
+    {
+      "id": 1,
+      "name": "Multilines",
+      "layout": [2, 3, 2, 3, 2, 2],
+      "fontTitle": "mexcellent",
+      "fonts": ["stripey", "mexcellent", "italianno"]
+    },
+    {
+      "id": 2,
+      "name": "Simple",
+      "layout": [1, 2],
+      "fontTitle": "italianno",
+      "fonts": ["comfortaa", "italianno"]
+    },
+    {
+      "id": 3,
+      "name": "One Line",
+      "layout": [1],
+      "fontTitle": "comfortaa",
+      "fonts": ["mexcellent", "italianno"]
+    },
+    {
+      "id": 4,
+      "name": "Complex",
+      "layout": [3, 2, 1, 4, 3, 1, 2, 3],
+      "fontTitle": "comfortaa",
+      "fonts": ["italianno"]
+    }
+  ],
+  "input": {
+    "max": null,
+    "defaultIcon": ["anker", "gorilla"],
+    "icons": [
+      {
+        "name": "gorilla",
+        "file": "./icons/516_Gorilla_V1.svg",
+        "tags": ["animal", "ape"]
+      },
+      {
+        "name": "kuschel",
+        "file": "./icons/501_kuscheln_V1.svg",
+        "tags": ["animal", "mami"]
+      },
+      {
+        "name": "anker",
+        "file": "./icons/503_Anker_V1.svg",
+        "tags": ["car", "mama"]
+      },
+      {
+        "name": "tannenzapfen",
+        "file": "./icons/511_Tannenzapfen_V1.svg",
+        "tags": ["toy", "motor"]
+      },
+      {
+        "name": "umarmen",
+        "file": "./icons/500_umarmen_V1.svg",
+        "tags": ["house"]
+      }
+    ]
+  },
+  "toolbar": {
+    "fontFamily": true,
+    "fontSpacing": true
+  }
+}

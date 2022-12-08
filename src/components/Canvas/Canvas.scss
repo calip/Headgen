@@ -1,0 +1,69 @@
+.pix-editor {
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  border-radius: 2px;
+  background-color: white;
+  width: fit-content;
+  margin: 80px auto 0 auto;
+}
+
+.pix-canvas {
+  display: grid;
+}
+
+.pix-content {
+  cursor: grab;
+}
+
+.pix-content-selected {
+  outline: dashed 1px #0e6ffd;
+}
+
+.pix-content-target {
+  background-color: #7aafff;
+}
+
+.pix-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.center-screen {
+  border: 1px dotted #a5a5a5;
+}
+
+.pix-title {
+  cursor: grab;
+}
+
+.pix-title-selected {
+  outline: dashed 1px #0e6ffd;
+}
+
+.item-wrapper {
+  display: flex;
+  max-width: 370px;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.icon-image {
+  max-height: 1.5ex;
+  margin-bottom: 0.5ex;
+  margin-left: 0.1ex;
+}
+
+table {
+  width: 100%;
+  white-space:nowrap;
+}
+
+table td {
+  text-align: center;
+}
+
+table td:hover {
+  background-color: #d4d4d4;
+}
+

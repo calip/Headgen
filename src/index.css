@@ -1,0 +1,35 @@
+html {
+  overflow: hidden;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+@font-face {
+  font-family: 'Comfortaa-Wordpix';
+  src: local('Comfortaa-Wordpix'), url(assets/fonts/Comfortaa-Wordpix.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Italianno-Wordpix';
+  src: local('Italianno-Wordpix'), url(assets/fonts/Italianno-Wordpix.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'MarqueeMoon-Wordpix';
+  src: local('MarqueeMoon-Wordpix'), url(assets/fonts/MarqueeMoon-Wordpix.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Mexcellent-Wordpix';
+  src: local('Mexcellent-Wordpix'), url(assets/fonts/Mexcellent-Wordpix.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Stripey-Wordpix';
+  src: local('Stripey-Wordpix'), url(assets/fonts/Stripey-Wordpix.ttf) format('truetype');
+}
