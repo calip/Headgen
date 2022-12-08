@@ -1,0 +1,39 @@
+.panel-button {
+  position: absolute;
+  left: -33px;
+  top: 75px;
+
+  button {
+    border: 0;
+    background: #fff;
+    border-radius: 5px;
+    padding: 8px;
+  }
+}
+
+.panel {
+  border-top: 1px solid #ebebeb;
+  height: 100%;
+  position: fixed;
+  margin-right: -250px;
+  background-color: #fff;
+  transition: 0.5s;
+  right: 0;
+  top: 0;
+  width: 250px;
+  z-index: 0;
+}
+
+.panel.is-open {
+  margin-right: 0;
+  transition: .5s;
+}
+
+
+.panel-nav {
+  margin-top: 70px;
+}
+
+.panel-container {
+  font-size: 12px;
+}
