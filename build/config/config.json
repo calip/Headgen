@@ -1,6 +1,7 @@
 {
   "appId": 1,
   "appName": "Pixgen",
+  "language": "de",
   "admin": true,
   "layout": {
     "width": 4000,
@@ -40,7 +41,7 @@
   ],
   "input": {
     "max": null,
-    "defaultIcon": "anker",
+    "defaultIcon": ["anker", "gorilla"],
     "icons": [
       {
         "name": "gorilla",
