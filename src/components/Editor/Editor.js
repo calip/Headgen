@@ -8,6 +8,9 @@ import Canvas from '../Canvas/Canvas'
 import Navbar from '../Navbar/Navbar'
 import Input from '../../utils/Input'
 import Helpers from '../../utils/Helpers'
+import { useTranslation } from 'react-i18next'
+import '../../utils/i18n'
+import './Editor.scss'
 
 function Editor({ config }) {
   const width = config.layout.width
@@ -16,12 +19,13 @@ function Editor({ config }) {
   const dpc = config.layout.dpc
   const icons = config.input.icons
   const templates = config.templates
+  const language = config.language
   const sidebarOpen = Helpers.isTouchScreenDevice() ? false : true
 
   const [isAdmin, setIsAdmin] = useState(false)
-  const [fontType, setFontType] = useState('Font Family')
-  const [fontSize, setFontSize] = useState('Font Size')
-  const [fontSpacing, setFontSpacing] = useState('No Spacing')
+  const [fontType, setFontType] = useState('FontFamily')
+  const [fontSize, setFontSize] = useState('FontSize')
+  const [fontSpacing, setFontSpacing] = useState('NoSpacing')
   const [layoutType, setLayoutType] = useState('Layout')
   const [isSidebarOpen, setSidebarOpen] = useState(sidebarOpen)
   const [isPanelOpen, setPanelOpen] = useState(false)
@@ -37,6 +41,8 @@ function Editor({ config }) {
   const handleDownload = (quality) => () => {
     exportAsImage(exportRef.current, layoutDpc, config.appName, quality)
   }
+
+  const { i18n } = useTranslation()
 
   //get query param to load json file
   //url http://localhost:3000/?file=http://localhost:5001/api/marketing-announcement
@@ -108,6 +114,7 @@ function Editor({ config }) {
     const items = Helpers.getInputItem(config)
     if (items) {
       setInputItem(items)
+      i18n.changeLanguage(language)
     }
   }, [config])
 
