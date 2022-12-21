@@ -16,6 +16,7 @@ import {
 import Dialog from '../Dialog/Dialog'
 import Input from '../../utils/Input'
 import Helpers from '../../utils/Helpers'
+import i18n from '../../utils/i18n'
 
 function Panel({ toggle, isOpen, layout, items, template, config }) {
   const currentTemplate = config.templates.find((item) => item.id === items.inputItem.template)
@@ -89,12 +90,12 @@ function Panel({ toggle, isOpen, layout, items, template, config }) {
         </button>
       </div>
       <div className="panel-nav flex-column p-3">
-        <h6 className="mb-3">Layout</h6>
+        <h6 className="mb-3">{i18n.t('Layout')}</h6>
         <div className="panel-container">
           <Row>
             <Col>
               <FormGroup className="mb-3" controlId="formGroupEmail">
-                <FormLabel>Width (px) </FormLabel>
+                <FormLabel>{i18n.t('Width')} (px) </FormLabel>
                 <FormControl
                   className="form-control-sm"
                   type="number"
@@ -111,7 +112,7 @@ function Panel({ toggle, isOpen, layout, items, template, config }) {
             </Col>
             <Col>
               <FormGroup className="mb-3" controlId="formGroupEmail">
-                <FormLabel>Height (px) </FormLabel>
+                <FormLabel>{i18n.t('Height')} (px) </FormLabel>
                 <FormControl
                   className="form-control-sm"
                   type="number"
@@ -128,7 +129,7 @@ function Panel({ toggle, isOpen, layout, items, template, config }) {
           <Row>
             <Col>
               <FormGroup className="mb-3" controlId="formGroupEmail">
-                <FormLabel>Padding (px)</FormLabel>
+                <FormLabel>{i18n.t('Padding')} (px)</FormLabel>
                 <FormControl
                   className="form-control-sm"
                   type="number"
@@ -144,12 +145,12 @@ function Panel({ toggle, isOpen, layout, items, template, config }) {
             <Col></Col>
           </Row>
         </div>
-        <h6 className="mb-3">Resolution</h6>
+        <h6 className="mb-3">{i18n.t('Resolution')}</h6>
         <div className="panel-container">
           <Row>
             <Col>
               <FormGroup className="mb-3" controlId="formGroupEmail">
-                <FormLabel>DPC</FormLabel>
+                <FormLabel>{i18n.t('DPC')}</FormLabel>
                 <FormControl
                   className="form-control-sm"
                   type="number"
@@ -165,7 +166,7 @@ function Panel({ toggle, isOpen, layout, items, template, config }) {
           </Row>
         </div>
         <hr />
-        <h6 className="mb-3">Template</h6>
+        <h6 className="mb-3">{i18n.t('Template')}</h6>
         <div className="panel-container">
           <DropdownButton
             variant="outline-dark"
@@ -186,7 +187,7 @@ function Panel({ toggle, isOpen, layout, items, template, config }) {
         <hr />
         <div className="panel-container">
           <Button variant="outline-secondary" onClick={showDialog}>
-            <FontAwesomeIcon icon={faEraser} /> Clear Session
+            <FontAwesomeIcon icon={faEraser} /> {i18n.t('ClearSession')}
           </Button>
         </div>
       </div>
