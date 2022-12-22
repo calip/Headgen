@@ -12,7 +12,6 @@ const TableData = ({
   dragId,
   targetDrag,
   setDragId,
-  setTargetDrag,
   handleTouchTarget
 }) => {
   const [top, setTop] = useState(0)
@@ -47,7 +46,6 @@ const TableData = ({
     const target = element.parentElement.closest('td')
     if (target) {
       const targetId = Math.abs(target.id)
-
       setDragId(targetId)
       setXAtTouchPointStart(x)
       setYAtTouchPointStart(y)
@@ -64,6 +62,9 @@ const TableData = ({
     let x = 0
     let y = 0
 
+    let targetX = 0
+    let targetY = 0
+
     if (
       e.type === 'touchstart' ||
       e.type === 'touchmove' ||
@@ -74,6 +75,9 @@ const TableData = ({
       let touch = evt.touches[0] || evt.changedTouches[0]
       x = +touch.pageX
       y = +touch.pageY
+
+      targetX = +touch.clientX
+      targetY = +touch.clientY
     } else if (
       e.type === 'mousedown' ||
       e.type === 'mouseup' ||
@@ -87,16 +91,15 @@ const TableData = ({
       y = +e.clientY
     }
 
-    // const targetX = e.changedTouches[0].clientX
-    // const targetY = e.changedTouches[0].clientY
-    const element = document.elementFromPoint(x, y)
+    const element = document.elementFromPoint(targetX, targetY)
     if (element) {
       const target = element.parentElement.closest('td')
       if (target) {
         const targetId = Math.abs(target.id)
-        if (dragId !== targetId) {
-          setTargetDrag(targetId)
-          console.log(dragId, targetId)
+
+        if (targetId > 0 && targetId !== dragId) {
+          clearTargetStyle()
+          target.style.background = '#7aafff'
         }
       }
     }
@@ -105,6 +108,13 @@ const TableData = ({
     const yRelativeToStart = y - yAtTouchPointStart - 35
     setTop(yRelativeToStart + 'px')
     setLeft(xRelativeToStart + 'px')
+  }
+
+  const clearTargetStyle = () => {
+    const ele = document.querySelectorAll('.pix-content')
+    Array.from(ele).map((el) => {
+      el.style.background = ''
+    })
   }
 
   const handleTouchEnd = (e) => {
@@ -119,11 +129,11 @@ const TableData = ({
         const targetId = Math.abs(target.id)
         handleTouchTarget(targetId)
         setDrag(false)
-        // setTargetDrag()
+        clearTargetStyle()
       }
     }
     setDrag(false)
-    // setTargetDrag()
+    clearTargetStyle()
   }
 
   let td = []
@@ -134,7 +144,7 @@ const TableData = ({
       <td
         draggable={true}
         onDragOver={handleDragOver}
-        onDragStart={handleDrag}
+        onDrag={handleDrag}
         onDrop={handleDrop}
         onTouchStart={(e) => handleTouchStart(e, item.id)}
         onTouchEnd={handleTouchEnd}
