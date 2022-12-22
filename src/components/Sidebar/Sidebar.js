@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCloud, faMinus, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faCloud, faMinus, faPlus, faQuestion, faTimes } from '@fortawesome/free-solid-svg-icons'
 import {
   Nav,
   Button,
@@ -14,6 +14,7 @@ import classNames from 'classnames'
 import Helpers from '../../utils/Helpers'
 import File from '../Dialog/File'
 import './Sidebar.scss'
+import i18n from '../../utils/i18n'
 import { useDebouncedCallback } from 'use-debounce'
 
 function SideBar({ toggle, isOpen, items, icons, template, config }) {
@@ -93,7 +94,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config }) {
         items.inputItem.items.length % template.inputTemplate.fonts.length
       ]
     const max = config.input.max
-    const currentLength = items.inputItem.items.length + 1
+    const currentLength = Math.max(...items.inputItem.items.map((e) => e.order)) + 1
     let id = Helpers.getRandomId()
     const item = {
       id: id,
@@ -187,8 +188,8 @@ function SideBar({ toggle, isOpen, items, icons, template, config }) {
         <div className="flex-column p-1">
           <FormControl
             type="text"
-            className="input-title"
-            placeholder="Title..."
+            className="pix-input"
+            placeholder={`${i18n.t('Title')}...`}
             defaultValue={items.inputItem.title}
             onChange={(e) => handleTitleChange(e.target.value)}
           />
@@ -204,7 +205,8 @@ function SideBar({ toggle, isOpen, items, icons, template, config }) {
                   </Button>
                   <FormControl
                     type="text"
-                    placeholder="Type Here..."
+                    className="pix-input"
+                    placeholder={`${i18n.t('TypeHere')}...`}
                     defaultValue={item.realText}
                     data-index={item.id}
                     onKeyDown={() => loadSpinner(index)}
@@ -221,17 +223,18 @@ function SideBar({ toggle, isOpen, items, icons, template, config }) {
                       </button>
                     ) : (
                       <DropdownButton
-                        variant="outline-dark"
-                        className="icon-dropdown"
+                        variant="outline-white"
                         id="icon-style"
                         data-index={item.id}
                         title={
                           item.icon === '' ? (
-                            <div className="icon-placeholder">Icon</div>
+                            <div className="icon-placeholder">
+                              <FontAwesomeIcon icon={faQuestion} />
+                            </div>
                           ) : (
                             <img
                               src={Helpers.getIconForButton(icons, item.icon)}
-                              width="40"
+                              width="60"
                               alt={item.icon}
                             />
                           )
@@ -243,7 +246,8 @@ function SideBar({ toggle, isOpen, items, icons, template, config }) {
                   </div>
                   <FormControl
                     type="text"
-                    placeholder="Type Here..."
+                    className="pix-input"
+                    placeholder={`${i18n.t('TypeHere')}...`}
                     defaultValue={item.spokenText}
                     data-index={item.id}
                     onChange={(e) => handleSpokenTextChange(e.target.value, index)}
@@ -253,11 +257,11 @@ function SideBar({ toggle, isOpen, items, icons, template, config }) {
             )
           })}
         <Button variant="outline-primary" onClick={addInputItem}>
-          <FontAwesomeIcon icon={faPlus} /> Add
+          <FontAwesomeIcon icon={faPlus} /> {i18n.t('Add')}
         </Button>
         <hr />
         <Button variant="outline-primary" onClick={showDialog}>
-          <FontAwesomeIcon icon={faCloud} /> Load
+          <FontAwesomeIcon icon={faCloud} /> {i18n.t('Load')}
         </Button>
       </Nav>
       <File show={showLoad} dialogFn={showDialog} actionFn={loadJson} />

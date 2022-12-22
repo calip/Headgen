@@ -13,7 +13,6 @@ const TableItem = ({
   dragId,
   targetDrag,
   setDragId,
-  setTargetDrag,
   handleTouchTarget
 }) => {
   let table = []
@@ -42,7 +41,6 @@ const TableItem = ({
                   dragId={dragId}
                   targetDrag={targetDrag}
                   setDragId={setDragId}
-                  setTargetDrag={setTargetDrag}
                   handleTouchTarget={handleTouchTarget}
                 />
               </tr>

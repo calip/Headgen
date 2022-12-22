@@ -1,3 +1,5 @@
+import i18n from '../utils/i18n'
+
 const Helpers = {
   storeInputItem: (config, item) => {
     localStorage.setItem(`inputs-${config.appId}`, JSON.stringify(item))
@@ -47,7 +49,7 @@ const Helpers = {
       case 'stripey':
         return 'Stripey'
       default:
-        return 'Font Family'
+        return i18n.t('FontFamily')
     }
   },
   getIconSizeForFontStyle(font) {
@@ -64,6 +66,24 @@ const Helpers = {
         return '100%'
       default:
         return '100%'
+    }
+  },
+  getLabelForFontSpacing(space) {
+    switch (space) {
+      case '0':
+        return i18n.t('NoSpacing')
+      case '2':
+        return '1'
+      case '5':
+        return '2'
+      case '10':
+        return '3'
+      case '15':
+        return '4'
+      case '20':
+        return '5'
+      default:
+        return i18n.t('Spacing')
     }
   }
 }
