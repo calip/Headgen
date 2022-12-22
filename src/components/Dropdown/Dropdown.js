@@ -9,7 +9,7 @@ function Dropdown(item, items, itemAction) {
       className={'font-style-dropdown ps-1'}
       disabled={item == null || item === ''}
       id="font-style"
-      title={Helpers.getLabelForFontStyle(item ?? 'Font Family')}
+      title={Helpers.getLabelForFontStyle(item ?? 'FontFamily')}
       onSelect={itemAction}>
       {items.map((item) => (
         <Dropdown.Item eventKey={item} key={item}>
