@@ -6,6 +6,8 @@ import './Navbar.scss'
 import DropdownToggle from 'react-bootstrap/esm/DropdownToggle'
 import DropdownMenu from 'react-bootstrap/esm/DropdownMenu'
 import DropdownItem from 'react-bootstrap/esm/DropdownItem'
+import Helpers from '../../utils/Helpers'
+import i18n from '../../utils/i18n'
 
 const FONT_STYLES = ['comfortaa', 'italianno', 'marqueemoon', 'mexcellent', 'stripey']
 const FONT_SPACING = ['0', '2', '5', '10', '15', '20']
@@ -36,11 +38,11 @@ function NavBar({ toggle, font, layout, config, admin, downloadFn }) {
             className={'font-style-dropdown ps-1'}
             disabled={font.fontType == null || font.fontType === ''}
             id="font-style"
-            title={getLabelForFontStyle(font.fontType ?? 'Font Family')}
+            title={Helpers.getLabelForFontStyle(font.fontType ?? i18n.t('FontFamily'))}
             onSelect={onFontTypeChange}>
             {FONT_STYLES.map((fontType) => (
               <Dropdown.Item eventKey={fontType} key={fontType}>
-                <label className={fontType}>{getLabelForFontStyle(fontType)}</label>
+                <label className={fontType}>{Helpers.getLabelForFontStyle(fontType)}</label>
               </Dropdown.Item>
             ))}
           </DropdownButton>
@@ -49,11 +51,11 @@ function NavBar({ toggle, font, layout, config, admin, downloadFn }) {
             className={'font-style-dropdown ps-1'}
             disabled={font.fontSpacing == null}
             id="font-space"
-            title={getLabelForFontSpacing(font.fontSpacing ?? 'Spacing')}
+            title={Helpers.getLabelForFontSpacing(font.fontSpacing ?? i18n.t('Spacing'))}
             onSelect={onFontSpaceChange}>
             {FONT_SPACING.map((fontSpace) => (
               <Dropdown.Item eventKey={fontSpace} key={fontSpace}>
-                <label className={fontSpace}>{getLabelForFontSpacing(fontSpace)}</label>
+                <label className={fontSpace}>{Helpers.getLabelForFontSpacing(fontSpace)}</label>
               </Dropdown.Item>
             ))}
           </DropdownButton>
@@ -78,12 +80,12 @@ function NavBar({ toggle, font, layout, config, admin, downloadFn }) {
 
             <DropdownMenu>
               <DropdownItem onClick={downloadFn('low')}>
-                <small>Lower Quality</small>
+                <small>{i18n.t('LowerQuality')}</small>
               </DropdownItem>
               {config.admin ? (
                 <DropdownItem onClick={downloadFn('high')}>
                   <small>
-                    High Resolution ({layout.layoutWidth} x {layout.layoutHeight} px)
+                    {i18n.t('HighResolution')} ({layout.layoutWidth} x {layout.layoutHeight} px)
                   </small>
                 </DropdownItem>
               ) : (
@@ -95,42 +97,6 @@ function NavBar({ toggle, font, layout, config, admin, downloadFn }) {
       </Navbar.Collapse>
     </Navbar>
   )
-}
-
-function getLabelForFontStyle(style) {
-  switch (style) {
-    case 'comfortaa':
-      return 'Comfortaa'
-    case 'italianno':
-      return 'Italianno'
-    case 'marqueemoon':
-      return 'MarqueeMoon'
-    case 'mexcellent':
-      return 'Mexcellent'
-    case 'stripey':
-      return 'Stripey'
-    default:
-      return 'Font Family'
-  }
-}
-
-function getLabelForFontSpacing(space) {
-  switch (space) {
-    case '0':
-      return 'No Spacing'
-    case '2':
-      return '1'
-    case '5':
-      return '2'
-    case '10':
-      return '3'
-    case '15':
-      return '4'
-    case '20':
-      return '5'
-    default:
-      return 'Spacing'
-  }
 }
 
 export default NavBar

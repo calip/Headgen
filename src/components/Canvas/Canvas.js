@@ -3,13 +3,12 @@ import './Canvas.scss'
 import FontStyled from '../../utils/FontStyled'
 import TableItem from '../Table/TableItem'
 import Helpers from '../../utils/Helpers'
-
 const Canvas = forwardRef((props, ref) => {
   const currentTemplate = props.config.templates.find(
     (item) => item.id === props.items.inputItem.template
   )
   const [data, setData] = useState({})
-  const fontType = props.font.fontType === 'Font Family' ? 'comfortaa' : props.font.fontType
+  const fontType = props.font.fontType === 'FontFamily' ? 'comfortaa' : props.font.fontType
   const fontSpacing =
     props.font.fontSpacing === 'Spacing' || props.font.fontSpacing === '0'
       ? ''
@@ -52,12 +51,12 @@ const Canvas = forwardRef((props, ref) => {
     event.stopPropagation()
     setItemSelected()
     setTitleSelected(false)
-    props.font.setFontType('Font Family')
+    props.font.setFontType('FontFamily')
     props.font.setFontSpacing('0')
   }
 
   useEffect(() => {
-    const currentFont = props.font.fontType === 'Font Family' ? 'comfortaa' : props.font.fontType
+    const currentFont = props.font.fontType === 'FontFamily' ? 'comfortaa' : props.font.fontType
     setFontSelected(currentFont)
   }, [props.font.fontType])
 
@@ -278,7 +277,6 @@ const Canvas = forwardRef((props, ref) => {
                     dragId={dragId}
                     targetDrag={targetDrag}
                     setDragId={setDragId}
-                    setTargetDrag={setTargetDrag}
                     handleTouchTarget={handleTouchTarget}
                   />
                 </div>
