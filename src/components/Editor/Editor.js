@@ -44,15 +44,6 @@ function Editor({ config }) {
 
   const { i18n } = useTranslation()
 
-  //get query param to load json file
-  //url http://localhost:3000/?file=http://localhost:5001/api/marketing-announcement
-  // const query = Helpers.getQuery();
-  // const file = query.get('file');
-  // Helpers.fetchJson(file).then(result =>
-  // {
-  //   console.log(result)
-  // });
-
   useEffect(() => {
     if (config.admin) {
       setIsAdmin(true)
@@ -111,12 +102,22 @@ function Editor({ config }) {
   }
 
   useEffect(() => {
+    Helpers.clearInputItem()
     const items = Helpers.getInputItem(config)
     if (items) {
       setInputItem(items)
       i18n.changeLanguage(language)
     }
   }, [config])
+
+  const loadJsonFromFile = (data) => {
+    Helpers.storeInputItem(config, data)
+    const items = Helpers.getInputItem(config)
+    if (items) {
+      setInputItem(items)
+      i18n.changeLanguage(language)
+    }
+  }
 
   return (
     <>
@@ -127,6 +128,7 @@ function Editor({ config }) {
         icons={icons}
         template={template}
         config={config}
+        loadJsonData={loadJsonFromFile}
       />
       <Container fluid className="content">
         <Navbar
@@ -155,14 +157,6 @@ function Editor({ config }) {
           template={template}
           config={config}
         />
-        {/* <div style={{ position: 'absolute', bottom: '0', left: 0 }}>
-          <a className="btn btn-primary" href="#">
-            Yes
-          </a>
-          <a className="btn btn-primary" href="#">
-            No
-          </a>
-        </div> */}
       </Container>
     </>
   )
