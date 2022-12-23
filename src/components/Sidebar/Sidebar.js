@@ -26,11 +26,8 @@ function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData 
   }
 
   const loadJson = () => {
-
     const data = JSON.parse(json)
-    console.log(data)
-    Helpers.storeInputItem(config, data)
-    loadJsonData()
+    loadJsonData(data)
     setShowLoad((showLoad) => !showLoad)
   }
 
