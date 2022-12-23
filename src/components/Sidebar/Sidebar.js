@@ -17,15 +17,18 @@ import './Sidebar.scss'
 import i18n from '../../utils/i18n'
 import { useDebouncedCallback } from 'use-debounce'
 
-function SideBar({ toggle, isOpen, items, icons, template, config }) {
+function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData }) {
   const [showLoad, setShowLoad] = useState(false)
+  const [json, setJson] = useState('')
 
   const showDialog = () => {
     setShowLoad((showLoad) => !showLoad)
   }
 
   const loadJson = () => {
-    console.log('load json')
+    const data = JSON.parse(json)
+    loadJsonData(data)
+    setShowLoad((showLoad) => !showLoad)
   }
 
   const handleRealTextChange = useDebouncedCallback((value, index) => {
@@ -264,7 +267,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config }) {
           <FontAwesomeIcon icon={faCloud} /> {i18n.t('Load')}
         </Button>
       </Nav>
-      <File show={showLoad} dialogFn={showDialog} actionFn={loadJson} />
+      <File show={showLoad} dialogFn={showDialog} actionFn={loadJson} setJson={setJson} />
     </div>
   )
 }
