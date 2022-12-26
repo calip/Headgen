@@ -101,22 +101,21 @@ function Editor({ config }) {
     setPanelOpen((isPanelOpen) => !isPanelOpen)
   }
 
-  useEffect(() => {
-    Helpers.clearInputItem()
+  const loadLocalStorage = (config) => {
     const items = Helpers.getInputItem(config)
     if (items) {
       setInputItem(items)
       i18n.changeLanguage(language)
     }
+  }
+
+  useEffect(() => {
+    loadLocalStorage(config)
   }, [config])
 
   const loadJsonFromFile = (data) => {
     Helpers.storeInputItem(config, data)
-    const items = Helpers.getInputItem(config)
-    if (items) {
-      setInputItem(items)
-      i18n.changeLanguage(language)
-    }
+    loadLocalStorage(config)
   }
 
   return (
