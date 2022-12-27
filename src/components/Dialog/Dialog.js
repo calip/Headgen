@@ -1,23 +1,20 @@
 import { Button, Modal } from 'react-bootstrap'
-import { useTranslation } from 'react-i18next'
-import '../../utils/i18n'
+import i18n from '../../utils/i18n'
 
-function Dialog({ show, dialogFn, actionFn }) {
-  const { t } = useTranslation()
-
+function Dialog(props) {
   return (
     <>
-      <Modal show={show} onHide={dialogFn}>
+      <Modal show={props.show} onHide={props.dialogFn}>
         <Modal.Header closeButton>
-          <Modal.Title>{t('ClearSession')}</Modal.Title>
+          <Modal.Title>{props.title}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{t('ClearConfirmation')}</Modal.Body>
+        <Modal.Body>{props.description}</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={dialogFn}>
-            {t('No')}
+          <Button variant="secondary" onClick={props.dialogFn}>
+            {i18n.t('No')}
           </Button>
-          <Button variant="primary" onClick={actionFn}>
-            {t('Yes')}
+          <Button variant="primary" onClick={props.actionFn}>
+            {i18n.t('Yes')}
           </Button>
         </Modal.Footer>
       </Modal>
