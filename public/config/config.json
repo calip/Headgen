@@ -1,6 +1,7 @@
 {
   "appId": 1,
   "appName": "Pixgen",
+  "language": "de",
   "admin": true,
   "layout": {
     "width": 4000,
