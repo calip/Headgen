@@ -191,7 +191,13 @@ function Panel({ toggle, isOpen, layout, items, template, config }) {
           </Button>
         </div>
       </div>
-      <Dialog show={show} dialogFn={showDialog} actionFn={clearSession} />
+      <Dialog
+        show={show}
+        dialogFn={showDialog}
+        title={i18n.t('ClearSession')}
+        description={i18n.t('ClearConfirmation')}
+        actionFn={clearSession}
+      />
     </div>
   )
 }
