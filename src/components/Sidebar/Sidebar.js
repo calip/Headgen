@@ -1,6 +1,13 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCloud, faMinus, faPlus, faQuestion, faTimes } from '@fortawesome/free-solid-svg-icons'
+import {
+  faSave,
+  faCloud,
+  faMinus,
+  faPlus,
+  faQuestion,
+  faTimes
+} from '@fortawesome/free-solid-svg-icons'
 import {
   Nav,
   Button,
@@ -16,13 +23,26 @@ import File from '../Dialog/File'
 import './Sidebar.scss'
 import i18n from '../../utils/i18n'
 import { useDebouncedCallback } from 'use-debounce'
+import Dialog from '../Dialog/Dialog'
+import saveFileAsJson from '../../utils/saveFileAsJson'
 
 function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData }) {
   const [showLoad, setShowLoad] = useState(false)
+  const [showSave, setShowSave] = useState(false)
   const [json, setJson] = useState('')
+  const scrollRef = useRef()
 
-  const showDialog = () => {
+  const showFileDialog = () => {
     setShowLoad((showLoad) => !showLoad)
+  }
+
+  const showConfirmDialog = () => {
+    setShowSave((showSave) => !showSave)
+  }
+
+  const saveJson = () => {
+    const items = Helpers.getInputItem(config)
+    saveFileAsJson(items, 'pixdata')
   }
 
   const loadJson = () => {
@@ -91,6 +111,11 @@ function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData 
     Helpers.storeInputItem(config, items.inputItem)
   }, 1000)
 
+  const setScrollFocus = () => {
+    const divElement = scrollRef.current
+    divElement.scrollTo({ top: divElement.scrollHeight, behavior: 'smooth' })
+  }
+
   const addInputItem = () => {
     const font =
       template.inputTemplate.fonts[
@@ -122,11 +147,13 @@ function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData 
         items.setInputItem((prevState) => {
           return { ...prevState, [items]: temp.items }
         })
+        setScrollFocus()
       }
     } else {
       items.setInputItem((prevState) => {
         return { ...prevState, [items]: temp.items }
       })
+      setScrollFocus()
     }
   }
 
@@ -197,77 +224,89 @@ function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData 
             onChange={(e) => handleTitleChange(e.target.value)}
           />
         </div>
-        {items.inputItem.items
-          .sort((a, b) => a.order - b.order)
-          .map((item, index) => {
-            return (
-              <div className="flex-column p-1" key={item.id}>
-                <InputGroup>
-                  <Button variant="outline-default" onClick={removeInputItem(item.id)}>
-                    <FontAwesomeIcon icon={faMinus} />
-                  </Button>
-                  <FormControl
-                    type="text"
-                    className="pix-input"
-                    placeholder={`${i18n.t('TypeHere')}...`}
-                    defaultValue={item.realText}
-                    data-index={item.id}
-                    onKeyDown={() => loadSpinner(index)}
-                    onChange={(e) => handleRealTextChange(e.target.value, index)}
-                  />
-                  <div className="list-icon">
-                    {item.loading ? (
-                      <button
-                        type="button"
-                        id="icon-spinner"
-                        aria-expanded="false"
-                        className="btn btn-outline-dark icon-input btn-icon-spinner">
-                        <Spinner animation="border" size="sm" />
-                      </button>
-                    ) : (
-                      <DropdownButton
-                        variant="outline-white"
-                        id="icon-style"
-                        data-index={item.id}
-                        title={
-                          item.icon === '' ? (
-                            <div className="icon-placeholder">
-                              <FontAwesomeIcon icon={faQuestion} />
-                            </div>
-                          ) : (
-                            <img
-                              src={Helpers.getIconForButton(icons, item.icon)}
-                              width="60"
-                              alt={item.icon}
-                            />
-                          )
-                        }
-                        onSelect={onIconChange(index)}>
-                        {renderDropdownIcon(index)}
-                      </DropdownButton>
-                    )}
-                  </div>
-                  <FormControl
-                    type="text"
-                    className="pix-input"
-                    placeholder={`${i18n.t('TypeHere')}...`}
-                    defaultValue={item.spokenText}
-                    data-index={item.id}
-                    onChange={(e) => handleSpokenTextChange(e.target.value, index)}
-                  />
-                </InputGroup>
-              </div>
-            )
-          })}
+        <div className="input-container" ref={scrollRef}>
+          {items.inputItem.items
+            .sort((a, b) => a.order - b.order)
+            .map((item, index) => {
+              return (
+                <div className="flex-column p-1" key={item.id}>
+                  <InputGroup>
+                    <Button variant="outline-default" onClick={removeInputItem(item.id)}>
+                      <FontAwesomeIcon icon={faMinus} />
+                    </Button>
+                    <FormControl
+                      type="text"
+                      className="pix-input"
+                      placeholder={`${i18n.t('TypeHere')}...`}
+                      defaultValue={item.realText}
+                      data-index={item.id}
+                      onKeyDown={() => loadSpinner(index)}
+                      onChange={(e) => handleRealTextChange(e.target.value, index)}
+                    />
+                    <div className="list-icon">
+                      {item.loading ? (
+                        <button
+                          type="button"
+                          id="icon-spinner"
+                          aria-expanded="false"
+                          className="btn btn-outline-dark icon-input btn-icon-spinner">
+                          <Spinner animation="border" size="sm" />
+                        </button>
+                      ) : (
+                        <DropdownButton
+                          variant="outline-white"
+                          id="icon-style"
+                          data-index={item.id}
+                          title={
+                            item.icon === '' ? (
+                              <div className="icon-placeholder">
+                                <FontAwesomeIcon icon={faQuestion} />
+                              </div>
+                            ) : (
+                              <img
+                                src={Helpers.getIconForButton(icons, item.icon)}
+                                width="60"
+                                alt={item.icon}
+                              />
+                            )
+                          }
+                          onSelect={onIconChange(index)}>
+                          {renderDropdownIcon(index)}
+                        </DropdownButton>
+                      )}
+                    </div>
+                    <FormControl
+                      type="text"
+                      className="pix-input"
+                      placeholder={`${i18n.t('TypeHere')}...`}
+                      defaultValue={item.spokenText}
+                      data-index={item.id}
+                      onChange={(e) => handleSpokenTextChange(e.target.value, index)}
+                    />
+                  </InputGroup>
+                </div>
+              )
+            })}
+        </div>
         <Button variant="outline-primary" onClick={addInputItem}>
           <FontAwesomeIcon icon={faPlus} /> {i18n.t('Add')}
         </Button>
         <hr />
-        <Button variant="outline-primary" onClick={showDialog}>
+        <Button variant="outline-primary" onClick={showConfirmDialog} className="mb-2">
+          <FontAwesomeIcon icon={faSave} /> {i18n.t('Save')}
+        </Button>
+        <Button variant="outline-primary" onClick={showFileDialog}>
           <FontAwesomeIcon icon={faCloud} /> {i18n.t('Load')}
         </Button>
       </Nav>
-      <File show={showLoad} dialogFn={showDialog} actionFn={loadJson} setJson={setJson} />
+      <Dialog
+        show={showSave}
+        dialogFn={showConfirmDialog}
+        title={i18n.t('SaveToFile')}
+        description={i18n.t('SaveFileDescription')}
+        actionFn={saveJson}
+      />
+      <File show={showLoad} dialogFn={showFileDialog} actionFn={loadJson} setJson={setJson} />
     </div>
   )
 }
