@@ -253,12 +253,9 @@ function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData 
                           <Spinner animation="border" size="sm" />
                         </button>
                       ) : (
-                        <DropdownButton
-                          variant="outline-white"
-                          id="icon-style"
-                          data-index={item.id}
-                          title={
-                            item.icon === '' ? (
+                        <Dropdown onSelect={onIconChange(index)}>
+                          <Dropdown.Toggle variant="outline-white" id="icon-style">
+                            {item.icon === '' ? (
                               <div className="icon-placeholder">
                                 <FontAwesomeIcon icon={faQuestion} />
                               </div>
@@ -268,11 +265,12 @@ function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData 
                                 width="60"
                                 alt={item.icon}
                               />
-                            )
-                          }
-                          onSelect={onIconChange(index)}>
-                          {renderDropdownIcon(index)}
-                        </DropdownButton>
+                            )}
+                          </Dropdown.Toggle>
+                          <Dropdown.Menu popperConfig={{ strategy: 'fixed' }}>
+                            {renderDropdownIcon(index)}
+                          </Dropdown.Menu>
+                        </Dropdown>
                       )}
                     </div>
                     <FormControl
