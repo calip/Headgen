@@ -8,15 +8,7 @@ import {
   faQuestion,
   faTimes
 } from '@fortawesome/free-solid-svg-icons'
-import {
-  Nav,
-  Button,
-  InputGroup,
-  FormControl,
-  Spinner,
-  DropdownButton,
-  Dropdown
-} from 'react-bootstrap'
+import { Nav, Button, InputGroup, FormControl, Spinner, Dropdown } from 'react-bootstrap'
 import classNames from 'classnames'
 import Helpers from '../../utils/Helpers'
 import File from '../Dialog/File'
@@ -43,6 +35,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData 
   const saveJson = () => {
     const items = Helpers.getInputItem(config)
     saveFileAsJson(items, 'pixdata')
+    setShowSave(false)
   }
 
   const loadJson = () => {
@@ -234,15 +227,18 @@ function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData 
                     <Button variant="outline-default" onClick={removeInputItem(item.id)}>
                       <FontAwesomeIcon icon={faMinus} />
                     </Button>
-                    <FormControl
-                      type="text"
-                      className="pix-input"
-                      placeholder={`${i18n.t('TypeHere')}...`}
-                      defaultValue={item.realText}
-                      data-index={item.id}
-                      onKeyDown={() => loadSpinner(index)}
-                      onChange={(e) => handleRealTextChange(e.target.value, index)}
-                    />
+                    <>
+                      <FormControl
+                        type="text"
+                        className="pix-input"
+                        placeholder={`${i18n.t('TypeHere')}...`}
+                        defaultValue={item.realText}
+                        key={item.realText}
+                        data-index={item.id}
+                        onKeyDown={() => loadSpinner(index)}
+                        onChange={(e) => handleRealTextChange(e.target.value, index)}
+                      />
+                    </>
                     <div className="list-icon">
                       {item.loading ? (
                         <button
@@ -273,14 +269,17 @@ function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData 
                         </Dropdown>
                       )}
                     </div>
-                    <FormControl
-                      type="text"
-                      className="pix-input"
-                      placeholder={`${i18n.t('TypeHere')}...`}
-                      defaultValue={item.spokenText}
-                      data-index={item.id}
-                      onChange={(e) => handleSpokenTextChange(e.target.value, index)}
-                    />
+                    <>
+                      <FormControl
+                        type="text"
+                        className="pix-input"
+                        placeholder={`${i18n.t('TypeHere')}...`}
+                        key={item.spokenText}
+                        defaultValue={item.spokenText}
+                        data-index={item.id}
+                        onChange={(e) => handleSpokenTextChange(e.target.value, index)}
+                      />
+                    </>
                   </InputGroup>
                 </div>
               )
