@@ -23,5 +23,7 @@
   "No": "No",
   "Save": "Save",
   "SaveToFile": "Save to Json File",
-  "SaveFileDescription": "Are you sure you want to save to json file?"
+  "SaveFileDescription": "Are you sure you want to save to json file?",
+  "LoadJsonFile": "Load JSON File",
+  "Cancel": "Cancel"
 }
