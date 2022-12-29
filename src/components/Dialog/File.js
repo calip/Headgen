@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Button, FormControl, FormGroup, Modal } from 'react-bootstrap'
+import i18n from '../../utils/i18n'
 
 function File({ show, dialogFn, actionFn, setJson }) {
-  const [disable, setDisable] = useState(false)
+  const [disable, setDisable] = useState(true)
   const handleFileChange = (e) => {
     const file = e.target.files[0]
     if (file.type != 'application/json') {
@@ -22,7 +23,7 @@ function File({ show, dialogFn, actionFn, setJson }) {
     <>
       <Modal show={show} onHide={dialogFn}>
         <Modal.Header closeButton>
-          <Modal.Title>Load JSON file</Modal.Title>
+          <Modal.Title>{i18n.t('LoadJsonFile')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <FormGroup controlId="jsonFile" className="mb-3">
@@ -31,10 +32,10 @@ function File({ show, dialogFn, actionFn, setJson }) {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={dialogFn}>
-            Cancel
+            {i18n.t('Cancel')}
           </Button>
           <Button variant="primary" onClick={actionFn} disabled={disable}>
-            Load
+            {i18n.t('Load')}
           </Button>
         </Modal.Footer>
       </Modal>
