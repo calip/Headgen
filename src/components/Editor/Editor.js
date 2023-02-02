@@ -6,7 +6,6 @@ import Panel from '../Panel/Panel'
 import exportAsImage from './../../utils/exportAsImage'
 import Canvas from '../Canvas/Canvas'
 import Navbar from '../Navbar/Navbar'
-import Input from '../../utils/Input'
 import Helpers from '../../utils/Helpers'
 import { useTranslation } from 'react-i18next'
 import '../../utils/i18n'
@@ -22,6 +21,8 @@ function Editor({ config }) {
   const language = config.language
   const sidebarOpen = Helpers.isTouchScreenDevice() ? false : true
 
+  const initialInput = Helpers.setData()
+
   const [isAdmin, setIsAdmin] = useState(false)
   const [fontType, setFontType] = useState('FontFamily')
   const [fontSize, setFontSize] = useState('FontSize')
@@ -33,7 +34,7 @@ function Editor({ config }) {
   const [layoutHeight, setLayoutHeight] = useState(height)
   const [layoutDpc, setLayoutDpc] = useState(dpc)
   const [layoutPadding, setLayoutPadding] = useState(padding)
-  const [inputItem, setInputItem] = useState(Input)
+  const [inputItem, setInputItem] = useState(initialInput)
   const [inputTemplate, setInputTemplate] = useState(templates[0])
   const exportRef = useRef()
   const [renderCanvas, setRenderCanvas] = useState(false)
@@ -118,6 +119,17 @@ function Editor({ config }) {
     loadLocalStorage(config)
   }
 
+  const clearSession = () => {
+    Helpers.clearInputItem()
+    const input = Helpers.setData()
+    setInputItem(input)
+    loadLocalStorage(config)
+  }
+
+  const reloadCanvas = () => {
+    loadLocalStorage(config)
+  }
+
   return (
     <>
       <SideBar
@@ -145,6 +157,7 @@ function Editor({ config }) {
           icons={icons}
           layout={layout}
           config={config}
+          reload={reloadCanvas}
           ref={exportRef}
         />
 
@@ -155,6 +168,7 @@ function Editor({ config }) {
           items={items}
           template={template}
           config={config}
+          resetSession={clearSession}
         />
       </Container>
     </>
