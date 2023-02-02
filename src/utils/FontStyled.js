@@ -59,7 +59,11 @@ const FontStyled = (props) => {
         </FontContainer>
       )
     }
-    return <FontContainer font={props.value.font}>{props.value.title}</FontContainer>
+    return (
+      <FontContainer font={props.value.font}>
+        <div style={{ letterSpacing: `${props.value.fontSpacing}px` }}>{props.value.title}</div>
+      </FontContainer>
+    )
   }
 }
 
