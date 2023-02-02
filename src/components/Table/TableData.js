@@ -52,7 +52,9 @@ const TableData = ({
       setDrag(true)
 
       const child = target.querySelector('.parent-icon-container')
-      child.style.display = 'none'
+      if (child) {
+        child.style.display = 'none'
+      }
     }
   }
 
