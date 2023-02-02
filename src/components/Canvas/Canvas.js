@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, useState } from 'react'
+import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import './Canvas.scss'
 import FontStyled from '../../utils/FontStyled'
 import TableItem from '../Table/TableItem'
@@ -29,7 +29,7 @@ const Canvas = forwardRef((props, ref) => {
   const titleSelectedChanged = useHasChanged(titleSelected)
   const dataChanged = useHasChanged(props.items)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (dataChanged) {
       setData(props.items)
     }
@@ -55,12 +55,12 @@ const Canvas = forwardRef((props, ref) => {
     props.font.setFontSpacing('0')
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const currentFont = props.font.fontType === 'FontFamily' ? 'comfortaa' : props.font.fontType
     setFontSelected(currentFont)
   }, [props.font.fontType])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const currentSpacing =
       props.font.fontSpacing === 'Spacing' || props.font.fontSpacing === '0'
         ? ''
@@ -68,7 +68,7 @@ const Canvas = forwardRef((props, ref) => {
     setSpacingSelected(currentSpacing)
   }, [props.font.fontSpacing])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (fontTypeChanged && titleSelected) {
       let temp = data.inputItem
       temp.font = fontType
@@ -80,6 +80,19 @@ const Canvas = forwardRef((props, ref) => {
     }
     if (data.inputItem && titleSelectedChanged && data.inputItem.font !== fontType) {
       props.font.setFontType(data.inputItem.font)
+    }
+
+    if (fontSpacingChanged && titleSelected) {
+      let temp = data.inputItem
+      temp.fontSpacing = fontSpacing
+      setData((prevState) => {
+        return { ...prevState, [data.inputItem.items]: temp.items }
+      })
+      props.items.setInputItem(data.inputItem)
+      Helpers.storeInputItem(props.config, props.items.inputItem)
+    }
+    if (data.inputItem && titleSelectedChanged && data.inputItem.fontSpacing !== fontSpacing) {
+      props.font.setFontSpacing(data.inputItem.fontSpacing)
     }
   }, [
     titleSelected,
@@ -95,7 +108,7 @@ const Canvas = forwardRef((props, ref) => {
     fontSpacing
   ])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let arrItem = null
     if (data.inputItem && data.inputItem.items) {
       arrItem = data.inputItem.items.find((item) => item.id === itemSelected)
@@ -194,6 +207,7 @@ const Canvas = forwardRef((props, ref) => {
       return { ...prevState, [data.inputItem.items]: temp.items }
     })
 
+    props.reload()
     props.items.setInputItem(data.inputItem)
     Helpers.storeInputItem(props.config, props.items.inputItem)
   }
@@ -220,6 +234,8 @@ const Canvas = forwardRef((props, ref) => {
     setData((prevState) => {
       return { ...prevState, [data.inputItem.items]: temp.items }
     })
+
+    props.reload()
     props.items.setInputItem(data.inputItem)
     Helpers.storeInputItem(props.config, props.items.inputItem)
   }
@@ -227,7 +243,7 @@ const Canvas = forwardRef((props, ref) => {
   if (dataChanged) {
     return (
       <div className="pix-editor">
-        <div className="pix-canvas" style={{ minWidth: `400px`, minHeight: `${height}px` }}>
+        <div className="pix-canvas" style={{ minWidth: `${width}px`, minHeight: `${height}px` }}>
           <div className="center-screen" style={{ margin: `10px` }}>
             <p>Loading</p>
           </div>
