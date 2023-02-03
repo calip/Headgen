@@ -116,20 +116,11 @@ function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData 
       ]
     const max = config.input.max
     const currentLength = Math.max(...items.inputItem.items.map((e) => e.order)) + 1
-    let id = Helpers.getRandomId()
-    const item = {
-      id: id,
-      headline: false,
-      realText: '',
-      spokenText: '',
-      icon: '',
-      font: font,
-      fontPadding: 0,
-      fontTransition: '',
-      fontSpacing: '',
-      iconDisplay: '',
-      order: currentLength
-    }
+
+    let setItem = Helpers.setItems()
+    setItem.font = font
+    setItem.order = currentLength
+    const item = setItem
 
     const inputItem = [...items.inputItem.items, item]
     const temp = items.inputItem
@@ -211,6 +202,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData 
         <div className="flex-column p-1">
           <FormControl
             type="text"
+            key={items.inputItem.title}
             className="pix-input"
             placeholder={`${i18n.t('Title')}...`}
             defaultValue={items.inputItem.title}
@@ -233,7 +225,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData 
                         className="pix-input"
                         placeholder={`${i18n.t('TypeHere')}...`}
                         defaultValue={item.realText}
-                        key={item.realText}
+                        key={item.id}
                         data-index={item.id}
                         onKeyDown={() => loadSpinner(index)}
                         onChange={(e) => handleRealTextChange(e.target.value, index)}
@@ -274,7 +266,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData 
                         type="text"
                         className="pix-input"
                         placeholder={`${i18n.t('TypeHere')}...`}
-                        key={item.spokenText}
+                        key={item.id}
                         defaultValue={item.spokenText}
                         data-index={item.id}
                         onChange={(e) => handleSpokenTextChange(e.target.value, index)}
