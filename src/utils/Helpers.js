@@ -85,6 +85,34 @@ const Helpers = {
       default:
         return i18n.t('Spacing')
     }
+  },
+  setData: () => {
+    const data = {
+      title: '',
+      font: '',
+      fontPadding: 0,
+      fontSpacing: '',
+      template: 1,
+      items: [Helpers.setItems()]
+    }
+    return data
+  },
+  setItems: () => {
+    let id = Helpers.getRandomId()
+    const item = {
+      id: id,
+      headline: false,
+      realText: '',
+      spokenText: '',
+      icon: '',
+      font: '',
+      fontPadding: 0,
+      fontTransition: '',
+      fontSpacing: '',
+      iconDisplay: '',
+      order: 0
+    }
+    return item
   }
 }
 
