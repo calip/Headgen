@@ -14,11 +14,10 @@ import {
   Row
 } from 'react-bootstrap'
 import Dialog from '../Dialog/Dialog'
-import Input from '../../utils/Input'
 import Helpers from '../../utils/Helpers'
 import i18n from '../../utils/i18n'
 
-function Panel({ toggle, isOpen, layout, items, template, config }) {
+function Panel({ toggle, isOpen, layout, items, template, config, resetSession }) {
   const currentTemplate = config.templates.find((item) => item.id === items.inputItem.template)
   const [show, setShow] = useState(false)
   const min = 1000
@@ -66,8 +65,7 @@ function Panel({ toggle, isOpen, layout, items, template, config }) {
   }
 
   const clearSession = () => {
-    Helpers.clearInputItem()
-    items.setInputItem(Input)
+    resetSession()
     setShow(false)
   }
 
