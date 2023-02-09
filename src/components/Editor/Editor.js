@@ -16,6 +16,7 @@ function Editor({ config }) {
   const height = config.layout.height
   const padding = config.layout.padding
   const dpc = config.layout.dpc
+  const border = config.layout.border
   const icons = config.input.icons
   const templates = config.templates
   const language = config.language
@@ -33,6 +34,7 @@ function Editor({ config }) {
   const [layoutWidth, setLayoutWidth] = useState(width)
   const [layoutHeight, setLayoutHeight] = useState(height)
   const [layoutDpc, setLayoutDpc] = useState(dpc)
+  const [layoutBorder, setLayoutBorder] = useState(border)
   const [layoutPadding, setLayoutPadding] = useState(padding)
   const [inputItem, setInputItem] = useState(initialInput)
   const [inputTemplate, setInputTemplate] = useState(templates[0])
@@ -75,7 +77,9 @@ function Editor({ config }) {
     layoutPadding: layoutPadding,
     setLayoutPadding: setLayoutPadding,
     layoutType: layoutType,
-    setLayoutType: setLayoutType
+    setLayoutType: setLayoutType,
+    layoutBorder: layoutBorder,
+    setLayoutBorder: setLayoutBorder
   }
 
   const render = {
