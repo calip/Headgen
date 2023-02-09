@@ -16,6 +16,7 @@ const Canvas = forwardRef((props, ref) => {
   const width = Math.abs(props.layout.layoutWidth) / 10
   const height = Math.abs(props.layout.layoutHeight) / 10
   const padding = Math.abs(props.layout.layoutPadding)
+  const border = Math.abs(props.layout.layoutBorder)
   const icons = props.icons
   const [itemSelected, setItemSelected] = useState()
   const [fontSelected, setFontSelected] = useState('comfortaa')
@@ -258,8 +259,11 @@ const Canvas = forwardRef((props, ref) => {
           style={{ minWidth: `${width}px`, minHeight: `${height}px` }}
           ref={ref}>
           <div
-            className="center-screen"
-            style={{ margin: `${padding}px`, display: 'table' }}
+            className={border ? 'center-screen' : null}
+            style={{
+              margin: `${padding}px`,
+              display: 'table'
+            }}
             onClick={removeSelectedItem}>
             <div style={{ display: 'table-cell', verticalAlign: 'middle' }}>
               {data.inputItem.title ? (
