@@ -7,7 +7,8 @@
     "width": 4000,
     "height": 6000,
     "padding": 10,
-    "dpc": 100
+    "dpc": 100,
+    "border": true
   },
   "templates": [
     {
