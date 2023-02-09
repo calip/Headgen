@@ -8,6 +8,7 @@ import {
   Col,
   Dropdown,
   DropdownButton,
+  FormCheck,
   FormControl,
   FormGroup,
   FormLabel,
@@ -58,6 +59,10 @@ function Panel({ toggle, isOpen, layout, items, template, config, resetSession }
       Math.min(Number(maxPadding), Number(event.target.value))
     )
     layout.setLayoutPadding(value)
+  }
+
+  const onBorderChange = (event) => {
+    layout.setLayoutBorder(event.target.checked)
   }
 
   const showDialog = () => {
@@ -140,7 +145,17 @@ function Panel({ toggle, isOpen, layout, items, template, config, resetSession }
                 />
               </FormGroup>
             </Col>
-            <Col></Col>
+            <Col>
+              <FormGroup className="mb-3" controlId="formGroupEmail">
+                <FormLabel>{i18n.t('Border')}</FormLabel>
+                <FormCheck
+                  type="switch"
+                  checked={layout.layoutBorder}
+                  onChange={onBorderChange}
+                  label={i18n.t('Border')}
+                />
+              </FormGroup>
+            </Col>
           </Row>
         </div>
         <h6 className="mb-3">{i18n.t('Resolution')}</h6>
