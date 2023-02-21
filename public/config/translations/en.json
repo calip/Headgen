@@ -26,5 +26,6 @@
   "SaveFileDescription": "Are you sure you want to save to json file?",
   "LoadJsonFile": "Load JSON File",
   "Cancel": "Cancel",
-  "Border": "Border"
+  "Border": "Border",
+  "Preview": "Preview"
 }
