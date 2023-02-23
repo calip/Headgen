@@ -10,6 +10,8 @@ import Helpers from '../../utils/Helpers'
 import { useTranslation } from 'react-i18next'
 import '../../utils/i18n'
 import './Editor.scss'
+import PreviewButton from '../Tools/Preview/PreviewButton'
+import PreviewDialog from '../Tools/Preview/PreviewDialog'
 
 function Editor({ config }) {
   const width = config.layout.width
@@ -38,6 +40,7 @@ function Editor({ config }) {
   const [layoutPadding, setLayoutPadding] = useState(padding)
   const [inputItem, setInputItem] = useState(initialInput)
   const [inputTemplate, setInputTemplate] = useState(templates[0])
+  const [showPreview, setShowPreview] = useState(false)
   const exportRef = useRef()
   const [renderCanvas, setRenderCanvas] = useState(false)
 
@@ -134,6 +137,10 @@ function Editor({ config }) {
     loadLocalStorage(config)
   }
 
+  const showPreviewDialog = () => {
+    setShowPreview((showPreview) => !showPreview)
+  }
+
   return (
     <>
       <SideBar
@@ -174,6 +181,9 @@ function Editor({ config }) {
           config={config}
           resetSession={clearSession}
         />
+
+        <PreviewDialog show={showPreview} dialogFn={showPreviewDialog} title={i18n.t('Preview')} />
+        <PreviewButton previewFn={showPreviewDialog} />
       </Container>
     </>
   )
