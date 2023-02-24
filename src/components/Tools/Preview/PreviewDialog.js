@@ -5,7 +5,7 @@ import i18n from '../../../utils/i18n'
 function PreviewDialog(props) {
   return (
     <>
-      <Modal show={props.show} onHide={props.dialogFn}>
+      <Modal className="preview-modal" show={props.show} onHide={props.dialogFn}>
         <Modal.Header closeButton>
           <Modal.Title>{props.title}</Modal.Title>
         </Modal.Header>
