@@ -1,0 +1,11 @@
+.preview-modal {
+  .modal-dialog {
+    width: 100vw;
+    height: 100vh;
+ }
+ .modal-content {
+   height: auto;
+   min-height: 100%;
+   border-radius: 0;
+}
+}
