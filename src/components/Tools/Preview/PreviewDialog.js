@@ -9,14 +9,13 @@ function PreviewDialog(props) {
         <Modal.Header closeButton>
           <Modal.Title>{props.title}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{props.description}</Modal.Body>
+        <Modal.Body>
+          <div>
+            sadsa
+          </div>
+        </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={props.dialogFn}>
-            {i18n.t('No')}
-          </Button>
-          <Button variant="primary" onClick={props.actionFn}>
-            {i18n.t('Yes')}
-          </Button>
+          <Button variant="secondary">{i18n.t('Close')}</Button>
         </Modal.Footer>
       </Modal>
     </>
