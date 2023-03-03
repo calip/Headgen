@@ -27,5 +27,6 @@
   "LoadJsonFile": "Load JSON File",
   "Cancel": "Cancel",
   "Border": "Border",
-  "Preview": "Preview"
+  "Preview": "Preview",
+  "Close": "Close"
 }
