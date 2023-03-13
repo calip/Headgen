@@ -1,18 +1,21 @@
 .panel-button {
   position: absolute;
-  left: -33px;
+  left: -37px;
   top: 75px;
 
   button {
-    border: 0;
     background: #fff;
     border-radius: 5px;
+    border: 1px solid #ebebeb;
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
     padding: 8px;
   }
 }
 
 .panel {
-  border-top: 1px solid #ebebeb;
+  border-left: 1px solid #ebebeb;
   height: 100%;
   position: fixed;
   margin-right: -250px;
