@@ -182,7 +182,7 @@ function Editor({ config }) {
         />
 
         <PreviewDialog show={showPreview} dialogFn={showPreviewDialog} title={i18n.t('Preview')} />
-        <PreviewButton previewFn={showPreviewDialog} />
+        <PreviewButton previewFn={showPreviewDialog} isPanelOpen={isPanelOpen} />
       </Container>
     </>
   )

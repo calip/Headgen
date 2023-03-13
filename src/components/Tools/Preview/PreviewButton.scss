@@ -4,8 +4,14 @@
   right: 5px;
   margin: 0;
   padding: 5px 3px;
+  transition: 0.5s;
 
   button {
     background-color: #fff;
   }
+}
+
+.preview-button.panel-open {
+  right: 255px;
+  transition: .5s;
 }
