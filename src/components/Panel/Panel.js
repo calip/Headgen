@@ -93,92 +93,98 @@ function Panel({ toggle, isOpen, layout, items, template, config, resetSession }
         </button>
       </div>
       <div className="panel-nav flex-column p-3">
-        <h6 className="mb-3">{i18n.t('Layout')}</h6>
-        <div className="panel-container">
-          <Row>
-            <Col>
-              <FormGroup className="mb-3" controlId="formGroupEmail">
-                <FormLabel>{i18n.t('Width')} (px) </FormLabel>
-                <FormControl
-                  className="form-control-sm"
-                  type="number"
-                  name="width"
-                  min={1000}
-                  max={10000}
-                  value={layout.layoutWidth}
-                  onBlur={onTextWidthBlur}
-                  onChange={onLayoutWidthChange}
-                  placeholder="100"
-                  aria-label="100"
-                />
-              </FormGroup>
-            </Col>
-            <Col>
-              <FormGroup className="mb-3" controlId="formGroupEmail">
-                <FormLabel>{i18n.t('Height')} (px) </FormLabel>
-                <FormControl
-                  className="form-control-sm"
-                  type="number"
-                  name="height"
-                  value={layout.layoutHeight}
-                  onBlur={onTextHeightBlur}
-                  onChange={onLayoutHeightChange}
-                  placeholder="100"
-                  aria-label="100"
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <FormGroup className="mb-3" controlId="formGroupEmail">
-                <FormLabel>{i18n.t('Padding')} (px)</FormLabel>
-                <FormControl
-                  className="form-control-sm"
-                  type="number"
-                  name="padding"
-                  value={layout.layoutPadding}
-                  onBlur={onPaddingBlur}
-                  onChange={onLayoutPaddingChange}
-                  placeholder="100"
-                  aria-label="100"
-                />
-              </FormGroup>
-            </Col>
-            <Col>
-              <FormGroup className="mb-3" controlId="formGroupEmail">
-                <FormLabel>{i18n.t('Border')}</FormLabel>
-                <FormCheck
-                  type="switch"
-                  checked={layout.layoutBorder}
-                  onChange={onBorderChange}
-                  label={i18n.t('Border')}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-        </div>
-        <h6 className="mb-3">{i18n.t('Resolution')}</h6>
-        <div className="panel-container">
-          <Row>
-            <Col>
-              <FormGroup className="mb-3" controlId="formGroupEmail">
-                <FormLabel>{i18n.t('DPC')}</FormLabel>
-                <FormControl
-                  className="form-control-sm"
-                  type="number"
-                  name="dpc"
-                  defaultValue={layout.layoutDpc}
-                  onChange={onLayoutDpcChange}
-                  placeholder="100"
-                  aria-label="100"
-                />
-              </FormGroup>
-            </Col>
-            <Col></Col>
-          </Row>
-        </div>
-        <hr />
+        {config.admin ? (
+          <>
+            <h6 className="mb-3">{i18n.t('Layout')}</h6>
+            <div className="panel-container">
+              <Row>
+                <Col>
+                  <FormGroup className="mb-3" controlId="formGroupEmail">
+                    <FormLabel>{i18n.t('Width')} (px) </FormLabel>
+                    <FormControl
+                      className="form-control-sm"
+                      type="number"
+                      name="width"
+                      min={1000}
+                      max={10000}
+                      value={layout.layoutWidth}
+                      onBlur={onTextWidthBlur}
+                      onChange={onLayoutWidthChange}
+                      placeholder="100"
+                      aria-label="100"
+                    />
+                  </FormGroup>
+                </Col>
+                <Col>
+                  <FormGroup className="mb-3" controlId="formGroupEmail">
+                    <FormLabel>{i18n.t('Height')} (px) </FormLabel>
+                    <FormControl
+                      className="form-control-sm"
+                      type="number"
+                      name="height"
+                      value={layout.layoutHeight}
+                      onBlur={onTextHeightBlur}
+                      onChange={onLayoutHeightChange}
+                      placeholder="100"
+                      aria-label="100"
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <FormGroup className="mb-3" controlId="formGroupEmail">
+                    <FormLabel>{i18n.t('Padding')} (px)</FormLabel>
+                    <FormControl
+                      className="form-control-sm"
+                      type="number"
+                      name="padding"
+                      value={layout.layoutPadding}
+                      onBlur={onPaddingBlur}
+                      onChange={onLayoutPaddingChange}
+                      placeholder="100"
+                      aria-label="100"
+                    />
+                  </FormGroup>
+                </Col>
+                <Col>
+                  <FormGroup className="mb-3" controlId="formGroupEmail">
+                    <FormLabel>{i18n.t('Border')}</FormLabel>
+                    <FormCheck
+                      type="switch"
+                      checked={layout.layoutBorder}
+                      onChange={onBorderChange}
+                      label={i18n.t('Border')}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+            </div>
+            <h6 className="mb-3">{i18n.t('Resolution')}</h6>
+            <div className="panel-container">
+              <Row>
+                <Col>
+                  <FormGroup className="mb-3" controlId="formGroupEmail">
+                    <FormLabel>{i18n.t('DPC')}</FormLabel>
+                    <FormControl
+                      className="form-control-sm"
+                      type="number"
+                      name="dpc"
+                      defaultValue={layout.layoutDpc}
+                      onChange={onLayoutDpcChange}
+                      placeholder="100"
+                      aria-label="100"
+                    />
+                  </FormGroup>
+                </Col>
+                <Col></Col>
+              </Row>
+            </div>
+            <hr />
+          </>
+        ) : (
+          <></>
+        )}
         <h6 className="mb-3">{i18n.t('Template')}</h6>
         <div className="panel-container">
           <DropdownButton
