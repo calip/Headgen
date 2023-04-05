@@ -73,26 +73,27 @@ function NavBar({ toggle, font, layout, config, admin, downloadFn }) {
           ) : (
             <></>
           )}
-          <Dropdown align="end">
-            <DropdownToggle variant="outline-primary">
-              <FontAwesomeIcon icon={faSave} />
-            </DropdownToggle>
 
-            <DropdownMenu>
-              <DropdownItem onClick={downloadFn('low')}>
-                <small>{i18n.t('LowerQuality')}</small>
-              </DropdownItem>
-              {config.admin ? (
+          {config.admin ? (
+            <Dropdown align="end">
+              <DropdownToggle variant="outline-primary">
+                <FontAwesomeIcon icon={faSave} />
+              </DropdownToggle>
+
+              <DropdownMenu>
+                <DropdownItem onClick={downloadFn('low')}>
+                  <small>{i18n.t('LowerQuality')}</small>
+                </DropdownItem>
                 <DropdownItem onClick={downloadFn('high')}>
                   <small>
                     {i18n.t('HighResolution')} ({layout.layoutWidth} x {layout.layoutHeight} px)
                   </small>
                 </DropdownItem>
-              ) : (
-                <></>
-              )}
-            </DropdownMenu>
-          </Dropdown>
+              </DropdownMenu>
+            </Dropdown>
+          ) : (
+            <></>
+          )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
