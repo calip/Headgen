@@ -281,12 +281,18 @@ function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData 
           <FontAwesomeIcon icon={faPlus} /> {i18n.t('Add')}
         </Button>
         <hr />
-        <Button variant="outline-primary" onClick={showConfirmDialog} className="mb-2">
-          <FontAwesomeIcon icon={faSave} /> {i18n.t('Save')}
-        </Button>
-        <Button variant="outline-primary" onClick={showFileDialog}>
-          <FontAwesomeIcon icon={faCloud} /> {i18n.t('Load')}
-        </Button>
+        {config.admin ? (
+          <>
+            <Button variant="outline-primary" onClick={showConfirmDialog} className="mb-2">
+              <FontAwesomeIcon icon={faSave} /> {i18n.t('Save')}
+            </Button>
+            <Button variant="outline-primary" onClick={showFileDialog}>
+              <FontAwesomeIcon icon={faCloud} /> {i18n.t('Load')}
+            </Button>
+          </>
+        ) : (
+          <></>
+        )}
       </Nav>
       <Dialog
         show={showSave}
