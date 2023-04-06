@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faSave,
@@ -18,11 +18,24 @@ import { useDebouncedCallback } from 'use-debounce'
 import Dialog from '../Dialog/Dialog'
 import saveFileAsJson from '../../utils/saveFileAsJson'
 
-function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData }) {
+function SideBar({ toggle, isOpen, items, icons, template, config, selectText, loadJsonData }) {
   const [showLoad, setShowLoad] = useState(false)
   const [showSave, setShowSave] = useState(false)
   const [json, setJson] = useState('')
   const scrollRef = useRef()
+
+  const realRefs = useRef([])
+  const spokenRefs = useRef([])
+
+  useEffect(() => {
+    const real = realRefs.current[selectText.textItem]
+    const spoken = spokenRefs.current[selectText.textItem]
+    if (real && spoken) {
+      real.classList.add('input-focus')
+      spoken.classList.add('input-focus')
+      selectText.setClickItem(false)
+    }
+  })
 
   const showFileDialog = () => {
     setShowLoad((showLoad) => !showLoad)
@@ -222,12 +235,18 @@ function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData 
                     <>
                       <FormControl
                         type="text"
-                        className="pix-input"
+                        className={`pix-input ${
+                          item.id !== selectText.textItem && item.realText.length > 0
+                            ? 'greyed-out'
+                            : ''
+                        }`}
+                        ref={(el) => (realRefs.current[item.id] = el)}
                         placeholder={`${i18n.t('TypeHere')}...`}
                         defaultValue={item.realText}
                         key={item.id}
                         data-index={item.id}
                         onKeyDown={() => loadSpinner(index)}
+                        onClick={() => selectText.setTextItem(item.id)}
                         onChange={(e) => handleRealTextChange(e.target.value, index)}
                       />
                     </>
@@ -264,11 +283,17 @@ function SideBar({ toggle, isOpen, items, icons, template, config, loadJsonData 
                     <>
                       <FormControl
                         type="text"
-                        className="pix-input"
+                        className={`pix-input ${
+                          item.id !== selectText.textItem && item.realText.length > 0
+                            ? 'greyed-out'
+                            : ''
+                        }`}
+                        ref={(el) => (spokenRefs.current[item.id] = el)}
                         placeholder={`${i18n.t('TypeHere')}...`}
                         key={item.id}
                         defaultValue={item.spokenText}
                         data-index={item.id}
+                        onClick={() => selectText.setTextItem(item.id)}
                         onChange={(e) => handleSpokenTextChange(e.target.value, index)}
                       />
                     </>

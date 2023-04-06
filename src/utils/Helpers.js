@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import i18n from '../utils/i18n'
 
 const Helpers = {
@@ -113,6 +114,17 @@ const Helpers = {
       order: 0
     }
     return item
+  },
+  useHasChanged: (val) => {
+    const prevVal = Helpers.usePrevious(val)
+    return prevVal !== val
+  },
+  usePrevious: (value) => {
+    const ref = useRef()
+    useEffect(() => {
+      ref.current = value
+    })
+    return ref.current
   }
 }
 

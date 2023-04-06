@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { forwardRef, useLayoutEffect, useState } from 'react'
 import './Canvas.scss'
 import FontStyled from '../../utils/FontStyled'
 import TableItem from '../Table/TableItem'
@@ -8,6 +8,8 @@ const Canvas = forwardRef((props, ref) => {
     (item) => item.id === props.items.inputItem.template
   )
   const [data, setData] = useState({})
+
+  const selectedText = props.selectText.textItem
   const fontType = props.font.fontType === 'FontFamily' ? 'comfortaa' : props.font.fontType
   const fontSpacing =
     props.font.fontSpacing === 'Spacing' || props.font.fontSpacing === '0'
@@ -23,16 +25,23 @@ const Canvas = forwardRef((props, ref) => {
   const [spacingSelected, setSpacingSelected] = useState('0')
   const [titleSelected, setTitleSelected] = useState(false)
 
-  const fontTypeChanged = useHasChanged(fontType)
-  const fontSpacingChanged = useHasChanged(fontSpacing)
-  const itemSelectedChanged = useHasChanged(itemSelected)
+  const fontTypeChanged = Helpers.useHasChanged(fontType)
+  const fontSpacingChanged = Helpers.useHasChanged(fontSpacing)
+  const itemSelectedChanged = Helpers.useHasChanged(itemSelected)
 
-  const titleSelectedChanged = useHasChanged(titleSelected)
-  const dataChanged = useHasChanged(props.items)
+  const titleSelectedChanged = Helpers.useHasChanged(titleSelected)
+  const selectedTextChanged = Helpers.useHasChanged(selectedText)
+  const dataChanged = Helpers.useHasChanged(props.items)
 
   useLayoutEffect(() => {
     if (dataChanged) {
       setData(props.items)
+    }
+  })
+
+  useLayoutEffect(() => {
+    if (selectedTextChanged) {
+      setItemSelected(selectedText)
     }
   })
 
@@ -45,12 +54,16 @@ const Canvas = forwardRef((props, ref) => {
   const onItemSelect = (id) => (event) => {
     event.stopPropagation()
     setItemSelected(id)
+    props.selectText.setClickItem(true)
+    props.selectText.setTextItem(id)
     setTitleSelected(false)
   }
 
   const removeSelectedItem = (event) => {
     event.stopPropagation()
     setItemSelected()
+    props.selectText.setClickItem(false)
+    props.selectText.setTextItem()
     setTitleSelected(false)
     props.font.setFontType('FontFamily')
     props.font.setFontSpacing('0')
@@ -310,18 +323,5 @@ const Canvas = forwardRef((props, ref) => {
     )
   }
 })
-
-const useHasChanged = (val) => {
-  const prevVal = usePrevious(val)
-  return prevVal !== val
-}
-
-const usePrevious = (value) => {
-  const ref = useRef()
-  useEffect(() => {
-    ref.current = value
-  })
-  return ref.current
-}
 
 export default Canvas
