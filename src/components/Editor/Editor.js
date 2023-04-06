@@ -42,6 +42,8 @@ function Editor({ config }) {
   const [showPreview, setShowPreview] = useState(false)
   const exportRef = useRef()
   const [renderCanvas, setRenderCanvas] = useState(false)
+  const [textItem, setTextItem] = useState()
+  const [clickItem, setClickItem] = useState(false)
 
   const handleDownload = (quality) => () => {
     exportAsImage(exportRef.current, layoutDpc, config.appName, quality)
@@ -67,6 +69,13 @@ function Editor({ config }) {
     setFontSize: setFontSize,
     fontSpacing: fontSpacing,
     setFontSpacing: setFontSpacing
+  }
+
+  const selectText = {
+    textItem: textItem,
+    setTextItem: setTextItem,
+    clickItem: clickItem,
+    setClickItem: setClickItem
   }
 
   const layout = {
@@ -149,6 +158,7 @@ function Editor({ config }) {
         icons={icons}
         template={template}
         config={config}
+        selectText={selectText}
         loadJsonData={loadJsonFromFile}
       />
       <Container fluid className="content">
@@ -167,6 +177,7 @@ function Editor({ config }) {
           icons={icons}
           layout={layout}
           config={config}
+          selectText={selectText}
           reload={reloadCanvas}
           ref={exportRef}
         />
