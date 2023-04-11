@@ -44,6 +44,7 @@ function Editor({ config }) {
   const [renderCanvas, setRenderCanvas] = useState(false)
   const [textItem, setTextItem] = useState()
   const [clickItem, setClickItem] = useState(false)
+  const [clickTitle, setClickTitle] = useState(false)
 
   const handleDownload = (quality) => () => {
     exportAsImage(exportRef.current, layoutDpc, config.appName, quality)
@@ -75,7 +76,9 @@ function Editor({ config }) {
     textItem: textItem,
     setTextItem: setTextItem,
     clickItem: clickItem,
-    setClickItem: setClickItem
+    setClickItem: setClickItem,
+    clickTitle: clickTitle,
+    setClickTitle: setClickTitle
   }
 
   const layout = {
