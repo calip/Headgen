@@ -26,6 +26,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText, l
 
   const realRefs = useRef([])
   const spokenRefs = useRef([])
+  const titleRef = useRef()
 
   useEffect(() => {
     const real = realRefs.current[selectText.textItem]
@@ -34,8 +35,23 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText, l
       real.classList.add('input-focus')
       spoken.classList.add('input-focus')
       selectText.setClickItem(false)
+      selectText.setClickTitle(false)
     }
   })
+
+  useEffect(() => {
+    if (selectText.clickTitle) {
+      const title = titleRef.current
+      title.classList.add('input-focus')
+      selectText.setClickItem(false)
+    }
+  })
+
+  const inputTitleClicked = () => {
+    selectText.setClickItem(false)
+    selectText.setTextItem()
+    selectText.setClickTitle(true)
+  }
 
   const showFileDialog = () => {
     setShowLoad((showLoad) => !showLoad)
@@ -214,11 +230,13 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText, l
       <Nav className="flex-column p-2">
         <div className="flex-column p-1">
           <FormControl
+            ref={titleRef}
             type="text"
             key={items.inputItem.title}
-            className="pix-input"
+            className={`pix-input ${selectText.clickTitle ? '' : 'greyed-out'}`}
             placeholder={`${i18n.t('Title')}...`}
             defaultValue={items.inputItem.title}
+            onClick={inputTitleClicked}
             onChange={(e) => handleTitleChange(e.target.value)}
           />
         </div>
@@ -236,9 +254,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText, l
                       <FormControl
                         type="text"
                         className={`pix-input ${
-                          item.id !== selectText.textItem && item.realText.length > 0
-                            ? 'greyed-out'
-                            : ''
+                          item.id !== selectText.textItem ? 'greyed-out' : ''
                         }`}
                         ref={(el) => (realRefs.current[item.id] = el)}
                         placeholder={`${i18n.t('TypeHere')}...`}
@@ -284,9 +300,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText, l
                       <FormControl
                         type="text"
                         className={`pix-input ${
-                          item.id !== selectText.textItem && item.realText.length > 0
-                            ? 'greyed-out'
-                            : ''
+                          item.id !== selectText.textItem ? 'greyed-out' : ''
                         }`}
                         ref={(el) => (spokenRefs.current[item.id] = el)}
                         placeholder={`${i18n.t('TypeHere')}...`}
