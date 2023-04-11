@@ -10,6 +10,7 @@ const Canvas = forwardRef((props, ref) => {
   const [data, setData] = useState({})
 
   const selectedText = props.selectText.textItem
+  const clickTitle = props.selectText.clickTitle
   const fontType = props.font.fontType === 'FontFamily' ? 'comfortaa' : props.font.fontType
   const fontSpacing =
     props.font.fontSpacing === 'Spacing' || props.font.fontSpacing === '0'
@@ -31,6 +32,7 @@ const Canvas = forwardRef((props, ref) => {
 
   const titleSelectedChanged = Helpers.useHasChanged(titleSelected)
   const selectedTextChanged = Helpers.useHasChanged(selectedText)
+  const selectedTitleChanged = Helpers.useHasChanged(clickTitle)
   const dataChanged = Helpers.useHasChanged(props.items)
 
   useLayoutEffect(() => {
@@ -45,10 +47,19 @@ const Canvas = forwardRef((props, ref) => {
     }
   })
 
+  useLayoutEffect(() => {
+    if (selectedTitleChanged) {
+      setTitleSelected(clickTitle)
+    }
+  })
+
   const onTitleSelect = (event) => {
     event.stopPropagation()
     setItemSelected()
     setTitleSelected(true)
+    props.selectText.setClickTitle(true)
+    props.selectText.setClickItem(false)
+    props.selectText.setTextItem()
   }
 
   const onItemSelect = (id) => (event) => {
@@ -56,6 +67,7 @@ const Canvas = forwardRef((props, ref) => {
     setItemSelected(id)
     props.selectText.setClickItem(true)
     props.selectText.setTextItem(id)
+    props.selectText.setClickTitle(false)
     setTitleSelected(false)
   }
 
@@ -65,6 +77,7 @@ const Canvas = forwardRef((props, ref) => {
     props.selectText.setClickItem(false)
     props.selectText.setTextItem()
     setTitleSelected(false)
+    props.selectText.setClickTitle(false)
     props.font.setFontType('FontFamily')
     props.font.setFontSpacing('0')
   }
