@@ -87,13 +87,16 @@ const Helpers = {
         return i18n.t('Spacing')
     }
   },
-  setData: () => {
+  setData: (config) => {
     const data = {
       title: '',
       font: '',
       fontPadding: 0,
       fontSpacing: '',
       template: 1,
+      format: config.layout.format,
+      height: config.layout.height,
+      width: config.layout.width,
       items: [Helpers.setItems()]
     }
     return data

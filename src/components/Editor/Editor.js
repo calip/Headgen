@@ -9,10 +9,11 @@ import Helpers from '../../utils/Helpers'
 import { useTranslation } from 'react-i18next'
 import '../../utils/i18n'
 import './Editor.scss'
-import PreviewButton from '../Tools/Preview/PreviewButton'
-import PreviewDialog from '../Dialog/PreviewDialog'
+// import PreviewButton from '../Tools/Preview/PreviewButton'
+// import PreviewDialog from '../Dialog/PreviewDialog'
 
 function Editor({ config }) {
+  const format = config.layout.format
   const width = config.layout.width
   const height = config.layout.height
   const padding = config.layout.padding
@@ -23,15 +24,15 @@ function Editor({ config }) {
   const language = config.language
   const sidebarOpen = Helpers.isTouchScreenDevice() ? false : true
 
-  const initialInput = Helpers.setData()
+  const initialInput = Helpers.setData(config)
 
   const [isAdmin, setIsAdmin] = useState(false)
   const [fontType, setFontType] = useState('FontFamily')
   const [fontSize, setFontSize] = useState('FontSize')
   const [fontSpacing, setFontSpacing] = useState('NoSpacing')
-  const [layoutType, setLayoutType] = useState('Layout')
   const [isSidebarOpen, setSidebarOpen] = useState(sidebarOpen)
   const [isPanelOpen, setPanelOpen] = useState(false)
+  const [layoutFormat, setLayoutFormat] = useState(format)
   const [layoutWidth, setLayoutWidth] = useState(width)
   const [layoutHeight, setLayoutHeight] = useState(height)
   const [layoutDpc, setLayoutDpc] = useState(dpc)
@@ -39,7 +40,7 @@ function Editor({ config }) {
   const [layoutPadding, setLayoutPadding] = useState(padding)
   const [inputItem, setInputItem] = useState(initialInput)
   const [inputTemplate, setInputTemplate] = useState(templates[0])
-  const [showPreview, setShowPreview] = useState(false)
+  // const [showPreview, setShowPreview] = useState(false)
   const exportRef = useRef()
   const [renderCanvas, setRenderCanvas] = useState(false)
   const [textItem, setTextItem] = useState()
@@ -90,8 +91,8 @@ function Editor({ config }) {
     setLayoutDpc: setLayoutDpc,
     layoutPadding: layoutPadding,
     setLayoutPadding: setLayoutPadding,
-    layoutType: layoutType,
-    setLayoutType: setLayoutType,
+    layoutFormat: layoutFormat,
+    setLayoutFormat: setLayoutFormat,
     layoutBorder: layoutBorder,
     setLayoutBorder: setLayoutBorder
   }
@@ -148,9 +149,9 @@ function Editor({ config }) {
     loadLocalStorage(config)
   }
 
-  const showPreviewDialog = () => {
-    setShowPreview((showPreview) => !showPreview)
-  }
+  // const showPreviewDialog = () => {
+  //   setShowPreview((showPreview) => !showPreview)
+  // }
 
   return (
     <>
@@ -195,8 +196,8 @@ function Editor({ config }) {
           resetSession={clearSession}
         />
 
-        <PreviewDialog show={showPreview} dialogFn={showPreviewDialog} title={i18n.t('Preview')} />
-        <PreviewButton previewFn={showPreviewDialog} isPanelOpen={isPanelOpen} />
+        {/* <PreviewDialog show={showPreview} dialogFn={showPreviewDialog} title={i18n.t('Preview')} />
+        <PreviewButton previewFn={showPreviewDialog} isPanelOpen={isPanelOpen} /> */}
       </Container>
     </>
   )
