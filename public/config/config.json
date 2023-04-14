@@ -3,6 +3,7 @@
   "appName": "Pixgen",
   "language": "de",
   "admin": true,
+  "format": "canvas",
   "layout": {
     "width": 4000,
     "height": 6000,
