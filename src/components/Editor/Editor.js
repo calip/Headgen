@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next'
 import '../../utils/i18n'
 import './Editor.scss'
 import PreviewButton from '../Tools/Preview/PreviewButton'
-import PreviewDialog from '../Tools/Preview/PreviewDialog'
+import PreviewDialog from '../Dialog/PreviewDialog'
 
 function Editor({ config }) {
   const width = config.layout.width
