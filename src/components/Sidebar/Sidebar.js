@@ -17,16 +17,26 @@ import i18n from '../../utils/i18n'
 import { useDebouncedCallback } from 'use-debounce'
 import Dialog from '../Dialog/Dialog'
 import saveFileAsJson from '../../utils/saveFileAsJson'
+import ErrorDialog from '../Dialog/ErrorDialog'
 
 function SideBar({ toggle, isOpen, items, icons, template, config, selectText, loadJsonData }) {
   const [showLoad, setShowLoad] = useState(false)
-  const [showSave, setShowSave] = useState(false)
+  const [showDialog, setShowDialog] = useState(false)
+  const [canSave, setCanSave] = useState(false)
   const [json, setJson] = useState('')
   const scrollRef = useRef()
 
   const realRefs = useRef([])
   const spokenRefs = useRef([])
   const titleRef = useRef()
+
+  useEffect(() => {
+    const content = Helpers.getInputItem(config)
+    if (content) {
+      setCanSave(true)
+    }
+    console.log(canSave)
+  })
 
   useEffect(() => {
     const real = realRefs.current[selectText.textItem]
@@ -58,13 +68,15 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText, l
   }
 
   const showConfirmDialog = () => {
-    setShowSave((showSave) => !showSave)
+    setShowDialog((showDialog) => !showDialog)
   }
 
   const saveJson = () => {
     const items = Helpers.getInputItem(config)
-    saveFileAsJson(items, 'pixdata')
-    setShowSave(false)
+    if (items) {
+      saveFileAsJson(items, 'pixdata')
+      setShowDialog(false)
+    }
   }
 
   const loadJson = () => {
@@ -333,13 +345,22 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText, l
           <></>
         )}
       </Nav>
-      <Dialog
-        show={showSave}
-        dialogFn={showConfirmDialog}
-        title={i18n.t('SaveToFile')}
-        description={i18n.t('SaveFileDescription')}
-        actionFn={saveJson}
-      />
+      {canSave ? (
+        <Dialog
+          show={showDialog}
+          dialogFn={showConfirmDialog}
+          title={i18n.t('SaveToFile')}
+          description={i18n.t('SaveFileDescription')}
+          actionFn={saveJson}
+        />
+      ) : (
+        <ErrorDialog
+          show={showDialog}
+          dialogFn={showConfirmDialog}
+          title={i18n.t('CannotSave')}
+          description={i18n.t('ContentIsEmpty')}
+        />
+      )}
       <File show={showLoad} dialogFn={showFileDialog} actionFn={loadJson} setJson={setJson} />
     </div>
   )
