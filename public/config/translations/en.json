@@ -29,5 +29,7 @@
   "Border": "Border",
   "Preview": "Preview",
   "Close": "Close",
-  "Initializing": "Initializing"
+  "Initializing": "Initializing",
+  "Format": "Format",
+  "FormatSelection": "Format Selection"
 }
