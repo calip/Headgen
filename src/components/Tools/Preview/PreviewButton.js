@@ -1,5 +1,5 @@
 import React from 'react'
-import './PreviewButton.scss'
+import './Preview.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 import { Button, ButtonGroup } from 'react-bootstrap'
