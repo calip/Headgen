@@ -1,6 +1,6 @@
 import { Button, Modal } from 'react-bootstrap'
-import './PreviewDialog.scss'
-import i18n from '../../../utils/i18n'
+import '../Tools/Preview/Preview.scss'
+import i18n from '../../utils/i18n'
 
 function PreviewDialog(props) {
   return (
