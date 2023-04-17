@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './Panel.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCogs, faEraser } from '@fortawesome/free-solid-svg-icons'
 import classNames from 'classnames'
 import {
   Button,
+  Card,
   Col,
   Dropdown,
   DropdownButton,
@@ -43,6 +44,7 @@ function Panel({ toggle, isOpen, layout, items, template, config, resetSession }
 
   const onLayoutHeightChange = (event) => {
     layout.setLayoutHeight(event.target.value)
+    onHeightChange(event.target.value)
   }
 
   const onLayoutDpcChange = (event) => {
@@ -74,6 +76,16 @@ function Panel({ toggle, isOpen, layout, items, template, config, resetSession }
     setShow(false)
   }
 
+  const onHeightChange = (value) => {
+    console.log(value, items.inputItem)
+    // let input = items.inputItem
+    // input.template = temp.id
+    // items.setInputItem((prevState) => {
+    //   return { ...prevState, [items]: input.items }
+    // })
+    // Helpers.storeInputItem(config, items.inputItem)
+  }
+
   const onTemplateChange = (eventkey) => {
     const temp = template.templates.find((i) => i.id === Math.abs(eventkey))
     template.setInputTemplate(temp)
@@ -97,6 +109,21 @@ function Panel({ toggle, isOpen, layout, items, template, config, resetSession }
           <>
             <h6 className="mb-3">{i18n.t('Layout')}</h6>
             <div className="panel-container">
+              <Row>
+                <Col>
+                  <FormGroup className="mb-3" controlId="formGroupEmail">
+                    <Card>
+                      {/* <Card.Img variant="top" className="image-format" src="holder.js/100px180" /> */}
+                      <Card.Body className="panel-card">
+                        <div className="card-title">Card Title</div>
+                        <div className="card-format">
+                          <img src={Helpers.getSelectedFormat(config).preview} />
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  </FormGroup>
+                </Col>
+              </Row>
               <Row>
                 <Col>
                   <FormGroup className="mb-3" controlId="formGroupEmail">
