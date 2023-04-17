@@ -40,3 +40,31 @@
 .panel-container {
   font-size: 12px;
 }
+
+.panel-card {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.panel-card:hover {
+  box-shadow: 0 0 0 3px rgba(21, 156, 228, 0.4);
+}
+
+.card-title {
+  margin-bottom: 5px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.card-format {
+  display: block;
+  width: auto;
+  height: 100px;
+  margin: 0 auto;
+  text-align: center;
+
+  img {
+    width: 150px;
+    height: 100px;
+  }
+}
