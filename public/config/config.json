@@ -3,8 +3,8 @@
   "appName": "Pixgen",
   "language": "de",
   "admin": true,
-  "format": "canvas",
   "layout": {
+    "format": "frame",
     "width": 4000,
     "height": 6000,
     "padding": 10,
@@ -72,6 +72,92 @@
       }
     ]
   },
+  "format": [
+    {
+      "id": "canvas",
+      "title": "Canvas",
+      "preview": "./img/canvas.png",
+      "sizes": [
+        {
+          "height": 20,
+          "width": 20
+        },
+        {
+          "height": 30,
+          "width": 20
+        },
+        {
+          "height": 40,
+          "width": 40
+        },
+        {
+          "height": 60,
+          "width": 40
+        },
+        {
+          "height": 80,
+          "width": 60
+        },
+        {
+          "height": 100,
+          "width": 75
+        }
+      ],
+      "images": ["./img/canvas.png", "./img/canvas-1.png", "./img/canvas-2.png", "./img/canvas-3.png"]
+    },
+    {
+      "id": "frame",
+      "title": "Picture in frame",
+      "preview": "./img/frame.png",
+      "sizes": [
+        {
+          "height": 40,
+          "width": 30
+        },
+        {
+          "height": 60,
+          "width": 40
+        },
+        {
+          "height": 90,
+          "width": 60
+        }
+      ],
+      "images": ["./img/frame.png", "./img/frame-1.png", "./img/frame-2.png", "./img/frame-3.png"]
+    },
+    {
+      "id": "wallboard",
+      "title": "Wallboard",
+      "preview": "./img/wallboard.png",
+      "sizes": [
+        {
+          "height": 20,
+          "width": 20
+        },
+        {
+          "height": 30,
+          "width": 20
+        },
+        {
+          "height": 40,
+          "width": 40
+        },
+        {
+          "height": 60,
+          "width": 40
+        },
+        {
+          "height": 80,
+          "width": 60
+        },
+        {
+          "height": 100,
+          "width": 75
+        }
+      ],
+      "images": ["./img/wallboard.png", "./img/wallboard-1.png", "./img/wallboard-2.png", "./img/wallboard-3.png"]
+    }
+  ],
   "toolbar": {
     "fontFamily": true,
     "fontSpacing": true
