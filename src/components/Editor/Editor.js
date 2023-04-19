@@ -13,7 +13,8 @@ import './Editor.scss'
 // import PreviewDialog from '../Dialog/PreviewDialog'
 
 function Editor({ config }) {
-  const format = config.layout.format
+  const format = config.format
+  const selectedFormat = config.layout.format
   const width = config.layout.width
   const height = config.layout.height
   const padding = config.layout.padding
@@ -32,7 +33,7 @@ function Editor({ config }) {
   const [fontSpacing, setFontSpacing] = useState('NoSpacing')
   const [isSidebarOpen, setSidebarOpen] = useState(sidebarOpen)
   const [isPanelOpen, setPanelOpen] = useState(false)
-  const [layoutFormat, setLayoutFormat] = useState(format)
+  const [layoutFormat, setLayoutFormat] = useState(selectedFormat)
   const [layoutWidth, setLayoutWidth] = useState(width)
   const [layoutHeight, setLayoutHeight] = useState(height)
   const [layoutDpc, setLayoutDpc] = useState(dpc)
@@ -148,7 +149,6 @@ function Editor({ config }) {
   const reloadCanvas = () => {
     loadLocalStorage(config)
   }
-
   // const showPreviewDialog = () => {
   //   setShowPreview((showPreview) => !showPreview)
   // }
@@ -193,6 +193,7 @@ function Editor({ config }) {
           items={items}
           template={template}
           config={config}
+          format={format}
           resetSession={clearSession}
         />
 
