@@ -1,0 +1,17 @@
+.format-pages {
+  height: 330px;
+  overflow: hidden;
+  position:relative;
+}
+
+.format-page {
+  height: 100%;
+  width: 100%;
+  display:block;
+  opacity: 1;
+}
+
+.format-page.hide {
+  display: none;
+  opacity: 0;
+}
