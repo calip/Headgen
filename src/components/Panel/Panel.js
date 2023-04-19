@@ -18,10 +18,12 @@ import {
 import Dialog from '../Dialog/Dialog'
 import Helpers from '../../utils/Helpers'
 import i18n from '../../utils/i18n'
+import FormatDialog from '../Tools/Format/FormatDialog'
 
-function Panel({ toggle, isOpen, layout, items, template, config, resetSession }) {
+function Panel({ toggle, isOpen, layout, items, template, config, format, resetSession }) {
   const currentTemplate = config.templates.find((item) => item.id === items.inputItem.template)
   const [show, setShow] = useState(false)
+  const [showFormat, setShowFormat] = useState(false)
   const min = 1000
   const max = 10000
 
@@ -71,9 +73,24 @@ function Panel({ toggle, isOpen, layout, items, template, config, resetSession }
     setShow((show) => !show)
   }
 
+  const showFormatDialog = () => {
+    setShowFormat((showFormat) => !showFormat)
+  }
+
   const clearSession = () => {
     resetSession()
     setShow(false)
+  }
+
+  const selectFormat = (format, index) => {
+    const size = format.sizes.at(index)
+    const realWidth = Helpers.getRealFormatSize(size.width)
+    const realHeight = Helpers.getRealFormatSize(size.height)
+    layout.setLayoutFormat(format.id)
+    layout.setLayoutWidth(realWidth)
+    layout.setLayoutHeight(realHeight)
+
+    console.log('sele', layout)
   }
 
   const onHeightChange = (value) => {
@@ -112,19 +129,38 @@ function Panel({ toggle, isOpen, layout, items, template, config, resetSession }
               <Row>
                 <Col>
                   <FormGroup className="mb-3" controlId="formGroupEmail">
-                    <Card>
-                      {/* <Card.Img variant="top" className="image-format" src="holder.js/100px180" /> */}
-                      <Card.Body className="panel-card">
-                        <div className="card-title">Card Title</div>
-                        <div className="card-format">
-                          <img src={Helpers.getSelectedFormat(config).preview} />
+                    <Card className="format-card" onClick={showFormatDialog}>
+                      <Card.Body className="format-body">
+                        <div className="format-title">{layout.layoutFormat}</div>
+                        <div className="format-content">
+                          <img
+                            src={Helpers.getSelectedFormat(format, layout.layoutFormat).preview}
+                          />
                         </div>
                       </Card.Body>
+                      <Card.Footer className="format-footer">
+                        {Helpers.getConvertFormatSize(layout.layoutWidth, layout.layoutHeight)}
+                      </Card.Footer>
                     </Card>
                   </FormGroup>
                 </Col>
               </Row>
               <Row>
+                <Col>
+                  <FormGroup className="mb-3" controlId="formGroupEmail">
+                    <FormLabel>{i18n.t('Height')} (px) </FormLabel>
+                    <FormControl
+                      className="form-control-sm"
+                      type="number"
+                      name="height"
+                      value={layout.layoutHeight}
+                      onBlur={onTextHeightBlur}
+                      onChange={onLayoutHeightChange}
+                      placeholder="100"
+                      aria-label="100"
+                    />
+                  </FormGroup>
+                </Col>
                 <Col>
                   <FormGroup className="mb-3" controlId="formGroupEmail">
                     <FormLabel>{i18n.t('Width')} (px) </FormLabel>
@@ -137,21 +173,6 @@ function Panel({ toggle, isOpen, layout, items, template, config, resetSession }
                       value={layout.layoutWidth}
                       onBlur={onTextWidthBlur}
                       onChange={onLayoutWidthChange}
-                      placeholder="100"
-                      aria-label="100"
-                    />
-                  </FormGroup>
-                </Col>
-                <Col>
-                  <FormGroup className="mb-3" controlId="formGroupEmail">
-                    <FormLabel>{i18n.t('Height')} (px) </FormLabel>
-                    <FormControl
-                      className="form-control-sm"
-                      type="number"
-                      name="height"
-                      value={layout.layoutHeight}
-                      onBlur={onTextHeightBlur}
-                      onChange={onLayoutHeightChange}
                       placeholder="100"
                       aria-label="100"
                     />
@@ -243,6 +264,14 @@ function Panel({ toggle, isOpen, layout, items, template, config, resetSession }
         title={i18n.t('ClearSession')}
         description={i18n.t('ClearConfirmation')}
         actionFn={clearSession}
+      />
+      <FormatDialog
+        show={showFormat}
+        config={config}
+        onHide={() => setShowFormat(false)}
+        title={i18n.t('Format')}
+        description={i18n.t('FormatSelection')}
+        actionfn={selectFormat}
       />
     </div>
   )

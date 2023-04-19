@@ -9,15 +9,33 @@ function FormatDialog(props) {
   const { actionfn, ...others } = props
 
   const [formatType, setFormatType] = useState('')
+  const [sizeIndex, setSizeIndex] = useState()
 
   const onSelectFormat = (value) => {
     const format = others.config.format.find((item) => item.id === value)
     setFormatType(format)
   }
 
+  const onSelectSize = (value) => {
+    setSizeIndex(value)
+  }
+
   const handleClose = () => {
     setFormatType('')
+    setSizeIndex()
     others.onHide()
+  }
+
+  const handleBack = () => {
+    setFormatType('')
+    setSizeIndex()
+  }
+
+  const handleChoose = (format, index) => {
+    setFormatType('')
+    setSizeIndex()
+    others.onHide()
+    actionfn(format, index)
   }
 
   return (
@@ -32,18 +50,27 @@ function FormatDialog(props) {
         <Modal.Title id="contained-modal-title-vcenter">{others.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>
-          <strong>{formatType.title}</strong>
-        </p>
-        {formatType ? (
-          <CarouselImage images={formatType.images} />
-        ) : (
-          <FormatType format={others.config.format} onSelectFormat={onSelectFormat} />
-        )}
+        <div className="format-pages">
+          {formatType ? (
+            <div className="format-page">
+              <CarouselImage format={formatType} onSelectSize={onSelectSize} />
+            </div>
+          ) : (
+            <div className="format-page">
+              <FormatType format={others.config.format} onSelectFormat={onSelectFormat} />
+            </div>
+          )}
+        </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleClose}>{i18n.t('Close')}</Button>
-        <Button onClick={actionfn}>{i18n.t('OK')}</Button>
+        <Button variant="secondary" onClick={handleBack}>
+          {i18n.t('Back')}
+        </Button>
+        {formatType && sizeIndex >= 0 ? (
+          <Button onClick={() => handleChoose(formatType, sizeIndex)}>{i18n.t('Choose')}</Button>
+        ) : (
+          <></>
+        )}
       </Modal.Footer>
     </Modal>
   )

@@ -35,7 +35,6 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText, l
     if (content) {
       setCanSave(true)
     }
-    console.log(canSave)
   })
 
   useEffect(() => {

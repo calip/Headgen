@@ -16,6 +16,18 @@ const Helpers = {
     const data = icons.find((i) => i.name === icon)
     return data.file
   },
+  getSelectedFormat: (format, selected) => {
+    const f = format.find((item) => item.id === selected)
+    return f
+  },
+  getConvertFormatSize: (width, height) => {
+    const w = Math.abs(width / 100)
+    const h = Math.abs(height / 100)
+    return `${h} x ${w}`
+  },
+  getRealFormatSize: (size) => {
+    return Math.abs(size * 100)
+  },
   getQuery: () => {
     return new URLSearchParams(window.location.search)
   },
