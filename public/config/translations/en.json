@@ -31,5 +31,10 @@
   "Close": "Close",
   "Initializing": "Initializing",
   "Format": "Format",
-  "FormatSelection": "Format Selection"
+  "FormatSelection": "Format Selection",
+  "CannotSave": "Cannot Save",
+  "ContentIsEmpty": "Content is empty",
+  "OK": "OK",
+  "Back": "Back",
+  "Choose": "Choose"
 }
