@@ -41,22 +41,30 @@
   font-size: 12px;
 }
 
-.panel-card {
-  padding: 10px;
+.format-card {
   cursor: pointer;
 }
 
-.panel-card:hover {
+
+.format-card:hover {
   box-shadow: 0 0 0 3px rgba(21, 156, 228, 0.4);
 }
 
-.card-title {
+.format-body {
+  padding: 10px; 
+}
+
+.format-footer {
+  background: #fff;
+  text-align: center;
+}
+.format-title {
   margin-bottom: 5px;
   text-align: center;
   font-weight: 600;
 }
 
-.card-format {
+.format-content {
   display: block;
   width: auto;
   height: 100px;
