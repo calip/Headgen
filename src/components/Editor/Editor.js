@@ -25,13 +25,14 @@ function Editor({ config }) {
   const language = config.language
   const sidebarOpen = Helpers.isTouchScreenDevice() ? false : true
 
-  const initialInput = Helpers.setData(config)
+  const initialInput = Helpers.setData(width, height)
 
   const [isAdmin, setIsAdmin] = useState(false)
   const [fontType, setFontType] = useState('FontFamily')
   const [fontSize, setFontSize] = useState('FontSize')
   const [fontSpacing, setFontSpacing] = useState('NoSpacing')
   const [isSidebarOpen, setSidebarOpen] = useState(sidebarOpen)
+  const [initFormat, setInitFormat] = useState(false)
   const [isPanelOpen, setPanelOpen] = useState(false)
   const [layoutFormat, setLayoutFormat] = useState(selectedFormat)
   const [layoutWidth, setLayoutWidth] = useState(width)
@@ -110,6 +111,8 @@ function Editor({ config }) {
   }
 
   const items = {
+    initFormat: initFormat,
+    setInitFormat: setInitFormat,
     inputItem: inputItem,
     setInputItem: setInputItem
   }
@@ -141,7 +144,8 @@ function Editor({ config }) {
 
   const clearSession = () => {
     Helpers.clearInputItem()
-    const input = Helpers.setData()
+    setInitFormat(false)
+    const input = Helpers.setData(width, height)
     setInputItem(input)
     loadLocalStorage(config)
   }
