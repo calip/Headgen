@@ -31,6 +31,12 @@ const Helpers = {
   getQuery: () => {
     return new URLSearchParams(window.location.search)
   },
+  saveInputToLocalStorage: (items, config, value) => {
+    items.setInputItem((prevState) => {
+      return { ...prevState, [items]: value }
+    })
+    Helpers.storeInputItem(config, items.inputItem)
+  },
   fetchJson: async (url) => {
     const response = await fetch(url, {
       method: 'GET'
@@ -99,16 +105,16 @@ const Helpers = {
         return i18n.t('Spacing')
     }
   },
-  setData: (config) => {
+  setData: (width, height) => {
     const data = {
       title: '',
       font: '',
       fontPadding: 0,
       fontSpacing: '',
       template: 1,
-      format: config.layout.format,
-      height: config.layout.height,
-      width: config.layout.width,
+      format: 'canvas',
+      height: height,
+      width: width,
       items: [Helpers.setItems()]
     }
     return data

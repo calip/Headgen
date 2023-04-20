@@ -22,31 +22,67 @@ import FormatDialog from '../Tools/Format/FormatDialog'
 
 function Panel({ toggle, isOpen, layout, items, template, config, format, resetSession }) {
   const currentTemplate = config.templates.find((item) => item.id === items.inputItem.template)
+  const currentWidth = items.inputItem.width
+  const currentHeight = items.inputItem.height
+  const currentFormat = items.inputItem.format
+
   const [show, setShow] = useState(false)
   const [showFormat, setShowFormat] = useState(false)
+
   const min = 1000
   const max = 10000
-
   const minPadding = 0
   const maxPadding = 100
+
+  // useEffect(() => {
+  //   // console.log('asasd', currentFormat, !items.initFormat)
+  //   // if (currentFormat === null) {
+  //   // setShowFormat(true)
+  //   items.setInitFormat(currentFormat === null)
+  //   // } else {
+  //   //   console.log('xcvxc')
+  //   // }
+  // })
+
+  // useEffect(() => {
+  //   console.log(items.initFormat)
+  //   if (items.initFormat) {
+  //     setShowFormat(true)
+  //   }
+  // })
 
   const onTextWidthBlur = (event) => {
     let value = Math.max(Number(min), Math.min(Number(max), Number(event.target.value)))
     layout.setLayoutWidth(value)
+
+    let temp = items.inputItem
+    temp.width = Math.abs(value)
+    Helpers.saveInputToLocalStorage(items, config, temp.items)
   }
 
   const onTextHeightBlur = (event) => {
     let value = Math.max(Number(min), Math.min(Number(max), Number(event.target.value)))
     layout.setLayoutHeight(value)
+
+    let temp = items.inputItem
+    temp.height = Math.abs(value)
+    Helpers.saveInputToLocalStorage(items, config, temp.items)
   }
 
   const onLayoutWidthChange = (event) => {
     layout.setLayoutWidth(event.target.value)
+
+    let temp = items.inputItem
+    temp.width = Math.abs(event.target.value)
+    Helpers.saveInputToLocalStorage(items, config, temp.items)
   }
 
   const onLayoutHeightChange = (event) => {
     layout.setLayoutHeight(event.target.value)
-    onHeightChange(event.target.value)
+
+    let temp = items.inputItem
+    temp.height = Math.abs(event.target.value)
+    Helpers.saveInputToLocalStorage(items, config, temp.items)
   }
 
   const onLayoutDpcChange = (event) => {
@@ -90,17 +126,12 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, resetS
     layout.setLayoutWidth(realWidth)
     layout.setLayoutHeight(realHeight)
 
-    console.log('sele', layout)
-  }
+    let temp = items.inputItem
+    temp.format = format.id
+    temp.width = realWidth
+    temp.height = realHeight
 
-  const onHeightChange = (value) => {
-    console.log(value, items.inputItem)
-    // let input = items.inputItem
-    // input.template = temp.id
-    // items.setInputItem((prevState) => {
-    //   return { ...prevState, [items]: input.items }
-    // })
-    // Helpers.storeInputItem(config, items.inputItem)
+    Helpers.saveInputToLocalStorage(items, config, temp.items)
   }
 
   const onTemplateChange = (eventkey) => {
@@ -108,10 +139,8 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, resetS
     template.setInputTemplate(temp)
     let input = items.inputItem
     input.template = temp.id
-    items.setInputItem((prevState) => {
-      return { ...prevState, [items]: input.items }
-    })
-    Helpers.storeInputItem(config, items.inputItem)
+
+    Helpers.saveInputToLocalStorage(items, config, temp.items)
   }
 
   return (
@@ -122,29 +151,27 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, resetS
         </button>
       </div>
       <div className="panel-nav flex-column p-3">
-        {config.admin ? (
-          <>
-            <h6 className="mb-3">{i18n.t('Layout')}</h6>
-            <div className="panel-container">
-              <Row>
-                <Col>
-                  <FormGroup className="mb-3" controlId="formGroupEmail">
-                    <Card className="format-card" onClick={showFormatDialog}>
-                      <Card.Body className="format-body">
-                        <div className="format-title">{layout.layoutFormat}</div>
-                        <div className="format-content">
-                          <img
-                            src={Helpers.getSelectedFormat(format, layout.layoutFormat).preview}
-                          />
-                        </div>
-                      </Card.Body>
-                      <Card.Footer className="format-footer">
-                        {Helpers.getConvertFormatSize(layout.layoutWidth, layout.layoutHeight)}
-                      </Card.Footer>
-                    </Card>
-                  </FormGroup>
-                </Col>
-              </Row>
+        <h6 className="mb-3">{i18n.t('Layout')}</h6>
+        <div className="panel-container">
+          <Row>
+            <Col>
+              <FormGroup className="mb-3" controlId="formGroupEmail">
+                <Card className="format-card" onClick={showFormatDialog}>
+                  <Card.Body className="format-body">
+                    <div className="format-title">{currentFormat}</div>
+                    <div className="format-content">
+                      <img src={Helpers.getSelectedFormat(format, currentFormat)?.preview} />
+                    </div>
+                  </Card.Body>
+                  <Card.Footer className="format-footer">
+                    {Helpers.getConvertFormatSize(currentWidth, currentHeight)}
+                  </Card.Footer>
+                </Card>
+              </FormGroup>
+            </Col>
+          </Row>
+          {config.admin ? (
+            <>
               <Row>
                 <Col>
                   <FormGroup className="mb-3" controlId="formGroupEmail">
@@ -153,7 +180,7 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, resetS
                       className="form-control-sm"
                       type="number"
                       name="height"
-                      value={layout.layoutHeight}
+                      value={currentHeight}
                       onBlur={onTextHeightBlur}
                       onChange={onLayoutHeightChange}
                       placeholder="100"
@@ -170,7 +197,7 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, resetS
                       name="width"
                       min={1000}
                       max={10000}
-                      value={layout.layoutWidth}
+                      value={currentWidth}
                       onBlur={onTextWidthBlur}
                       onChange={onLayoutWidthChange}
                       placeholder="100"
@@ -207,7 +234,13 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, resetS
                   </FormGroup>
                 </Col>
               </Row>
-            </div>
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
+        {config.admin ? (
+          <>
             <h6 className="mb-3">{i18n.t('Resolution')}</h6>
             <div className="panel-container">
               <Row>
@@ -228,11 +261,11 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, resetS
                 <Col></Col>
               </Row>
             </div>
-            <hr />
           </>
         ) : (
           <></>
         )}
+        <hr />
         <h6 className="mb-3">{i18n.t('Template')}</h6>
         <div className="panel-container">
           <DropdownButton
