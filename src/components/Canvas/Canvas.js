@@ -16,8 +16,8 @@ const Canvas = forwardRef((props, ref) => {
     props.font.fontSpacing === 'Spacing' || props.font.fontSpacing === '0'
       ? ''
       : props.font.fontSpacing
-  const width = Math.abs(props.layout.layoutWidth) / 10
-  const height = Math.abs(props.layout.layoutHeight) / 10
+  const width = Math.abs(props.items.inputItem.width) / 10
+  const height = Math.abs(props.items.inputItem.height) / 10
   const padding = Math.abs(props.layout.layoutPadding)
   const border = Math.abs(props.layout.layoutBorder)
   const icons = props.icons
