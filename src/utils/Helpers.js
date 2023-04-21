@@ -112,7 +112,7 @@ const Helpers = {
       fontPadding: 0,
       fontSpacing: '',
       template: 1,
-      format: 'canvas',
+      format: null,
       height: height,
       width: width,
       items: [Helpers.setItems()]
