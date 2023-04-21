@@ -63,7 +63,10 @@ function FormatDialog(props) {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleBack}>
+        <Button
+          variant="secondary"
+          onClick={handleBack}
+          style={{ visibility: formatType ? '' : 'hidden' }}>
           {i18n.t('Back')}
         </Button>
         {formatType && sizeIndex >= 0 ? (
