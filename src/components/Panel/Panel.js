@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Panel.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCogs, faEraser } from '@fortawesome/free-solid-svg-icons'
@@ -34,22 +34,11 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, resetS
   const minPadding = 0
   const maxPadding = 100
 
-  // useEffect(() => {
-  //   // console.log('asasd', currentFormat, !items.initFormat)
-  //   // if (currentFormat === null) {
-  //   // setShowFormat(true)
-  //   items.setInitFormat(currentFormat === null)
-  //   // } else {
-  //   //   console.log('xcvxc')
-  //   // }
-  // })
-
-  // useEffect(() => {
-  //   console.log(items.initFormat)
-  //   if (items.initFormat) {
-  //     setShowFormat(true)
-  //   }
-  // })
+  useEffect(() => {
+    if (items.initFormat) {
+      setShowFormat(true)
+    }
+  })
 
   const onTextWidthBlur = (event) => {
     let value = Math.max(Number(min), Math.min(Number(max), Number(event.target.value)))
@@ -125,6 +114,7 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, resetS
     layout.setLayoutFormat(format.id)
     layout.setLayoutWidth(realWidth)
     layout.setLayoutHeight(realHeight)
+    items.setInitFormat(false)
 
     let temp = items.inputItem
     temp.format = format.id
