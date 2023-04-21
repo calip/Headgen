@@ -25,6 +25,7 @@ function Editor({ config }) {
   const language = config.language
   const sidebarOpen = Helpers.isTouchScreenDevice() ? false : true
 
+  const [initFormat, setInitFormat] = useState(false)
   const initialInput = Helpers.setData(width, height)
 
   const [isAdmin, setIsAdmin] = useState(false)
@@ -32,7 +33,6 @@ function Editor({ config }) {
   const [fontSize, setFontSize] = useState('FontSize')
   const [fontSpacing, setFontSpacing] = useState('NoSpacing')
   const [isSidebarOpen, setSidebarOpen] = useState(sidebarOpen)
-  const [initFormat, setInitFormat] = useState(false)
   const [isPanelOpen, setPanelOpen] = useState(false)
   const [layoutFormat, setLayoutFormat] = useState(selectedFormat)
   const [layoutWidth, setLayoutWidth] = useState(width)
@@ -130,6 +130,8 @@ function Editor({ config }) {
     if (items) {
       setInputItem(items)
       i18n.changeLanguage(language)
+    } else {
+      setInitFormat(true)
     }
   }
 
