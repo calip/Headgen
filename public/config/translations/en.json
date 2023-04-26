@@ -36,5 +36,14 @@
   "ContentIsEmpty": "Content is empty",
   "OK": "OK",
   "Back": "Back",
-  "Choose": "Choose"
+  "Choose": "Choose",
+  "Email": "Email",
+  "Send": "Send",
+  "SendToEmail": "Send to email",
+  "SendToEmailDescription": "Are you sure you want to send the link to email?",
+  "CopyToClipboard": "Copy to Clipboard",
+  "Greeting": "Hallo",
+  "LinkDescription": "This is your link to load pixgen data",
+  "Open": "Open",
+  "EmailSubject": "Pixgen Data"
 }
