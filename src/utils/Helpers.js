@@ -136,6 +136,16 @@ const Helpers = {
     }
     return item
   },
+  encodeJsonData: (data) => {
+    const params = JSON.stringify(data)
+    const object = window.btoa(params)
+    return object
+  },
+  decodeJsonData: (data) => {
+    const decoded = window.atob(data)
+    const object = JSON.parse(decoded)
+    return object
+  },
   useHasChanged: (val) => {
     const prevVal = Helpers.usePrevious(val)
     return prevVal !== val
