@@ -4,7 +4,7 @@
   "language": "de",
   "admin": true,
   "layout": {
-    "format": "frame",
+    "format": "canvas",
     "width": 4000,
     "height": 6000,
     "padding": 10,
@@ -161,5 +161,9 @@
   "toolbar": {
     "fontFamily": true,
     "fontSpacing": true
+  },
+  "mail": {
+    "apikey": "JKH6876JKHJK8768HK",
+    "apiurl": "http://apipixgen.vps2231243.fastwebserver.de/api/v1/mail"
   }
 }
