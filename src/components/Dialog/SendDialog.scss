@@ -1,0 +1,24 @@
+.code-preview {
+  background: #2d2d34;
+  color: #fafaff;
+  border-radius: 5px;
+  display: block;
+  line-height: 1.4;
+  overflow-x: auto;
+  padding: 20px;
+  white-space: pre-wrap;
+  height: 200px;
+}
+
+.copy-button {
+  align-items: center;
+  border-radius: 10px;
+  color: #cfcfd3;
+  background: #0000;
+  height: 32px;
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  width: 32px;
+  border: none;
+}
