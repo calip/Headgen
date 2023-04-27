@@ -1,30 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faSave,
-  faCloud,
-  faMinus,
-  faPlus,
-  faQuestion,
-  faTimes
-} from '@fortawesome/free-solid-svg-icons'
+import { faMinus, faPlus, faQuestion, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { Nav, Button, InputGroup, FormControl, Spinner, Dropdown } from 'react-bootstrap'
 import classNames from 'classnames'
 import Helpers from '../../utils/Helpers'
-import File from '../Dialog/File'
 import './Sidebar.scss'
 import i18n from '../../utils/i18n'
 import { useDebouncedCallback } from 'use-debounce'
-import Dialog from '../Dialog/Dialog'
-import saveFileAsJson from '../../utils/saveFileAsJson'
+// import Dialog from '../Dialog/Dialog'
 import ErrorDialog from '../Dialog/ErrorDialog'
+import EmailToast from '../Tools/Toast/EmailToast'
+import SendDialog from '../Dialog/SendDialog'
+import sendMail from '../../utils/sendMail'
 
-function SideBar({ toggle, isOpen, items, icons, template, config, selectText, loadJsonData }) {
-  const [showLoad, setShowLoad] = useState(false)
+function SideBar({ toggle, isOpen, items, icons, template, config, selectText }) {
   const [showDialog, setShowDialog] = useState(false)
   const [canSave, setCanSave] = useState(false)
-  const [json, setJson] = useState('')
+  const [emailDialog, setEmailDialog] = useState(false)
+  const [showEmailToast, setShowEmailToast] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
+  const [dataUrl, setDataUrl] = useState()
   const scrollRef = useRef()
+  const emailRef = useRef('')
 
   const realRefs = useRef([])
   const spokenRefs = useRef([])
@@ -56,32 +53,57 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText, l
     }
   })
 
+  const handleEmailChange = (value) => {
+    const regex = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g
+    if (regex.test(value)) {
+      setEmailDialog(true)
+    } else {
+      setEmailDialog(false)
+    }
+  }
+
   const inputTitleClicked = () => {
     selectText.setClickItem(false)
     selectText.setTextItem()
     selectText.setClickTitle(true)
   }
 
-  const showFileDialog = () => {
-    setShowLoad((showLoad) => !showLoad)
-  }
-
   const showConfirmDialog = () => {
+    if (!showDialog) {
+      const items = Helpers.getInputItem(config)
+      if (items) {
+        const url = `${window.location.origin}?data=${Helpers.encodeJsonData(items)}`
+        setDataUrl(url)
+      }
+    }
     setShowDialog((showDialog) => !showDialog)
   }
 
-  const saveJson = () => {
-    const items = Helpers.getInputItem(config)
-    if (items) {
-      saveFileAsJson(items, 'pixdata')
-      setShowDialog(false)
-    }
+  const closeEmailToast = () => {
+    setShowEmailToast(false)
   }
 
-  const loadJson = () => {
-    const data = JSON.parse(json)
-    loadJsonData(data)
-    setShowLoad((showLoad) => !showLoad)
+  const sendToEmail = () => {
+    const email = emailRef.current.value
+    const jsonData = {
+      email: email,
+      apikey: config.mail.apikey,
+      subject: i18n.t('EmailSubject'),
+      greeting: `${i18n.t('Greeting')} ${email}`,
+      text: i18n.t('LinkDescription'),
+      button: i18n.t('Open'),
+      url: dataUrl
+    }
+    sendMail(config.mail.apiurl, jsonData).then((res) => {
+      console.log(res)
+      if (res.status) {
+        setShowEmailToast(true)
+        setToastMessage(res.message)
+        emailRef.current.value = ''
+        setDataUrl()
+      }
+    })
+    setShowDialog(false)
   }
 
   const handleRealTextChange = useDebouncedCallback((value, index) => {
@@ -333,24 +355,40 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText, l
         <hr />
         {config.admin ? (
           <>
-            <Button variant="outline-primary" onClick={showConfirmDialog} className="mb-2">
+            {/* <Button variant="outline-primary" onClick={showConfirmDialog} className="mb-2">
               <FontAwesomeIcon icon={faSave} /> {i18n.t('Save')}
-            </Button>
-            <Button variant="outline-primary" onClick={showFileDialog}>
-              <FontAwesomeIcon icon={faCloud} /> {i18n.t('Load')}
-            </Button>
+            </Button> */}
+            <InputGroup className="mb-3">
+              <FormControl
+                ref={emailRef}
+                type="email"
+                required
+                placeholder={i18n.t('Email')}
+                aria-label={i18n.t('Email')}
+                onChange={(e) => handleEmailChange(e.target.value)}
+              />
+              <Button
+                type="submit"
+                variant="primary"
+                id="button-addon2"
+                disabled={!emailDialog}
+                onClick={showConfirmDialog}>
+                {i18n.t('Send')}
+              </Button>
+            </InputGroup>
           </>
         ) : (
           <></>
         )}
       </Nav>
       {canSave ? (
-        <Dialog
+        <SendDialog
           show={showDialog}
           dialogFn={showConfirmDialog}
-          title={i18n.t('SaveToFile')}
-          description={i18n.t('SaveFileDescription')}
-          actionFn={saveJson}
+          title={i18n.t('SendToEmail')}
+          description={i18n.t('SendToEmailDescription')}
+          data={dataUrl}
+          actionFn={sendToEmail}
         />
       ) : (
         <ErrorDialog
@@ -360,7 +398,13 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText, l
           description={i18n.t('ContentIsEmpty')}
         />
       )}
-      <File show={showLoad} dialogFn={showFileDialog} actionFn={loadJson} setJson={setJson} />
+
+      <EmailToast
+        showToast={showEmailToast}
+        description={toastMessage}
+        onClose={closeEmailToast}
+        title={i18n.t('SendToEmail')}
+      />
     </div>
   )
 }
