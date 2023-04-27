@@ -61,6 +61,19 @@ function Editor({ config }) {
     }
   }, [config])
 
+  useEffect(() => {
+    const search = window.location.search
+    const params = new URLSearchParams(search)
+    const data = params.get('data')
+
+    if (data) {
+      Helpers.storeInputItem(config, Helpers.decodeJsonData(data))
+      loadLocalStorage(config)
+      const url = `${window.location.origin}`
+      window.history.pushState({ path: url }, '', url)
+    }
+  }, [])
+
   const admin = {
     isAdmin: isAdmin,
     setIsAdmin: setIsAdmin
@@ -139,11 +152,6 @@ function Editor({ config }) {
     loadLocalStorage(config)
   }, [config])
 
-  const loadJsonFromFile = (data) => {
-    Helpers.storeInputItem(config, data)
-    loadLocalStorage(config)
-  }
-
   const clearSession = () => {
     Helpers.clearInputItem()
     setInitFormat(false)
@@ -169,7 +177,6 @@ function Editor({ config }) {
         template={template}
         config={config}
         selectText={selectText}
-        loadJsonData={loadJsonFromFile}
       />
       <Container fluid className="content">
         <Navbar
