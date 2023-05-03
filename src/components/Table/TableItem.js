@@ -2,6 +2,7 @@ import Helpers from '../../utils/Helpers'
 import TableData from './TableData'
 
 const TableItem = ({
+  maxSize,
   items,
   icons,
   template,
@@ -31,6 +32,8 @@ const TableItem = ({
             <tbody>
               <tr>
                 <TableData
+                  maxSize={maxSize}
+                  items={items}
                   data={data}
                   icons={icons}
                   onItemSelect={onItemSelect}
