@@ -1,12 +1,14 @@
-import { forwardRef, useLayoutEffect, useState } from 'react'
+import { forwardRef, useLayoutEffect, useRef, useState } from 'react'
 import './Canvas.scss'
-import FontStyled from '../../utils/FontStyled'
 import TableItem from '../Table/TableItem'
 import Helpers from '../../utils/Helpers'
+import FontStyled from '../../utils/FontStyled'
+
 const Canvas = forwardRef((props, ref) => {
   const currentTemplate = props.config.templates.find(
     (item) => item.id === props.items.inputItem.template
   )
+
   const [data, setData] = useState({})
 
   const selectedText = props.selectText.textItem
@@ -34,6 +36,7 @@ const Canvas = forwardRef((props, ref) => {
   const selectedTextChanged = Helpers.useHasChanged(selectedText)
   const selectedTitleChanged = Helpers.useHasChanged(clickTitle)
   const dataChanged = Helpers.useHasChanged(props.items)
+  const contentChanged = Helpers.useHasChanged(data)
 
   useLayoutEffect(() => {
     if (dataChanged) {
@@ -267,6 +270,26 @@ const Canvas = forwardRef((props, ref) => {
     Helpers.storeInputItem(props.config, props.items.inputItem)
   }
 
+  const contentRef = useRef()
+  const [maxSize, setMaxSize] = useState(512)
+
+  useLayoutEffect(() => {
+    if (contentChanged) {
+      const parent = ref.current
+      const child = contentRef.current
+      if (parent && child) {
+        const initHeight = child.clientHeight - padding
+        setTimeout(() => {
+          const scaleHeight = child.clientHeight - padding
+          const totalItem = data.inputItem.items.length + 1
+          const scaleSize = Math.abs(initHeight / totalItem)
+          const updateSize = scaleHeight >= initHeight ? scaleSize : maxSize
+          setMaxSize(updateSize)
+        }, 0)
+      }
+    }
+  })
+
   if (dataChanged) {
     return (
       <div className="pix-editor">
@@ -282,17 +305,22 @@ const Canvas = forwardRef((props, ref) => {
       <div className="pix-editor">
         <div
           className="pix-canvas"
-          style={{ minWidth: `${width}px`, minHeight: `${height}px` }}
+          style={{
+            minWidth: `${width}px`,
+            minHeight: `${height}px`,
+            maxHeight: `${height}px`
+          }}
           ref={ref}>
           <div
             className={border ? 'center-screen' : null}
+            ref={contentRef}
             style={{
               margin: `${padding}px`,
               display: 'table'
             }}
             onClick={removeSelectedItem}>
             <div style={{ display: 'table-cell', verticalAlign: 'middle' }}>
-              {data.inputItem.title ? (
+              {/* {data.inputItem.title ? (
                 <div>
                   <table>
                     <tbody>
@@ -300,7 +328,12 @@ const Canvas = forwardRef((props, ref) => {
                         <td
                           className={`pix-title ${titleSelected ? 'pix-title-selected' : ''}`}
                           onClick={onTitleSelect}>
-                          <FontStyled value={data.inputItem} multiline={false} />
+                          <FontStyled
+                            value={data.inputItem}
+                            multiline={false}
+                            maxSize={maxSize}
+                            visible={itemLoad}
+                          />
                         </td>
                       </tr>
                     </tbody>
@@ -308,10 +341,11 @@ const Canvas = forwardRef((props, ref) => {
                 </div>
               ) : (
                 <></>
-              )}
+              )} */}
               {data.inputItem.items ? (
                 <div>
                   <TableItem
+                    maxSize={maxSize}
                     items={data.inputItem.items}
                     icons={icons}
                     template={currentTemplate}
