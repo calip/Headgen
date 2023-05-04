@@ -7,7 +7,6 @@ import Helpers from '../../utils/Helpers'
 import './Sidebar.scss'
 import i18n from '../../utils/i18n'
 import { useDebouncedCallback } from 'use-debounce'
-// import Dialog from '../Dialog/Dialog'
 import ErrorDialog from '../Dialog/ErrorDialog'
 import EmailToast from '../Tools/Toast/EmailToast'
 import SendDialog from '../Dialog/SendDialog'
@@ -26,6 +25,8 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
   const realRefs = useRef([])
   const spokenRefs = useRef([])
   const titleRef = useRef()
+
+  const currentTemplate = template.templates.find((item) => item.id === items.inputItem.template)
 
   useEffect(() => {
     const content = Helpers.getInputItem(config)
@@ -63,9 +64,15 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
   }
 
   const inputTitleClicked = () => {
+    selectText.setClickTitle(true)
     selectText.setClickItem(false)
     selectText.setTextItem()
-    selectText.setClickTitle(true)
+  }
+
+  const inputItemClicked = (id) => {
+    selectText.setClickTitle(false)
+    selectText.setClickItem(true)
+    selectText.setTextItem(id)
   }
 
   const showConfirmDialog = () => {
@@ -111,8 +118,9 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
     let tempItems = temp.items.map((i) => i)
     tempItems[index].realText = value
     if (tempItems[index].font.length <= 0) {
-      tempItems[index].font = template.inputTemplate.fonts[0]
+      tempItems[index].font = currentTemplate.fonts[0]
     }
+
     const filteredIcons = icons.filter((element) =>
       element.tags.some((subElement) =>
         subElement.includes(tempItems[index].realText.toLowerCase())
@@ -134,8 +142,9 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
     let tempItems = temp.items.map((i) => i)
     tempItems[index].spokenText = value
     if (tempItems[index].font.length <= 0) {
-      tempItems[index].font = template.inputTemplate.fonts[0]
+      tempItems[index].font = currentTemplate.fonts[0]
     }
+
     temp.items = tempItems
     items.setInputItem((prevState) => {
       return { ...prevState, [items]: temp.items }
@@ -157,8 +166,9 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
   const handleTitleChange = useDebouncedCallback((value) => {
     let temp = items.inputItem
     if (temp.font.length <= 0) {
-      temp.font = template.inputTemplate.fontTitle
+      temp.font = currentTemplate.fontTitle
     }
+
     temp.title = value
     items.setInputItem((prevState) => {
       return { ...prevState, [items]: temp.items }
@@ -172,10 +182,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
   }
 
   const addInputItem = () => {
-    const font =
-      template.inputTemplate.fonts[
-        items.inputItem.items.length % template.inputTemplate.fonts.length
-      ]
+    const font = currentTemplate.fonts[items.inputItem.items.length % currentTemplate.fonts.length]
     const max = config.input.max
     const currentLength = Math.max(...items.inputItem.items.map((e) => e.order)) + 1
 
@@ -265,7 +272,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
           <FormControl
             ref={titleRef}
             type="text"
-            key={items.inputItem.title}
+            key="title"
             className={`pix-input ${selectText.clickTitle ? '' : 'greyed-out'}`}
             placeholder={`${i18n.t('Title')}...`}
             defaultValue={items.inputItem.title}
@@ -295,7 +302,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
                         key={item.id}
                         data-index={item.id}
                         onKeyDown={() => loadSpinner(index)}
-                        onClick={() => selectText.setTextItem(item.id)}
+                        onClick={() => inputItemClicked(item.id)}
                         onChange={(e) => handleRealTextChange(e.target.value, index)}
                       />
                     </>
@@ -340,7 +347,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
                         key={item.id}
                         defaultValue={item.spokenText}
                         data-index={item.id}
-                        onClick={() => selectText.setTextItem(item.id)}
+                        onClick={() => inputItemClicked(item.id)}
                         onChange={(e) => handleSpokenTextChange(e.target.value, index)}
                       />
                     </>
@@ -355,9 +362,6 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
         <hr />
         {config.admin ? (
           <>
-            {/* <Button variant="outline-primary" onClick={showConfirmDialog} className="mb-2">
-              <FontAwesomeIcon icon={faSave} /> {i18n.t('Save')}
-            </Button> */}
             <InputGroup className="mb-3">
               <FormControl
                 ref={emailRef}
