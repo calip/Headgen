@@ -154,6 +154,8 @@ function Editor({ config }) {
 
   const clearSession = () => {
     Helpers.clearInputItem()
+    setFontType('FontFamily')
+    setFontSpacing('0')
     setInitFormat(false)
     const input = Helpers.setData(width, height)
     setInputItem(input)
