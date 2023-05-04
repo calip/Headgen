@@ -3,6 +3,7 @@ import './Canvas.scss'
 import TableItem from '../Table/TableItem'
 import Helpers from '../../utils/Helpers'
 import FontStyled from '../../utils/FontStyled'
+import ItemLoader from '../../utils/ItemLoader'
 
 const Canvas = forwardRef((props, ref) => {
   const currentTemplate = props.config.templates.find(
@@ -10,6 +11,9 @@ const Canvas = forwardRef((props, ref) => {
   )
 
   const [data, setData] = useState({})
+  const contentRef = useRef()
+  const titleRef = useRef()
+  const [itemSize, setItemSize] = useState(512)
 
   const selectedText = props.selectText.textItem
   const clickTitle = props.selectText.clickTitle
@@ -109,7 +113,9 @@ const Canvas = forwardRef((props, ref) => {
       Helpers.storeInputItem(props.config, props.items.inputItem)
     }
     if (data.inputItem && titleSelectedChanged && data.inputItem.font !== fontType) {
-      props.font.setFontType(data.inputItem.font)
+      if (data.inputItem.items.length > 0 && data.inputItem.items[0].font.length > 0) {
+        props.font.setFontType(data.inputItem.font)
+      }
     }
 
     if (fontSpacingChanged && titleSelected) {
@@ -270,21 +276,22 @@ const Canvas = forwardRef((props, ref) => {
     Helpers.storeInputItem(props.config, props.items.inputItem)
   }
 
-  const contentRef = useRef()
-  const [maxSize, setMaxSize] = useState(512)
-
   useLayoutEffect(() => {
     if (contentChanged) {
       const parent = ref.current
       const child = contentRef.current
-      if (parent && child) {
+      const title = titleRef.current
+      if (parent && child && title) {
         const initHeight = child.clientHeight - padding
+
         setTimeout(() => {
-          const scaleHeight = child.clientHeight - padding
-          const totalItem = data.inputItem.items.length + 1
-          const scaleSize = Math.abs(initHeight / totalItem)
-          const updateSize = scaleHeight >= initHeight ? scaleSize : maxSize
-          setMaxSize(updateSize)
+          const titleHeight = title.clientHeight
+          const scaleHeight = Math.abs(child.clientHeight - padding)
+          const totalHeight = Math.abs(initHeight - titleHeight)
+          const totalItem = data.inputItem.items.length
+          const scaleSize = Math.abs(totalHeight / totalItem)
+          const updateSize = scaleHeight >= initHeight ? scaleSize : itemSize
+          setItemSize(updateSize)
         }, 0)
       }
     }
@@ -320,32 +327,33 @@ const Canvas = forwardRef((props, ref) => {
             }}
             onClick={removeSelectedItem}>
             <div style={{ display: 'table-cell', verticalAlign: 'middle' }}>
-              {/* {data.inputItem.title ? (
-                <div>
+              {data.inputItem.title ? (
+                <div ref={titleRef}>
                   <table>
                     <tbody>
                       <tr>
-                        <td
-                          className={`pix-title ${titleSelected ? 'pix-title-selected' : ''}`}
-                          onClick={onTitleSelect}>
-                          <FontStyled
-                            value={data.inputItem}
-                            multiline={false}
-                            maxSize={maxSize}
-                            visible={itemLoad}
-                          />
-                        </td>
+                        {data.inputItem.title.length >= 3 ? (
+                          <td
+                            className={`pix-title ${titleSelected ? 'pix-title-selected' : ''}`}
+                            onClick={onTitleSelect}>
+                            <FontStyled value={data.inputItem} multiline={false} maxSize={300} />
+                          </td>
+                        ) : (
+                          <td>
+                            <ItemLoader data={data.inputItem.title} />
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
                 </div>
               ) : (
                 <></>
-              )} */}
+              )}
               {data.inputItem.items ? (
                 <div>
                   <TableItem
-                    maxSize={maxSize}
+                    maxSize={itemSize}
                     items={data.inputItem.items}
                     icons={icons}
                     template={currentTemplate}
