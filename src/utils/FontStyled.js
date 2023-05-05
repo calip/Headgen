@@ -2,21 +2,26 @@ import { ReactFitty } from 'react-fitty'
 import { ReactSVG } from 'react-svg'
 import styled from 'styled-components'
 import Helpers from './Helpers'
+import Nbsp from './nbsp'
 
 const FontContainer = styled(ReactFitty)`
   line-height: 100%;
+  letter-spacing: ${(props) => props.spacing}px;
   font-family: ${(props) => props.font}-Wordpix;
 `
 const FontStyled = (props) => {
   if (props && props.value) {
     if (props.multiline) {
       return (
-        <FontContainer wrapText font={props.value.font}>
+        <FontContainer
+          wrapText
+          font={props.value.font}
+          spacing={props.value.fontSpacing}
+          minSize={8}
+          maxSize={props.maxSize}>
           <div style={{ display: 'flex' }}>
-            <div
-              style={{
-                letterSpacing: `${props.value.fontSpacing}px`
-              }}>
+            <div>
+              {props.value.font === 'italianno' ? <Nbsp count={1} /> : <></>}
               {props.value.realText}
             </div>
             {props.value.icon ? (
@@ -48,11 +53,9 @@ const FontStyled = (props) => {
             ) : (
               <></>
             )}
-            <div
-              style={{
-                letterSpacing: `${props.value.fontSpacing}px`
-              }}>
+            <div>
               {props.value.spokenText}
+              {props.value.font === 'italianno' ? <Nbsp count={1} /> : <></>}
               {props.space ? <span>&nbsp;</span> : <></>}
             </div>
           </div>
@@ -60,8 +63,16 @@ const FontStyled = (props) => {
       )
     }
     return (
-      <FontContainer font={props.value.font}>
-        <div style={{ letterSpacing: `${props.value.fontSpacing}px` }}>{props.value.title}</div>
+      <FontContainer
+        font={props.value.font}
+        spacing={props.value.fontSpacing}
+        minSize={8}
+        maxSize={props.maxSize}>
+        <div>
+          {props.value.font === 'italianno' ? <Nbsp count={2} /> : <></>}
+          {props.value.title}
+          {props.value.font === 'italianno' ? <Nbsp count={2} /> : <></>}
+        </div>
       </FontContainer>
     )
   }
