@@ -33,7 +33,6 @@ const TableItem = ({
               <tr>
                 <TableData
                   maxSize={maxSize}
-                  items={items}
                   data={data}
                   icons={icons}
                   onItemSelect={onItemSelect}

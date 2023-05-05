@@ -15,6 +15,14 @@ const exportAsImage = async (element, dpc, title, quality) => {
   const borderElement = newElement.querySelector(`.pix-content-selected`)
   if (borderElement) {
     borderElement.style.border = 'none'
+    borderElement.style.outline = 'none'
+    borderElement.style.backgroundColor = 'transparent'
+  }
+  const titleElement = newElement.querySelector(`.pix-title-selected`)
+  if (titleElement) {
+    titleElement.style.border = 'none'
+    titleElement.style.outline = 'none'
+    titleElement.style.backgroundColor = 'transparent'
   }
   document.body.appendChild(newElement)
 
