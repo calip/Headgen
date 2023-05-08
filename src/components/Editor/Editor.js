@@ -9,8 +9,6 @@ import Helpers from '../../utils/Helpers'
 import { useTranslation } from 'react-i18next'
 import '../../utils/i18n'
 import './Editor.scss'
-// import PreviewButton from '../Tools/Preview/PreviewButton'
-// import PreviewDialog from '../Dialog/PreviewDialog'
 
 function Editor({ config }) {
   const format = config.format
@@ -165,9 +163,6 @@ function Editor({ config }) {
   const reloadCanvas = () => {
     loadLocalStorage(config)
   }
-  // const showPreviewDialog = () => {
-  //   setShowPreview((showPreview) => !showPreview)
-  // }
 
   return (
     <>
@@ -211,9 +206,6 @@ function Editor({ config }) {
           format={format}
           resetSession={clearSession}
         />
-
-        {/* <PreviewDialog show={showPreview} dialogFn={showPreviewDialog} title={i18n.t('Preview')} />
-        <PreviewButton previewFn={showPreviewDialog} isPanelOpen={isPanelOpen} /> */}
       </Container>
     </>
   )
