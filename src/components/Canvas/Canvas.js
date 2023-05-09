@@ -17,7 +17,7 @@ const Canvas = forwardRef((props, ref) => {
 
   const selectedText = props.selectText.textItem
   const clickTitle = props.selectText.clickTitle
-  const fontType = props.font.fontType === 'FontFamily' ? 'comfortaa' : props.font.fontType
+  const fontType = props.font.fontType === 'FontFamily' ? '' : props.font.fontType
   const fontSpacing =
     props.font.fontSpacing === 'Spacing' || props.font.fontSpacing === '0'
       ? ''
@@ -28,7 +28,7 @@ const Canvas = forwardRef((props, ref) => {
   const border = Math.abs(props.layout.layoutBorder)
   const icons = props.icons
   const [itemSelected, setItemSelected] = useState()
-  const [fontSelected, setFontSelected] = useState('comfortaa')
+  const [fontSelected, setFontSelected] = useState('')
   const [spacingSelected, setSpacingSelected] = useState('0')
   const [titleSelected, setTitleSelected] = useState(false)
 
@@ -85,12 +85,12 @@ const Canvas = forwardRef((props, ref) => {
     props.selectText.setTextItem()
     setTitleSelected(false)
     props.selectText.setClickTitle(false)
-    props.font.setFontType('FontFamily')
+    props.font.setFontType('')
     props.font.setFontSpacing('0')
   }
 
   useLayoutEffect(() => {
-    const currentFont = props.font.fontType === 'FontFamily' ? 'comfortaa' : props.font.fontType
+    const currentFont = props.font.fontType === 'FontFamily' ? '' : props.font.fontType
     setFontSelected(currentFont)
   }, [props.font.fontType])
 
@@ -113,9 +113,7 @@ const Canvas = forwardRef((props, ref) => {
       Helpers.storeInputItem(props.config, props.items.inputItem)
     }
     if (data.inputItem && titleSelectedChanged && data.inputItem.font !== fontType) {
-      if (data.inputItem.items.length > 0 && data.inputItem.items[0].font.length > 0) {
-        props.font.setFontType(data.inputItem.font)
-      }
+      props.font.setFontType(titleSelected ? data.inputItem.font : fontType)
     }
 
     if (fontSpacingChanged && titleSelected) {
