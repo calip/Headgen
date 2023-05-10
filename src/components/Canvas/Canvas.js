@@ -86,7 +86,7 @@ const Canvas = forwardRef((props, ref) => {
     setTitleSelected(false)
     props.selectText.setClickTitle(false)
     props.font.setFontType('')
-    props.font.setFontSpacing('0')
+    props.font.setFontSpacing(null)
   }
 
   useLayoutEffect(() => {
@@ -126,7 +126,7 @@ const Canvas = forwardRef((props, ref) => {
       Helpers.storeInputItem(props.config, props.items.inputItem)
     }
     if (data.inputItem && titleSelectedChanged && data.inputItem.fontSpacing !== fontSpacing) {
-      props.font.setFontSpacing(data.inputItem.fontSpacing)
+      props.font.setFontSpacing(titleSelected ? data.inputItem.fontSpacing : fontSpacing)
     }
   }, [
     titleSelected,
@@ -327,7 +327,7 @@ const Canvas = forwardRef((props, ref) => {
             <div style={{ display: 'table-cell', verticalAlign: 'middle' }}>
               {data.inputItem.title ? (
                 <div ref={titleRef}>
-                  <table>
+                  <table className="pixgen-table">
                     <tbody>
                       <tr>
                         {data.inputItem.title.length >= 3 ? (
