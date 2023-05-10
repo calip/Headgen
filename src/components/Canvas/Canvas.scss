@@ -16,7 +16,7 @@
 
 .pix-content-selected {
   outline: dashed 1px #0e6ffd;
-  background-color: #f3f3f3;
+  background-color: #f3f3f3 !important;
 }
 
 .pix-content-target {
@@ -39,7 +39,7 @@
 
 .pix-title-selected {
   outline: dashed 1px #0e6ffd;
-  background-color: #f3f3f3;
+  background-color: #f3f3f3 !important;
 }
 
 .item-wrapper {
@@ -77,4 +77,16 @@ table td:hover {
 .pix-loader {
   display: flex;
   justify-content: center;
+}
+
+.pixgen-table {
+  background-color: transparent !important;
+  border: none !important;
+  td {
+    background-color: transparent !important;
+    padding: 0;
+    line-height: 0 !important;
+    vertical-align: unset !important;
+    border: none !important;
+  }
 }

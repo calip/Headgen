@@ -20,7 +20,7 @@ import Helpers from '../../utils/Helpers'
 import i18n from '../../utils/i18n'
 import FormatDialog from '../Tools/Format/FormatDialog'
 
-function Panel({ toggle, isOpen, layout, items, template, config, format, resetSession }) {
+function Panel({ toggle, isOpen, layout, items, template, config, format, admin, resetSession }) {
   const currentTemplate = config.templates.find((item) => item.id === items.inputItem.template)
   const currentWidth = items.inputItem.width
   const currentHeight = items.inputItem.height
@@ -160,7 +160,7 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, resetS
               </FormGroup>
             </Col>
           </Row>
-          {config.admin ? (
+          {admin.isAdmin ? (
             <>
               <Row>
                 <Col>
@@ -229,7 +229,7 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, resetS
             <></>
           )}
         </div>
-        {config.admin ? (
+        {admin.isAdmin ? (
           <>
             <h6 className="mb-3">{i18n.t('Resolution')}</h6>
             <div className="panel-container">

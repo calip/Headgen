@@ -360,30 +360,24 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
           <FontAwesomeIcon icon={faPlus} /> {i18n.t('Add')}
         </Button>
         <hr />
-        {config.admin ? (
-          <>
-            <InputGroup className="mb-3">
-              <FormControl
-                ref={emailRef}
-                type="email"
-                required
-                placeholder={i18n.t('Email')}
-                aria-label={i18n.t('Email')}
-                onChange={(e) => handleEmailChange(e.target.value)}
-              />
-              <Button
-                type="submit"
-                variant="primary"
-                id="button-addon2"
-                disabled={!emailDialog}
-                onClick={showConfirmDialog}>
-                {i18n.t('Send')}
-              </Button>
-            </InputGroup>
-          </>
-        ) : (
-          <></>
-        )}
+        <InputGroup className="mb-3">
+          <FormControl
+            ref={emailRef}
+            type="email"
+            required
+            placeholder={i18n.t('Email')}
+            aria-label={i18n.t('Email')}
+            onChange={(e) => handleEmailChange(e.target.value)}
+          />
+          <Button
+            type="submit"
+            variant="primary"
+            id="button-addon2"
+            disabled={!emailDialog}
+            onClick={showConfirmDialog}>
+            {i18n.t('Send')}
+          </Button>
+        </InputGroup>
       </Nav>
       {canSave ? (
         <SendDialog
