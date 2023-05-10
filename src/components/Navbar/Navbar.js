@@ -74,7 +74,7 @@ function NavBar({ toggle, font, layout, config, admin, downloadFn }) {
             <></>
           )}
 
-          {config.admin ? (
+          {admin.isAdmin ? (
             <Dropdown align="end">
               <DropdownToggle variant="outline-primary">
                 <FontAwesomeIcon icon={faSave} />
