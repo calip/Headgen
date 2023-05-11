@@ -9,7 +9,8 @@ i18n
     lng: 'en',
     backend: {
       /* translation file path */
-      loadPath: '/config/{{ns}}/{{lng}}.json'
+      // loadPath: '/config/{{ns}}/{{lng}}.json'
+      loadPath: `${process.env.REACT_APP_BASE}/config/{{ns}}/{{lng}}.json`
     },
     fallbackLng: 'en',
     debug: false,
