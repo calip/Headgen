@@ -19,14 +19,14 @@ function App() {
 
   useEffect(() => {
     setLoading(true)
-    Helpers.fetchJson('config/config.json').then((result) => {
+    Helpers.fetchJson(`${process.env.REACT_APP_BASE}/config/config.json`).then((result) => {
       setConfig(result)
       Promise.all([
-        fontComfortaa.load(),
-        fontItalianno.load(),
-        fontMarqueeMoon.load(),
-        fontMexcellent.load(),
-        fontStripey.load()
+        fontComfortaa.load(null, 9000),
+        fontItalianno.load(null, 9000),
+        fontMarqueeMoon.load(null, 9000),
+        fontMexcellent.load(null, 9000),
+        fontStripey.load(null, 9000)
       ]).then(function () {
         setLoading(false)
       })
