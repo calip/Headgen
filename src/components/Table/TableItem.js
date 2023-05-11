@@ -28,7 +28,7 @@ const TableItem = ({
       start = start + temp
       table.push(
         <div key={id}>
-          <table>
+          <table className="pixgen-table">
             <tbody>
               <tr>
                 <TableData
