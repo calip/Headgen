@@ -9,6 +9,7 @@ import Helpers from '../../utils/Helpers'
 import { useTranslation } from 'react-i18next'
 import '../../utils/i18n'
 import './Editor.scss'
+import Woocommerce from '../../utils/woocommerce'
 // import PreviewButton from '../Tools/Preview/PreviewButton'
 // import PreviewDialog from '../Dialog/PreviewDialog'
 
@@ -54,6 +55,26 @@ function Editor({ config }) {
   }
 
   const { i18n } = useTranslation()
+
+  const api = Woocommerce(config)
+
+  // const [orders, setOrders] = useState([])
+
+  let fetchOrders = () => {
+    api
+      .get('products', {
+        per_page: 20
+      })
+      .then((response) => {
+        console.log(response)
+        if (response.status === 200) {
+          // setOrders(response.data)
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 
   useEffect(() => {
     if (config.admin) {
@@ -146,6 +167,7 @@ function Editor({ config }) {
     } else {
       setInitFormat(true)
     }
+    fetchOrders()
   }
 
   useEffect(() => {
