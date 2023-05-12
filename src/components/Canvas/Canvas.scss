@@ -82,8 +82,12 @@ table td:hover {
 .pixgen-table {
   background-color: transparent !important;
   border: none !important;
+
+  tbody>tr:nth-child(odd)>td,table tbody>tr:nth-child(odd)>th {
+    background-color: transparent;
+  }
+
   td {
-    background-color: transparent !important;
     padding: 0;
     line-height: 0 !important;
     vertical-align: unset !important;
