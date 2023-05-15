@@ -14,7 +14,7 @@ import Woocommerce from '../../utils/woocommerce'
 // import PreviewDialog from '../Dialog/PreviewDialog'
 
 function Editor({ config }) {
-  const format = config.format
+  let format = config.format
   const selectedFormat = config.layout.format
   const width = config.layout.width
   const height = config.layout.height
@@ -58,9 +58,9 @@ function Editor({ config }) {
 
   const api = Woocommerce(config)
 
-  // const [orders, setOrders] = useState([])
+  const [products, setProducts] = useState([])
 
-  let fetchOrders = () => {
+  const fetchProducts = async () => {
     api
       .get('products', {
         per_page: 20
@@ -68,7 +68,7 @@ function Editor({ config }) {
       .then((response) => {
         console.log(response)
         if (response.status === 200) {
-          // setOrders(response.data)
+          setProducts(response.data)
         }
       })
       .catch((error) => {
@@ -147,6 +147,7 @@ function Editor({ config }) {
   const items = {
     initFormat: initFormat,
     setInitFormat: setInitFormat,
+    products: products,
     inputItem: inputItem,
     setInputItem: setInputItem
   }
@@ -165,9 +166,10 @@ function Editor({ config }) {
       setInputItem(items)
       i18n.changeLanguage(language)
     } else {
-      setInitFormat(true)
+      fetchProducts().then(() => {
+        setInitFormat(true)
+      })
     }
-    fetchOrders()
   }
 
   useEffect(() => {
