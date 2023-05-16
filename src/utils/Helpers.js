@@ -17,7 +17,9 @@ const Helpers = {
     return data.file
   },
   getSelectedFormat: (format, selected) => {
-    const f = format.find((item) => item.id === selected)
+    console.log(format, selected)
+    const f = format.find((item) => item.id === parseInt(selected))
+    console.log(f)
     return f
   },
   getConvertFormatSize: (width, height) => {
@@ -51,6 +53,29 @@ const Helpers = {
     } catch (e) {
       return false
     }
+  },
+  extractProducts: (products) => {
+    return products.map((item) => {
+      const images = item.images.map((img) => img.src)
+      const attributes = item.attributes.find((attr) => attr.id === 1)
+      const size = attributes.options.map((opt) => {
+        const option = opt.split('x')
+        const value = {
+          height: parseInt(option[0]),
+          width: parseInt(option[1])
+        }
+        return value
+      })
+      const data = {
+        id: item.id,
+        name: item.name,
+        slug: item.slug,
+        images: images,
+        preview: images[0],
+        size: size
+      }
+      return data
+    })
   },
   getRandomId() {
     return Math.floor(Math.random() * 1000000)
