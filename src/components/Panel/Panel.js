@@ -24,7 +24,10 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, admin,
   const currentTemplate = config.templates.find((item) => item.id === items.inputItem.template)
   const currentWidth = items.inputItem.width
   const currentHeight = items.inputItem.height
+
   const currentFormat = items.inputItem.format
+  const products = Helpers.extractProducts(items.products)
+  const availableFormat = config.wordpress.active ? products : format
 
   const [show, setShow] = useState(false)
   const [showFormat, setShowFormat] = useState(false)
@@ -150,7 +153,9 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, admin,
                   <Card.Body className="format-body">
                     <div className="format-title">{currentFormat}</div>
                     <div className="format-content">
-                      <img src={Helpers.getSelectedFormat(format, currentFormat)?.preview} />
+                      <img
+                        src={Helpers.getSelectedFormat(availableFormat, currentFormat)?.preview}
+                      />
                     </div>
                   </Card.Body>
                   <Card.Footer className="format-footer">
@@ -291,8 +296,10 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, admin,
       <FormatDialog
         show={showFormat}
         config={config}
+        format={availableFormat}
         onHide={() => setShowFormat(false)}
         title={i18n.t('Format')}
+        products={products}
         description={i18n.t('FormatSelection')}
         actionfn={selectFormat}
       />
