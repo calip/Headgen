@@ -8,8 +8,11 @@ import CarouselImage from '../Carousel/CarouselImage'
 function FormatDialog(props) {
   const { actionfn, ...others } = props
 
-  const [formatType, setFormatType] = useState('')
+  const [formatType, setFormatType] = useState()
   const [sizeIndex, setSizeIndex] = useState()
+
+  const availableFormat = others.format //others.config.wordpress.active ? others.products : others.config.format
+  console.log(availableFormat)
 
   const onSelectFormat = (value) => {
     const format = others.config.format.find((item) => item.id === value)
@@ -21,18 +24,18 @@ function FormatDialog(props) {
   }
 
   const handleClose = () => {
-    setFormatType('')
+    setFormatType()
     setSizeIndex()
     others.onHide()
   }
 
   const handleBack = () => {
-    setFormatType('')
+    setFormatType()
     setSizeIndex()
   }
 
   const handleChoose = (format, index) => {
-    setFormatType('')
+    setFormatType()
     setSizeIndex()
     others.onHide()
     actionfn(format, index)
@@ -57,7 +60,7 @@ function FormatDialog(props) {
             </div>
           ) : (
             <div className="format-page">
-              <FormatType format={others.config.format} onSelectFormat={onSelectFormat} />
+              <FormatType format={availableFormat} onSelectFormat={onSelectFormat} />
             </div>
           )}
         </div>
