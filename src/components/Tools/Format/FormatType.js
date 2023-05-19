@@ -9,8 +9,12 @@ function FormatType(props) {
           return (
             <Col key={item.id} onClick={() => props.onSelectFormat(item.id)}>
               <div className="format-type-content">
-                <img src={item.preview} alt="preview" />
-                <p>{item.title}</p>
+                <img
+                  src={item.preview}
+                  alt="preview"
+                  className="img-fluid mx-auto mx-lg-0 h-100 col-8 col-sm-6 col-md-4 col-lg-1 my-auto"
+                />
+                <p>{item.name}</p>
               </div>
             </Col>
           )
