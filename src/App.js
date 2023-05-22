@@ -6,10 +6,12 @@ import Editor from './components/Editor/Editor'
 import Loader from './components/Loader/Loader'
 import Helpers from './utils/Helpers'
 import FontFaceObserver from 'fontfaceobserver'
+import Woocommerce from './utils/woocommerce'
 
 function App() {
   const [config, setConfig] = useState({})
   const [loading, setLoading] = useState(true)
+  const [products, setProducts] = useState([])
 
   const fontComfortaa = new FontFaceObserver('Comfortaa-Wordpix')
   const fontItalianno = new FontFaceObserver('Italianno-Wordpix')
@@ -28,12 +30,29 @@ function App() {
         fontMexcellent.load(null, 9000),
         fontStripey.load(null, 9000)
       ]).then(function () {
-        setLoading(false)
+        const api = Woocommerce(result)
+        api
+          .get('products', {
+            per_page: 20
+          })
+          .then((response) => {
+            if (response.status === 200) {
+              setProducts(response.data)
+              setLoading(false)
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
       })
     })
   }, [])
 
-  return <div className="App">{loading ? <Loader /> : <Editor config={config} />}</div>
+  return (
+    <div className="App">
+      {loading ? <Loader /> : <Editor config={config} products={products} />}
+    </div>
+  )
 }
 
 export default App
