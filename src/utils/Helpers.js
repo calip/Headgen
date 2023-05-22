@@ -17,9 +17,7 @@ const Helpers = {
     return data.file
   },
   getSelectedFormat: (format, selected) => {
-    console.log(format, selected)
     const f = format.find((item) => item.id === parseInt(selected))
-    console.log(f)
     return f
   },
   getConvertFormatSize: (width, height) => {
@@ -72,7 +70,7 @@ const Helpers = {
         slug: item.slug,
         images: images,
         preview: images[0],
-        size: size
+        sizes: size
       }
       return data
     })
