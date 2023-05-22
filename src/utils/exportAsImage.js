@@ -12,17 +12,13 @@ const exportAsImage = async (element, dpc, title, quality) => {
   if (quality === 'low') {
     newElement.style.background = '#fff'
   }
-  const borderElement = newElement.querySelector(`.pix-content-selected`)
+  const borderElement = newElement.querySelector(`.pix-content`)
   if (borderElement) {
-    borderElement.style.border = 'none'
-    borderElement.style.outline = 'none'
-    borderElement.style.backgroundColor = 'transparent'
+    borderElement.classList.remove('pix-content-selected')
   }
-  const titleElement = newElement.querySelector(`.pix-title-selected`)
+  const titleElement = newElement.querySelector(`.pix-title`)
   if (titleElement) {
-    titleElement.style.border = 'none'
-    titleElement.style.outline = 'none'
-    titleElement.style.backgroundColor = 'transparent'
+    titleElement.classList.remove('pix-title-selected')
   }
   document.body.appendChild(newElement)
 
