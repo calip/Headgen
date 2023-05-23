@@ -9,12 +9,14 @@ import Helpers from '../../utils/Helpers'
 import { useTranslation } from 'react-i18next'
 import '../../utils/i18n'
 import './Editor.scss'
-import Woocommerce from '../../utils/woocommerce'
 // import PreviewButton from '../Tools/Preview/PreviewButton'
 // import PreviewDialog from '../Dialog/PreviewDialog'
 
-function Editor({ config }) {
-  let format = config.format
+function Editor({ config, products }) {
+  let format =
+    config.wordpress.active && products.length > 0
+      ? Helpers.extractProducts(products)
+      : config.format
   const selectedFormat = config.layout.format
   const width = config.layout.width
   const height = config.layout.height
@@ -49,31 +51,20 @@ function Editor({ config }) {
   const [textItem, setTextItem] = useState()
   const [clickItem, setClickItem] = useState(false)
   const [clickTitle, setClickTitle] = useState(false)
+  const { i18n } = useTranslation()
 
   const handleDownload = (quality) => () => {
     exportAsImage(exportRef.current, layoutDpc, config.appName, quality)
   }
 
-  const { i18n } = useTranslation()
-
-  const api = Woocommerce(config)
-
-  const [products, setProducts] = useState([])
-
-  const fetchProducts = async () => {
-    api
-      .get('products', {
-        per_page: 20
-      })
-      .then((response) => {
-        console.log(response)
-        if (response.status === 200) {
-          setProducts(response.data)
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+  const handleAddToCart = () => {
+    console.log(
+      `https://new.wordpix.de/warenkorb/?add-to-cart=${items.inputItem.format.id}&quantity=1&variation_id=${items.inputItem.variation.id}&pixgen=12312`
+    )
+    window.open(
+      `https://new.wordpix.de/warenkorb/?add-to-cart=${items.inputItem.format.id}&quantity=1&variation_id=${items.inputItem.variation.id}&pixgen=12312`,
+      '_self'
+    )
   }
 
   useEffect(() => {
@@ -85,7 +76,7 @@ function Editor({ config }) {
   useEffect(() => {
     const search = window.location.search
     const params = new URLSearchParams(search)
-    const data = params.get('data')
+    const data = params.get('pixgen')
 
     if (data) {
       Helpers.storeInputItem(config, Helpers.decodeJsonData(data))
@@ -166,9 +157,7 @@ function Editor({ config }) {
       setInputItem(items)
       i18n.changeLanguage(language)
     } else {
-      fetchProducts().then(() => {
-        setInitFormat(true)
-      })
+      setInitFormat(true)
     }
   }
 
@@ -212,6 +201,7 @@ function Editor({ config }) {
           config={config}
           admin={admin}
           downloadFn={handleDownload}
+          addToCart={handleAddToCart}
         />
         <Canvas
           font={font}

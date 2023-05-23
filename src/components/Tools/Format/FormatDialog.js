@@ -4,41 +4,59 @@ import './FormatDialog.scss'
 import FormatType from './FormatType'
 import { useState } from 'react'
 import CarouselImage from '../Carousel/CarouselImage'
+import Woocommerce from '../../../utils/woocommerce'
+import Helpers from '../../../utils/Helpers'
 
 function FormatDialog(props) {
   const { actionfn, ...others } = props
 
   const [formatType, setFormatType] = useState()
-  const [sizeIndex, setSizeIndex] = useState()
-
-  const availableFormat = others.format //others.config.wordpress.active ? others.products : others.config.format
-  console.log(availableFormat)
+  const [selectedVariation, setSelectedVariation] = useState()
+  // const [variantLoading, setVariantLoading] = useState(true)
 
   const onSelectFormat = (value) => {
-    const format = others.config.format.find((item) => item.id === value)
-    setFormatType(format)
+    const format = others.format.find((item) => item.id === value)
+    const api = Woocommerce(others.config)
+    api
+      .get(`products/${value}/variations`, {
+        per_page: 20,
+        status: 'publish'
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          const resData = response.data.map(({ id, attributes }) => ({ id, attributes }))
+          const variationData = Helpers.extractVariationAttributes(resData)
+          format.variations = variationData
+          console.log(format)
+          setFormatType(format)
+          // setVariantLoading(false)
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
-  const onSelectSize = (value) => {
-    setSizeIndex(value)
+  const onSelectVariation = (value) => {
+    setSelectedVariation(value)
   }
 
   const handleClose = () => {
     setFormatType()
-    setSizeIndex()
+    setSelectedVariation()
     others.onHide()
   }
 
   const handleBack = () => {
     setFormatType()
-    setSizeIndex()
+    setSelectedVariation()
   }
 
-  const handleChoose = (format, index) => {
+  const handleChoose = (format, variation) => {
     setFormatType()
-    setSizeIndex()
+    setSelectedVariation()
     others.onHide()
-    actionfn(format, index)
+    actionfn(format, variation)
   }
 
   return (
@@ -56,11 +74,11 @@ function FormatDialog(props) {
         <div className="format-pages">
           {formatType ? (
             <div className="format-page">
-              <CarouselImage format={formatType} onSelectSize={onSelectSize} />
+              <CarouselImage format={formatType} onSelectVariation={onSelectVariation} />
             </div>
           ) : (
             <div className="format-page">
-              <FormatType format={availableFormat} onSelectFormat={onSelectFormat} />
+              <FormatType format={others.format} onSelectFormat={onSelectFormat} />
             </div>
           )}
         </div>
@@ -72,8 +90,10 @@ function FormatDialog(props) {
           style={{ visibility: formatType ? '' : 'hidden' }}>
           {i18n.t('Back')}
         </Button>
-        {formatType && sizeIndex >= 0 ? (
-          <Button onClick={() => handleChoose(formatType, sizeIndex)}>{i18n.t('Choose')}</Button>
+        {formatType && selectedVariation ? (
+          <Button onClick={() => handleChoose(formatType, selectedVariation)}>
+            {i18n.t('Choose')}
+          </Button>
         ) : (
           <></>
         )}

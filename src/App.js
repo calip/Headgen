@@ -33,7 +33,9 @@ function App() {
         const api = Woocommerce(result)
         api
           .get('products', {
-            per_page: 20
+            per_page: 20,
+            type: 'variable',
+            status: 'publish'
           })
           .then((response) => {
             if (response.status === 200) {
