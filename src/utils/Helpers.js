@@ -55,22 +55,28 @@ const Helpers = {
   extractProducts: (products) => {
     return products.map((item) => {
       const images = item.images.map((img) => img.src)
-      const attributes = item.attributes.find((attr) => attr.id === 1)
-      const size = attributes.options.map((opt) => {
-        const option = opt.split('x')
-        const value = {
-          height: parseInt(option[0]),
-          width: parseInt(option[1])
-        }
-        return value
-      })
       const data = {
         id: item.id,
         name: item.name,
         slug: item.slug,
         images: images,
         preview: images[0],
-        sizes: size
+        variations: []
+      }
+      return data
+    })
+  },
+  extractVariationAttributes: (variations) => {
+    return variations.map((item) => {
+      const attribute = item.attributes.find((attr) => attr.id === 1)
+      let data = null
+      if (attribute && attribute.option) {
+        const option = attribute.option.split('x')
+        data = {
+          id: item.id,
+          height: parseInt(option[0]),
+          width: parseInt(option[1])
+        }
       }
       return data
     })
@@ -138,6 +144,7 @@ const Helpers = {
       format: null,
       height: height,
       width: width,
+      variation: null,
       items: [Helpers.setItems()]
     }
     return data
