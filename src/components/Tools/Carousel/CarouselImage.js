@@ -3,11 +3,11 @@ import './CarouselImage.scss'
 import { useState } from 'react'
 
 function CarouselImage(props) {
-  const [activeSize, setActiveSize] = useState()
+  const [activeVariation, setActiveVariation] = useState()
 
-  const handleSelectSize = (size) => {
-    setActiveSize(size)
-    props.onSelectSize(size)
+  const handleSelectVariation = (variation) => {
+    setActiveVariation(variation)
+    props.onSelectVariation(variation)
   }
 
   return (
@@ -19,22 +19,22 @@ function CarouselImage(props) {
               {props.format.images.map((item, index) => {
                 return (
                   <Carousel.Item key={index}>
-                    <img className="d-block w-100" src={item} alt="carousel image" />
+                    <img className="carousel-img" src={item} alt="carousel image" />
                   </Carousel.Item>
                 )
               })}
             </Carousel>
           </div>
           <div className="carousel-option">
-            {props.format.sizes.map((size, index) => {
+            {props.format.variations.map((variation) => {
               return (
                 <Button
                   variant="outline-dark"
-                  active={index === activeSize}
+                  active={variation?.id === activeVariation?.id}
                   size="sm"
-                  key={index}
-                  onClick={() => handleSelectSize(index)}>
-                  {size.width}x{size.height}
+                  key={variation?.id}
+                  onClick={() => handleSelectVariation(variation)}>
+                  {variation?.width}x{variation?.height}
                 </Button>
               )
             })}
