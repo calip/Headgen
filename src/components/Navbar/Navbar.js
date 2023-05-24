@@ -12,7 +12,7 @@ import i18n from '../../utils/i18n'
 const FONT_STYLES = ['comfortaa', 'italianno', 'marqueemoon', 'mexcellent', 'stripey']
 const FONT_SPACING = ['0', '2', '5', '10', '15', '20']
 
-function NavBar({ toggle, font, layout, config, admin, downloadFn }) {
+function NavBar({ toggle, font, layout, config, admin, downloadFn, addToCart }) {
   const onFontTypeChange = (eventkey) => {
     font.setFontType(eventkey)
   }
@@ -61,6 +61,9 @@ function NavBar({ toggle, font, layout, config, admin, downloadFn }) {
           </DropdownButton>
         </Nav>
         <Nav>
+          <Button variant="primary" onClick={addToCart}>
+            {i18n.t('AddToCart')}
+          </Button>
           {config.admin ? (
             <FormCheck
               type="switch"
@@ -73,7 +76,6 @@ function NavBar({ toggle, font, layout, config, admin, downloadFn }) {
           ) : (
             <></>
           )}
-
           {admin.isAdmin ? (
             <Dropdown align="end">
               <DropdownToggle variant="outline-primary">
@@ -92,7 +94,15 @@ function NavBar({ toggle, font, layout, config, admin, downloadFn }) {
               </DropdownMenu>
             </Dropdown>
           ) : (
-            <></>
+            <>
+              {config.wordpress.active ? (
+                <Button variant="primary" onClick={addToCart}>
+                  {i18n.t('AddToCart')}
+                </Button>
+              ) : (
+                <></>
+              )}
+            </>
           )}
         </Nav>
       </Navbar.Collapse>

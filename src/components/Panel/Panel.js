@@ -24,10 +24,7 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, admin,
   const currentTemplate = config.templates.find((item) => item.id === items.inputItem.template)
   const currentWidth = items.inputItem.width
   const currentHeight = items.inputItem.height
-
   const currentFormat = items.inputItem.format
-  const products = Helpers.extractProducts(items.products)
-  const availableFormat = config.wordpress.active ? products : format
 
   const [show, setShow] = useState(false)
   const [showFormat, setShowFormat] = useState(false)
@@ -110,17 +107,18 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, admin,
     setShow(false)
   }
 
-  const selectFormat = (format, index) => {
-    const size = format.sizes.at(index)
-    const realWidth = Helpers.getRealFormatSize(size.width)
-    const realHeight = Helpers.getRealFormatSize(size.height)
-    layout.setLayoutFormat(format.id)
+  const selectFormat = (inputFormat, variation) => {
+    console.log(inputFormat, variation)
+    const realWidth = Helpers.getRealFormatSize(variation.width)
+    const realHeight = Helpers.getRealFormatSize(variation.height)
+    layout.setLayoutFormat(inputFormat.id)
     layout.setLayoutWidth(realWidth)
     layout.setLayoutHeight(realHeight)
     items.setInitFormat(false)
 
     let temp = items.inputItem
-    temp.format = format.id
+    temp.format = inputFormat
+    temp.variation = variation
     temp.width = realWidth
     temp.height = realHeight
 
@@ -151,11 +149,11 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, admin,
               <FormGroup className="mb-3" controlId="formGroupEmail">
                 <Card className="format-card" onClick={showFormatDialog}>
                   <Card.Body className="format-body">
-                    <div className="format-title">{currentFormat}</div>
+                    <div className="format-title">
+                      {Helpers.getSelectedFormat(format, currentFormat?.id)?.name}
+                    </div>
                     <div className="format-content">
-                      <img
-                        src={Helpers.getSelectedFormat(availableFormat, currentFormat)?.preview}
-                      />
+                      <img src={Helpers.getSelectedFormat(format, currentFormat?.id)?.preview} />
                     </div>
                   </Card.Body>
                   <Card.Footer className="format-footer">
@@ -296,10 +294,9 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, admin,
       <FormatDialog
         show={showFormat}
         config={config}
-        format={availableFormat}
+        format={format}
         onHide={() => setShowFormat(false)}
         title={i18n.t('Format')}
-        products={products}
         description={i18n.t('FormatSelection')}
         actionfn={selectFormat}
       />
