@@ -46,5 +46,6 @@
   "Greeting": "Hallo",
   "LinkDescription": "This is your link to load pixgen data",
   "Open": "Open",
-  "EmailSubject": "Pixgen Data"
+  "EmailSubject": "Pixgen Data",
+  "AddToCart": "Add To Cart"
 }

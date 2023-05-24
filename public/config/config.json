@@ -4,7 +4,7 @@
   "language": "de",
   "admin": true,
   "layout": {
-    "format": "canvas",
+    "format": null,
     "width": 4000,
     "height": 6000,
     "padding": 10,
@@ -78,28 +78,34 @@
       "name": "Canvas",
       "slug": "canvas",
       "preview": "./img/canvas.png",
-      "sizes": [
+      "variations": [
         {
+          "id": 1,
           "height": 20,
           "width": 20
         },
         {
+          "id": 2,
           "height": 30,
           "width": 20
         },
         {
+          "id": 3,
           "height": 40,
           "width": 40
         },
         {
+          "id": 4,
           "height": 60,
           "width": 40
         },
         {
+          "id": 5,
           "height": 80,
           "width": 60
         },
         {
+          "id": 6,
           "height": 100,
           "width": 75
         }
@@ -111,16 +117,19 @@
       "name": "Picture in frame",
       "slug": "wallboard",
       "preview": "./img/frame.png",
-      "sizes": [
+      "variations": [
         {
+          "id": 1,
           "height": 40,
           "width": 30
         },
         {
+          "id": 2,
           "height": 60,
           "width": 40
         },
         {
+          "id": 3,
           "height": 90,
           "width": 60
         }
@@ -132,28 +141,34 @@
       "name": "Wallboard",
       "slug": "wallboard",
       "preview": "./img/wallboard.png",
-      "sizes": [
+      "variations": [
         {
+          "id": 1,
           "height": 20,
           "width": 20
         },
         {
+          "id": 2,
           "height": 30,
           "width": 20
         },
         {
+          "id": 3,
           "height": 40,
           "width": 40
         },
         {
+          "id": 4,
           "height": 60,
           "width": 40
         },
         {
+          "id": 5,
           "height": 80,
           "width": 60
         },
         {
+          "id": 6,
           "height": 100,
           "width": 75
         }
