@@ -79,7 +79,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
     if (!showDialog) {
       const items = Helpers.getInputItem(config)
       if (items) {
-        const url = `${window.location.origin}?data=${Helpers.encodeJsonData(items)}`
+        const url = `${window.location.origin}?pixgen=${Helpers.encodeJsonData(items)}`
         setDataUrl(url)
       }
     }
@@ -102,7 +102,6 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
       url: dataUrl
     }
     sendMail(config.mail.apiurl, jsonData).then((res) => {
-      console.log(res)
       if (res.status) {
         setShowEmailToast(true)
         setToastMessage(res.message)
