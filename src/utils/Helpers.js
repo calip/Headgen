@@ -52,6 +52,11 @@ const Helpers = {
       return false
     }
   },
+  clearUrlHistory: (config) => {
+    const url = `${window.location.origin}`
+    const path = config.admin ? `${url}/apps/pixgen` : `${url}/pixeditor`
+    window.history.pushState({ path: url }, '', path)
+  },
   extractProducts: (products) => {
     return products.map((item) => {
       const images = item.images.map((img) => img.src)
@@ -65,6 +70,18 @@ const Helpers = {
       }
       return data
     })
+  },
+  extractProduct: (product) => {
+    const images = product.images.map((img) => img.src)
+    const data = {
+      id: product.id,
+      name: product.name,
+      slug: product.slug,
+      images: images,
+      preview: images[0],
+      variations: product.variations
+    }
+    return data
   },
   extractVariationAttributes: (variations) => {
     return variations.map((item) => {
@@ -80,6 +97,21 @@ const Helpers = {
       }
       return data
     })
+  },
+  extractVariation: (variation) => {
+    // return variations.map((item) => {
+    const attribute = variation.attributes.find((attr) => attr.id === 1)
+    let data = null
+    if (attribute && attribute.option) {
+      const option = attribute.option.split('x')
+      data = {
+        id: variation.id,
+        height: parseInt(option[0]),
+        width: parseInt(option[1])
+      }
+    }
+    return data
+    // })
   },
   getRandomId() {
     return Math.floor(Math.random() * 1000000)
@@ -135,7 +167,9 @@ const Helpers = {
     }
   },
   setData: (width, height) => {
+    let id = Helpers.getRandomId()
     const data = {
+      id: id,
       title: '',
       font: '',
       fontPadding: 0,
