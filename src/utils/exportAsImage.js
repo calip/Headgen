@@ -12,9 +12,11 @@ const exportAsImage = async (element, dpc, title, quality) => {
   if (quality === 'low') {
     newElement.style.background = '#fff'
   }
-  const borderElement = newElement.querySelector(`.pix-content`)
-  if (borderElement) {
-    borderElement.classList.remove('pix-content-selected')
+  const contentElement = newElement.querySelectorAll(`.pix-content`)
+  if (contentElement) {
+    contentElement.forEach((selectedContent) => {
+      selectedContent.classList.remove('pix-content-selected')
+    })
   }
   const titleElement = newElement.querySelector(`.pix-title`)
   if (titleElement) {
