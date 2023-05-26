@@ -34,7 +34,7 @@ function CarouselImage(props) {
                   size="sm"
                   key={variation?.id}
                   onClick={() => handleSelectVariation(variation)}>
-                  {variation?.width}x{variation?.height}
+                  {variation?.height}x{variation?.width}
                 </Button>
               )
             })}
