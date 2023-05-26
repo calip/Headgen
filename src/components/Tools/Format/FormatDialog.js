@@ -12,29 +12,30 @@ function FormatDialog(props) {
 
   const [formatType, setFormatType] = useState()
   const [selectedVariation, setSelectedVariation] = useState()
-  // const [variantLoading, setVariantLoading] = useState(true)
 
   const onSelectFormat = (value) => {
     const format = others.format.find((item) => item.id === value)
-    const api = Woocommerce(others.config)
-    api
-      .get(`products/${value}/variations`, {
-        per_page: 20,
-        status: 'publish'
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          const resData = response.data.map(({ id, attributes }) => ({ id, attributes }))
-          const variationData = Helpers.extractVariationAttributes(resData)
-          format.variations = variationData
-          console.log(format)
-          setFormatType(format)
-          // setVariantLoading(false)
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    if (others.config.wordpress.active) {
+      const api = Woocommerce(others.config)
+      api
+        .get(`products/${value}/variations`, {
+          per_page: 20,
+          status: 'publish'
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            const resData = response.data.map(({ id, attributes }) => ({ id, attributes }))
+            const variationData = Helpers.extractVariationAttributes(resData)
+            format.variations = variationData
+            setFormatType(format)
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    } else {
+      setFormatType(format)
+    }
   }
 
   const onSelectVariation = (value) => {
@@ -72,14 +73,20 @@ function FormatDialog(props) {
       </Modal.Header>
       <Modal.Body>
         <div className="format-pages">
-          {formatType ? (
-            <div className="format-page">
-              <CarouselImage format={formatType} onSelectVariation={onSelectVariation} />
-            </div>
+          {others.wp.loadWordpress ? (
+            <h4 className="text-center">{i18n.t('PleaseWait')}...</h4>
           ) : (
-            <div className="format-page">
-              <FormatType format={others.format} onSelectFormat={onSelectFormat} />
-            </div>
+            <>
+              {formatType ? (
+                <div className="format-page">
+                  <CarouselImage format={formatType} onSelectVariation={onSelectVariation} />
+                </div>
+              ) : (
+                <div className="format-page">
+                  <FormatType format={others.format} onSelectFormat={onSelectFormat} />
+                </div>
+              )}
+            </>
           )}
         </div>
       </Modal.Body>
