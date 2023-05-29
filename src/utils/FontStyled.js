@@ -45,7 +45,10 @@ const FontStyled = (props) => {
                           `width: ${size}; height: ${size}; display: ${props.value.iconDisplay}`
                         )
                       }}
-                      src={Helpers.getIconForButton(props.icons, props.value.icon)}
+                      src={`${props.imgPath}${Helpers.getIconForButton(
+                        props.icons,
+                        props.value.icon
+                      )}`}
                     />
                   </div>
                 </div>

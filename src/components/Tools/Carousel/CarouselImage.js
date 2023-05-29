@@ -1,12 +1,17 @@
 import { Button, Carousel, Col, Container, Row } from 'react-bootstrap'
 import './CarouselImage.scss'
 import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTag } from '@fortawesome/free-solid-svg-icons'
 
 function CarouselImage(props) {
   const [activeVariation, setActiveVariation] = useState()
+  const [price, setPrice] = useState('')
 
   const handleSelectVariation = (variation) => {
     setActiveVariation(variation)
+    setPrice(variation.price)
+    console.log(variation)
     props.onSelectVariation(variation)
   }
 
@@ -24,6 +29,13 @@ function CarouselImage(props) {
                 )
               })}
             </Carousel>
+            {price ? (
+              <div className="carousel-tags">
+                <FontAwesomeIcon icon={faTag} /> {price}
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
           <div className="carousel-option">
             {props.format.variations.map((variation) => {
