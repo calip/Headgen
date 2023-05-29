@@ -47,5 +47,10 @@
   "LinkDescription": "This is your link to load pixgen data",
   "Open": "Open",
   "EmailSubject": "Pixgen Data",
-  "AddToCart": "Add To Cart"
+  "AddToCart": "Add To Cart",
+  "AddToCartConfirmation": "Are you sure you want to add this version to Cart",
+  "AddToCartError": "Add To Cart error",
+  "InputItemEmpty": "Input text minimum 3 items",
+  "InputTitleEmpty": "Input Title cannot be empty",
+  "PleaseWait": "Please Wait"
 }
