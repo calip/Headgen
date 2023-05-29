@@ -4,10 +4,19 @@
   height: auto;
   margin: 0 auto;
   text-align: center;
+  position: relative;
+}
+
+.carousel-tags {
+  position: absolute;
+  top: 25px;
+  right: -25px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #a10101;
 }
 
 .carousel-option {
-  padding-top: 10px;
   margin: 0 25%;
   text-align: center;
   
