@@ -1,5 +1,5 @@
 {
-  "appId": 1,
+  "appId": 10,
   "appName": "Pixgen",
   "language": "de",
   "admin": true,
@@ -47,27 +47,27 @@
     "icons": [
       {
         "name": "gorilla",
-        "file": "./icons/516_Gorilla_V1.svg",
+        "file": "/icons/516_Gorilla_V1.svg",
         "tags": ["animal", "ape"]
       },
       {
         "name": "kuschel",
-        "file": "./icons/501_kuscheln_V1.svg",
+        "file": "/icons/501_kuscheln_V1.svg",
         "tags": ["animal", "mami"]
       },
       {
         "name": "anker",
-        "file": "./icons/503_Anker_V1.svg",
+        "file": "/icons/503_Anker_V1.svg",
         "tags": ["car", "mama"]
       },
       {
         "name": "tannenzapfen",
-        "file": "./icons/511_Tannenzapfen_V1.svg",
+        "file": "/icons/511_Tannenzapfen_V1.svg",
         "tags": ["toy", "motor"]
       },
       {
         "name": "umarmen",
-        "file": "./icons/500_umarmen_V1.svg",
+        "file": "/icons/500_umarmen_V1.svg",
         "tags": ["house"]
       }
     ]
@@ -77,40 +77,46 @@
       "id": 1,
       "name": "Canvas",
       "slug": "canvas",
-      "preview": "./img/canvas.png",
+      "preview": "/img/canvas.png",
       "variations": [
         {
           "id": 1,
           "height": 20,
-          "width": 20
+          "width": 20,
+          "price": "0.0"
         },
         {
           "id": 2,
           "height": 30,
-          "width": 20
+          "width": 20,
+          "price": "0.0"
         },
         {
           "id": 3,
           "height": 40,
-          "width": 40
+          "width": 40,
+          "price": "0.0"
         },
         {
           "id": 4,
           "height": 60,
-          "width": 40
+          "width": 40,
+          "price": "0.0"
         },
         {
           "id": 5,
           "height": 80,
-          "width": 60
+          "width": 60,
+          "price": "0.0"
         },
         {
           "id": 6,
           "height": 100,
-          "width": 75
+          "width": 75,
+          "price": "0.0"
         }
       ],
-      "images": ["./img/canvas.png", "./img/canvas-1.png", "./img/canvas-2.png", "./img/canvas-3.png"]
+      "images": ["/img/canvas.png", "/img/canvas-1.png", "/img/canvas-2.png", "/img/canvas-3.png"]
     },
     {
       "id": 2,
@@ -121,59 +127,68 @@
         {
           "id": 1,
           "height": 40,
-          "width": 30
+          "width": 30,
+          "price": "0.0"
         },
         {
           "id": 2,
           "height": 60,
-          "width": 40
+          "width": 40,
+          "price": "0.0"
         },
         {
           "id": 3,
           "height": 90,
-          "width": 60
+          "width": 60,
+          "price": "0.0"
         }
       ],
-      "images": ["./img/frame.png", "./img/frame-1.png", "./img/frame-2.png", "./img/frame-3.png"]
+      "images": ["/img/frame.png", "/img/frame-1.png", "/img/frame-2.png", "/img/frame-3.png"]
     },
     {
       "id": 3,
       "name": "Wallboard",
       "slug": "wallboard",
-      "preview": "./img/wallboard.png",
+      "preview": "/img/wallboard.png",
       "variations": [
         {
           "id": 1,
           "height": 20,
-          "width": 20
+          "width": 20,
+          "price": "0.0"
         },
         {
           "id": 2,
           "height": 30,
-          "width": 20
+          "width": 20,
+          "price": "0.0"
         },
         {
           "id": 3,
           "height": 40,
-          "width": 40
+          "width": 40,
+          "price": "0.0"
         },
         {
           "id": 4,
           "height": 60,
-          "width": 40
+          "width": 40,
+          "price": "0.0"
         },
         {
           "id": 5,
           "height": 80,
-          "width": 60
+          "width": 60,
+          "price": "0.0"
         },
         {
           "id": 6,
           "height": 100,
-          "width": 75
+          "width": 75,
+          "price": "0.0"
         }
       ],
-      "images": ["./img/wallboard.png", "./img/wallboard-1.png", "./img/wallboard-2.png", "./img/wallboard-3.png"]
+      "images": ["/img/wallboard.png", "/img/wallboard-1.png", "/img/wallboard-2.png", "/img/wallboard-3.png"]
     }
   ],
   "toolbar": {
@@ -187,6 +202,8 @@
   "wordpress": {
     "active": true,
     "baseUrl": "https://new.wordpix.de",
+    "cartSlug": "/warenkorb",
+    "pluginPath": "/wp-content/plugins/pixgen-editor/pixgen",
     "consumerKey": "ck_7e58e70e77db57648b0b3476586b3263b5d3fb22",
     "consumerSecret": "cs_45471bc5f7ee555f92b149e8cda4def4d9cf7f5d"
   }
