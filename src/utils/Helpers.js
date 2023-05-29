@@ -92,7 +92,8 @@ const Helpers = {
         data = {
           id: item.id,
           height: parseInt(option[0]),
-          width: parseInt(option[1])
+          width: parseInt(option[1]),
+          price: item.price
         }
       }
       return data
