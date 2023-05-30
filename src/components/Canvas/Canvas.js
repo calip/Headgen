@@ -41,6 +41,9 @@ const Canvas = forwardRef((props, ref) => {
   const selectedTitleChanged = Helpers.useHasChanged(clickTitle)
   const dataChanged = Helpers.useHasChanged(props.items)
   const contentChanged = Helpers.useHasChanged(data)
+  const imgPath = props.config.wordpress.active
+    ? `${props.config.wordpress.baseUrl}${props.config.wordpress.pluginPath}`
+    : ''
 
   useLayoutEffect(() => {
     if (dataChanged) {
@@ -351,6 +354,7 @@ const Canvas = forwardRef((props, ref) => {
               {data.inputItem.items ? (
                 <div>
                   <TableItem
+                    imgPath={imgPath}
                     maxSize={itemSize}
                     items={data.inputItem.items}
                     icons={icons}
