@@ -20,7 +20,19 @@ import Helpers from '../../utils/Helpers'
 import i18n from '../../utils/i18n'
 import FormatDialog from '../Tools/Format/FormatDialog'
 
-function Panel({ toggle, isOpen, layout, items, template, config, format, admin, resetSession }) {
+function Panel({
+  toggle,
+  isOpen,
+  layout,
+  items,
+  template,
+  config,
+  format,
+  admin,
+  wp,
+  selectItem,
+  resetSession
+}) {
   const currentTemplate = config.templates.find((item) => item.id === items.inputItem.template)
   const currentWidth = items.inputItem.width
   const currentHeight = items.inputItem.height
@@ -36,7 +48,13 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, admin,
 
   useEffect(() => {
     if (items.initFormat) {
-      setShowFormat(true)
+      if (selectItem.selectedProduct && selectItem.selectedVariation) {
+        selectFormat(selectItem.selectedProduct, selectItem.selectedVariation)
+        selectItem.setSelectedProduct(null)
+        selectItem.setSelectedVariation(null)
+      } else {
+        setShowFormat(true)
+      }
     }
   })
 
@@ -108,7 +126,6 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, admin,
   }
 
   const selectFormat = (inputFormat, variation) => {
-    console.log(inputFormat, variation)
     const realWidth = Helpers.getRealFormatSize(variation.width)
     const realHeight = Helpers.getRealFormatSize(variation.height)
     layout.setLayoutFormat(inputFormat.id)
@@ -121,6 +138,8 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, admin,
     temp.variation = variation
     temp.width = realWidth
     temp.height = realHeight
+
+    console.log(temp)
 
     Helpers.saveInputToLocalStorage(items, config, temp.items)
   }
@@ -154,6 +173,7 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, admin,
                     </div>
                     <div className="format-content">
                       <img src={Helpers.getSelectedFormat(format, currentFormat?.id)?.preview} />
+                      <div className="format-price">{items.inputItem?.variation.price}</div>
                     </div>
                   </Card.Body>
                   <Card.Footer className="format-footer">
@@ -294,6 +314,7 @@ function Panel({ toggle, isOpen, layout, items, template, config, format, admin,
       <FormatDialog
         show={showFormat}
         config={config}
+        wp={wp}
         format={format}
         onHide={() => setShowFormat(false)}
         title={i18n.t('Format')}

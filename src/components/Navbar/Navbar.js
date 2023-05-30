@@ -12,7 +12,10 @@ import i18n from '../../utils/i18n'
 const FONT_STYLES = ['comfortaa', 'italianno', 'marqueemoon', 'mexcellent', 'stripey']
 const FONT_SPACING = ['0', '2', '5', '10', '15', '20']
 
-function NavBar({ toggle, font, layout, config, admin, downloadFn, addToCart }) {
+function NavBar({ toggle, font, items, config, admin, downloadFn, addToCart }) {
+  const currentWidth = items.inputItem.width
+  const currentHeight = items.inputItem.height
+
   const onFontTypeChange = (eventkey) => {
     font.setFontType(eventkey)
   }
@@ -61,9 +64,6 @@ function NavBar({ toggle, font, layout, config, admin, downloadFn, addToCart }) 
           </DropdownButton>
         </Nav>
         <Nav>
-          <Button variant="primary" onClick={addToCart}>
-            {i18n.t('AddToCart')}
-          </Button>
           {config.admin ? (
             <FormCheck
               type="switch"
@@ -88,7 +88,7 @@ function NavBar({ toggle, font, layout, config, admin, downloadFn, addToCart }) 
                 </DropdownItem>
                 <DropdownItem onClick={downloadFn('high')}>
                   <small>
-                    {i18n.t('HighResolution')} ({layout.layoutWidth} x {layout.layoutHeight} px)
+                    {i18n.t('HighResolution')} ({currentWidth} x {currentHeight} px)
                   </small>
                 </DropdownItem>
               </DropdownMenu>
