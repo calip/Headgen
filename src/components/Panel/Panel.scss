@@ -11,6 +11,11 @@
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     padding: 8px;
+    color: #000 !important;
+  }
+
+  button:hover{
+    color: #000 !important;
   }
 }
 
@@ -70,9 +75,19 @@
   height: 100px;
   margin: 0 auto;
   text-align: center;
+  position: relative;
 
   img {
     width: 150px;
     height: 100px;
   }
+}
+
+.format-price {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #a10101;
 }
