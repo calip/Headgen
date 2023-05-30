@@ -12,7 +12,7 @@ import EmailToast from '../Tools/Toast/EmailToast'
 import SendDialog from '../Dialog/SendDialog'
 import sendMail from '../../utils/sendMail'
 
-function SideBar({ toggle, isOpen, items, icons, template, config, selectText }) {
+function SideBar({ toggle, isOpen, items, icons, template, config, admin, selectText }) {
   const [showDialog, setShowDialog] = useState(false)
   const [canSave, setCanSave] = useState(false)
   const [emailDialog, setEmailDialog] = useState(false)
@@ -21,6 +21,10 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
   const [dataUrl, setDataUrl] = useState()
   const scrollRef = useRef()
   const emailRef = useRef('')
+
+  const imgPath = config.wordpress.active
+    ? `${config.wordpress.baseUrl}${config.wordpress.pluginPath}`
+    : ''
 
   const realRefs = useRef([])
   const spokenRefs = useRef([])
@@ -240,7 +244,11 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
       <>
         {expectedIcons.map((icon, index) => (
           <Dropdown.Item eventKey={icon.name} key={index}>
-            <img src={Helpers.getIconForButton(icons, icon.name)} width="60" alt={icon.name} />
+            <img
+              src={`${imgPath}${Helpers.getIconForButton(icons, icon.name)}`}
+              width="60"
+              alt={icon.name}
+            />
           </Dropdown.Item>
         ))}
       </>
@@ -323,7 +331,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
                               </div>
                             ) : (
                               <img
-                                src={Helpers.getIconForButton(icons, item.icon)}
+                                src={`${imgPath}${Helpers.getIconForButton(icons, item.icon)}`}
                                 width="60"
                                 alt={item.icon}
                               />
@@ -359,24 +367,28 @@ function SideBar({ toggle, isOpen, items, icons, template, config, selectText })
           <FontAwesomeIcon icon={faPlus} /> {i18n.t('Add')}
         </Button>
         <hr />
-        <InputGroup className="mb-3">
-          <FormControl
-            ref={emailRef}
-            type="email"
-            required
-            placeholder={i18n.t('Email')}
-            aria-label={i18n.t('Email')}
-            onChange={(e) => handleEmailChange(e.target.value)}
-          />
-          <Button
-            type="submit"
-            variant="primary"
-            id="button-addon2"
-            disabled={!emailDialog}
-            onClick={showConfirmDialog}>
-            {i18n.t('Send')}
-          </Button>
-        </InputGroup>
+        {admin.isAdmin ? (
+          <InputGroup className="mb-3">
+            <FormControl
+              ref={emailRef}
+              type="email"
+              required
+              placeholder={i18n.t('Email')}
+              aria-label={i18n.t('Email')}
+              onChange={(e) => handleEmailChange(e.target.value)}
+            />
+            <Button
+              type="submit"
+              variant="primary"
+              id="button-addon2"
+              disabled={!emailDialog}
+              onClick={showConfirmDialog}>
+              {i18n.t('Send')}
+            </Button>
+          </InputGroup>
+        ) : (
+          <></>
+        )}
       </Nav>
       {canSave ? (
         <SendDialog
