@@ -24,7 +24,13 @@ function FormatDialog(props) {
         })
         .then((response) => {
           if (response.status === 200) {
-            const resData = response.data.map(({ id, attributes }) => ({ id, attributes }))
+            console.log(response)
+            const resData = response.data.map(({ id, attributes, price }) => ({
+              id,
+              attributes,
+              price
+            }))
+            console.log(resData)
             const variationData = Helpers.extractVariationAttributes(resData)
             format.variations = variationData
             setFormatType(format)
