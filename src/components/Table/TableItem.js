@@ -2,6 +2,7 @@ import Helpers from '../../utils/Helpers'
 import TableData from './TableData'
 
 const TableItem = ({
+  imgPath,
   maxSize,
   items,
   icons,
@@ -32,6 +33,7 @@ const TableItem = ({
             <tbody>
               <tr>
                 <TableData
+                  imgPath={imgPath}
                   maxSize={maxSize}
                   data={data}
                   icons={icons}
