@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import FontStyled from '../../utils/FontStyled'
 
 const TableData = ({
+  imgPath,
   maxSize,
   data,
   icons,
@@ -159,7 +160,14 @@ const TableData = ({
           item.id === targetDrag ? 'pix-content-target' : ''
         }`}
         style={dragId === item.id ? styleForImg : {}}>
-        <FontStyled value={item} icons={icons} space={space} multiline={true} maxSize={maxSize} />
+        <FontStyled
+          value={item}
+          icons={icons}
+          space={space}
+          multiline={true}
+          maxSize={maxSize}
+          imgPath={imgPath}
+        />
       </td>
     )
   })
