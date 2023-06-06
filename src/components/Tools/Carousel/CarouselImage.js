@@ -6,12 +6,11 @@ import { faTag } from '@fortawesome/free-solid-svg-icons'
 
 function CarouselImage(props) {
   const [activeVariation, setActiveVariation] = useState()
-  const [price, setPrice] = useState('')
+  const [price, setPrice] = useState(props.initPrice)
 
   const handleSelectVariation = (variation) => {
     setActiveVariation(variation)
     setPrice(variation.price)
-    console.log(variation)
     props.onSelectVariation(variation)
   }
 
