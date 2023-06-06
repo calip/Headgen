@@ -139,8 +139,6 @@ function Panel({
     temp.width = realWidth
     temp.height = realHeight
 
-    console.log(temp)
-
     Helpers.saveInputToLocalStorage(items, config, temp.items)
   }
 
@@ -173,7 +171,7 @@ function Panel({
                     </div>
                     <div className="format-content">
                       <img src={Helpers.getSelectedFormat(format, currentFormat?.id)?.preview} />
-                      <div className="format-price">{items.inputItem?.variation.price}</div>
+                      <div className="format-price">{items.inputItem?.variation?.price}</div>
                     </div>
                   </Card.Body>
                   <Card.Footer className="format-footer">
