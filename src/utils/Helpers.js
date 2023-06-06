@@ -108,7 +108,8 @@ const Helpers = {
       data = {
         id: variation.id,
         height: parseInt(option[0]),
-        width: parseInt(option[1])
+        width: parseInt(option[1]),
+        price: variation.price
       }
     }
     return data
