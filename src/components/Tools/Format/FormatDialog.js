@@ -12,6 +12,7 @@ function FormatDialog(props) {
 
   const [formatType, setFormatType] = useState()
   const [selectedVariation, setSelectedVariation] = useState()
+  const [minMaxPrice, setMinMaxPrice] = useState('')
 
   const onSelectFormat = (value) => {
     const format = others.format.find((item) => item.id === value)
@@ -24,13 +25,18 @@ function FormatDialog(props) {
         })
         .then((response) => {
           if (response.status === 200) {
-            console.log(response)
             const resData = response.data.map(({ id, attributes, price }) => ({
               id,
               attributes,
               price
             }))
-            console.log(resData)
+            const minPrice = resData.reduce((prev, curr) => {
+              return parseFloat(prev.price) < parseFloat(curr.price) ? prev : curr
+            })
+            const maxPrice = resData.reduce((prev, curr) => {
+              return parseFloat(prev.price) > parseFloat(curr.price) ? prev : curr
+            })
+            setMinMaxPrice(`${minPrice.price} - ${maxPrice.price}`)
             const variationData = Helpers.extractVariationAttributes(resData)
             format.variations = variationData
             setFormatType(format)
@@ -85,7 +91,11 @@ function FormatDialog(props) {
             <>
               {formatType ? (
                 <div className="format-page">
-                  <CarouselImage format={formatType} onSelectVariation={onSelectVariation} />
+                  <CarouselImage
+                    format={formatType}
+                    onSelectVariation={onSelectVariation}
+                    initPrice={minMaxPrice}
+                  />
                 </div>
               ) : (
                 <div className="format-page">
