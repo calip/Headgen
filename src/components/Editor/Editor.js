@@ -11,8 +11,8 @@ import '../../utils/i18n'
 import './Editor.scss'
 import ErrorDialog from '../Dialog/ErrorDialog'
 import Dialog from '../Dialog/Dialog'
-// import PreviewButton from '../Tools/Preview/PreviewButton'
-// import PreviewDialog from '../Dialog/PreviewDialog'
+import PreviewButton from '../Tools/Preview/PreviewButton'
+import PreviewDialog from '../Dialog/PreviewDialog'
 
 function Editor({ config, products, selectItem }) {
   let format =
@@ -47,7 +47,7 @@ function Editor({ config, products, selectItem }) {
   const [layoutPadding, setLayoutPadding] = useState(padding)
   const [inputItem, setInputItem] = useState(initialInput)
   const [inputTemplate, setInputTemplate] = useState(templates[0])
-  // const [showPreview, setShowPreview] = useState(false)
+  const [showPreview, setShowPreview] = useState(false)
   const exportRef = useRef()
   const [renderCanvas, setRenderCanvas] = useState(false)
   const [textItem, setTextItem] = useState()
@@ -225,9 +225,9 @@ function Editor({ config, products, selectItem }) {
   const reloadCanvas = () => {
     loadLocalStorage(config)
   }
-  // const showPreviewDialog = () => {
-  //   setShowPreview((showPreview) => !showPreview)
-  // }
+  const showPreviewDialog = () => {
+    setShowPreview((showPreview) => !showPreview)
+  }
 
   return (
     <Fragment key={inputItem.id}>
@@ -292,8 +292,8 @@ function Editor({ config, products, selectItem }) {
           actionFn={addToCart}
         />
 
-        {/* <PreviewDialog show={showPreview} dialogFn={showPreviewDialog} title={i18n.t('Preview')} />
-        <PreviewButton previewFn={showPreviewDialog} isPanelOpen={isPanelOpen} /> */}
+        <PreviewDialog show={showPreview} dialogFn={showPreviewDialog} title={i18n.t('Preview')} />
+        <PreviewButton previewFn={showPreviewDialog} isPanelOpen={isPanelOpen} />
       </Container>
     </Fragment>
   )
