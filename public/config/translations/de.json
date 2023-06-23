@@ -52,5 +52,7 @@
   "AddToCartError": "Add To Cart error",
   "InputItemEmpty": "Input text minimum 3 items",
   "InputTitleEmpty": "Input Title cannot be empty",
-  "PleaseWait": "Please Wait"
+  "PleaseWait": "Please Wait",
+  "FitToWindow": "Fit To Window",
+  "RealSize": "Real Size"
 }
