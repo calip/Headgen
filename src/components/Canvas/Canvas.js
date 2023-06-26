@@ -1,4 +1,4 @@
-import { forwardRef, useLayoutEffect, useRef, useState } from 'react'
+import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import './Canvas.scss'
 import TableItem from '../Table/TableItem'
 import Helpers from '../../utils/Helpers'
@@ -10,6 +10,7 @@ const Canvas = forwardRef((props, ref) => {
     (item) => item.id === props.items.inputItem.template
   )
 
+  const zoomSize = parseInt(props.zoomSize)
   const [data, setData] = useState({})
   const contentRef = useRef()
   const titleRef = useRef()
@@ -80,6 +81,11 @@ const Canvas = forwardRef((props, ref) => {
     props.selectText.setClickTitle(false)
     setTitleSelected(false)
   }
+
+  useEffect(() => {
+    const event = new Event('onClick')
+    removeSelectedItem(event)
+  }, [props.clickOutCanvas])
 
   const removeSelectedItem = (event) => {
     event.stopPropagation()
@@ -279,28 +285,66 @@ const Canvas = forwardRef((props, ref) => {
 
   useLayoutEffect(() => {
     if (contentChanged) {
-      const parent = ref.current
-      const child = contentRef.current
-      const title = titleRef.current
-      if (parent && child && title) {
-        const initHeight = child.clientHeight - padding
-
+      const childElement = contentRef.current
+      const titleElement = titleRef.current
+      if (childElement && titleElement) {
+        const initHeight = childElement.clientHeight
+        const initTitleHeight = titleElement.clientHeight
         setTimeout(() => {
-          const titleHeight = title.clientHeight
-          const scaleHeight = Math.abs(child.clientHeight - padding)
-          const totalHeight = Math.abs(initHeight - titleHeight)
-          const totalItem = data.inputItem.items.length
-          const scaleSize = Math.abs(totalHeight / totalItem)
-          const updateSize = scaleHeight >= initHeight ? scaleSize : itemSize
-          setItemSize(updateSize)
+          const titleHeight = titleElement.clientHeight
+          if (titleHeight > 0 && titleHeight !== initTitleHeight) {
+            const scaleHeight = childElement.clientHeight
+            const totalHeight = Math.abs(initHeight - titleHeight)
+            const totalItem = data.inputItem.items.length
+            const scaleSize = Math.abs(totalHeight / totalItem)
+            const updateSize = scaleHeight >= initHeight ? scaleSize : itemSize
+            setItemSize(updateSize)
+          }
         }, 0)
       }
     }
   })
 
+  useEffect(() => {
+    if (props.parentRef.current && props.canvasRef.current) {
+      const { clientWidth: cw, clientHeight: ch } = props.canvasRef.current
+      const { clientWidth: pw, clientHeight: ph } = props.parentRef.current
+      const scale = Math.min(pw / cw, ph / ch)
+
+      const zoom = zoomSize ? zoomSize : 5
+      if (zoom) {
+        const scaleAmtX = (scale * zoom) / 100
+        const scaleAmtY = scaleAmtX
+        props.canvasRef.current.style.transform = `scale(${scaleAmtX}, ${scaleAmtY})`
+      }
+
+      if (props.zoomSize === null) {
+        initScaleSize()
+      }
+    }
+  }, [zoomSize])
+
+  useEffect(() => {
+    initScaleSize()
+  }, [])
+
+  const initScaleSize = () => {
+    if (props.parentRef.current && props.canvasRef.current) {
+      const { clientWidth: cw, clientHeight: ch } = props.canvasRef.current
+      const { clientWidth: pw, clientHeight: ph } = props.parentRef.current
+      const scale = Math.min(pw / cw, ph / ch)
+
+      const initScale = 100 / scale
+      const scaleAmtX = Math.round((scale * initScale) / 100)
+      const scaleAmtY = scaleAmtX
+      props.setZoomSize(initScale)
+      props.canvasRef.current.style.transform = `scale(${scaleAmtX}, ${scaleAmtY})`
+    }
+  }
+
   if (dataChanged) {
     return (
-      <div className="pix-editor">
+      <div className="pix-editor-canvas">
         <div className="pix-canvas" style={{ minWidth: `${width}px`, minHeight: `${height}px` }}>
           <div className="center-screen" style={{ margin: `10px` }}>
             <p>Loading</p>
@@ -310,11 +354,12 @@ const Canvas = forwardRef((props, ref) => {
     )
   } else {
     return (
-      <div className="pix-editor">
+      <div className="pix-editor-canvas">
         <div
           className="pix-canvas"
           style={{
             minWidth: `${width}px`,
+            maxWidth: `${width}px`,
             minHeight: `${height}px`,
             maxHeight: `${height}px`
           }}
