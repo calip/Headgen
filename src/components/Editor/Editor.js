@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef, Fragment } from 'react'
-import { Container } from 'react-bootstrap'
 import SideBar from '../Sidebar/Sidebar'
 import Panel from '../Panel/Panel'
 import exportAsImage from './../../utils/exportAsImage'
@@ -11,8 +10,7 @@ import '../../utils/i18n'
 import './Editor.scss'
 import ErrorDialog from '../Dialog/ErrorDialog'
 import Dialog from '../Dialog/Dialog'
-import PreviewButton from '../Tools/Preview/PreviewButton'
-import PreviewDialog from '../Dialog/PreviewDialog'
+import Zoom from '../Tools/Zoom/Zoom'
 
 function Editor({ config, products, selectItem }) {
   let format =
@@ -47,7 +45,6 @@ function Editor({ config, products, selectItem }) {
   const [layoutPadding, setLayoutPadding] = useState(padding)
   const [inputItem, setInputItem] = useState(initialInput)
   const [inputTemplate, setInputTemplate] = useState(templates[0])
-  const [showPreview, setShowPreview] = useState(false)
   const exportRef = useRef()
   const [renderCanvas, setRenderCanvas] = useState(false)
   const [textItem, setTextItem] = useState()
@@ -58,6 +55,11 @@ function Editor({ config, products, selectItem }) {
   const [titleError, setTitleError] = useState(false)
   const [loadWordpress, setLoadWordpress] = useState(false)
   const { i18n } = useTranslation()
+  const editorRef = useRef()
+  const canvasRef = useRef()
+
+  const [zoomSize, setZoomSize] = useState(null)
+  const [clickOutCanvas, setClickOutCanvas] = useState(false)
 
   const handleDownload = (quality) => () => {
     exportAsImage(exportRef.current, layoutDpc, config.appName, quality)
@@ -225,9 +227,6 @@ function Editor({ config, products, selectItem }) {
   const reloadCanvas = () => {
     loadLocalStorage(config)
   }
-  const showPreviewDialog = () => {
-    setShowPreview((showPreview) => !showPreview)
-  }
 
   return (
     <Fragment key={inputItem.id}>
@@ -241,60 +240,83 @@ function Editor({ config, products, selectItem }) {
         admin={admin}
         selectText={selectText}
       />
-      <Container fluid className="content">
-        <Navbar
-          toggle={toggleSidebar}
-          font={font}
-          items={items}
-          config={config}
-          admin={admin}
-          downloadFn={handleDownload}
-          addToCart={handleAddToCart}
-        />
-        <Canvas
-          font={font}
-          items={items}
-          render={render}
-          icons={icons}
-          layout={layout}
-          config={config}
-          selectText={selectText}
-          reload={reloadCanvas}
-          ref={exportRef}
-        />
 
-        <Panel
-          toggle={togglePanel}
-          isOpen={isPanelOpen}
-          layout={layout}
-          items={items}
-          template={template}
-          config={config}
-          format={format}
-          admin={admin}
-          wp={wp}
-          selectItem={selectItem}
-          resetSession={clearSession}
-        />
+      <div className="pixgen-editor-wrapper">
+        <div className="pixgen-actionbar-wrapper">
+          <Navbar
+            toggle={toggleSidebar}
+            font={font}
+            items={items}
+            config={config}
+            admin={admin}
+            downloadFn={handleDownload}
+            addToCart={handleAddToCart}
+          />
+        </div>
 
-        <ErrorDialog
-          show={showErrorCart}
-          dialogFn={showErrorCartDialog}
-          title={i18n.t('AddToCartError')}
-          description={titleError ? i18n.t('InputTitleEmpty') : i18n.t('InputItemEmpty')}
-        />
+        <div
+          className="pixgen-editor"
+          ref={editorRef}
+          onClick={() => setClickOutCanvas((clickOutCanvas) => !clickOutCanvas)}>
+          <div className="pixgen-editor-padder" ref={canvasRef}>
+            <div className="pixgen-editor-frame">
+              <div className="device-container">
+                <Canvas
+                  font={font}
+                  items={items}
+                  render={render}
+                  icons={icons}
+                  layout={layout}
+                  config={config}
+                  selectText={selectText}
+                  reload={reloadCanvas}
+                  parentRef={editorRef}
+                  canvasRef={canvasRef}
+                  zoomSize={zoomSize}
+                  setZoomSize={setZoomSize}
+                  clickOutCanvas={clickOutCanvas}
+                  ref={exportRef}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <Dialog
-          title={i18n.t('AddToCart')}
-          description={i18n.t('AddToCartConfirmation')}
-          show={showConfirmCart}
-          dialogFn={showConfirmCartDialog}
-          actionFn={addToCart}
-        />
+        <div className="pixgen-footer-wrapper">
+          <div className="tools-footer">
+            <Zoom zoomSize={zoomSize} setZoomSize={setZoomSize} />
+          </div>
+        </div>
+      </div>
 
-        <PreviewDialog show={showPreview} dialogFn={showPreviewDialog} title={i18n.t('Preview')} />
-        <PreviewButton previewFn={showPreviewDialog} isPanelOpen={isPanelOpen} />
-      </Container>
+      <Panel
+        toggle={togglePanel}
+        isOpen={isPanelOpen}
+        layout={layout}
+        items={items}
+        template={template}
+        config={config}
+        format={format}
+        admin={admin}
+        wp={wp}
+        selectItem={selectItem}
+        resetSession={clearSession}
+      />
+
+      <ErrorDialog
+        show={showErrorCart}
+        dialogFn={showErrorCartDialog}
+        title={i18n.t('AddToCartError')}
+        description={titleError ? i18n.t('InputTitleEmpty') : i18n.t('InputItemEmpty')}
+      />
+
+      <Dialog
+        title={i18n.t('AddToCart')}
+        description={i18n.t('AddToCartConfirmation')}
+        show={showConfirmCart}
+        dialogFn={showConfirmCartDialog}
+        actionFn={addToCart}
+      />
     </Fragment>
   )
 }
