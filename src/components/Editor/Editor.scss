@@ -2,3 +2,60 @@
   background-color: #fff !important;
   color: inherit;
 }
+
+.pixgen-editor-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-content: space-around;
+    max-height: 100%;
+    height: 100%;
+    position: relative;
+    transition: 0.5s ease-out;
+
+}
+.pixgen-actionbar-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.pixgen-footer-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .tools-footer {
+    margin: 20px 0;
+    text-align: center;
+  }
+}
+
+.pixgen-editor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+  align-content: space-around;
+  max-height: 100%;
+  height: 100%;
+  position: relative;
+
+  div.pixgen-editor-padder {
+    margin: auto;
+    transition: 0.5s;
+  }
+
+  div.pixgen-editor-frame {
+    margin: auto;
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 100%;
+
+    .device-container {
+      display: block;
+      position: relative;
+      outline: 1px solid #BECFDA;
+    }
+  }
+}
