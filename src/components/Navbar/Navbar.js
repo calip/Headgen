@@ -29,13 +29,13 @@ function NavBar({ toggle, font, items, config, admin, downloadFn, addToCart }) {
   }
 
   return (
-    <Navbar bg="light" className="navbar shadow-sm p-3 mb-5 bg-white" expand>
+    <Navbar bg="light" className="navbar shadow-sm p-3 bg-white" expand>
       <Button variant="outline-secondary" onClick={toggle}>
         <FontAwesomeIcon icon={faAlignLeft} />
       </Button>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="ms-auto me-auto" navbar>
+        <Nav className="ms-auto me-auto pixgen-navbar" navbar>
           <DropdownButton
             variant="outline-dark"
             className={'font-style-dropdown ps-1'}

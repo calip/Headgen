@@ -6,7 +6,7 @@ const exportAsImage = async (element, dpc, title, quality) => {
   const newDpc = quality === 'high' ? dpc : 28.346
   const imageType = quality === 'high' ? 'image/png' : 'image/jpeg'
   const newElement = element.cloneNode(true)
-  newElement.style.transform = `scale(${scale}, ${scale}) translateX(100%)`
+  newElement.style.transform = `scale(${scale}, ${scale}) translateY(100%)`
   newElement.style.transformorigin = '0 0'
   newElement.style.position = 'fixed'
   if (quality === 'low') {

@@ -11,3 +11,23 @@
   }
 }
 
+@media (min-width: 280px) and (max-width: 320px) {
+  .switch-mode {
+    display: none;
+  }
+  .navbar {
+    button {
+      font-size: 10px;
+    }
+  }
+  .pixgen-navbar {
+    align-items: center;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .font-style-dropdown {
+    button {
+      font-size: 10px;
+    }
+  }
+}
