@@ -1,7 +1,7 @@
 .panel-button {
   position: absolute;
-  left: -37px;
   top: 75px;
+  left: -37px;
 
   button {
     background: #fff;
@@ -26,9 +26,9 @@
   margin-right: -250px;
   background-color: #fff;
   transition: 0.5s;
+  min-width: 250px;
+  max-width: 250px;
   right: 0;
-  top: 0;
-  width: 250px;
   z-index: 0;
 }
 
@@ -37,9 +37,10 @@
   transition: .5s;
 }
 
-
 .panel-nav {
   margin-top: 70px;
+  overflow-x: auto;
+  height: 100%;
 }
 
 .panel-container {
