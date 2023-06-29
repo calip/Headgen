@@ -106,12 +106,14 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      {loading ? (
-        <Loader />
-      ) : (
-        <Editor config={config} products={products} selectItem={selectItem} />
-      )}
+    <div className="pixgen-wrapper">
+      <div className="pixgen-container">
+        {loading ? (
+          <Loader />
+        ) : (
+          <Editor config={config} products={products} selectItem={selectItem} />
+        )}
+      </div>
     </div>
   )
 }

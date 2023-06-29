@@ -17,7 +17,7 @@ const FontStyled = (props) => {
           wrapText
           font={props.value.font}
           spacing={props.value.fontSpacing}
-          minSize={8}
+          minSize={1}
           maxSize={props.maxSize}>
           <div style={{ display: 'flex' }}>
             <div>
@@ -67,9 +67,10 @@ const FontStyled = (props) => {
     }
     return (
       <FontContainer
+        wrapText
         font={props.value.font}
         spacing={props.value.fontSpacing}
-        minSize={8}
+        minSize={1}
         maxSize={props.maxSize}>
         <div>
           {props.value.font === 'italianno' ? <Nbsp count={2} /> : <></>}
