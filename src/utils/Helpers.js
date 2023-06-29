@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import i18n from '../utils/i18n'
+import { Tooltip } from 'react-bootstrap'
 
 const Helpers = {
   storeInputItem: (config, item) => {
@@ -222,6 +223,9 @@ const Helpers = {
       ref.current = value
     })
     return ref.current
+  },
+  renderTooltip: (title) => {
+    return <Tooltip id="button-tooltip">{title}</Tooltip>
   }
 }
 
