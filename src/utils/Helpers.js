@@ -85,23 +85,28 @@ const Helpers = {
     return data
   },
   extractVariationAttributes: (variations) => {
-    return variations.map((item) => {
-      const attribute = item.attributes.find((attr) => attr.id === 1)
-      let data = null
-      if (attribute && attribute.option) {
-        const option = attribute.option.split('x')
-        data = {
-          id: item.id,
-          height: parseInt(option[0]),
-          width: parseInt(option[1]),
-          price: item.price
+    return variations
+      .map((item) => {
+        const attribute = item.attributes.find((attr) => attr.id === 1)
+        let data = null
+        if (attribute && attribute.option) {
+          const option = attribute.option.split('x')
+          data = {
+            id: item.id,
+            height: parseInt(option[0]),
+            width: parseInt(option[1]),
+            price: item.price
+          }
         }
-      }
-      return data
-    })
+        return data
+      })
+      .sort((a, b) => {
+        const va = Math.abs(a.width * a.height)
+        const vb = Math.abs(b.width * b.height)
+        return va - vb
+      })
   },
   extractVariation: (variation) => {
-    // return variations.map((item) => {
     const attribute = variation.attributes.find((attr) => attr.id === 1)
     let data = null
     if (attribute && attribute.option) {
@@ -114,7 +119,6 @@ const Helpers = {
       }
     }
     return data
-    // })
   },
   getRandomId() {
     return Math.floor(Math.random() * 1000000)
