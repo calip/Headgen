@@ -12,6 +12,9 @@ function App() {
   const [config, setConfig] = useState({})
   const [loading, setLoading] = useState(true)
   const [products, setProducts] = useState([])
+  const [currencyCode, setCurrencyCode] = useState('EUR')
+  const [currencySymbol, setCurrencySymbol] = useState('&euro;')
+  const [currencyPosition, setCurrencyPosition] = useState('right_space')
   const [selectedProduct, setSelectedProduct] = useState()
   const [selectedVariation, setSelectedVariation] = useState()
 
@@ -26,6 +29,15 @@ function App() {
     setSelectedProduct: setSelectedProduct,
     selectedVariation: selectedVariation,
     setSelectedVariation: setSelectedVariation
+  }
+
+  const currency = {
+    currencyCode: currencyCode,
+    setCurrencyCode: setCurrencyCode,
+    currencySymbol: currencySymbol,
+    setCurrencySymbol: setCurrencySymbol,
+    currencyPosition: currencyPosition,
+    setCurrencyPosition: setCurrencyPosition
   }
 
   const timeout = (time) => {
@@ -49,50 +61,73 @@ function App() {
         if (result.wordpress.active) {
           const api = Woocommerce(result)
           api
-            .get('products', {
-              per_page: 20,
-              type: 'variable',
-              status: 'publish'
+            .get('system_status', {
+              per_page: 20
             })
-            .then((response) => {
-              if (response.status === 200) {
-                const search = window.location.search
-                const params = new URLSearchParams(search)
-                const editor = params.get('editor')
-                if (editor) {
-                  const param = Helpers.decodeJsonData(editor)
-                  api
-                    .get('products/' + param.product_id, {})
-                    .then((resproduct) => {
-                      if (resproduct.status === 200) {
-                        const product = Helpers.extractProduct(resproduct.data)
+            .then((settings) => {
+              if (settings.status === 200) {
+                const wooSettings = settings.data
+                api
+                  .get('products', {
+                    per_page: 20,
+                    type: 'variable',
+                    status: 'publish'
+                  })
+                  .then((response) => {
+                    if (response.status === 200) {
+                      const search = window.location.search
+                      const params = new URLSearchParams(search)
+                      const editor = params.get('editor')
+                      if (editor) {
+                        const param = Helpers.decodeJsonData(editor)
                         api
-                          .get(
-                            'products/' + param.product_id + '/variations/' + param.variation_id,
-                            {}
-                          )
-                          .then((res) => {
-                            if (res.status === 200) {
-                              const variation = Helpers.extractVariation(res.data)
-                              setSelectedProduct(product)
-                              setSelectedVariation(variation)
-                              setProducts(response.data)
-                              setLoading(false)
-                              Helpers.clearUrlHistory(result)
+                          .get('products/' + param.product_id, {})
+                          .then((resproduct) => {
+                            if (resproduct.status === 200) {
+                              const product = Helpers.extractProduct(resproduct.data)
+                              api
+                                .get(
+                                  'products/' +
+                                    param.product_id +
+                                    '/variations/' +
+                                    param.variation_id,
+                                  {}
+                                )
+                                .then((res) => {
+                                  if (res.status === 200) {
+                                    const variation = Helpers.extractVariation(res.data)
+                                    setSelectedProduct(product)
+                                    setSelectedVariation(variation)
+                                    setCurrencyCode(wooSettings.settings.currency)
+                                    setCurrencySymbol(wooSettings.settings.currency_symbol)
+                                    setCurrencyPosition(wooSettings.settings.currency_position)
+                                    setProducts(response.data)
+                                    setLoading(false)
+                                    Helpers.clearUrlHistory(result)
+                                  }
+                                })
+                                .catch((error) => {
+                                  console.log(error)
+                                })
                             }
                           })
                           .catch((error) => {
                             console.log(error)
                           })
+                      } else {
+                        setProducts(response.data)
+                        setCurrencyCode(wooSettings.settings.currency)
+                        setCurrencySymbol(wooSettings.settings.currency_symbol)
+                        setCurrencyPosition(wooSettings.settings.currency_position)
+                        setLoading(false)
                       }
-                    })
-                    .catch((error) => {
-                      console.log(error)
-                    })
-                } else {
-                  setProducts(response.data)
-                  setLoading(false)
-                }
+                    }
+                  })
+                  .catch((error) => {
+                    console.log(error)
+                  })
+              } else {
+                setLoading(false)
               }
             })
             .catch((error) => {
@@ -111,7 +146,7 @@ function App() {
         {loading ? (
           <Loader />
         ) : (
-          <Editor config={config} products={products} selectItem={selectItem} />
+          <Editor config={config} products={products} selectItem={selectItem} currency={currency} />
         )}
       </div>
     </div>
