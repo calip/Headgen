@@ -44,7 +44,7 @@ function Zoom({ zoomSize, setZoomSize }) {
 
   return (
     <div className="zoom-wrapper">
-      <div className="zoom-container">
+      <div className="pixgen-zoom-container">
         <div className="zoom-label">
           <OverlayTrigger
             placement="top"

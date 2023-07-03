@@ -57,7 +57,7 @@ a:focus {
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
-.sidebar {
+.pixgen-sidebar {
   min-width: 400px;
   max-width: 400px;
   background: #fff;
@@ -66,25 +66,25 @@ a:focus {
   transition: all 0.5s;
 }
 
-.sidebar.is-open {
+.pixgen-sidebar.is-open {
   margin-left: 0;
   transition: 0.5s;
 }
 
-.sidebar-header {
+.pixgen-sidebar-header {
   background: #fff;
   box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
   /* color: #adb5bd; */
 }
 
-.sidebar-header h3 {
+.pixgen-sidebar-header h3 {
   margin-top: 5px;
   margin-bottom: 0;
   font-weight: 600;
   color: #c60055;
 }
 
-.sidebar ul p {
+.pixgen-sidebar ul p {
   color: #fff;
   padding: 10px;
 }
@@ -127,7 +127,7 @@ li a.dropdown-toggle::after {
   top: 10%;
 }
 
-.sidebar-header > button {
+.pixgen-sidebar-header > button {
   position: relative;
   float: right;
   margin: 0.5em;
@@ -160,14 +160,14 @@ and (max-device-width : 568px) {
     transition: all 0.5s;
   }
 
-  .sidebar {
+  .pixgen-sidebar {
     min-width: 350px;
     max-width: 350px;
     margin-left: -350px;
     z-index: 1;
     overflow-x: auto;
   }
-  .sidebar.is-open {
+  .pixgen-sidebar.is-open {
     min-width: 100%;
     max-width: 100%;
     margin-left: 0;
@@ -175,7 +175,7 @@ and (max-device-width : 568px) {
     height: 100vh !important;
   }
 
-  .sidebar.is-open > .sidebar-header button {
+  .pixgen-sidebar.is-open > .pixgen-sidebar-header button {
     display: block;
   }
 
