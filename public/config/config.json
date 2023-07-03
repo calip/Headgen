@@ -191,6 +191,51 @@
       "images": ["/img/wallboard.png", "/img/wallboard-1.png", "/img/wallboard-2.png", "/img/wallboard-3.png"]
     }
   ],
+  "tutorial": {
+    "active": true,
+    "steps": [
+      {
+        "target": ".navbar",
+        "placement": "bottom",
+        "content": "Welcome!! Please spare a minute to learn about our page",
+        "disableBeacon": true,
+        "disableOverlayClose": true,
+        "hideCloseButton": true
+      },
+      {
+        "target": ".sidebar",
+        "placement": "right",
+        "content": "You can log in here",
+        "disableBeacon": true,
+        "disableOverlayClose": true,
+        "hideCloseButton": true
+      },
+      {
+        "target": ".panel",
+        "placement": "left",
+        "content": "Sign up here, if youre new",
+        "disableBeacon": true,
+        "disableOverlayClose": true,
+        "hideCloseButton": true
+      },
+      {
+        "target": ".zoom-container",
+        "placement": "top",
+        "content": "Sign up here, if youre new",
+        "disableBeacon": true,
+        "disableOverlayClose": true,
+        "hideCloseButton": true
+      },
+      {
+        "target": ".pixgen-editor-frame",
+        "placement": "left",
+        "content": "Sign up here, if youre new",
+        "disableBeacon": true,
+        "disableOverlayClose": true,
+        "hideCloseButton": true
+      }
+    ]
+  },
   "toolbar": {
     "fontFamily": true,
     "fontSpacing": true
@@ -202,6 +247,9 @@
   "wordpress": {
     "active": true,
     "baseUrl": "https://new.wordpix.de",
+    "currency": "EUR",
+    "currencySymbol": "&euro;",
+    "currencyPosition": "right_space",
     "cartSlug": "/warenkorb",
     "pluginPath": "/wp-content/plugins/pixgen-editor/pixgen",
     "consumerKey": "ck_7e58e70e77db57648b0b3476586b3263b5d3fb22",
