@@ -36,7 +36,15 @@ function FormatDialog(props) {
             const maxPrice = resData.reduce((prev, curr) => {
               return parseFloat(prev.price) > parseFloat(curr.price) ? prev : curr
             })
-            setMinMaxPrice(`${minPrice.price} - ${maxPrice.price}`)
+            const strMinPrice =
+              props.currency.currencyPosition === 'left_space'
+                ? `${props.currency.currencySymbol}${minPrice.price}`
+                : `${minPrice.price}${props.currency.currencySymbol}`
+            const strMaxPrice =
+              props.currency.currencyPosition === 'left_space'
+                ? `${props.currency.currencySymbol}${maxPrice.price}`
+                : `${maxPrice.price}${props.currency.currencySymbol}`
+            setMinMaxPrice(`${strMinPrice} - ${strMaxPrice}`)
             const variationData = Helpers.extractVariationAttributes(resData)
             format.variations = variationData
             setFormatType(format)
@@ -93,6 +101,7 @@ function FormatDialog(props) {
                 <div className="format-page">
                   <CarouselImage
                     format={formatType}
+                    currency={others.currency}
                     onSelectVariation={onSelectVariation}
                     initPrice={minMaxPrice}
                   />

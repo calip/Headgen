@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './Panel.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCogs, faEraser } from '@fortawesome/free-solid-svg-icons'
+import { faCogs, faEraser, faTag } from '@fortawesome/free-solid-svg-icons'
 import classNames from 'classnames'
 import {
   Button,
@@ -31,12 +31,14 @@ function Panel({
   admin,
   wp,
   selectItem,
+  currency,
   resetSession
 }) {
   const currentTemplate = config.templates.find((item) => item.id === items.inputItem.template)
   const currentWidth = items.inputItem.width
   const currentHeight = items.inputItem.height
   const currentFormat = items.inputItem.format
+  const currentvariation = items.inputItem.variation
 
   const [show, setShow] = useState(false)
   const [showFormat, setShowFormat] = useState(false)
@@ -152,7 +154,7 @@ function Panel({
   }
 
   return (
-    <div className={classNames('panel', { 'is-open': isOpen })}>
+    <div className={classNames('pixgen-panel', { 'is-open': isOpen })}>
       <div className="panel-button">
         <button onClick={toggle}>
           <FontAwesomeIcon icon={faCogs} />
@@ -163,7 +165,7 @@ function Panel({
         <div className="panel-container">
           <Row>
             <Col>
-              <FormGroup className="mb-3" controlId="formGroupEmail">
+              <FormGroup className="mb-3">
                 <Card className="format-card" onClick={showFormatDialog}>
                   <Card.Body className="format-body">
                     <div className="format-title">
@@ -171,7 +173,25 @@ function Panel({
                     </div>
                     <div className="format-content">
                       <img src={Helpers.getSelectedFormat(format, currentFormat?.id)?.preview} />
-                      <div className="format-price">{items.inputItem?.variation?.price}</div>
+                      {currentvariation?.price ? (
+                        <div className="format-price" key={currentvariation?.price}>
+                          {currency.currencyPosition === 'left_space' ? (
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: `${currency.currencySymbol}${currentvariation?.price}`
+                              }}
+                            />
+                          ) : (
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: `${currentvariation?.price}${currency.currencySymbol}`
+                              }}
+                            />
+                          )}
+                        </div>
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </Card.Body>
                   <Card.Footer className="format-footer">
@@ -185,7 +205,7 @@ function Panel({
             <>
               <Row>
                 <Col>
-                  <FormGroup className="mb-3" controlId="formGroupEmail">
+                  <FormGroup className="mb-3">
                     <FormLabel>{i18n.t('Height')} (px) </FormLabel>
                     <FormControl
                       className="form-control-sm"
@@ -200,7 +220,7 @@ function Panel({
                   </FormGroup>
                 </Col>
                 <Col>
-                  <FormGroup className="mb-3" controlId="formGroupEmail">
+                  <FormGroup className="mb-3">
                     <FormLabel>{i18n.t('Width')} (px) </FormLabel>
                     <FormControl
                       className="form-control-sm"
@@ -219,7 +239,7 @@ function Panel({
               </Row>
               <Row>
                 <Col>
-                  <FormGroup className="mb-3" controlId="formGroupEmail">
+                  <FormGroup className="mb-3">
                     <FormLabel>{i18n.t('Padding')} (px)</FormLabel>
                     <FormControl
                       className="form-control-sm"
@@ -234,7 +254,7 @@ function Panel({
                   </FormGroup>
                 </Col>
                 <Col>
-                  <FormGroup className="mb-3" controlId="formGroupEmail">
+                  <FormGroup className="mb-3">
                     <FormLabel>{i18n.t('Border')}</FormLabel>
                     <FormCheck
                       type="switch"
@@ -256,7 +276,7 @@ function Panel({
             <div className="panel-container">
               <Row>
                 <Col>
-                  <FormGroup className="mb-3" controlId="formGroupEmail">
+                  <FormGroup className="mb-3">
                     <FormLabel>{i18n.t('DPC')}</FormLabel>
                     <FormControl
                       className="form-control-sm"
@@ -313,6 +333,7 @@ function Panel({
         show={showFormat}
         config={config}
         wp={wp}
+        currency={currency}
         format={format}
         onHide={() => setShowFormat(false)}
         title={i18n.t('Format')}
