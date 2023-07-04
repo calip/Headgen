@@ -11,8 +11,9 @@ import './Editor.scss'
 import ErrorDialog from '../Dialog/ErrorDialog'
 import Dialog from '../Dialog/Dialog'
 import Zoom from '../Tools/Zoom/Zoom'
+import Joyride from 'react-joyride'
 
-function Editor({ config, products, selectItem }) {
+function Editor({ config, products, selectItem, currency }) {
   let format =
     config.wordpress.active && products.length > 0
       ? Helpers.extractProducts(products)
@@ -27,6 +28,7 @@ function Editor({ config, products, selectItem }) {
   const templates = config.templates
   const language = config.language
   const sidebarOpen = Helpers.isTouchScreenDevice() ? false : true
+  const panelOpen = Helpers.isTouchScreenDevice() ? false : true
 
   const [initFormat, setInitFormat] = useState(false)
   const initialInput = Helpers.setData(width, height)
@@ -36,7 +38,7 @@ function Editor({ config, products, selectItem }) {
   const [fontSize, setFontSize] = useState('FontSize')
   const [fontSpacing, setFontSpacing] = useState('NoSpacing')
   const [isSidebarOpen, setSidebarOpen] = useState(sidebarOpen)
-  const [isPanelOpen, setPanelOpen] = useState(false)
+  const [isPanelOpen, setPanelOpen] = useState(panelOpen)
   const [layoutFormat, setLayoutFormat] = useState(selectedFormat)
   const [layoutWidth, setLayoutWidth] = useState(width)
   const [layoutHeight, setLayoutHeight] = useState(height)
@@ -228,8 +230,52 @@ function Editor({ config, products, selectItem }) {
     loadLocalStorage(config)
   }
 
+  const steps = [
+    {
+      target: '.pixgen-navbar',
+      placement: 'bottom',
+      content: 'Welcome!! Please spare a minute to learn about our page',
+      disableBeacon: true,
+      disableOverlayClose: true,
+      hideCloseButton: true
+    },
+    {
+      target: '.pixgen-sidebar',
+      placement: 'right',
+      content: 'You can log in here',
+      disableBeacon: true,
+      disableOverlayClose: true,
+      hideCloseButton: true
+    },
+    {
+      target: '.pixgen-panel',
+      placement: 'left',
+      content: 'Sign up here, if youre new',
+      disableBeacon: true,
+      disableOverlayClose: true,
+      hideCloseButton: true
+    },
+    {
+      target: '.pixgen-zoom-container',
+      placement: 'top',
+      content: 'Sign up here, if youre new',
+      disableBeacon: true,
+      disableOverlayClose: true,
+      hideCloseButton: true
+    },
+    {
+      target: '.pixgen-editor-frame',
+      placement: 'left',
+      content: 'Sign up here, if youre new',
+      disableBeacon: true,
+      disableOverlayClose: true,
+      hideCloseButton: true
+    }
+  ]
+
   return (
     <Fragment key={inputItem.id}>
+      <Joyride steps={steps} continuous={true} showProgress={true} showSkipButton={true} />
       <SideBar
         toggle={toggleSidebar}
         isOpen={isSidebarOpen}
@@ -300,6 +346,7 @@ function Editor({ config, products, selectItem }) {
         admin={admin}
         wp={wp}
         selectItem={selectItem}
+        currency={currency}
         resetSession={clearSession}
       />
 
