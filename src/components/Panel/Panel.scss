@@ -19,7 +19,7 @@
   }
 }
 
-.panel {
+.pixgen-panel {
   border-left: 1px solid #ebebeb;
   height: 100%;
   position: absolute;
@@ -32,7 +32,7 @@
   z-index: 0;
 }
 
-.panel.is-open {
+.pixgen-panel.is-open {
   margin-right: 0;
   transition: .5s;
 }
@@ -79,7 +79,6 @@
   position: relative;
 
   img {
-    width: 150px;
     height: 100px;
   }
 }
@@ -87,7 +86,7 @@
 .format-price {
   position: absolute;
   top: 0;
-  right: 25px;
+  right: 0;
   font-weight: bold;
   font-size: 16px;
   color: #a10101;

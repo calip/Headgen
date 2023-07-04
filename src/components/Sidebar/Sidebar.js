@@ -266,8 +266,8 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
   }
 
   return (
-    <div className={classNames('sidebar', { 'is-open': isOpen })}>
-      <div className="sidebar-header p-3">
+    <div className={classNames('pixgen-sidebar shadow-sm', { 'is-open': isOpen })}>
+      <div className="pixgen-sidebar-header p-3">
         <Button variant="link" onClick={toggle} style={{ color: '#6c757d', margin: 0 }}>
           <FontAwesomeIcon icon={faTimes} pull="right" size="xs" />
         </Button>
