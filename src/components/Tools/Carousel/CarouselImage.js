@@ -1,8 +1,6 @@
 import { Button, Carousel, Col, Container, Row } from 'react-bootstrap'
 import './CarouselImage.scss'
 import { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTag } from '@fortawesome/free-solid-svg-icons'
 
 function CarouselImage(props) {
   const [activeVariation, setActiveVariation] = useState()
@@ -30,7 +28,15 @@ function CarouselImage(props) {
             </Carousel>
             {price ? (
               <div className="carousel-tags">
-                <FontAwesomeIcon icon={faTag} /> {price}
+                {props.currency.currencyPosition === 'left_space' ? (
+                  <span
+                    dangerouslySetInnerHTML={{ __html: `${props.currency.currencySymbol}${price}` }}
+                  />
+                ) : (
+                  <span
+                    dangerouslySetInnerHTML={{ __html: `${price}${props.currency.currencySymbol}` }}
+                  />
+                )}
               </div>
             ) : (
               <></>
