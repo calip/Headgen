@@ -56,6 +56,7 @@ function Editor({ config, products, selectItem, currency }) {
   const [showConfirmCart, setConfirmCart] = useState(false)
   const [titleError, setTitleError] = useState(false)
   const [loadWordpress, setLoadWordpress] = useState(false)
+  const [showTutorial, setShowTutorial] = useState(false)
   const { i18n } = useTranslation()
   const editorRef = useRef()
   const canvasRef = useRef()
@@ -218,6 +219,7 @@ function Editor({ config, products, selectItem, currency }) {
 
   const clearSession = () => {
     Helpers.clearInputItem()
+    setShowTutorial(false)
     setFontType('FontFamily')
     setFontSpacing('0')
     setInitFormat(false)
@@ -273,9 +275,21 @@ function Editor({ config, products, selectItem, currency }) {
     }
   ]
 
+  useEffect(() => {
+    handleShowTutorial()
+  }, [])
+
+  const handleShowTutorial = () => {
+    setShowTutorial(inputItem.format ? true : false)
+  }
+
   return (
     <Fragment key={inputItem.id}>
-      <Joyride steps={steps} continuous={true} showProgress={true} showSkipButton={true} />
+      {showTutorial ? (
+        <Joyride steps={steps} continuous={true} showProgress={true} showSkipButton={true} />
+      ) : (
+        <></>
+      )}
       <SideBar
         toggle={toggleSidebar}
         isOpen={isSidebarOpen}
@@ -348,6 +362,7 @@ function Editor({ config, products, selectItem, currency }) {
         selectItem={selectItem}
         currency={currency}
         resetSession={clearSession}
+        showTutorial={handleShowTutorial}
       />
 
       <ErrorDialog
