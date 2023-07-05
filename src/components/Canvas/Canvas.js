@@ -23,9 +23,14 @@ const Canvas = forwardRef((props, ref) => {
     props.font.fontSpacing === 'Spacing' || props.font.fontSpacing === '0'
       ? ''
       : props.font.fontSpacing
-  const width = Math.abs(props.items.inputItem.width) / 10
-  const height = Math.abs(props.items.inputItem.height) / 10
-  const padding = Math.abs(props.layout.layoutPadding)
+
+  const initWidth = Helpers.cmToPxConversion(props.items.inputItem.width, props.layout.layoutDpc)
+  const initHeight = Helpers.cmToPxConversion(props.items.inputItem.height, props.layout.layoutDpc)
+  const initPadding = Helpers.cmToPxConversion(props.layout.layoutPadding, props.layout.layoutDpc)
+
+  const width = Math.abs(initWidth / 10)
+  const height = Math.abs(initHeight / 10)
+  const padding = Math.abs(initPadding / 10)
   const border = Math.abs(props.layout.layoutBorder)
   const icons = props.icons
   const [itemSelected, setItemSelected] = useState()

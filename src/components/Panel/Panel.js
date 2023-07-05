@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './Panel.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCogs, faEraser, faTag } from '@fortawesome/free-solid-svg-icons'
+import { faCogs, faEraser, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import classNames from 'classnames'
 import {
   Button,
@@ -32,7 +32,8 @@ function Panel({
   wp,
   selectItem,
   currency,
-  resetSession
+  resetSession,
+  showTutorial
 }) {
   const currentTemplate = config.templates.find((item) => item.id === items.inputItem.template)
   const currentWidth = items.inputItem.width
@@ -128,19 +129,17 @@ function Panel({
   }
 
   const selectFormat = (inputFormat, variation) => {
-    const realWidth = Helpers.getRealFormatSize(variation.width)
-    const realHeight = Helpers.getRealFormatSize(variation.height)
     layout.setLayoutFormat(inputFormat.id)
-    layout.setLayoutWidth(realWidth)
-    layout.setLayoutHeight(realHeight)
+    layout.setLayoutWidth(variation.width)
+    layout.setLayoutHeight(variation.height)
     items.setInitFormat(false)
 
     let temp = items.inputItem
     temp.format = inputFormat
     temp.variation = variation
-    temp.width = realWidth
-    temp.height = realHeight
-
+    temp.width = variation.width
+    temp.height = variation.height
+    showTutorial()
     Helpers.saveInputToLocalStorage(items, config, temp.items)
   }
 
@@ -195,7 +194,7 @@ function Panel({
                     </div>
                   </Card.Body>
                   <Card.Footer className="format-footer">
-                    {Helpers.getConvertFormatSize(currentWidth, currentHeight)}
+                    {Helpers.showFormatSize(currentWidth, currentHeight)}
                   </Card.Footer>
                 </Card>
               </FormGroup>
@@ -206,7 +205,9 @@ function Panel({
               <Row>
                 <Col>
                   <FormGroup className="mb-3">
-                    <FormLabel>{i18n.t('Height')} (px) </FormLabel>
+                    <FormLabel>
+                      {i18n.t('Height')} ({currentvariation?.unit})
+                    </FormLabel>
                     <FormControl
                       className="form-control-sm"
                       type="number"
@@ -221,7 +222,9 @@ function Panel({
                 </Col>
                 <Col>
                   <FormGroup className="mb-3">
-                    <FormLabel>{i18n.t('Width')} (px) </FormLabel>
+                    <FormLabel>
+                      {i18n.t('Width')} ({currentvariation?.unit})
+                    </FormLabel>
                     <FormControl
                       className="form-control-sm"
                       type="number"
@@ -240,7 +243,9 @@ function Panel({
               <Row>
                 <Col>
                   <FormGroup className="mb-3">
-                    <FormLabel>{i18n.t('Padding')} (px)</FormLabel>
+                    <FormLabel>
+                      {i18n.t('Padding')} ({currentvariation?.unit})
+                    </FormLabel>
                     <FormControl
                       className="form-control-sm"
                       type="number"
@@ -319,6 +324,12 @@ function Panel({
         <div className="panel-container">
           <Button variant="outline-secondary" onClick={showDialog}>
             <FontAwesomeIcon icon={faEraser} /> {i18n.t('ClearSession')}
+          </Button>
+        </div>
+        <hr />
+        <div className="panel-container">
+          <Button variant="outline-secondary" onClick={showTutorial}>
+            <FontAwesomeIcon icon={faInfoCircle} /> {i18n.t('ShowTutorial')}
           </Button>
         </div>
       </div>
