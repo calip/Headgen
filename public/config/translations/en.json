@@ -54,5 +54,6 @@
   "InputTitleEmpty": "Input Title cannot be empty",
   "PleaseWait": "Please Wait",
   "FitToWindow": "Fit To Window",
-  "RealSize": "Real Size"
+  "RealSize": "Real Size",
+  "ShowTutorial": "Show Tutorial"
 }
