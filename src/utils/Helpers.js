@@ -21,13 +21,8 @@ const Helpers = {
     const f = format.find((item) => item.id === parseInt(selected))
     return f
   },
-  getConvertFormatSize: (width, height) => {
-    const w = Math.abs(width / 100)
-    const h = Math.abs(height / 100)
-    return `${h} x ${w}`
-  },
-  getRealFormatSize: (size) => {
-    return Math.abs(size * 100)
+  showFormatSize: (width, height) => {
+    return `${height} x ${width}`
   },
   getQuery: () => {
     return new URLSearchParams(window.location.search)
@@ -91,10 +86,16 @@ const Helpers = {
         let data = null
         if (attribute && attribute.option) {
           const option = attribute.option.split('x')
+          const secOption = option[1].split(' ')
+
+          const height = parseInt(option[0])
+          const width = parseInt(secOption[0])
+          const unit = secOption[1] ? secOption[1] : 'px'
           data = {
             id: item.id,
-            height: parseInt(option[0]),
-            width: parseInt(option[1]),
+            height: height,
+            width: width,
+            unit: unit,
             price: item.price
           }
         }
@@ -111,10 +112,16 @@ const Helpers = {
     let data = null
     if (attribute && attribute.option) {
       const option = attribute.option.split('x')
+      const secOption = option[1].split(' ')
+
+      const height = parseInt(option[0])
+      const width = parseInt(secOption[0])
+      const unit = secOption[1] ? secOption[1] : 'px'
       data = {
         id: variation.id,
-        height: parseInt(option[0]),
-        width: parseInt(option[1]),
+        height: height,
+        width: width,
+        unit: unit,
         price: variation.price
       }
     }
@@ -230,6 +237,12 @@ const Helpers = {
   },
   renderTooltip: (title) => {
     return <Tooltip id="button-tooltip">{title}</Tooltip>
+  },
+  cmToPxConversion: (size, dpc) => {
+    const dpi = Math.round(dpc / 0.3937008)
+    const cm = Math.round(dpi / 2.54)
+    const px = Math.round(size * cm)
+    return px
   }
 }
 
