@@ -8,6 +8,7 @@
     "width": 40,
     "height": 60,
     "padding": 1,
+    "unit": "px",
     "dpc": 100,
     "border": true
   },
@@ -254,6 +255,36 @@
   "toolbar": {
     "fontFamily": true,
     "fontSpacing": true
+  },
+  "placeholder": {
+    "title": "Oliver",
+    "font": "mexcellent",
+    "items": [
+      {
+        "font": "stripey",
+        "icon": "gorilla",
+        "realText": "jkhkhk",
+        "spokenText": "nkkjh"
+      },
+      {
+        "font": "stripey",
+        "icon": "gorilla",
+        "realText": "jkhkhk",
+        "spokenText": "nkkjh"
+      },
+      {
+        "font": "stripey",
+        "icon": "gorilla",
+        "realText": "jkhkhk",
+        "spokenText": "nkkjh"
+      },
+      {
+        "font": "stripey",
+        "icon": "gorilla",
+        "realText": "jkhkhk",
+        "spokenText": "nkkjh"
+      }
+    ]
   },
   "mail": {
     "apikey": "JKH6876JKHJK8768HK",
