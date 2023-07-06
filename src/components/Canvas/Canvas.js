@@ -347,6 +347,20 @@ const Canvas = forwardRef((props, ref) => {
     }
   }
 
+  useEffect(() => {
+    if (data.inputItem?.placeholder) {
+      const inputTitle = data.inputItem.title.length > 0
+      const inputItems = data.inputItem.items.some(
+        (item) => item.realText.length > 0 || item.spokenText.length > 0
+      )
+      if (inputTitle || inputItems) {
+        let temp = data.inputItem
+        temp.placeholder = false
+        Helpers.saveInputToLocalStorage(props.items, props.config, temp.items)
+      }
+    }
+  }, [data.inputItem])
+
   if (dataChanged) {
     return (
       <div className="pix-editor-canvas">
@@ -360,72 +374,139 @@ const Canvas = forwardRef((props, ref) => {
   } else {
     return (
       <div className="pix-editor-canvas">
-        <div
-          className="pix-canvas"
-          style={{
-            minWidth: `${width}px`,
-            maxWidth: `${width}px`,
-            minHeight: `${height}px`,
-            maxHeight: `${height}px`
-          }}
-          ref={ref}>
+        {data.inputItem.placeholder ? (
           <div
-            className={border ? 'center-screen' : null}
-            ref={contentRef}
+            className="pix-canvas"
             style={{
-              margin: `${padding}px`,
-              display: 'table'
-            }}
-            onClick={removeSelectedItem}>
-            <div style={{ display: 'table-cell', verticalAlign: 'middle' }}>
-              {data.inputItem.title ? (
-                <div ref={titleRef}>
+              minWidth: `${width}px`,
+              maxWidth: `${width}px`,
+              minHeight: `${height}px`,
+              maxHeight: `${height}px`
+            }}>
+            <div
+              className={border ? 'center-screen' : null}
+              style={{
+                margin: `${padding}px`,
+                display: 'table'
+              }}>
+              <div
+                style={{
+                  display: 'table-cell',
+                  verticalAlign: 'middle',
+                  color: '#a1a1a1',
+                  pointerEvents: 'none'
+                }}>
+                <div>
                   <table className="pixgen-table">
                     <tbody>
                       <tr>
-                        {data.inputItem.title.length >= 3 ? (
-                          <td
-                            className={`pix-title ${titleSelected ? 'pix-title-selected' : ''}`}
-                            onClick={onTitleSelect}>
-                            <FontStyled value={data.inputItem} multiline={false} maxSize={300} />
-                          </td>
-                        ) : (
-                          <td>
-                            <ItemLoader data={data.inputItem.title} />
-                          </td>
-                        )}
+                        <td>
+                          <FontStyled
+                            value={props.config.placeholder}
+                            multiline={false}
+                            maxSize={300}
+                          />
+                        </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-              ) : (
-                <></>
-              )}
-              {data.inputItem.items ? (
                 <div>
-                  <TableItem
-                    imgPath={imgPath}
-                    maxSize={itemSize}
-                    items={data.inputItem.items}
-                    icons={icons}
-                    template={currentTemplate}
-                    onItemSelect={onItemSelect}
-                    itemSelected={itemSelected}
-                    handleDrag={handleDrag}
-                    handleDragOver={handleDragOver}
-                    handleDrop={handleDrop}
-                    dragId={dragId}
-                    targetDrag={targetDrag}
-                    setDragId={setDragId}
-                    handleTouchTarget={handleTouchTarget}
-                  />
+                  <table className="pixgen-table">
+                    <tbody>
+                      {props.config.placeholder.items.map((item, index) => {
+                        const lastIndex = data.length - 1
+                        const space =
+                          index >= 0 && data.length > 1 && index != lastIndex ? true : false
+                        return (
+                          <tr key={index}>
+                            <td>
+                              <FontStyled
+                                value={item}
+                                icons={icons}
+                                space={space}
+                                multiline={true}
+                                maxSize={itemSize}
+                                imgPath={imgPath}
+                              />
+                            </td>
+                          </tr>
+                        )
+                      })}
+                    </tbody>
+                  </table>
                 </div>
-              ) : (
-                <></>
-              )}
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div
+            className="pix-canvas"
+            style={{
+              minWidth: `${width}px`,
+              maxWidth: `${width}px`,
+              minHeight: `${height}px`,
+              maxHeight: `${height}px`
+            }}
+            ref={ref}>
+            <div
+              className={border ? 'center-screen' : null}
+              ref={contentRef}
+              style={{
+                margin: `${padding}px`,
+                display: 'table'
+              }}
+              onClick={removeSelectedItem}>
+              <div style={{ display: 'table-cell', verticalAlign: 'middle' }}>
+                {data.inputItem.title ? (
+                  <div ref={titleRef}>
+                    <table className="pixgen-table">
+                      <tbody>
+                        <tr>
+                          {data.inputItem.title.length >= 3 ? (
+                            <td
+                              className={`pix-title ${titleSelected ? 'pix-title-selected' : ''}`}
+                              onClick={onTitleSelect}>
+                              <FontStyled value={data.inputItem} multiline={false} maxSize={300} />
+                            </td>
+                          ) : (
+                            <td>
+                              <ItemLoader data={data.inputItem.title} />
+                            </td>
+                          )}
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {data.inputItem.items ? (
+                  <div>
+                    <TableItem
+                      imgPath={imgPath}
+                      maxSize={itemSize}
+                      items={data.inputItem.items}
+                      icons={icons}
+                      template={currentTemplate}
+                      onItemSelect={onItemSelect}
+                      itemSelected={itemSelected}
+                      handleDrag={handleDrag}
+                      handleDragOver={handleDragOver}
+                      handleDrop={handleDrop}
+                      dragId={dragId}
+                      targetDrag={targetDrag}
+                      setDragId={setDragId}
+                      handleTouchTarget={handleTouchTarget}
+                    />
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     )
   }

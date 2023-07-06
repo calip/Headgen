@@ -23,6 +23,7 @@ function Editor({ config, products, selectItem, currency }) {
   const height = config.layout.height
   const padding = config.layout.padding
   const dpc = config.layout.dpc
+  const unit = config.layout.unit
   const border = config.layout.border
   const icons = config.input.icons
   const templates = config.templates
@@ -42,6 +43,7 @@ function Editor({ config, products, selectItem, currency }) {
   const [layoutFormat, setLayoutFormat] = useState(selectedFormat)
   const [layoutWidth, setLayoutWidth] = useState(width)
   const [layoutHeight, setLayoutHeight] = useState(height)
+  const [layoutUnit, setLayoutUnit] = useState(unit)
   const [layoutDpc, setLayoutDpc] = useState(dpc)
   const [layoutBorder, setLayoutBorder] = useState(border)
   const [layoutPadding, setLayoutPadding] = useState(padding)
@@ -160,6 +162,8 @@ function Editor({ config, products, selectItem, currency }) {
     setLayoutWidth: setLayoutWidth,
     layoutHeight: layoutHeight,
     setLayoutHeight: setLayoutHeight,
+    layoutUnit: layoutUnit,
+    setLayoutUnit: setLayoutUnit,
     layoutDpc: layoutDpc,
     setLayoutDpc: setLayoutDpc,
     layoutPadding: layoutPadding,

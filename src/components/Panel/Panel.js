@@ -39,7 +39,8 @@ function Panel({
   const currentWidth = items.inputItem.width
   const currentHeight = items.inputItem.height
   const currentFormat = items.inputItem.format
-  const currentvariation = items.inputItem.variation
+  const currentVariation = items.inputItem.variation
+  const currentUnit = items.inputItem.unit
 
   const [show, setShow] = useState(false)
   const [showFormat, setShowFormat] = useState(false)
@@ -132,6 +133,7 @@ function Panel({
     layout.setLayoutFormat(inputFormat.id)
     layout.setLayoutWidth(variation.width)
     layout.setLayoutHeight(variation.height)
+    layout.setLayoutUnit(variation.unit)
     items.setInitFormat(false)
 
     let temp = items.inputItem
@@ -139,6 +141,8 @@ function Panel({
     temp.variation = variation
     temp.width = variation.width
     temp.height = variation.height
+    temp.unit = variation.unit
+    temp.placeholder = true
     showTutorial()
     Helpers.saveInputToLocalStorage(items, config, temp.items)
   }
@@ -172,18 +176,18 @@ function Panel({
                     </div>
                     <div className="format-content">
                       <img src={Helpers.getSelectedFormat(format, currentFormat?.id)?.preview} />
-                      {currentvariation?.price ? (
-                        <div className="format-price" key={currentvariation?.price}>
+                      {currentVariation?.price ? (
+                        <div className="format-price" key={currentVariation?.price}>
                           {currency.currencyPosition === 'left_space' ? (
                             <span
                               dangerouslySetInnerHTML={{
-                                __html: `${currency.currencySymbol}${currentvariation?.price}`
+                                __html: `${currency.currencySymbol}${currentVariation?.price}`
                               }}
                             />
                           ) : (
                             <span
                               dangerouslySetInnerHTML={{
-                                __html: `${currentvariation?.price}${currency.currencySymbol}`
+                                __html: `${currentVariation?.price}${currency.currencySymbol}`
                               }}
                             />
                           )}
@@ -206,7 +210,7 @@ function Panel({
                 <Col>
                   <FormGroup className="mb-3">
                     <FormLabel>
-                      {i18n.t('Height')} ({currentvariation?.unit})
+                      {i18n.t('Height')} ({currentUnit})
                     </FormLabel>
                     <FormControl
                       className="form-control-sm"
@@ -223,7 +227,7 @@ function Panel({
                 <Col>
                   <FormGroup className="mb-3">
                     <FormLabel>
-                      {i18n.t('Width')} ({currentvariation?.unit})
+                      {i18n.t('Width')} ({currentUnit})
                     </FormLabel>
                     <FormControl
                       className="form-control-sm"
@@ -244,7 +248,7 @@ function Panel({
                 <Col>
                   <FormGroup className="mb-3">
                     <FormLabel>
-                      {i18n.t('Padding')} ({currentvariation?.unit})
+                      {i18n.t('Padding')} ({currentUnit})
                     </FormLabel>
                     <FormControl
                       className="form-control-sm"
