@@ -192,6 +192,8 @@ const Helpers = {
       format: null,
       height: height,
       width: width,
+      unit: '',
+      placeholder: false,
       variation: null,
       items: [Helpers.setItems()]
     }
