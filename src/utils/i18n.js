@@ -1,6 +1,7 @@
 import i18n from 'i18next'
 import Backend from 'i18next-xhr-backend'
 import { initReactI18next } from 'react-i18next'
+import { env } from './env'
 
 i18n
   .use(Backend)
@@ -10,7 +11,7 @@ i18n
     backend: {
       /* translation file path */
       // loadPath: '/config/{{ns}}/{{lng}}.json'
-      loadPath: `${process.env.REACT_APP_BASE}/config/{{ns}}/{{lng}}.json`
+      loadPath: `${env.REACT_APP_BASE}/config/{{ns}}/{{lng}}.json`
     },
     fallbackLng: 'en',
     debug: false,
