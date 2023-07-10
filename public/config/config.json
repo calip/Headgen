@@ -49,27 +49,103 @@
       {
         "name": "gorilla",
         "file": "/icons/516_Gorilla_V1.svg",
-        "tags": ["animal", "ape"]
+        "tags": [
+          "animal",
+          "ape"
+        ]
       },
       {
         "name": "kuschel",
         "file": "/icons/501_kuscheln_V1.svg",
-        "tags": ["animal", "mami"]
+        "tags": [
+          "animal",
+          "mami"
+        ]
       },
       {
         "name": "anker",
         "file": "/icons/503_Anker_V1.svg",
-        "tags": ["car", "mama"]
+        "tags": [
+          "car",
+          "mama"
+        ]
       },
       {
         "name": "tannenzapfen",
         "file": "/icons/511_Tannenzapfen_V1.svg",
-        "tags": ["toy", "motor"]
+        "tags": [
+          "toy",
+          "motor"
+        ]
       },
       {
         "name": "umarmen",
         "file": "/icons/500_umarmen_V1.svg",
-        "tags": ["house"]
+        "tags": [
+          "house"
+        ]
+      },
+      {
+        "name": "Karotte",
+        "file": "/icons/01_Karotte_V2.svg",
+        "tags": [
+          "Möhre",
+          "Karotten",
+          "Möhren"
+        ]
+      },
+      {
+        "name": "Schaukel",
+        "file": "/icons/02_Schaukel_V2.svg",
+        "tags": [
+          "schaukeln"
+        ]
+      },
+      {
+        "name": "Rutsche",
+        "file": "/icons/03_Rutsche_V1.svg",
+        "tags": [
+          "rutschen"
+        ]
+      },
+      {
+        "name": "Ball",
+        "file": "/icons/04_Ball_V1.svg",
+        "tags": [
+          "Bälle"
+        ]
+      },
+      {
+        "name": "Flugzeug",
+        "file": "/icons/05_Flugzeug_V1.svg",
+        "tags": [
+          "Flugzeuge",
+          "Flug",
+          "fliegen"
+        ]
+      },
+      {
+        "name": "Glas",
+        "file": "/icons/06_Glas_V2.svg",
+        "tags": [
+          "Gläser"
+        ]
+      },
+      {
+        "name": "Vogel",
+        "file": "/icons/07_Vogel_V1.svg",
+        "tags": [
+          "Vögel",
+          "piep",
+          "fliegen"
+        ]
+      },
+      {
+        "name": "Mama",
+        "file": "/icons/23_Mama_V1.svg",
+        "tags": [
+          "Tante"
+        ]
       }
     ]
   },
@@ -211,7 +287,7 @@
     "active": true,
     "steps": [
       {
-        "target": ".navbar",
+        "target": ".pixgen-navbar",
         "placement": "bottom",
         "content": "Welcome!! Please spare a minute to learn about our page",
         "disableBeacon": true,
@@ -219,25 +295,25 @@
         "hideCloseButton": true
       },
       {
-        "target": ".sidebar",
+        "target": ".pixgen-sidebar",
         "placement": "right",
-        "content": "You can log in here",
+        "content": "You add text here",
         "disableBeacon": true,
         "disableOverlayClose": true,
         "hideCloseButton": true
       },
       {
-        "target": ".panel",
+        "target": ".pixgen-panel",
         "placement": "left",
-        "content": "Sign up here, if youre new",
+        "content": "Setting panel",
         "disableBeacon": true,
         "disableOverlayClose": true,
         "hideCloseButton": true
       },
       {
-        "target": ".zoom-container",
+        "target": ".pixgen-zoom-container",
         "placement": "top",
-        "content": "Sign up here, if youre new",
+        "content": "Minimize and maximize canvas",
         "disableBeacon": true,
         "disableOverlayClose": true,
         "hideCloseButton": true
@@ -245,7 +321,7 @@
       {
         "target": ".pixgen-editor-frame",
         "placement": "left",
-        "content": "Sign up here, if youre new",
+        "content": "Canvas Editor",
         "disableBeacon": true,
         "disableOverlayClose": true,
         "hideCloseButton": true
@@ -257,32 +333,29 @@
     "fontSpacing": true
   },
   "placeholder": {
-    "title": "Oliver",
+    "title": "Quatschkopf",
     "font": "mexcellent",
     "items": [
       {
+        "id": 1,
         "font": "stripey",
         "icon": "gorilla",
-        "realText": "jkhkhk",
-        "spokenText": "nkkjh"
+        "realText": "Crocodille",
+        "spokenText": "Dodidil"
       },
       {
-        "font": "stripey",
+        "id": 2,
+        "font": "mexcellent",
         "icon": "gorilla",
-        "realText": "jkhkhk",
-        "spokenText": "nkkjh"
+        "realText": "Banane",
+        "spokenText": "Manana"
       },
       {
-        "font": "stripey",
+        "id": 3,
+        "font": "italianno",
         "icon": "gorilla",
-        "realText": "jkhkhk",
-        "spokenText": "nkkjh"
-      },
-      {
-        "font": "stripey",
-        "icon": "gorilla",
-        "realText": "jkhkhk",
-        "spokenText": "nkkjh"
+        "realText": "Dusche",
+        "spokenText": "Uhsche"
       }
     ]
   },
