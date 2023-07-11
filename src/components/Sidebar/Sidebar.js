@@ -11,6 +11,7 @@ import ErrorDialog from '../Dialog/ErrorDialog'
 import EmailToast from '../Tools/Toast/EmailToast'
 import SendDialog from '../Dialog/SendDialog'
 import sendMail from '../../utils/sendMail'
+import { env } from '../../utils/env'
 
 function SideBar({ toggle, isOpen, items, icons, template, config, admin, selectText }) {
   const [showDialog, setShowDialog] = useState(false)
@@ -22,9 +23,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
   const scrollRef = useRef()
   const emailRef = useRef('')
 
-  const imgPath = config.wordpress.active
-    ? `${config.wordpress.baseUrl}${config.wordpress.pluginPath}`
-    : ''
+  const imgPath = `${env.REACT_APP_BASE}`
 
   const realRefs = useRef([])
   const spokenRefs = useRef([])
@@ -124,15 +123,20 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
       tempItems[index].font = currentTemplate.fonts[0]
     }
 
-    const filteredIcons = icons.filter((element) =>
-      element.tags.some((subElement) =>
-        subElement.includes(tempItems[index].realText.toLowerCase())
+    const filteredIcons = icons.filter((element) => {
+      const tags = element.tags.map((tag) => tag.toLowerCase())
+      const arrName = element.name.includes(items.inputItem.items[index].realText.toLowerCase())
+      const arrTags = tags.some((subElement) =>
+        subElement.includes(items.inputItem.items[index].realText.toLowerCase())
       )
-    )
+      return arrName || arrTags
+    })
     if (filteredIcons.length <= 0 || tempItems[index].realText === '') {
       tempItems[index].icon = ''
     }
     tempItems[index].loading = false
+
+    tempItems[index].icon = filteredIcons.length > 0 ? filteredIcons[0].name : ''
     temp.items = tempItems
     items.setInputItem((prevState) => {
       return { ...prevState, [items]: temp.items }
@@ -227,13 +231,15 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
   const renderDropdownIcon = (index) => {
     let filteredIcons = []
     if (items.inputItem.items[index].realText.length > 0) {
-      filteredIcons = icons.filter((element) =>
-        element.tags.some((subElement) =>
+      filteredIcons = icons.filter((element) => {
+        const tags = element.tags.map((tag) => tag.toLowerCase())
+        const arrName = element.name.includes(items.inputItem.items[index].realText.toLowerCase())
+        const arrTags = tags.some((subElement) =>
           subElement.includes(items.inputItem.items[index].realText.toLowerCase())
         )
-      )
+        return arrName || arrTags
+      })
     }
-
     const defaultIcons = icons.filter((icon) => config.input.defaultIcon.includes(icon.name))
     let expectedIcons = filteredIcons.concat(defaultIcons)
     expectedIcons = expectedIcons.filter((item, index) => {
