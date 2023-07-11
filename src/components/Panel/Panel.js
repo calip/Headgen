@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import './Panel.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCogs, faEraser, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
@@ -45,7 +45,7 @@ function Panel({
   const [show, setShow] = useState(false)
   const [showFormat, setShowFormat] = useState(false)
 
-  const min = 1000
+  const min = 1
   const max = 10000
   const minPadding = 0
   const maxPadding = 100
@@ -198,14 +198,14 @@ function Panel({
                     </div>
                   </Card.Body>
                   <Card.Footer className="format-footer">
-                    {Helpers.showFormatSize(currentWidth, currentHeight)}
+                    {Helpers.showFormatSize(currentWidth, currentHeight, currentUnit)}
                   </Card.Footer>
                 </Card>
               </FormGroup>
             </Col>
           </Row>
           {admin.isAdmin ? (
-            <>
+            <Fragment key={currentUnit}>
               <Row>
                 <Col>
                   <FormGroup className="mb-3">
@@ -274,7 +274,7 @@ function Panel({
                   </FormGroup>
                 </Col>
               </Row>
-            </>
+            </Fragment>
           ) : (
             <></>
           )}
