@@ -28,11 +28,12 @@ function Editor({ config, products, selectItem, currency }) {
   const icons = config.input.icons
   const templates = config.templates
   const language = config.language
+  const tutorial = config.tutorial
   const sidebarOpen = Helpers.isTouchScreenDevice() ? false : true
   const panelOpen = Helpers.isTouchScreenDevice() ? false : true
 
   const [initFormat, setInitFormat] = useState(false)
-  const initialInput = Helpers.setData(width, height)
+  const initialInput = Helpers.setData(unit, width, height)
 
   const [isAdmin, setIsAdmin] = useState(false)
   const [fontType, setFontType] = useState('FontFamily')
@@ -227,7 +228,7 @@ function Editor({ config, products, selectItem, currency }) {
     setFontType('FontFamily')
     setFontSpacing('0')
     setInitFormat(false)
-    const input = Helpers.setData(width, height)
+    const input = Helpers.setData(unit, width, height)
     setInputItem(input)
     loadLocalStorage(config)
   }
@@ -236,61 +237,29 @@ function Editor({ config, products, selectItem, currency }) {
     loadLocalStorage(config)
   }
 
-  const steps = [
-    {
-      target: '.pixgen-navbar',
-      placement: 'bottom',
-      content: 'Welcome!! Please spare a minute to learn about our page',
-      disableBeacon: true,
-      disableOverlayClose: true,
-      hideCloseButton: true
-    },
-    {
-      target: '.pixgen-sidebar',
-      placement: 'right',
-      content: 'You can log in here',
-      disableBeacon: true,
-      disableOverlayClose: true,
-      hideCloseButton: true
-    },
-    {
-      target: '.pixgen-panel',
-      placement: 'left',
-      content: 'Sign up here, if youre new',
-      disableBeacon: true,
-      disableOverlayClose: true,
-      hideCloseButton: true
-    },
-    {
-      target: '.pixgen-zoom-container',
-      placement: 'top',
-      content: 'Sign up here, if youre new',
-      disableBeacon: true,
-      disableOverlayClose: true,
-      hideCloseButton: true
-    },
-    {
-      target: '.pixgen-editor-frame',
-      placement: 'left',
-      content: 'Sign up here, if youre new',
-      disableBeacon: true,
-      disableOverlayClose: true,
-      hideCloseButton: true
-    }
-  ]
-
-  useEffect(() => {
-    handleShowTutorial()
-  }, [])
-
   const handleShowTutorial = () => {
-    setShowTutorial(inputItem.format ? true : false)
+    setShowTutorial(true)
+  }
+
+  const handleTutorialCallback = (data) => {
+    if (data.status === 'skipped') {
+      setShowTutorial(false)
+    }
+    if (data.status === 'finished') {
+      setShowTutorial(false)
+    }
   }
 
   return (
     <Fragment key={inputItem.id}>
-      {showTutorial ? (
-        <Joyride steps={steps} continuous={true} showProgress={true} showSkipButton={true} />
+      {showTutorial && tutorial?.active ? (
+        <Joyride
+          callback={handleTutorialCallback}
+          steps={tutorial?.steps}
+          continuous={true}
+          showProgress={true}
+          showSkipButton={true}
+        />
       ) : (
         <></>
       )}
