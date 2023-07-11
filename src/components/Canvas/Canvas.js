@@ -4,6 +4,8 @@ import TableItem from '../Table/TableItem'
 import Helpers from '../../utils/Helpers'
 import FontStyled from '../../utils/FontStyled'
 import ItemLoader from '../../utils/ItemLoader'
+import { env } from '../../utils/env'
+import CanvasPlaceholder from '../Tools/Placeholder/CanvasPlaceholder'
 
 const Canvas = forwardRef((props, ref) => {
   const currentTemplate = props.config.templates.find(
@@ -24,9 +26,19 @@ const Canvas = forwardRef((props, ref) => {
       ? ''
       : props.font.fontSpacing
 
-  const initWidth = Helpers.cmToPxConversion(props.items.inputItem.width, props.layout.layoutDpc)
-  const initHeight = Helpers.cmToPxConversion(props.items.inputItem.height, props.layout.layoutDpc)
-  const initPadding = Helpers.cmToPxConversion(props.layout.layoutPadding, props.layout.layoutDpc)
+  const initUnit = props.items.inputItem?.unit
+  const initWidth =
+    initUnit === 'cm'
+      ? Helpers.cmToPxConversion(props.items.inputItem.width, props.layout.layoutDpc)
+      : props.items.inputItem.width
+  const initHeight =
+    initUnit === 'cm'
+      ? Helpers.cmToPxConversion(props.items.inputItem.height, props.layout.layoutDpc)
+      : props.items.inputItem.height
+  const initPadding =
+    initUnit === 'cm'
+      ? Helpers.cmToPxConversion(props.layout.layoutPadding, props.layout.layoutDpc)
+      : props.layout.layoutPadding
 
   const width = Math.abs(initWidth / 10)
   const height = Math.abs(initHeight / 10)
@@ -47,9 +59,7 @@ const Canvas = forwardRef((props, ref) => {
   const selectedTitleChanged = Helpers.useHasChanged(clickTitle)
   const dataChanged = Helpers.useHasChanged(props.items)
   const contentChanged = Helpers.useHasChanged(data)
-  const imgPath = props.config.wordpress.active
-    ? `${props.config.wordpress.baseUrl}${props.config.wordpress.pluginPath}`
-    : ''
+  const imgPath = `${env.REACT_APP_BASE}`
 
   useLayoutEffect(() => {
     if (dataChanged) {
@@ -348,9 +358,9 @@ const Canvas = forwardRef((props, ref) => {
   }
 
   useEffect(() => {
-    if (data.inputItem?.placeholder) {
-      const inputTitle = data.inputItem.title.length > 0
-      const inputItems = data.inputItem.items.some(
+    if (props.items?.inputItem?.placeholder) {
+      const inputTitle = data?.inputItem?.title.length > 0
+      const inputItems = data?.inputItem?.items.some(
         (item) => item.realText.length > 0 || item.spokenText.length > 0
       )
       if (inputTitle || inputItems) {
@@ -374,71 +384,20 @@ const Canvas = forwardRef((props, ref) => {
   } else {
     return (
       <div className="pix-editor-canvas">
-        {data.inputItem.placeholder ? (
-          <div
-            className="pix-canvas"
-            style={{
-              minWidth: `${width}px`,
-              maxWidth: `${width}px`,
-              minHeight: `${height}px`,
-              maxHeight: `${height}px`
-            }}>
-            <div
-              className={border ? 'center-screen' : null}
-              style={{
-                margin: `${padding}px`,
-                display: 'table'
-              }}>
-              <div
-                style={{
-                  display: 'table-cell',
-                  verticalAlign: 'middle',
-                  color: '#a1a1a1',
-                  pointerEvents: 'none'
-                }}>
-                <div>
-                  <table className="pixgen-table">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <FontStyled
-                            value={props.config.placeholder}
-                            multiline={false}
-                            maxSize={300}
-                          />
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div>
-                  <table className="pixgen-table">
-                    <tbody>
-                      {props.config.placeholder.items.map((item, index) => {
-                        const lastIndex = data.length - 1
-                        const space =
-                          index >= 0 && data.length > 1 && index != lastIndex ? true : false
-                        return (
-                          <tr key={index}>
-                            <td>
-                              <FontStyled
-                                value={item}
-                                icons={icons}
-                                space={space}
-                                multiline={true}
-                                maxSize={itemSize}
-                                imgPath={imgPath}
-                              />
-                            </td>
-                          </tr>
-                        )
-                      })}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
+        {data?.inputItem?.placeholder ? (
+          <CanvasPlaceholder
+            width={width}
+            height={height}
+            border={border}
+            padding={padding}
+            placeholder={props.config.placeholder}
+            icons={icons}
+            itemSize={itemSize}
+            imgPath={imgPath}
+            currentTemplate={currentTemplate}
+            titleRef={titleRef}
+            contentRef={contentRef}
+          />
         ) : (
           <div
             className="pix-canvas"
