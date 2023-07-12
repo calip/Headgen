@@ -21,8 +21,8 @@ const Helpers = {
     const f = format.find((item) => item.id === parseInt(selected))
     return f
   },
-  showFormatSize: (width, height) => {
-    return `${height} x ${width}`
+  showFormatSize: (width, height, unit) => {
+    return `${height} ${unit} x ${width} ${unit}`
   },
   getQuery: () => {
     return new URLSearchParams(window.location.search)
@@ -180,7 +180,7 @@ const Helpers = {
         return i18n.t('Spacing')
     }
   },
-  setData: (width, height) => {
+  setData: (unit, width, height) => {
     let id = Helpers.getRandomId()
     const data = {
       id: id,
@@ -192,7 +192,7 @@ const Helpers = {
       format: null,
       height: height,
       width: width,
-      unit: '',
+      unit: unit,
       placeholder: false,
       variation: null,
       items: [Helpers.setItems()]
