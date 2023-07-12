@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 function CarouselImage(props) {
   const [activeVariation, setActiveVariation] = useState()
-  const [price, setPrice] = useState(props.initPrice)
+  const [price, setPrice] = useState()
 
   const handleSelectVariation = (variation) => {
     setActiveVariation(variation)
@@ -39,7 +39,9 @@ function CarouselImage(props) {
                 )}
               </div>
             ) : (
-              <></>
+              <div className="carousel-tags">
+                <span dangerouslySetInnerHTML={{ __html: `${props.initPrice}` }} />
+              </div>
             )}
           </div>
           <div className="carousel-option">
@@ -51,7 +53,9 @@ function CarouselImage(props) {
                   size="sm"
                   key={variation?.id}
                   onClick={() => handleSelectVariation(variation)}>
-                  {variation?.height}x{variation?.width}
+                  {variation?.height}
+                  {variation?.unit} x {variation?.width}
+                  {variation?.unit}
                 </Button>
               )
             })}
