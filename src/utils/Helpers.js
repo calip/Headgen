@@ -1,8 +1,12 @@
 import { useEffect, useRef } from 'react'
-import i18n from '../utils/i18n'
+import i18n from './i18n.js'
 import { Tooltip } from 'react-bootstrap'
+import { env } from './env.js'
 
 const Helpers = {
+  getBaseUrl: () => {
+    return env.REACT_APP_BASE ? env.REACT_APP_BASE : ''
+  },
   storeInputItem: (config, item) => {
     localStorage.setItem(`inputs-${config.appId}`, JSON.stringify(item))
   },
@@ -148,16 +152,8 @@ const Helpers = {
   },
   getIconSizeForFontStyle(font) {
     switch (font) {
-      case 'comfortaa':
-        return '100%'
       case 'italianno':
-        return '50%'
-      case 'marqueemoon':
-        return '100%'
-      case 'mexcellent':
-        return '100%'
-      case 'stripey':
-        return '100%'
+        return '75%'
       default:
         return '100%'
     }
@@ -245,6 +241,128 @@ const Helpers = {
     const cm = Math.round(dpi / 2.54)
     const px = Math.round(size * cm)
     return px
+  },
+  italiannoSpace: () => {
+    return [
+      {
+        letter: 'A',
+        leftSpace: 0,
+        rightSpace: 2
+      },
+      {
+        letter: 'F',
+        leftSpace: 0,
+        rightSpace: 2
+      },
+      {
+        letter: 'I',
+        leftSpace: 0,
+        rightSpace: 2
+      },
+      {
+        letter: 'J',
+        leftSpace: 2,
+        rightSpace: 2
+      },
+      {
+        letter: 'K',
+        leftSpace: 0,
+        rightSpace: 2
+      },
+      {
+        letter: 'T',
+        leftSpace: 0,
+        rightSpace: 2
+      },
+      {
+        letter: 'V',
+        leftSpace: 0,
+        rightSpace: 3
+      },
+      {
+        letter: 'W',
+        leftSpace: 0,
+        rightSpace: 3
+      },
+      {
+        letter: 'X',
+        leftSpace: 1,
+        rightSpace: 2
+      },
+      {
+        letter: 'Y',
+        leftSpace: 0,
+        rightSpace: 2
+      },
+      {
+        letter: 'Z',
+        leftSpace: 0,
+        rightSpace: 2
+      },
+      {
+        letter: 'b',
+        leftSpace: 0,
+        rightSpace: 2
+      },
+      {
+        letter: 'd',
+        leftSpace: 0,
+        rightSpace: 2
+      },
+      {
+        letter: 'f',
+        leftSpace: 2,
+        rightSpace: 2
+      },
+      {
+        letter: 'g',
+        leftSpace: 2,
+        rightSpace: 1
+      },
+      {
+        letter: 'j',
+        leftSpace: 3,
+        rightSpace: 1
+      },
+      {
+        letter: 'p',
+        leftSpace: 2,
+        rightSpace: 1
+      },
+      {
+        letter: 'y',
+        leftSpace: 1,
+        rightSpace: 1
+      }
+    ]
+  },
+  getIconLetter: (font) => {
+    switch (font) {
+      case 'comfortaa':
+        return 'a'
+      case 'italianno':
+        return 'OO'
+      case 'marqueemoon':
+        return 'OO'
+      case 'mexcellent':
+        return 'W'
+      case 'stripey':
+        return 'W'
+      default:
+        return 'a'
+    }
+  },
+  getIconStyle: (font, size) => {
+    switch (font) {
+      case 'italianno':
+        return `width: ${size}; height: ${size}; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);`
+      case 'stripey':
+        return `width: ${size}; height: ${size}; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);`
+      case 'comfortaa':
+        return `width: ${size}; height: ${size}; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);`
+      default:
+        return `width: ${size}; height: ${size};`
+    }
   }
 }
 
