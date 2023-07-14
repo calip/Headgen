@@ -11,9 +11,10 @@ i18n
     backend: {
       /* translation file path */
       // loadPath: '/config/{{ns}}/{{lng}}.json'
-      loadPath: env.REACT_APP_BASE
-        ? `./config/{{ns}}/{{lng}}.json`
-        : `${env.REACT_APP_BASE}/config/{{ns}}/{{lng}}.json`
+      loadPath:
+        env.REACT_APP_BASE === undefined
+          ? `./config/{{ns}}/{{lng}}.json`
+          : `${env.REACT_APP_BASE}/config/{{ns}}/{{lng}}.json`
     },
     fallbackLng: 'en',
     debug: false,
