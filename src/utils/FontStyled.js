@@ -6,7 +6,9 @@ import Nbsp from './nbsp'
 
 const FontContainer = styled(ReactFitty)`
   line-height: 100%;
-  letter-spacing: ${(props) => props.spacing}px;
+  text-indent: ${(props) => props.spacing}em;
+  text-align: center;
+  letter-spacing: ${(props) => props.spacing}em;
   font-family: ${(props) => props.font}-Wordpix;
 `
 
@@ -50,10 +52,16 @@ const FontStyled = (props) => {
         }
       })
 
-      const leftRealSpace = leftRealLetters ? leftRealLetters.leftSpace : 0
-      const rightRealSpace = rightRealLetters ? rightRealLetters.rightSpace : 1
-      const leftSpokenSpace = leftSpokenLetters ? leftSpokenLetters.leftSpace : 0
-      const rightSpokenSpace = rightSpokenLetters ? rightSpokenLetters.rightSpace : 1
+      const leftRealSpace =
+        leftRealLetters && props.value.fontSpacing < 1 ? leftRealLetters.leftSpace : 0
+      const rightRealSpace =
+        rightRealLetters && props.value.fontSpacing < 1 ? rightRealLetters.rightSpace : 0
+      const leftSpokenSpace =
+        leftSpokenLetters && props.value.fontSpacing < 1 ? leftSpokenLetters.leftSpace : 0
+      const rightSpokenSpace =
+        rightSpokenLetters && props.value.fontSpacing < 1 ? rightSpokenLetters.rightSpace : 0
+      const defRightRealSpace = props.value.fontSpacing > 0 ? 0 : 1
+      const defLeftSpokenSpace = props.value.fontSpacing > 0 ? 0 : 1
 
       return (
         <FontContainer
@@ -71,7 +79,7 @@ const FontStyled = (props) => {
               )}
               {props.value.realText}
               {props.value.font === 'italianno' && props.value.realText.length > 0 ? (
-                <Nbsp count={props.value.icon ? 1 : rightRealSpace} />
+                <Nbsp count={props.value.icon ? defRightRealSpace : rightRealSpace} />
               ) : (
                 <></>
               )}
@@ -109,7 +117,7 @@ const FontStyled = (props) => {
             )}
             <div>
               {props.value.font === 'italianno' && props.value.spokenText.length > 0 ? (
-                <Nbsp count={props.value.icon ? 0 : leftSpokenSpace} />
+                <Nbsp count={props.value.icon ? defLeftSpokenSpace : leftSpokenSpace} />
               ) : (
                 <></>
               )}
