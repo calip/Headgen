@@ -162,15 +162,15 @@ const Helpers = {
     switch (space) {
       case '0':
         return i18n.t('NoSpacing')
-      case '2':
+      case '0.3':
         return '1'
-      case '5':
+      case '0.5':
         return '2'
-      case '10':
+      case '0.7':
         return '3'
-      case '15':
+      case '1':
         return '4'
-      case '20':
+      case '1.3':
         return '5'
       default:
         return i18n.t('Spacing')
@@ -341,7 +341,7 @@ const Helpers = {
       case 'comfortaa':
         return 'a'
       case 'italianno':
-        return 'OO'
+        return 'W'
       case 'marqueemoon':
         return 'OO'
       case 'mexcellent':
@@ -354,14 +354,12 @@ const Helpers = {
   },
   getIconStyle: (font, size) => {
     switch (font) {
-      case 'italianno':
-        return `width: ${size}; height: ${size}; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);`
-      case 'stripey':
-        return `width: ${size}; height: ${size}; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);`
-      case 'comfortaa':
-        return `width: ${size}; height: ${size}; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);`
+      case 'marqueemoon':
+        return `width: ${size}; height: ${size}; position: absolute; top: -1px; left: 0;`
+      case 'mexcellent':
+        return `width: ${size}; height: ${size}; position: absolute; top: -1px; left: 0;`
       default:
-        return `width: ${size}; height: ${size};`
+        return `width: ${size}; height: ${size}; position: absolute; top: 0; left: 0;`
     }
   }
 }
