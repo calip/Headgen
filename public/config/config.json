@@ -45,7 +45,16 @@
   "input": {
     "max": null,
     "defaultIcon": ["anker", "gorilla"],
+    "showTitle": true,
+    "placeholderIcon": "question",
     "icons": [
+      {
+        "name": "question",
+        "file": "/icons/519_wo_V1.svg",
+        "tags": [
+          "question"
+        ]
+      },
       {
         "name": "gorilla",
         "file": "/icons/516_Gorilla_V1.svg",
