@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinus, faPlus, faQuestion, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faMinus, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { Nav, Button, InputGroup, FormControl, Spinner, Dropdown } from 'react-bootstrap'
 import classNames from 'classnames'
 import Helpers from '../../utils/Helpers'
@@ -11,7 +11,6 @@ import ErrorDialog from '../Dialog/ErrorDialog'
 import EmailToast from '../Tools/Toast/EmailToast'
 import SendDialog from '../Dialog/SendDialog'
 import sendMail from '../../utils/sendMail'
-import { env } from '../../utils/env'
 
 function SideBar({ toggle, isOpen, items, icons, template, config, admin, selectText }) {
   const [showDialog, setShowDialog] = useState(false)
@@ -22,8 +21,6 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
   const [dataUrl, setDataUrl] = useState()
   const scrollRef = useRef()
   const emailRef = useRef('')
-
-  const imgPath = `${env.REACT_APP_BASE}`
 
   const realRefs = useRef([])
   const spokenRefs = useRef([])
@@ -136,7 +133,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
     }
     tempItems[index].loading = false
 
-    tempItems[index].icon = filteredIcons.length > 0 ? filteredIcons[0].name : ''
+    tempItems[index].icon = filteredIcons.length === 1 ? filteredIcons[0].name : ''
     temp.items = tempItems
     items.setInputItem((prevState) => {
       return { ...prevState, [items]: temp.items }
@@ -251,10 +248,11 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
         {expectedIcons.map((icon, index) => (
           <Dropdown.Item eventKey={icon.name} key={index}>
             <img
-              src={`${imgPath}${Helpers.getIconForButton(icons, icon.name)}`}
-              width="60"
+              src={`${Helpers.getBaseUrl()}${Helpers.getIconForButton(icons, icon.name)}`}
+              width="30"
               alt={icon.name}
             />
+            {config.input.showTitle ? icon.name : ''}
           </Dropdown.Item>
         ))}
       </>
@@ -274,19 +272,19 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
   return (
     <div className={classNames('pixgen-sidebar shadow-sm', { 'is-open': isOpen })}>
       <div className="pixgen-sidebar-header p-3">
-        <Button variant="link" onClick={toggle} style={{ color: '#6c757d', margin: 0 }}>
+        <Button variant="link" size="sm" onClick={toggle} style={{ color: '#6c757d', margin: 0 }}>
           <FontAwesomeIcon icon={faTimes} pull="right" size="xs" />
         </Button>
         <h3>{config.appName}</h3>
       </div>
 
-      <Nav className="flex-column p-2">
+      <Nav className="flex-column p-2" style={{ height: '100%' }}>
         <div className="flex-column p-1">
           <FormControl
             ref={titleRef}
             type="text"
             key="title"
-            className={`pix-input ${selectText.clickTitle ? '' : 'greyed-out'}`}
+            className={`form-control-sm ${selectText.clickTitle ? '' : 'greyed-out'}`}
             placeholder={`${i18n.t('Title')}...`}
             defaultValue={items.inputItem.title}
             onClick={inputTitleClicked}
@@ -300,13 +298,16 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
               return (
                 <div className="flex-column p-1" key={item.id}>
                   <InputGroup>
-                    <Button variant="outline-default" onClick={removeInputItem(item.id)}>
+                    <Button
+                      variant="outline-default"
+                      className="pixremove-button"
+                      onClick={removeInputItem(item.id)}>
                       <FontAwesomeIcon icon={faMinus} />
                     </Button>
                     <>
                       <FormControl
                         type="text"
-                        className={`pix-input ${
+                        className={`form-control-sm ${
                           item.id !== selectText.textItem ? 'greyed-out' : ''
                         }`}
                         ref={(el) => (realRefs.current[item.id] = el)}
@@ -325,20 +326,28 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
                           type="button"
                           id="icon-spinner"
                           aria-expanded="false"
-                          className="btn btn-outline-dark icon-input btn-icon-spinner">
+                          className="btn icon-input btn-icon-spinner">
                           <Spinner animation="border" size="sm" />
                         </button>
                       ) : (
                         <Dropdown onSelect={onIconChange(index)}>
-                          <Dropdown.Toggle variant="outline-white" id="icon-style">
+                          <Dropdown.Toggle variant="outline-white" id="icon-style" size="sm">
                             {item.icon === '' ? (
-                              <div className="icon-placeholder">
-                                <FontAwesomeIcon icon={faQuestion} />
-                              </div>
+                              <img
+                                src={`${Helpers.getBaseUrl()}${Helpers.getIconForButton(
+                                  icons,
+                                  config.input.placeholderIcon
+                                )}`}
+                                width="30"
+                                alt={config.input.placeholderIcon}
+                              />
                             ) : (
                               <img
-                                src={`${imgPath}${Helpers.getIconForButton(icons, item.icon)}`}
-                                width="60"
+                                src={`${Helpers.getBaseUrl()}${Helpers.getIconForButton(
+                                  icons,
+                                  item.icon
+                                )}`}
+                                width="30"
                                 alt={item.icon}
                               />
                             )}
@@ -352,7 +361,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
                     <>
                       <FormControl
                         type="text"
-                        className={`pix-input ${
+                        className={`form-control-sm ${
                           item.id !== selectText.textItem ? 'greyed-out' : ''
                         }`}
                         ref={(el) => (spokenRefs.current[item.id] = el)}
@@ -369,13 +378,18 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
               )
             })}
         </div>
-        <Button variant="outline-primary" onClick={addInputItem}>
+        <Button
+          variant="outline-primary"
+          className="pixadd-button "
+          size="sm"
+          onClick={addInputItem}>
           <FontAwesomeIcon icon={faPlus} /> {i18n.t('Add')}
         </Button>
         <hr />
         {admin.isAdmin ? (
           <InputGroup className="mb-3">
             <FormControl
+              className="form-control-sm"
               ref={emailRef}
               type="email"
               required
@@ -387,6 +401,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
               type="submit"
               variant="primary"
               id="button-addon2"
+              size="sm"
               disabled={!emailDialog}
               onClick={showConfirmDialog}>
               {i18n.t('Send')}
