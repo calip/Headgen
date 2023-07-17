@@ -4,7 +4,6 @@ import TableItem from '../Table/TableItem'
 import Helpers from '../../utils/Helpers'
 import FontStyled from '../../utils/FontStyled'
 import ItemLoader from '../../utils/ItemLoader'
-import { env } from '../../utils/env'
 import CanvasPlaceholder from '../Tools/Placeholder/CanvasPlaceholder'
 
 const Canvas = forwardRef((props, ref) => {
@@ -59,7 +58,7 @@ const Canvas = forwardRef((props, ref) => {
   const selectedTitleChanged = Helpers.useHasChanged(clickTitle)
   const dataChanged = Helpers.useHasChanged(props.items)
   const contentChanged = Helpers.useHasChanged(data)
-  const imgPath = `${env.REACT_APP_BASE}`
+  const imgPath = Helpers.getBaseUrl()
 
   useLayoutEffect(() => {
     if (dataChanged) {

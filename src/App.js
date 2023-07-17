@@ -7,7 +7,6 @@ import Loader from './components/Loader/Loader'
 import Helpers from './utils/Helpers'
 import FontFaceObserver from 'fontfaceobserver'
 import Woocommerce from './utils/woocommerce'
-import { env } from './utils/env'
 
 function App() {
   const [config, setConfig] = useState({})
@@ -57,7 +56,7 @@ function App() {
       fontStripey.load(),
       timeout(3000)
     ]).then(() => {
-      Helpers.fetchJson(`${env.REACT_APP_BASE}/config/config.json`).then((result) => {
+      Helpers.fetchJson(`${Helpers.getBaseUrl()}/config/config.json`).then((result) => {
         setConfig(result)
         if (result.wordpress.active) {
           const api = Woocommerce(result)
