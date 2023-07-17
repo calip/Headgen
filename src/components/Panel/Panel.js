@@ -313,6 +313,7 @@ function Panel({
             className={'font-style-dropdown ps-1'}
             disabled={currentTemplate == null}
             id="font-space"
+            size="sm"
             title={currentTemplate.name ?? 'Templates'}
             onSelect={onTemplateChange}>
             {template.templates.map((temp) => (
@@ -326,13 +327,13 @@ function Panel({
         </div>
         <hr />
         <div className="panel-container">
-          <Button variant="outline-secondary" onClick={showDialog}>
+          <Button variant="outline-secondary" size="sm" onClick={showDialog}>
             <FontAwesomeIcon icon={faEraser} /> {i18n.t('ClearSession')}
           </Button>
         </div>
         <hr />
         <div className="panel-container">
-          <Button variant="outline-secondary" onClick={showTutorial}>
+          <Button variant="outline-secondary" size="sm" onClick={showTutorial}>
             <FontAwesomeIcon icon={faInfoCircle} /> {i18n.t('ShowTutorial')}
           </Button>
         </div>
