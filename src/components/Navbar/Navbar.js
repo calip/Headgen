@@ -10,11 +10,12 @@ import Helpers from '../../utils/Helpers'
 import i18n from '../../utils/i18n'
 
 const FONT_STYLES = ['comfortaa', 'italianno', 'marqueemoon', 'mexcellent', 'stripey']
-const FONT_SPACING = ['0', '2', '5', '10', '15', '20']
+const FONT_SPACING = ['0', '0.3', '0.5', '0.7', '1', '1.3']
 
 function NavBar({ toggle, font, items, config, admin, downloadFn, addToCart }) {
   const currentWidth = items.inputItem.width
   const currentHeight = items.inputItem.height
+  const currentUnit = items.inputItem.unit
 
   const onFontTypeChange = (eventkey) => {
     font.setFontType(eventkey)
@@ -30,7 +31,7 @@ function NavBar({ toggle, font, items, config, admin, downloadFn, addToCart }) {
 
   return (
     <Navbar bg="light" className="pixgen-navbar shadow-sm p-3 bg-white" expand>
-      <Button variant="outline-secondary" onClick={toggle}>
+      <Button variant="outline-secondary" size="sm" onClick={toggle}>
         <FontAwesomeIcon icon={faAlignLeft} />
       </Button>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -41,6 +42,7 @@ function NavBar({ toggle, font, items, config, admin, downloadFn, addToCart }) {
             className={'font-style-dropdown ps-1'}
             disabled={font.fontType == null || font.fontType === ''}
             id="font-style"
+            size="sm"
             title={Helpers.getLabelForFontStyle(font.fontType ?? i18n.t('FontFamily'))}
             onSelect={onFontTypeChange}>
             {FONT_STYLES.map((fontType) => (
@@ -54,6 +56,7 @@ function NavBar({ toggle, font, items, config, admin, downloadFn, addToCart }) {
             className={'font-style-dropdown ps-1'}
             disabled={font.fontSpacing == null}
             id="font-space"
+            size="sm"
             title={Helpers.getLabelForFontSpacing(font.fontSpacing ?? i18n.t('Spacing'))}
             onSelect={onFontSpaceChange}>
             {FONT_SPACING.map((fontSpace) => (
@@ -78,17 +81,17 @@ function NavBar({ toggle, font, items, config, admin, downloadFn, addToCart }) {
           )}
           {admin.isAdmin ? (
             <Dropdown align="end">
-              <DropdownToggle variant="outline-primary">
+              <DropdownToggle size="sm" variant="outline-primary">
                 <FontAwesomeIcon icon={faSave} />
               </DropdownToggle>
 
               <DropdownMenu>
-                <DropdownItem onClick={downloadFn('low')}>
+                <DropdownItem size="sm" onClick={downloadFn('low')}>
                   <small>{i18n.t('LowerQuality')}</small>
                 </DropdownItem>
-                <DropdownItem onClick={downloadFn('high')}>
+                <DropdownItem size="sm" onClick={downloadFn('high')}>
                   <small>
-                    {i18n.t('HighResolution')} ({currentWidth} x {currentHeight} px)
+                    {i18n.t('HighResolution')} ({currentWidth} x {currentHeight} {currentUnit})
                   </small>
                 </DropdownItem>
               </DropdownMenu>
@@ -96,7 +99,7 @@ function NavBar({ toggle, font, items, config, admin, downloadFn, addToCart }) {
           ) : (
             <>
               {config.wordpress.active ? (
-                <Button variant="primary" onClick={addToCart}>
+                <Button variant="primary" size="sm" onClick={addToCart}>
                   {i18n.t('AddToCart')}
                 </Button>
               ) : (
