@@ -70,14 +70,18 @@ const FontStyled = (props) => {
           spacing={props.value.fontSpacing}
           minSize={1}
           maxSize={props.maxSize}>
-          <div style={{ display: 'flex' }}>
+          <div
+            style={{
+              display: 'flex',
+              opacity: `${props.value.realText.length > 0 ? '1' : '0.3'}`
+            }}>
             <div>
               {props.value.font === 'italianno' && props.value.realText.length > 0 ? (
                 <Nbsp count={leftRealSpace} />
               ) : (
                 <></>
               )}
-              {props.value.realText}
+              {props.value.realText.length > 0 ? props.value.realText : 'Das gemeinte Wort'}
               {props.value.font === 'italianno' && props.value.realText.length > 0 ? (
                 <Nbsp count={props.value.icon ? defRightRealSpace : rightRealSpace} />
               ) : (
@@ -101,8 +105,7 @@ const FontStyled = (props) => {
                     }}>
                     <ReactSVG
                       beforeInjection={(svg) => {
-                        const size = Helpers.getIconSizeForFontStyle(props.value.font)
-                        svg.setAttribute('style', Helpers.getIconStyle(props.value.font, size))
+                        svg.setAttribute('style', Helpers.getIconStyle(props.value.font))
                       }}
                       src={`${props.imgPath}${Helpers.getIconForButton(
                         props.icons,
@@ -121,7 +124,7 @@ const FontStyled = (props) => {
               ) : (
                 <></>
               )}
-              {props.value.spokenText}
+              {props.value.spokenText.length > 0 ? props.value.spokenText : 'Das gesprochene Wort'}
               {props.value.font === 'italianno' && props.value.spokenText.length > 0 ? (
                 <Nbsp count={rightSpokenSpace} />
               ) : (
