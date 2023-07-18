@@ -150,14 +150,6 @@ const Helpers = {
         return i18n.t('FontFamily')
     }
   },
-  getIconSizeForFontStyle(font) {
-    switch (font) {
-      case 'italianno':
-        return '75%'
-      default:
-        return '100%'
-    }
-  },
   getLabelForFontSpacing(space) {
     switch (space) {
       case '0':
@@ -341,7 +333,7 @@ const Helpers = {
       case 'comfortaa':
         return 'a'
       case 'italianno':
-        return 'W'
+        return 'O'
       case 'marqueemoon':
         return 'OO'
       case 'mexcellent':
@@ -352,14 +344,14 @@ const Helpers = {
         return 'a'
     }
   },
-  getIconStyle: (font, size) => {
+  getIconStyle: (font) => {
     switch (font) {
       case 'marqueemoon':
-        return `width: ${size}; height: ${size}; position: absolute; top: -1px; left: 0;`
+        return `width: 100%; height: 100%; position: absolute; top: -1px; left: 0;`
       case 'mexcellent':
-        return `width: ${size}; height: ${size}; position: absolute; top: -1px; left: 0;`
+        return `width: 100%; height: 100%; position: absolute; top: -1px; left: 0;`
       default:
-        return `width: ${size}; height: ${size}; position: absolute; top: 0; left: 0;`
+        return `width: 100%; height: 100%; position: absolute; top: 0; left: 0;`
     }
   }
 }
