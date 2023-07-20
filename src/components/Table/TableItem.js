@@ -27,31 +27,33 @@ const TableItem = ({
       count = count + temp
       const data = items.sort((a, b) => a.order - b.order).slice(start, count)
       start = start + temp
-      table.push(
-        <div key={id}>
-          <table className="pixgen-table">
-            <tbody>
-              <tr>
-                <TableData
-                  imgPath={imgPath}
-                  maxSize={maxSize}
-                  data={data}
-                  icons={icons}
-                  onItemSelect={onItemSelect}
-                  itemSelected={itemSelected}
-                  handleDrag={handleDrag}
-                  handleDragOver={handleDragOver}
-                  handleDrop={handleDrop}
-                  dragId={dragId}
-                  targetDrag={targetDrag}
-                  setDragId={setDragId}
-                  handleTouchTarget={handleTouchTarget}
-                />
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      )
+      if (data.length > 0) {
+        table.push(
+          <div key={id}>
+            <table className="pixgen-table">
+              <tbody>
+                <tr>
+                  <TableData
+                    imgPath={imgPath}
+                    maxSize={maxSize}
+                    data={data}
+                    icons={icons}
+                    onItemSelect={onItemSelect}
+                    itemSelected={itemSelected}
+                    handleDrag={handleDrag}
+                    handleDragOver={handleDragOver}
+                    handleDrop={handleDrop}
+                    dragId={dragId}
+                    targetDrag={targetDrag}
+                    setDragId={setDragId}
+                    handleTouchTarget={handleTouchTarget}
+                  />
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )
+      }
     })
   }
   if (items.length > count) {
