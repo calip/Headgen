@@ -70,18 +70,14 @@ const FontStyled = (props) => {
           spacing={props.value.fontSpacing}
           minSize={1}
           maxSize={props.maxSize}>
-          <div
-            style={{
-              display: 'flex',
-              opacity: `${props.value.realText.length > 0 ? '1' : '0.3'}`
-            }}>
+          <div style={{ display: 'flex' }}>
             <div>
               {props.value.font === 'italianno' && props.value.realText.length > 0 ? (
                 <Nbsp count={leftRealSpace} />
               ) : (
                 <></>
               )}
-              {props.value.realText.length > 0 ? props.value.realText : 'Das gemeinte Wort'}
+              {props.value.realText.length > 0 ? props.value.realText : ' '}
               {props.value.font === 'italianno' && props.value.realText.length > 0 ? (
                 <Nbsp count={props.value.icon ? defRightRealSpace : rightRealSpace} />
               ) : (
@@ -124,7 +120,7 @@ const FontStyled = (props) => {
               ) : (
                 <></>
               )}
-              {props.value.spokenText.length > 0 ? props.value.spokenText : 'Das gesprochene Wort'}
+              {props.value.spokenText.length > 0 ? props.value.spokenText : ' '}
               {props.value.font === 'italianno' && props.value.spokenText.length > 0 ? (
                 <Nbsp count={rightSpokenSpace} />
               ) : (
