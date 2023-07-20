@@ -292,6 +292,11 @@ const Helpers = {
         rightSpace: 2
       },
       {
+        letter: 'a',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
         letter: 'b',
         leftSpace: 0,
         rightSpace: 2
@@ -309,6 +314,11 @@ const Helpers = {
       {
         letter: 'g',
         leftSpace: 2,
+        rightSpace: 1
+      },
+      {
+        letter: 'i',
+        leftSpace: 0,
         rightSpace: 1
       },
       {
