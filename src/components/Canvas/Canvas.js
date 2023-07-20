@@ -15,6 +15,7 @@ const Canvas = forwardRef((props, ref) => {
   const [data, setData] = useState({})
   const contentRef = useRef()
   const titleRef = useRef()
+  const itemRef = useRef()
   const [itemSize, setItemSize] = useState(512)
 
   const selectedText = props.selectText.textItem
@@ -301,7 +302,8 @@ const Canvas = forwardRef((props, ref) => {
     if (contentChanged) {
       const childElement = contentRef.current
       const titleElement = titleRef.current
-      if (childElement && titleElement) {
+      const itemElement = itemRef.current
+      if (childElement && titleElement && itemElement) {
         const initHeight = childElement.clientHeight
         const initTitleHeight = titleElement.clientHeight
         setTimeout(() => {
@@ -309,8 +311,10 @@ const Canvas = forwardRef((props, ref) => {
           if (titleHeight > 0 && titleHeight !== initTitleHeight) {
             const scaleHeight = childElement.clientHeight
             const totalHeight = Math.abs(initHeight - titleHeight)
-            const totalItem = data.inputItem.items.length
-            const scaleSize = Math.abs(totalHeight / totalItem)
+            const totalPadding = Math.abs(padding * 2)
+            const totalFullHeight = Math.abs(totalHeight - totalPadding)
+            const totalItem = itemElement.childNodes.length
+            const scaleSize = Math.abs(totalFullHeight / totalItem)
             const updateSize = scaleHeight >= initHeight ? scaleSize : itemSize
             setItemSize(updateSize)
           }
@@ -440,7 +444,7 @@ const Canvas = forwardRef((props, ref) => {
                   <></>
                 )}
                 {data.inputItem.items ? (
-                  <div>
+                  <div ref={itemRef}>
                     <TableItem
                       imgPath={imgPath}
                       maxSize={itemSize}
