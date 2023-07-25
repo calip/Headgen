@@ -45,7 +45,7 @@ const TableData = ({
     const y = +touch.pageY
 
     const element = document.elementFromPoint(touch.clientX, touch.clientY)
-    const target = element.parentElement.closest('td')
+    const target = element.parentElement.closest('.pix-content')
     if (target) {
       const targetId = Math.abs(target.id)
       setDragId(targetId)
@@ -97,7 +97,7 @@ const TableData = ({
 
     const element = document.elementFromPoint(targetX, targetY)
     if (element) {
-      const target = element.parentElement.closest('td')
+      const target = element.parentElement.closest('.pix-content')
       if (target) {
         const targetId = Math.abs(target.id)
 
@@ -127,7 +127,7 @@ const TableData = ({
     const y = e.changedTouches[0].clientY
     const element = document.elementFromPoint(x, y)
     if (element) {
-      const target = element.parentElement.closest('td')
+      const target = element.parentElement.closest('.pix-content')
 
       if (target) {
         const targetId = Math.abs(target.id)
@@ -145,7 +145,7 @@ const TableData = ({
     const lastIndex = data.length - 1
     const space = index >= 0 && data.length > 1 && index != lastIndex ? true : false
     td.push(
-      <td
+      <div
         draggable={true}
         onDragOver={handleDragOver}
         onDrag={handleDrag}
@@ -168,7 +168,7 @@ const TableData = ({
           maxSize={maxSize}
           imgPath={imgPath}
         />
-      </td>
+      </div>
     )
   })
   return td

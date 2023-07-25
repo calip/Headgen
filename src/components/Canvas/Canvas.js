@@ -416,7 +416,9 @@ const Canvas = forwardRef((props, ref) => {
               ref={contentRef}
               style={{
                 margin: `${padding}px`,
-                display: 'table'
+                display: 'table',
+                tableLayout: 'fixed',
+                width: 'calc(100% - 20px)'
               }}
               onClick={removeSelectedItem}>
               <div style={{ display: 'table-cell', verticalAlign: 'middle' }}>
@@ -443,6 +445,28 @@ const Canvas = forwardRef((props, ref) => {
                 ) : (
                   <></>
                 )}
+                {/* {data.inputItem.items ? (
+                  <div ref={itemRef}>
+                    <TableItem
+                      imgPath={imgPath}
+                      maxSize={itemSize}
+                      items={data.inputItem.items}
+                      icons={icons}
+                      template={currentTemplate}
+                      onItemSelect={onItemSelect}
+                      itemSelected={itemSelected}
+                      handleDrag={handleDrag}
+                      handleDragOver={handleDragOver}
+                      handleDrop={handleDrop}
+                      dragId={dragId}
+                      targetDrag={targetDrag}
+                      setDragId={setDragId}
+                      handleTouchTarget={handleTouchTarget}
+                    />
+                  </div>
+                ) : (
+                  <></>
+                )} */}
                 {data.inputItem.items ? (
                   <div ref={itemRef}>
                     <TableItem
