@@ -17,7 +17,7 @@ const TableItem = ({
   setDragId,
   handleTouchTarget
 }) => {
-  let table = []
+  let content = []
   const layout = template.layout
   let start = 0
   let count = 0
@@ -28,29 +28,23 @@ const TableItem = ({
       const data = items.sort((a, b) => a.order - b.order).slice(start, count)
       start = start + temp
       if (data.length > 0) {
-        table.push(
-          <div key={id}>
-            <table className="pixgen-table">
-              <tbody>
-                <tr>
-                  <TableData
-                    imgPath={imgPath}
-                    maxSize={maxSize}
-                    data={data}
-                    icons={icons}
-                    onItemSelect={onItemSelect}
-                    itemSelected={itemSelected}
-                    handleDrag={handleDrag}
-                    handleDragOver={handleDragOver}
-                    handleDrop={handleDrop}
-                    dragId={dragId}
-                    targetDrag={targetDrag}
-                    setDragId={setDragId}
-                    handleTouchTarget={handleTouchTarget}
-                  />
-                </tr>
-              </tbody>
-            </table>
+        content.push(
+          <div className="pix-item" key={id}>
+            <TableData
+              imgPath={imgPath}
+              maxSize={maxSize}
+              data={data}
+              icons={icons}
+              onItemSelect={onItemSelect}
+              itemSelected={itemSelected}
+              handleDrag={handleDrag}
+              handleDragOver={handleDragOver}
+              handleDrop={handleDrop}
+              dragId={dragId}
+              targetDrag={targetDrag}
+              setDragId={setDragId}
+              handleTouchTarget={handleTouchTarget}
+            />
           </div>
         )
       }
@@ -59,7 +53,7 @@ const TableItem = ({
   if (items.length > count) {
     count = 0
   }
-  return table
+  return content
 }
 
 export default TableItem
