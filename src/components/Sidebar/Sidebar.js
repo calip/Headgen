@@ -237,7 +237,9 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
         return arrName || arrTags
       })
     }
-    const defaultIcons = icons.filter((icon) => config.input.defaultIcon.includes(icon.name))
+    const defaultIcons = icons.filter((icon) =>
+      config.input.defaultIcon.includes(icon.name.toLowerCase())
+    )
     let expectedIcons = filteredIcons.concat(defaultIcons)
     expectedIcons = expectedIcons.filter((item, index) => {
       return expectedIcons.indexOf(item) == index
