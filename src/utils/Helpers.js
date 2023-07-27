@@ -18,7 +18,7 @@ const Helpers = {
     return items
   },
   getIconForButton: (icons, icon) => {
-    const data = icons.find((i) => i.name === icon)
+    const data = icons.find((i) => i.name.toLowerCase() === icon.toLowerCase())
     return data.file
   },
   getSelectedFormat: (format, selected) => {

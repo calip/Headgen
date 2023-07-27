@@ -126,6 +126,7 @@ const FontStyled = (props) => {
               ) : (
                 <></>
               )}
+              {props.value.spokenText.length > 0 ? <Nbsp count={props.space} /> : <></>}
             </div>
           </div>
         </FontContainer>
