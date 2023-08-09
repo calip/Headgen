@@ -70,7 +70,7 @@ const FontStyled = (props) => {
           spacing={props.value.fontSpacing}
           minSize={1}
           maxSize={props.maxSize}>
-          <div style={{ display: 'flex' }}>
+          <div style={{ display: 'flex', width: '100%', height: '100%', boxSizing: 'border-box' }}>
             <div>
               {props.value.font === 'italianno' && props.value.realText.length > 0 ? (
                 <Nbsp count={leftRealSpace} />
