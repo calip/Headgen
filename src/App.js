@@ -18,11 +18,23 @@ function App() {
   const [selectedProduct, setSelectedProduct] = useState()
   const [selectedVariation, setSelectedVariation] = useState()
 
-  const fontComfortaa = new FontFaceObserver('Comfortaa-Wordpix')
-  const fontItalianno = new FontFaceObserver('Italianno-Wordpix')
-  const fontMarqueeMoon = new FontFaceObserver('MarqueeMoon-Wordpix')
-  const fontMexcellent = new FontFaceObserver('Mexcellent-Wordpix')
-  const fontStripey = new FontFaceObserver('Stripey-Wordpix')
+  const exampleFontData = {
+    'Comfortaa-Wordpix': { weight: 'normal' },
+    'Italianno-Wordpix': { weight: 'normal' },
+    'MarqueeMoon-Wordpix': { weight: 'normal' },
+    'Mexcellent-Wordpix': { weight: 'normal' },
+    'Stripey-Wordpix': { weight: 'normal' }
+  }
+
+  let observers = []
+
+  // Make one observer for each font,
+  // by iterating over the data we already have
+  Object.keys(exampleFontData).forEach((family) => {
+    var data = exampleFontData[family]
+    var obs = new FontFaceObserver(family, data)
+    observers.push(obs.load())
+  })
 
   const selectItem = {
     selectedProduct: selectedProduct,
@@ -40,22 +52,9 @@ function App() {
     setCurrencyPosition: setCurrencyPosition
   }
 
-  const timeout = (time) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(reject, time)
-    })
-  }
-
   useEffect(() => {
     setLoading(true)
-    Promise.race([
-      fontComfortaa.load(),
-      fontItalianno.load(),
-      fontMarqueeMoon.load(),
-      fontMexcellent.load(),
-      fontStripey.load(),
-      timeout(3000)
-    ]).then(() => {
+    Promise.all(observers).then(() => {
       Helpers.fetchJson(`${Helpers.getBaseUrl()}/config/config.json`).then((result) => {
         setConfig(result)
         if (result.wordpress.active) {
