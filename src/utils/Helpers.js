@@ -100,7 +100,8 @@ const Helpers = {
             height: height,
             width: width,
             unit: unit,
-            price: item.price
+            price: item.price,
+            fields: item.meta_data
           }
         }
         return data
