@@ -25,10 +25,11 @@ function FormatDialog(props) {
         })
         .then((response) => {
           if (response.status === 200) {
-            const resData = response.data.map(({ id, attributes, price }) => ({
+            const resData = response.data.map(({ id, attributes, price, meta_data }) => ({
               id,
               attributes,
-              price
+              price,
+              meta_data
             }))
             const minPrice = resData.reduce((prev, curr) => {
               return parseFloat(prev.price) < parseFloat(curr.price) ? prev : curr
