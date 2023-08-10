@@ -67,13 +67,13 @@ const Canvas = forwardRef((props, ref) => {
     }
   })
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (selectedTextChanged) {
       setItemSelected(selectedText)
     }
   })
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (selectedTitleChanged) {
       setTitleSelected(clickTitle)
     }
@@ -418,55 +418,29 @@ const Canvas = forwardRef((props, ref) => {
                 margin: `${padding}px`,
                 display: 'table',
                 tableLayout: 'fixed',
-                width: 'calc(100% - 20px)'
+                width: `calc(100% - ${Math.abs(padding * 2)}px)`
               }}
               onClick={removeSelectedItem}>
               <div style={{ display: 'table-cell', verticalAlign: 'middle' }}>
                 {data.inputItem.title ? (
                   <div ref={titleRef}>
-                    <table className="pixgen-table">
-                      <tbody>
-                        <tr>
-                          {data.inputItem.title.length >= 3 ? (
-                            <td
-                              className={`pix-title ${titleSelected ? 'pix-title-selected' : ''}`}
-                              onClick={onTitleSelect}>
-                              <FontStyled value={data.inputItem} multiline={false} maxSize={300} />
-                            </td>
-                          ) : (
-                            <td>
-                              <ItemLoader data={data.inputItem.title} />
-                            </td>
-                          )}
-                        </tr>
-                      </tbody>
-                    </table>
+                    <div className="pix-title-container">
+                      {data.inputItem.title.length >= 3 ? (
+                        <div
+                          className={`pix-title ${titleSelected ? 'pix-title-selected' : ''}`}
+                          onClick={onTitleSelect}>
+                          <FontStyled value={data.inputItem} multiline={false} maxSize={300} />
+                        </div>
+                      ) : (
+                        <div className="pix-title">
+                          <ItemLoader data={data.inputItem.title} />
+                        </div>
+                      )}
+                    </div>
                   </div>
                 ) : (
                   <></>
                 )}
-                {/* {data.inputItem.items ? (
-                  <div ref={itemRef}>
-                    <TableItem
-                      imgPath={imgPath}
-                      maxSize={itemSize}
-                      items={data.inputItem.items}
-                      icons={icons}
-                      template={currentTemplate}
-                      onItemSelect={onItemSelect}
-                      itemSelected={itemSelected}
-                      handleDrag={handleDrag}
-                      handleDragOver={handleDragOver}
-                      handleDrop={handleDrop}
-                      dragId={dragId}
-                      targetDrag={targetDrag}
-                      setDragId={setDragId}
-                      handleTouchTarget={handleTouchTarget}
-                    />
-                  </div>
-                ) : (
-                  <></>
-                )} */}
                 {data.inputItem.items ? (
                   <div ref={itemRef}>
                     <TableItem
