@@ -122,7 +122,9 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
 
     const filteredIcons = icons.filter((element) => {
       const tags = element.tags.map((tag) => tag.toLowerCase())
-      const arrName = element.name.includes(items.inputItem.items[index].realText.toLowerCase())
+      const arrName = element.name
+        .toLowerCase()
+        .includes(items.inputItem.items[index].realText.toLowerCase())
       const arrTags = tags.some((subElement) =>
         subElement.includes(items.inputItem.items[index].realText.toLowerCase())
       )
@@ -230,7 +232,9 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
     if (items.inputItem.items[index].realText.length > 0) {
       filteredIcons = icons.filter((element) => {
         const tags = element.tags.map((tag) => tag.toLowerCase())
-        const arrName = element.name.includes(items.inputItem.items[index].realText.toLowerCase())
+        const arrName = element.name
+          .toLowerCase()
+          .includes(items.inputItem.items[index].realText.toLowerCase())
         const arrTags = tags.some((subElement) =>
           subElement.includes(items.inputItem.items[index].realText.toLowerCase())
         )
