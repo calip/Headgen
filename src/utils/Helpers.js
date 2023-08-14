@@ -57,6 +57,9 @@ const Helpers = {
     const path = config.admin ? `${url}/apps/pixgen` : `${url}/pixeditor`
     window.history.pushState({ path: url }, '', path)
   },
+  stringValueToBool: (value) => {
+    return value.toLowerCase() === 'yes'
+  },
   extractProducts: (products) => {
     return products.map((item) => {
       const images = item.images.map((img) => img.src)
@@ -70,6 +73,10 @@ const Helpers = {
       }
       return data
     })
+  },
+  getMetaProduct: (metadata, key) => {
+    const meta = metadata.find((x) => x.key === key)
+    return meta
   },
   extractProduct: (product) => {
     const images = product.images.map((img) => img.src)
@@ -101,7 +108,7 @@ const Helpers = {
             width: width,
             unit: unit,
             price: item.price,
-            fields: item.meta_data
+            metadata: item.meta_data
           }
         }
         return data
@@ -169,7 +176,7 @@ const Helpers = {
         return i18n.t('Spacing')
     }
   },
-  setData: (unit, width, height) => {
+  setData: (unit, width, height, fontSelection, spaceSelection, fonts) => {
     let id = Helpers.getRandomId()
     const data = {
       id: id,
@@ -178,6 +185,9 @@ const Helpers = {
       fontPadding: 0,
       fontSpacing: '',
       template: 1,
+      fonts: fonts,
+      fontSelection: fontSelection,
+      spaceSelection: spaceSelection,
       format: null,
       height: height,
       width: width,
