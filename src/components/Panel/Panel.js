@@ -130,6 +130,15 @@ function Panel({
   }
 
   const selectFormat = (inputFormat, variation) => {
+    const productTemplate = Helpers.getMetaProduct(variation.metadata, 'pixgen_template_select')
+    const selectTemplate = template.templates.find((i) => i.id === Math.abs(productTemplate.value))
+    const productFonts = Helpers.getMetaProduct(variation.metadata, 'pixgen_font_select')
+    const productFont = Helpers.getMetaProduct(variation.metadata, 'pixgen_font_check')
+    const productSpace = Helpers.getMetaProduct(variation.metadata, 'pixgen_space_check')
+    const selectFont = Helpers.stringValueToBool(productFont.value)
+    const selectSpace = Helpers.stringValueToBool(productSpace.value)
+
+    template.setInputTemplate(selectTemplate)
     layout.setLayoutFormat(inputFormat.id)
     layout.setLayoutWidth(variation.width)
     layout.setLayoutHeight(variation.height)
@@ -143,6 +152,10 @@ function Panel({
     temp.height = variation.height
     temp.unit = variation.unit
     temp.placeholder = true
+    temp.template = selectTemplate.id
+    temp.fonts = productFonts.value
+    temp.fontSelection = selectFont
+    temp.spaceSelection = selectSpace
     showTutorial()
     Helpers.saveInputToLocalStorage(items, config, temp.items)
   }
