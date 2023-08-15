@@ -29,11 +29,14 @@ function Editor({ config, products, selectItem, currency }) {
   const templates = config.templates
   const language = config.language
   const tutorial = config.tutorial
+  const fonts = config.fonts
+  const fontSelection = config.toolbar.fontFamily
+  const spaceSelection = config.toolbar.fontSpacing
   const sidebarOpen = Helpers.isTouchScreenDevice() ? false : true
   const panelOpen = Helpers.isTouchScreenDevice() ? false : true
 
   const [initFormat, setInitFormat] = useState(false)
-  const initialInput = Helpers.setData(unit, width, height)
+  const initialInput = Helpers.setData(unit, width, height, fontSelection, spaceSelection, fonts)
 
   const [isAdmin, setIsAdmin] = useState(false)
   const [fontType, setFontType] = useState('FontFamily')
@@ -205,6 +208,7 @@ function Editor({ config, products, selectItem, currency }) {
   const loadLocalStorage = (config) => {
     const items = Helpers.getInputItem(config)
     if (items) {
+      console.log(items)
       setInputItem(items)
       i18n.changeLanguage(language)
     } else {
