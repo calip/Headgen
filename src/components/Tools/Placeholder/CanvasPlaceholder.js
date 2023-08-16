@@ -39,7 +39,7 @@ function CanvasPlaceholder(props) {
               </tbody>
             </table>
           </div>
-          <div>
+          <div ref={props.itemRef}>
             <TableItem
               imgPath={props.imgPath}
               maxSize={props.itemSize}

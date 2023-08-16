@@ -18,7 +18,6 @@ function NavBar({ toggle, font, items, config, admin, downloadFn, addToCart }) {
   const currentFontSelection = items.inputItem.fontSelection
   const currentSpaceSelection = items.inputItem.spaceSelection
   const currentFonts = items.inputItem.fonts
-  console.log(items.inputItem.fonts)
 
   const onFontTypeChange = (eventkey) => {
     font.setFontType(eventkey)

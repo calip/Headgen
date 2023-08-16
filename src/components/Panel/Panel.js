@@ -131,12 +131,18 @@ function Panel({
 
   const selectFormat = (inputFormat, variation) => {
     const productTemplate = Helpers.getMetaProduct(variation.metadata, 'pixgen_template_select')
-    const selectTemplate = template.templates.find((i) => i.id === Math.abs(productTemplate.value))
+    const selectedProductTemplate = productTemplate ? Math.abs(productTemplate.value) : 1
+    const selectTemplate = template.templates.find((i) => i.id === selectedProductTemplate)
     const productFonts = Helpers.getMetaProduct(variation.metadata, 'pixgen_font_select')
+    const selectedProductFonts = productFonts ? productFonts.value : config.fonts
     const productFont = Helpers.getMetaProduct(variation.metadata, 'pixgen_font_check')
+    const selectedProductFont = productFont
+      ? Helpers.stringValueToBool(productFont.value)
+      : config.toolbar.fontFamily
     const productSpace = Helpers.getMetaProduct(variation.metadata, 'pixgen_space_check')
-    const selectFont = Helpers.stringValueToBool(productFont.value)
-    const selectSpace = Helpers.stringValueToBool(productSpace.value)
+    const selectedProductSpace = productSpace
+      ? Helpers.stringValueToBool(productSpace.value)
+      : config.toolbar.fontSpacing
 
     template.setInputTemplate(selectTemplate)
     layout.setLayoutFormat(inputFormat.id)
@@ -153,9 +159,9 @@ function Panel({
     temp.unit = variation.unit
     temp.placeholder = true
     temp.template = selectTemplate.id
-    temp.fonts = productFonts.value
-    temp.fontSelection = selectFont
-    temp.spaceSelection = selectSpace
+    temp.fonts = selectedProductFonts
+    temp.fontSelection = selectedProductFont
+    temp.spaceSelection = selectedProductSpace
     showTutorial()
     Helpers.saveInputToLocalStorage(items, config, temp.items)
   }
@@ -319,26 +325,32 @@ function Panel({
           <></>
         )}
         <hr />
-        <h6 className="mb-3">{i18n.t('Template')}</h6>
-        <div className="panel-container">
-          <DropdownButton
-            variant="outline-dark"
-            className={'font-style-dropdown ps-1'}
-            disabled={currentTemplate == null}
-            id="font-space"
-            size="sm"
-            title={currentTemplate.name ?? 'Templates'}
-            onSelect={onTemplateChange}>
-            {template.templates.map((temp) => (
-              <Dropdown.Item eventKey={temp.id} key={temp.id}>
-                <label className={temp.id}>
-                  {temp.name} {JSON.stringify(temp.layout)}
-                </label>
-              </Dropdown.Item>
-            ))}
-          </DropdownButton>
-        </div>
-        <hr />
+        {admin.isAdmin ? (
+          <>
+            <h6 className="mb-3">{i18n.t('Template')}</h6>
+            <div className="panel-container">
+              <DropdownButton
+                variant="outline-dark"
+                className={'font-style-dropdown ps-1'}
+                disabled={currentTemplate == null}
+                id="font-space"
+                size="sm"
+                title={currentTemplate.name ?? 'Templates'}
+                onSelect={onTemplateChange}>
+                {template.templates.map((temp) => (
+                  <Dropdown.Item eventKey={temp.id} key={temp.id}>
+                    <label className={temp.id}>
+                      {temp.name} {JSON.stringify(temp.layout)}
+                    </label>
+                  </Dropdown.Item>
+                ))}
+              </DropdownButton>
+            </div>
+            <hr />
+          </>
+        ) : (
+          <></>
+        )}
         <div className="panel-container">
           <Button variant="outline-secondary" size="sm" onClick={showDialog}>
             <FontAwesomeIcon icon={faEraser} /> {i18n.t('ClearSession')}
