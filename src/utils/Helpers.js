@@ -253,9 +253,39 @@ const Helpers = {
         rightSpace: 2
       },
       {
+        letter: 'B',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'C',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'D',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'E',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
         letter: 'F',
         leftSpace: 0,
         rightSpace: 2
+      },
+      {
+        letter: 'G',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'H',
+        leftSpace: 0,
+        rightSpace: 1
       },
       {
         letter: 'I',
@@ -273,9 +303,49 @@ const Helpers = {
         rightSpace: 2
       },
       {
+        letter: 'M',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'N',
+        leftSpace: 0,
+        rightSpace: 2
+      },
+      {
+        letter: 'O',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'P',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'Q',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'R',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'S',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
         letter: 'T',
         leftSpace: 0,
         rightSpace: 2
+      },
+      {
+        letter: 'U',
+        leftSpace: 0,
+        rightSpace: 1
       },
       {
         letter: 'V',
@@ -313,9 +383,19 @@ const Helpers = {
         rightSpace: 2
       },
       {
+        letter: 'c',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
         letter: 'd',
         leftSpace: 0,
         rightSpace: 2
+      },
+      {
+        letter: 'e',
+        leftSpace: 0,
+        rightSpace: 1
       },
       {
         letter: 'f',
@@ -325,6 +405,11 @@ const Helpers = {
       {
         letter: 'g',
         leftSpace: 2,
+        rightSpace: 1
+      },
+      {
+        letter: 'h',
+        leftSpace: 0,
         rightSpace: 1
       },
       {
@@ -338,13 +423,83 @@ const Helpers = {
         rightSpace: 1
       },
       {
+        letter: 'k',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'l',
+        leftSpace: 0,
+        rightSpace: 2
+      },
+      {
+        letter: 'm',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'n',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'o',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
         letter: 'p',
         leftSpace: 2,
         rightSpace: 1
       },
       {
+        letter: 'q',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'r',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 's',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 't',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'u',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'v',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'w',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
+        letter: 'x',
+        leftSpace: 0,
+        rightSpace: 1
+      },
+      {
         letter: 'y',
         leftSpace: 1,
+        rightSpace: 1
+      },
+      {
+        letter: 'z',
+        leftSpace: 0,
         rightSpace: 1
       }
     ]
