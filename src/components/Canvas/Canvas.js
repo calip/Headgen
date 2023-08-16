@@ -400,6 +400,7 @@ const Canvas = forwardRef((props, ref) => {
             currentTemplate={currentTemplate}
             titleRef={titleRef}
             contentRef={contentRef}
+            itemRef={itemRef}
           />
         ) : (
           <div
