@@ -208,7 +208,6 @@ function Editor({ config, products, selectItem, currency }) {
   const loadLocalStorage = (config) => {
     const items = Helpers.getInputItem(config)
     if (items) {
-      console.log(items)
       setInputItem(items)
       i18n.changeLanguage(language)
     } else {
