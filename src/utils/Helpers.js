@@ -134,8 +134,7 @@ const Helpers = {
         height: height,
         width: width,
         unit: unit,
-        price: variation.price,
-        metadata: variation.meta_data
+        price: variation.price
       }
     }
     return data

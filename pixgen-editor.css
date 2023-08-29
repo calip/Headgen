@@ -1,0 +1,8 @@
+.pixgen-main {
+	height: 100% !important;
+	width: 100% !important;
+}
+
+.content-area {
+	height: calc(100vh - 155px);
+}
