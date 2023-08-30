@@ -25,6 +25,9 @@ function Editor({ config, products, selectItem, currency }) {
   const dpc = config.layout.dpc
   const unit = config.layout.unit
   const border = config.layout.border
+  console.log(config.layout.backgroundColor)
+  const backgroundColor = config.layout.backgroundColor
+  const fontColor = config.layout.fontColor
   const icons = config.input.icons
   const templates = config.templates
   const language = config.language
@@ -50,6 +53,8 @@ function Editor({ config, products, selectItem, currency }) {
   const [layoutUnit, setLayoutUnit] = useState(unit)
   const [layoutDpc, setLayoutDpc] = useState(dpc)
   const [layoutBorder, setLayoutBorder] = useState(border)
+  const [layoutBackgroundColor, setLayoutBackgroundColor] = useState(backgroundColor)
+  const [layoutFontColor, setLayoutFontColor] = useState(fontColor)
   const [layoutPadding, setLayoutPadding] = useState(padding)
   const [inputItem, setInputItem] = useState(initialInput)
   const [inputTemplate, setInputTemplate] = useState(templates[0])
@@ -175,7 +180,11 @@ function Editor({ config, products, selectItem, currency }) {
     layoutFormat: layoutFormat,
     setLayoutFormat: setLayoutFormat,
     layoutBorder: layoutBorder,
-    setLayoutBorder: setLayoutBorder
+    setLayoutBorder: setLayoutBorder,
+    layoutBackgroundColor: layoutBackgroundColor,
+    setLayoutBackgroundColor: setLayoutBackgroundColor,
+    layoutFontColor: layoutFontColor,
+    setLayoutFontColor: setLayoutFontColor
   }
 
   const render = {
