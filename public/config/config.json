@@ -1,8 +1,8 @@
 {
-    "appId": 3,
-    "appName": "Wordpix",
+    "appId": 1,
+    "appName": "Pixgen",
     "language": "de",
-    "admin": false,
+    "admin": true,
     "layout": {
         "format": null,
         "width": 40,
@@ -10,7 +10,9 @@
         "padding": 1,
         "unit": "px",
         "dpc": 100,
-        "border": true
+        "border": true,
+        "backgroundColor": "#ff0000",
+        "fontColor": "#ffff00"
     },
     "templates": [
         {
@@ -3403,7 +3405,6 @@
                 "target": ".pixgen-navbar",
                 "placement": "bottom",
                 "content": "Welcome!! Please spare a minute to learn about our page",
-                "disableScrolling": true,
                 "disableBeacon": true,
                 "disableOverlayClose": true,
                 "hideCloseButton": true
@@ -3412,7 +3413,6 @@
                 "target": ".pixgen-sidebar",
                 "placement": "right",
                 "content": "You add text here",
-                "disableScrolling": true,
                 "disableBeacon": true,
                 "disableOverlayClose": true,
                 "hideCloseButton": true
@@ -3421,7 +3421,6 @@
                 "target": ".pixgen-panel",
                 "placement": "left",
                 "content": "Setting panel",
-                "disableScrolling": true,
                 "disableBeacon": true,
                 "disableOverlayClose": true,
                 "hideCloseButton": true
@@ -3430,7 +3429,6 @@
                 "target": ".pixgen-zoom-container",
                 "placement": "top",
                 "content": "Minimize and maximize canvas",
-                "disableScrolling": true,
                 "disableBeacon": true,
                 "disableOverlayClose": true,
                 "hideCloseButton": true
@@ -3439,7 +3437,6 @@
                 "target": ".pixgen-editor-frame",
                 "placement": "left",
                 "content": "Canvas Editor",
-                "disableScrolling": true,
                 "disableBeacon": true,
                 "disableOverlayClose": true,
                 "hideCloseButton": true
