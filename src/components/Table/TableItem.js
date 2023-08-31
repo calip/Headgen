@@ -3,6 +3,7 @@ import TableData from './TableData'
 
 const TableItem = ({
   imgPath,
+  fontColor,
   maxSize,
   items,
   icons,
@@ -32,6 +33,7 @@ const TableItem = ({
           <div className="pix-item" key={id}>
             <TableData
               imgPath={imgPath}
+              fontColor={fontColor}
               maxSize={maxSize}
               data={data}
               icons={icons}
