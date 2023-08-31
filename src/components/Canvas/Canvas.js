@@ -44,6 +44,8 @@ const Canvas = forwardRef((props, ref) => {
   const height = Math.abs(initHeight / 10)
   const padding = Math.abs(initPadding / 10)
   const border = Math.abs(props.layout.layoutBorder)
+  const backgroundColor = props.items.inputItem?.backgroundColor
+  const fontColor = props.items.inputItem?.fontColor
   const icons = props.icons
   const [itemSelected, setItemSelected] = useState()
   const [fontSelected, setFontSelected] = useState('')
@@ -386,12 +388,16 @@ const Canvas = forwardRef((props, ref) => {
     )
   } else {
     return (
-      <div className="pix-editor-canvas">
+      <div
+        className="pix-editor-canvas"
+        style={{ backgroundColor: `${backgroundColor}`, color: `${fontColor}` }}>
         {data?.inputItem?.placeholder ? (
           <CanvasPlaceholder
             width={width}
             height={height}
             border={border}
+            backgroundColor={backgroundColor}
+            fontColor={fontColor}
             padding={padding}
             placeholder={props.config.placeholder}
             icons={icons}
@@ -419,7 +425,8 @@ const Canvas = forwardRef((props, ref) => {
                 margin: `${padding}px`,
                 display: 'table',
                 tableLayout: 'fixed',
-                width: `calc(100% - ${Math.abs(padding * 2)}px)`
+                width: `calc(100% - ${Math.abs(padding * 2)}px)`,
+                filter: `invert(${backgroundColor === '#a5a5a5' ? '1' : '0'})`
               }}
               onClick={removeSelectedItem}>
               <div style={{ display: 'table-cell', verticalAlign: 'middle' }}>
@@ -446,6 +453,7 @@ const Canvas = forwardRef((props, ref) => {
                   <div ref={itemRef}>
                     <TableItem
                       imgPath={imgPath}
+                      fontColor={fontColor}
                       maxSize={itemSize}
                       items={data.inputItem.items}
                       icons={icons}

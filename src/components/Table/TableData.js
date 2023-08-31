@@ -3,6 +3,7 @@ import FontStyled from '../../utils/FontStyled'
 
 const TableData = ({
   imgPath,
+  fontColor,
   maxSize,
   data,
   icons,
@@ -167,6 +168,7 @@ const TableData = ({
           multiline={true}
           maxSize={maxSize}
           imgPath={imgPath}
+          fontColor={fontColor}
         />
       </div>
     )
