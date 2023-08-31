@@ -101,6 +101,10 @@ const FontStyled = (props) => {
                     }}>
                     <ReactSVG
                       beforeInjection={(svg) => {
+                        const paths = svg.querySelectorAll('path')
+                        for (let i = 0; i < paths.length; i++) {
+                          paths[i].setAttribute('style', `fill: ${props.fontColor}`)
+                        }
                         svg.setAttribute('style', Helpers.getIconStyle(props.value.font))
                       }}
                       src={`${props.imgPath}${Helpers.getIconForButton(
