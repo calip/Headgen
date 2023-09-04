@@ -13,6 +13,7 @@ import {
   FormControl,
   FormGroup,
   FormLabel,
+  InputGroup,
   Row
 } from 'react-bootstrap'
 import Dialog from '../Dialog/Dialog'
@@ -41,6 +42,8 @@ function Panel({
   const currentFormat = items.inputItem.format
   const currentVariation = items.inputItem.variation
   const currentUnit = items.inputItem.unit
+  const currentBackgroundColor = items.inputItem.backgroundColor
+  const currentFontColor = items.inputItem.fontColor
 
   const [show, setShow] = useState(false)
   const [showFormat, setShowFormat] = useState(false)
@@ -85,6 +88,38 @@ function Panel({
 
     let temp = items.inputItem
     temp.width = Math.abs(event.target.value)
+    Helpers.saveInputToLocalStorage(items, config, temp.items)
+  }
+
+  const onBackgroundColorChange = (event) => {
+    layout.setLayoutBackgroundColor(event.target.value)
+
+    let temp = items.inputItem
+    temp.backgroundColor = event.target.value
+    Helpers.saveInputToLocalStorage(items, config, temp.items)
+  }
+
+  const onResetBackgroundColor = () => {
+    layout.setLayoutBackgroundColor(config.layout.backgroundColor)
+
+    let temp = items.inputItem
+    temp.backgroundColor = config.layout.backgroundColor
+    Helpers.saveInputToLocalStorage(items, config, temp.items)
+  }
+
+  const onFontColorChange = (event) => {
+    layout.setLayoutFontColor(event.target.value)
+
+    let temp = items.inputItem
+    temp.fontColor = event.target.value
+    Helpers.saveInputToLocalStorage(items, config, temp.items)
+  }
+
+  const onResetFontColor = () => {
+    layout.setLayoutFontColor(config.layout.fontColor)
+
+    let temp = items.inputItem
+    temp.fontColor = config.layout.fontColor
     Helpers.saveInputToLocalStorage(items, config, temp.items)
   }
 
@@ -324,6 +359,45 @@ function Panel({
         ) : (
           <></>
         )}
+        <h6 className="mb-3">Color</h6>
+        <div className="panel-container">
+          <Row>
+            <Col>
+              <FormGroup className="mb-3">
+                <FormLabel>{i18n.t('Background')}</FormLabel>
+                <InputGroup className="mb-3">
+                  <FormControl
+                    className={`form-control-sm ${
+                      currentBackgroundColor === 'transparent' ? 'crossed' : ''
+                    }`}
+                    type="color"
+                    value={currentBackgroundColor}
+                    onChange={onBackgroundColorChange}
+                  />
+                  <Button variant="outline-secondary" size="sm" onClick={onResetBackgroundColor}>
+                    x
+                  </Button>
+                </InputGroup>
+              </FormGroup>
+            </Col>
+            <Col>
+              <FormGroup className="mb-3">
+                <FormLabel>{i18n.t('Font')}</FormLabel>
+                <InputGroup className="mb-3">
+                  <FormControl
+                    className="form-control-sm"
+                    type="color"
+                    value={currentFontColor}
+                    onChange={onFontColorChange}
+                  />
+                  <Button variant="outline-secondary" size="sm" onClick={onResetFontColor}>
+                    x
+                  </Button>
+                </InputGroup>
+              </FormGroup>
+            </Col>
+          </Row>
+        </div>
         <hr />
         {admin.isAdmin ? (
           <>
