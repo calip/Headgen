@@ -12,14 +12,18 @@ function CanvasPlaceholder(props) {
         minWidth: `${props.width}px`,
         maxWidth: `${props.width}px`,
         minHeight: `${props.height}px`,
-        maxHeight: `${props.height}px`
+        maxHeight: `${props.height}px`,
+        backgroundColor: `${props.backgroundColor}`,
+        color: `${props.fontColor}`
       }}>
       <div
         className={props.border ? 'center-screen' : null}
         ref={props.contentRef}
         style={{
           margin: `${props.padding}px`,
-          display: 'table'
+          display: 'table',
+          tableLayout: 'fixed',
+          width: `calc(100% - ${Math.abs(props.padding * 2)}px)`
         }}>
         <div
           style={{
@@ -42,6 +46,7 @@ function CanvasPlaceholder(props) {
           <div ref={props.itemRef}>
             <TableItem
               imgPath={props.imgPath}
+              fontColor={props.fontColor}
               maxSize={props.itemSize}
               items={data.items}
               icons={props.icons}
