@@ -193,6 +193,8 @@ const Helpers = {
       height: height,
       width: width,
       unit: unit,
+      backgroundColor: 'transparent',
+      fontColor: '#000000',
       placeholder: false,
       variation: null,
       items: [Helpers.setItems()]

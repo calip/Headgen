@@ -1,7 +1,7 @@
 import html2canvas from 'html2canvas'
 import * as changedpi from 'changedpi'
 
-const exportAsImage = async (element, dpc, title, quality) => {
+const exportAsImage = async (element, dpc, title, quality, backgroundColor) => {
   const scale = quality === 'high' ? 10 : 1
   const newDpc = quality === 'high' ? dpc : 28.346
   const imageType = quality === 'high' ? 'image/png' : 'image/jpeg'
@@ -10,7 +10,7 @@ const exportAsImage = async (element, dpc, title, quality) => {
   newElement.style.transformorigin = '0 0'
   newElement.style.position = 'fixed'
   if (quality === 'low') {
-    newElement.style.background = '#fff'
+    newElement.style.background = backgroundColor === 'transparent' ? '#ffffff' : backgroundColor
   }
   const contentElement = newElement.querySelectorAll(`.pix-content`)
   if (contentElement) {
