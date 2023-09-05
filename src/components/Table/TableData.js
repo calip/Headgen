@@ -132,6 +132,7 @@ const TableData = ({
 
       if (target) {
         const targetId = Math.abs(target.id)
+        onItemSelect(e, targetId)
         handleTouchTarget(targetId)
         setDrag(false)
         clearTargetStyle()
@@ -156,7 +157,7 @@ const TableData = ({
         onTouchMove={handleElementDrag}
         id={item.id}
         key={item.id}
-        onClick={onItemSelect(item.id)}
+        onClick={(e) => onItemSelect(e, item.id)}
         className={`pix-content ${item.id === itemSelected ? 'pix-content-selected' : ''} ${
           item.id === targetDrag ? 'pix-content-target' : ''
         }`}
