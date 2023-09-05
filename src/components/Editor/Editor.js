@@ -25,7 +25,6 @@ function Editor({ config, products, selectItem, currency }) {
   const dpc = config.layout.dpc
   const unit = config.layout.unit
   const border = config.layout.border
-  console.log(config.layout.backgroundColor)
   const backgroundColor = config.layout.backgroundColor
   const fontColor = config.layout.fontColor
   const icons = config.input.icons
@@ -65,6 +64,7 @@ function Editor({ config, products, selectItem, currency }) {
   const [clickTitle, setClickTitle] = useState(false)
   const [showErrorCart, setShowErrorCart] = useState(false)
   const [showConfirmCart, setConfirmCart] = useState(false)
+  const [showErrorExport, setShowErrorExport] = useState(false)
   const [titleError, setTitleError] = useState(false)
   const [loadWordpress, setLoadWordpress] = useState(false)
   const [showTutorial, setShowTutorial] = useState(false)
@@ -76,7 +76,17 @@ function Editor({ config, products, selectItem, currency }) {
   const [clickOutCanvas, setClickOutCanvas] = useState(false)
 
   const handleDownload = (quality) => () => {
-    exportAsImage(exportRef.current, layoutDpc, config.appName, quality)
+    if (!exportRef.current) {
+      showErrorExportDialog()
+      return
+    }
+    exportAsImage(
+      exportRef.current,
+      layoutDpc,
+      config.appName,
+      quality,
+      items.inputItem?.backgroundColor
+    )
   }
 
   const showConfirmCartDialog = () => {
@@ -85,6 +95,10 @@ function Editor({ config, products, selectItem, currency }) {
 
   const showErrorCartDialog = () => {
     setShowErrorCart((showErrorCart) => !showErrorCart)
+  }
+
+  const showErrorExportDialog = () => {
+    setShowErrorExport((showErrorExport) => !showErrorExport)
   }
 
   const handleAddToCart = () => {
@@ -355,6 +369,13 @@ function Editor({ config, products, selectItem, currency }) {
         dialogFn={showErrorCartDialog}
         title={i18n.t('AddToCartError')}
         description={titleError ? i18n.t('InputTitleEmpty') : i18n.t('InputItemEmpty')}
+      />
+
+      <ErrorDialog
+        show={showErrorExport}
+        dialogFn={showErrorExportDialog}
+        title={i18n.t('ExportError')}
+        description={i18n.t('UnableToSaveEmptyCanvas')}
       />
 
       <Dialog
