@@ -120,22 +120,26 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
       tempItems[index].font = currentTemplate.fonts[0]
     }
 
-    const filteredIcons = icons.filter((element) => {
-      const tags = element.tags.map((tag) => tag.toLowerCase())
-      const arrName = element.name
-        .toLowerCase()
-        .includes(items.inputItem.items[index].realText.toLowerCase())
-      const arrTags = tags.some((subElement) =>
-        subElement.includes(items.inputItem.items[index].realText.toLowerCase())
-      )
-      return arrName || arrTags
-    })
+    const filteredIcons = icons
+      .filter((element) => {
+        const tags = element.tags.map((tag) => tag.toLowerCase())
+        const arrName = element.name
+          .toLowerCase()
+          .includes(items.inputItem.items[index].realText.toLowerCase())
+        const arrTags = tags.some((subElement) =>
+          subElement.includes(items.inputItem.items[index].realText.toLowerCase())
+        )
+        return arrName || arrTags
+      })
+      .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
+
     if (filteredIcons.length <= 0 || tempItems[index].realText === '') {
       tempItems[index].icon = ''
     }
     tempItems[index].loading = false
 
-    tempItems[index].icon = filteredIcons.length === 1 ? filteredIcons[0].name : ''
+    tempItems[index].icon = filteredIcons.length >= 1 ? filteredIcons[0].name : ''
+
     temp.items = tempItems
     items.setInputItem((prevState) => {
       return { ...prevState, [items]: temp.items }
@@ -230,16 +234,18 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
   const renderDropdownIcon = (index) => {
     let filteredIcons = []
     if (items.inputItem.items[index].realText.length > 0) {
-      filteredIcons = icons.filter((element) => {
-        const tags = element.tags.map((tag) => tag.toLowerCase())
-        const arrName = element.name
-          .toLowerCase()
-          .includes(items.inputItem.items[index].realText.toLowerCase())
-        const arrTags = tags.some((subElement) =>
-          subElement.includes(items.inputItem.items[index].realText.toLowerCase())
-        )
-        return arrName || arrTags
-      })
+      filteredIcons = icons
+        .filter((element) => {
+          const tags = element.tags.map((tag) => tag.toLowerCase())
+          const arrName = element.name
+            .toLowerCase()
+            .includes(items.inputItem.items[index].realText.toLowerCase())
+          const arrTags = tags.some((subElement) =>
+            subElement.includes(items.inputItem.items[index].realText.toLowerCase())
+          )
+          return arrName || arrTags
+        })
+        .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
     }
     const defaultIcons = icons.filter((icon) =>
       config.input.defaultIcon.includes(icon.name.toLowerCase())
