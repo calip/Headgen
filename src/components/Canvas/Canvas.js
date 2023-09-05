@@ -83,14 +83,14 @@ const Canvas = forwardRef((props, ref) => {
 
   const onTitleSelect = (event) => {
     event.stopPropagation()
-    setItemSelected()
     setTitleSelected(true)
     props.selectText.setClickTitle(true)
     props.selectText.setClickItem(false)
     props.selectText.setTextItem()
+    setItemSelected()
   }
 
-  const onItemSelect = (id) => (event) => {
+  const onItemSelect = (event, id) => {
     event.stopPropagation()
     setItemSelected(id)
     props.selectText.setClickItem(true)
@@ -232,6 +232,7 @@ const Canvas = forwardRef((props, ref) => {
   const [targetDrag, setTargetDrag] = useState()
 
   const handleDrag = (ev) => {
+    console.log(dragId)
     setDragId(Math.abs(ev.currentTarget.id))
   }
 
@@ -388,9 +389,7 @@ const Canvas = forwardRef((props, ref) => {
     )
   } else {
     return (
-      <div
-        className="pix-editor-canvas"
-        style={{ backgroundColor: `${backgroundColor}`, color: `${fontColor}` }}>
+      <div className="pix-editor-canvas">
         {data?.inputItem?.placeholder ? (
           <CanvasPlaceholder
             width={width}
@@ -415,7 +414,9 @@ const Canvas = forwardRef((props, ref) => {
               minWidth: `${width}px`,
               maxWidth: `${width}px`,
               minHeight: `${height}px`,
-              maxHeight: `${height}px`
+              maxHeight: `${height}px`,
+              backgroundColor: `${backgroundColor}`,
+              color: `${fontColor}`
             }}
             ref={ref}>
             <div
@@ -436,7 +437,7 @@ const Canvas = forwardRef((props, ref) => {
                       {data.inputItem.title.length >= 3 ? (
                         <div
                           className={`pix-title ${titleSelected ? 'pix-title-selected' : ''}`}
-                          onClick={onTitleSelect}>
+                          onClick={(e) => onTitleSelect(e)}>
                           <FontStyled value={data.inputItem} multiline={false} maxSize={300} />
                         </div>
                       ) : (
