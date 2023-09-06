@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinus, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
-import { Nav, Button, InputGroup, FormControl, Spinner, Dropdown } from 'react-bootstrap'
+import { Nav, Button, InputGroup, FormControl, Dropdown } from 'react-bootstrap'
 import classNames from 'classnames'
 import Helpers from '../../utils/Helpers'
 import './Sidebar.scss'
@@ -22,6 +22,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
   const scrollRef = useRef()
   const emailRef = useRef('')
 
+  const dropdownRefs = useRef([])
   const realRefs = useRef([])
   const spokenRefs = useRef([])
   const titleRef = useRef()
@@ -137,9 +138,9 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
       tempItems[index].icon = ''
     }
     tempItems[index].loading = false
+    dropdownRefs.current[index].click()
 
     tempItems[index].icon = filteredIcons.length >= 1 ? filteredIcons[0].name : ''
-
     temp.items = tempItems
     items.setInputItem((prevState) => {
       return { ...prevState, [items]: temp.items }
@@ -333,42 +334,36 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
                       />
                     </>
                     <div className="list-icon">
-                      {item.loading ? (
-                        <button
-                          type="button"
-                          id="icon-spinner"
-                          aria-expanded="false"
-                          className="btn icon-input btn-icon-spinner">
-                          <Spinner animation="border" size="sm" />
-                        </button>
-                      ) : (
-                        <Dropdown onSelect={onIconChange(index)}>
-                          <Dropdown.Toggle variant="outline-white" id="icon-style" size="sm">
-                            {item.icon === '' ? (
-                              <img
-                                src={`${Helpers.getBaseUrl()}${Helpers.getIconForButton(
-                                  icons,
-                                  config.input.placeholderIcon
-                                )}`}
-                                width="30"
-                                alt={config.input.placeholderIcon}
-                              />
-                            ) : (
-                              <img
-                                src={`${Helpers.getBaseUrl()}${Helpers.getIconForButton(
-                                  icons,
-                                  item.icon
-                                )}`}
-                                width="30"
-                                alt={item.icon}
-                              />
-                            )}
-                          </Dropdown.Toggle>
-                          <Dropdown.Menu popperConfig={{ strategy: 'fixed' }}>
-                            {renderDropdownIcon(index)}
-                          </Dropdown.Menu>
-                        </Dropdown>
-                      )}
+                      <Dropdown onSelect={onIconChange(index)}>
+                        <Dropdown.Toggle
+                          variant="outline-white"
+                          id="icon-style"
+                          size="sm"
+                          ref={(el) => (dropdownRefs.current[index] = el)}>
+                          {item.icon === '' ? (
+                            <img
+                              src={`${Helpers.getBaseUrl()}${Helpers.getIconForButton(
+                                icons,
+                                config.input.placeholderIcon
+                              )}`}
+                              width="30"
+                              alt={config.input.placeholderIcon}
+                            />
+                          ) : (
+                            <img
+                              src={`${Helpers.getBaseUrl()}${Helpers.getIconForButton(
+                                icons,
+                                item.icon
+                              )}`}
+                              width="30"
+                              alt={item.icon}
+                            />
+                          )}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu popperConfig={{ strategy: 'fixed' }}>
+                          {renderDropdownIcon(index)}
+                        </Dropdown.Menu>
+                      </Dropdown>
                     </div>
                     <>
                       <FormControl
