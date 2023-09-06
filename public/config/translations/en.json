@@ -55,5 +55,9 @@
   "PleaseWait": "Please Wait",
   "FitToWindow": "Fit To Window",
   "RealSize": "Real Size",
-  "ShowTutorial": "Show Tutorial"
+  "ShowTutorial": "Show Tutorial",
+  "Background": "Background",
+  "Font": "Font",
+  "UnableToSaveEmptyCanvas": "Unable to save empty canvas",
+  "ExportError": "Export Error"
 }
