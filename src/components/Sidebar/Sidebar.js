@@ -27,6 +27,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
   const spokenRefs = useRef([])
   const titleRef = useRef()
 
+  // console.log(items.inputItem.items)
   const currentTemplate = template.templates.find((item) => item.id === items.inputItem.template)
 
   useEffect(() => {
@@ -121,26 +122,40 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
       tempItems[index].font = currentTemplate.fonts[0]
     }
 
-    const filteredIcons = icons
-      .filter((element) => {
-        const tags = element.tags.map((tag) => tag.toLowerCase())
-        const arrName = element.name
-          .toLowerCase()
-          .includes(items.inputItem.items[index].realText.toLowerCase())
-        const arrTags = tags.some((subElement) =>
-          subElement.includes(items.inputItem.items[index].realText.toLowerCase())
-        )
-        return arrName || arrTags
-      })
-      .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
+    let filteredIcons = []
+    if (tempItems[index].realText.length > 0) {
+      filteredIcons = icons
+        .filter((element) => {
+          const tags = element.tags.map((tag) => tag.toLowerCase())
+          const arrName = element.name
+            .toLowerCase()
+            .includes(items.inputItem.items[index].realText.toLowerCase())
+          const arrTags = tags.some((subElement) =>
+            subElement.includes(items.inputItem.items[index].realText.toLowerCase())
+          )
+          return arrName || arrTags
+        })
+        .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
+    }
 
     if (filteredIcons.length <= 0 || tempItems[index].realText === '') {
+      console.log('asdasd')
       tempItems[index].icon = ''
+    }
+    if (tempItems[index].realText === '') {
+      console.log('xxx')
+      tempItems[index].previousIcon = null
     }
     tempItems[index].loading = false
     dropdownRefs.current[index].click()
-
-    tempItems[index].icon = filteredIcons.length >= 1 ? filteredIcons[0].name : ''
+    // console.log(filteredIcons)
+    const selectedIcon = filteredIcons.length >= 1 ? filteredIcons[0]?.name : ''
+    
+    const previousIcon = tempItems[index].previousIcon ? tempItems[index].previousIcon.name : ''
+    console.log( tempItems[index].previousIcon)
+    tempItems[index].icon = selectedIcon.length > 0 ? selectedIcon : previousIcon
+    // tempItems[index].previousIcon = previousIcon
+    
     temp.items = tempItems
     items.setInputItem((prevState) => {
       return { ...prevState, [items]: temp.items }
@@ -167,6 +182,8 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
     let temp = items.inputItem
     let tempItems = temp.items.map((i) => i)
     tempItems[index].icon = event
+    const prevIcon = icons.find((i) => i.name.toLowerCase() === event.toLowerCase())
+    tempItems[index].previousIcon = prevIcon
     temp.items = tempItems
     items.setInputItem((prevState) => {
       return { ...prevState, [items]: temp.items }
@@ -251,7 +268,11 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
     const defaultIcons = icons.filter((icon) =>
       config.input.defaultIcon.includes(icon.name.toLowerCase())
     )
+
     let expectedIcons = filteredIcons.concat(defaultIcons)
+    if (items.inputItem.items[index].previousIcon) {
+      expectedIcons.unshift(items.inputItem.items[index].previousIcon)
+    }
     expectedIcons = expectedIcons.filter((item, index) => {
       return expectedIcons.indexOf(item) == index
     })
