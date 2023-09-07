@@ -209,6 +209,7 @@ const Helpers = {
       realText: '',
       spokenText: '',
       icon: '',
+      previousIcon: null,
       font: '',
       fontPadding: 0,
       fontTransition: '',
