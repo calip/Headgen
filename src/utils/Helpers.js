@@ -21,6 +21,10 @@ const Helpers = {
     const data = icons.find((i) => i.name.toLowerCase() === icon.toLowerCase())
     return data.file
   },
+  getIcon: (icons, name) => {
+    const data = icons.find((i) => i.name.toLowerCase() === name.toLowerCase())
+    return data
+  },
   getSelectedFormat: (format, selected) => {
     const f = format.find((item) => item.id === parseInt(selected))
     return f
