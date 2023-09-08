@@ -139,23 +139,20 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
     }
 
     if (filteredIcons.length <= 0 || tempItems[index].realText === '') {
-      console.log('asdasd')
       tempItems[index].icon = ''
     }
     if (tempItems[index].realText === '') {
-      console.log('xxx')
       tempItems[index].previousIcon = null
     }
     tempItems[index].loading = false
     dropdownRefs.current[index].click()
-    // console.log(filteredIcons)
     const selectedIcon = filteredIcons.length >= 1 ? filteredIcons[0]?.name : ''
-    
+    tempItems[index].previousIcon = tempItems[index].previousIcon
+      ? tempItems[index].previousIcon
+      : Helpers.getIcon(icons, selectedIcon)
+
     const previousIcon = tempItems[index].previousIcon ? tempItems[index].previousIcon.name : ''
-    console.log( tempItems[index].previousIcon)
     tempItems[index].icon = selectedIcon.length > 0 ? selectedIcon : previousIcon
-    // tempItems[index].previousIcon = previousIcon
-    
     temp.items = tempItems
     items.setInputItem((prevState) => {
       return { ...prevState, [items]: temp.items }
@@ -357,6 +354,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
                     <div className="list-icon">
                       <Dropdown onSelect={onIconChange(index)}>
                         <Dropdown.Toggle
+                          className="pixgen-dropdown-btn"
                           variant="outline-white"
                           id="icon-style"
                           size="sm"
