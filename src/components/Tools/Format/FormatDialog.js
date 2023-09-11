@@ -117,6 +117,31 @@ function FormatDialog(props) {
         </div>
       </Modal.Body>
       <Modal.Footer>
+        {formatType ? (
+          <div className="pixgen-mobile-price me-auto">
+            {selectedVariation?.price ? (
+              <>
+                {others.currency.currencyPosition === 'left_space' ? (
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: `${others.currency.currencySymbol}${selectedVariation?.price}`
+                    }}
+                  />
+                ) : (
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: `${selectedVariation?.price}${others.currency.currencySymbol}`
+                    }}
+                  />
+                )}
+              </>
+            ) : (
+              <span dangerouslySetInnerHTML={{ __html: `${minMaxPrice}` }} />
+            )}
+          </div>
+        ) : (
+          <></>
+        )}
         <Button
           variant="secondary"
           onClick={handleBack}
