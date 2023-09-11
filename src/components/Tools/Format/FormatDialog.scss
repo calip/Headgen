@@ -15,3 +15,22 @@
   display: none;
   opacity: 0;
 }
+
+.pixgen-mobile-price {
+  font-weight: bold;
+  font-size: 14px;
+  color: #a10101;
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .pixgen-mobile-price {
+    display: block;
+  }
+}
+
+@media (min-device-width : 768px) and (max-device-width : 1024px) {
+  .pixgen-mobile-price {
+    display: block;
+  }
+}
