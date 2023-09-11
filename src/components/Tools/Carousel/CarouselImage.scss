@@ -35,4 +35,14 @@
       font-size: 8px;
     }
   }
+
+  .carousel-tags {
+    display: none;
+  }
+}
+
+@media (min-device-width : 768px) and (max-device-width : 1024px) {
+  .carousel-tags span {
+    display: none;
+  }
 }
