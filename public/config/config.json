@@ -12,7 +12,8 @@
         "dpc": 100,
         "border": true,
         "backgroundColor": "transparent",
-        "fontColor": "#000000"
+        "fontColor": "#000000",
+        "imagePlaceholder": "/img/placeholder.png"
     },
     "templates": [
         {
