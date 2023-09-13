@@ -101,6 +101,7 @@ function FormatDialog(props) {
               {formatType ? (
                 <div className="format-page">
                   <CarouselImage
+                    layout={others.config.layout}
                     format={formatType}
                     currency={others.currency}
                     onSelectVariation={onSelectVariation}
@@ -109,7 +110,11 @@ function FormatDialog(props) {
                 </div>
               ) : (
                 <div className="format-page">
-                  <FormatType format={others.format} onSelectFormat={onSelectFormat} />
+                  <FormatType
+                    format={others.format}
+                    layout={others.config.layout}
+                    onSelectFormat={onSelectFormat}
+                  />
                 </div>
               )}
             </>
