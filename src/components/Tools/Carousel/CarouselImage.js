@@ -1,6 +1,7 @@
 import { Button, Carousel, Col, Container, Row } from 'react-bootstrap'
 import './CarouselImage.scss'
 import { useState } from 'react'
+import Helpers from '../../../utils/Helpers'
 
 function CarouselImage(props) {
   const [activeVariation, setActiveVariation] = useState()
@@ -17,15 +18,27 @@ function CarouselImage(props) {
       <Row>
         <Col>
           <div className="carousel-content">
-            <Carousel variant="dark">
-              {props.format.images.map((item, index) => {
-                return (
-                  <Carousel.Item key={index}>
-                    <img className="carousel-img" src={item} alt="carousel image" />
-                  </Carousel.Item>
-                )
-              })}
-            </Carousel>
+            {props.format.images.length > 0 ? (
+              <Carousel variant="dark">
+                {props.format.images.map((item, index) => {
+                  return (
+                    <Carousel.Item key={index}>
+                      <img className="carousel-img" src={item} alt="carousel image" />
+                    </Carousel.Item>
+                  )
+                })}
+              </Carousel>
+            ) : (
+              <Carousel variant="dark">
+                <Carousel.Item>
+                  <img
+                    className="carousel-img"
+                    src={`${Helpers.getBaseUrl()}${props.layout.imagePlaceholder}`}
+                    alt="carousel image"
+                  />
+                </Carousel.Item>
+              </Carousel>
+            )}
             {price ? (
               <div className="carousel-tags">
                 {props.currency.currencyPosition === 'left_space' ? (
