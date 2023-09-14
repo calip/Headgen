@@ -399,32 +399,26 @@ function Panel({
           </Row>
         </div>
         <hr />
-        {admin.isAdmin ? (
-          <>
-            <h6 className="mb-3">{i18n.t('Template')}</h6>
-            <div className="panel-container">
-              <DropdownButton
-                variant="outline-dark"
-                className={'font-style-dropdown ps-1'}
-                disabled={currentTemplate == null}
-                id="font-space"
-                size="sm"
-                title={currentTemplate.name ?? 'Templates'}
-                onSelect={onTemplateChange}>
-                {template.templates.map((temp) => (
-                  <Dropdown.Item eventKey={temp.id} key={temp.id}>
-                    <label className={temp.id}>
-                      {temp.name} {JSON.stringify(temp.layout)}
-                    </label>
-                  </Dropdown.Item>
-                ))}
-              </DropdownButton>
-            </div>
-            <hr />
-          </>
-        ) : (
-          <></>
-        )}
+        <h6 className="mb-3">{i18n.t('Template')}</h6>
+        <div className="panel-container">
+          <DropdownButton
+            variant="outline-dark"
+            className={'font-style-dropdown ps-1'}
+            disabled={currentTemplate == null}
+            id="font-space"
+            size="sm"
+            title={currentTemplate.name ?? 'Templates'}
+            onSelect={onTemplateChange}>
+            {template.templates.map((temp) => (
+              <Dropdown.Item eventKey={temp.id} key={temp.id}>
+                <label className={temp.id}>
+                  {temp.name} {JSON.stringify(temp.layout)}
+                </label>
+              </Dropdown.Item>
+            ))}
+          </DropdownButton>
+        </div>
+        <hr />
         <div className="panel-container">
           <Button variant="outline-secondary" size="sm" onClick={showDialog}>
             <FontAwesomeIcon icon={faEraser} /> {i18n.t('ClearSession')}
