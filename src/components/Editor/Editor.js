@@ -234,6 +234,7 @@ function Editor({ config, products, selectItem, currency }) {
       setInputItem(items)
       i18n.changeLanguage(language)
     } else {
+      i18n.changeLanguage(language)
       setInitFormat(true)
     }
   }
