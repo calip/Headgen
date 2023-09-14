@@ -342,7 +342,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
                           item.id !== selectText.textItem ? 'greyed-out' : ''
                         }`}
                         ref={(el) => (realRefs.current[item.id] = el)}
-                        placeholder={`${i18n.t('TypeHere')}...`}
+                        placeholder={`${i18n.t('IntendentWord')}...`}
                         defaultValue={item.realText}
                         key={item.id}
                         data-index={item.id}
@@ -391,7 +391,7 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
                           item.id !== selectText.textItem ? 'greyed-out' : ''
                         }`}
                         ref={(el) => (spokenRefs.current[item.id] = el)}
-                        placeholder={`${i18n.t('TypeHere')}...`}
+                        placeholder={`${i18n.t('SpokenWord')}...`}
                         key={item.id}
                         defaultValue={item.spokenText}
                         data-index={item.id}
