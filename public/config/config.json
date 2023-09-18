@@ -1,13 +1,14 @@
 {
-    "appId": 1,
-    "appName": "Pixgen",
+    "appId": 3,
+    "appName": "Editor",
     "language": "de",
-    "admin": true,
+    "admin": false,
     "layout": {
         "format": null,
         "width": 40,
         "height": 60,
         "padding": 1,
+        "orientation": "portrait",
         "unit": "px",
         "dpc": 100,
         "border": true,
@@ -18,7 +19,7 @@
     "templates": [
         {
             "id": 1,
-            "name": "Multilines",
+            "name": "Mehrzeiler",
             "layout": [
                 2,
                 3,
@@ -31,37 +32,39 @@
             "fonts": [
                 "stripey",
                 "mexcellent",
-                "italianno"
+                "comfortaa"
             ]
         },
         {
             "id": 2,
-            "name": "Simple",
+            "name": "Einfach gehalten",
             "layout": [
                 1,
                 2
             ],
-            "fontTitle": "italianno",
+            "fontTitle": "mexcellent",
             "fonts": [
-                "comfortaa",
-                "italianno"
+                "stripey",
+                "mexcellent",
+                "comfortaa"
             ]
         },
         {
             "id": 3,
-            "name": "One Line",
+            "name": "Einzeiler",
             "layout": [
                 1
             ],
-            "fontTitle": "comfortaa",
+            "fontTitle": "mexcellent",
             "fonts": [
+                "stripey",
                 "mexcellent",
-                "italianno"
+                "comfortaa"
             ]
         },
         {
             "id": 4,
-            "name": "Complex",
+            "name": "Wildes Durcheinander",
             "layout": [
                 3,
                 2,
@@ -81,12 +84,28 @@
     "input": {
         "max": null,
         "defaultIcon": [
-          "anker",
-          "gorilla"
+          "standard eins",
+      "standard zwei",
+      "standard drei"
         ],
         "showTitle": true,
         "placeholderIcon": "Frage",
         "icons": [
+      {
+            "name": "Standard Eins",
+            "file": "/icons/Standard_Sterne.svg",
+            "tags": []
+          },
+      {
+            "name": "Standard Zwei",
+            "file": "/icons/321_Seestern_V1.svg",
+            "tags": []
+          },
+      {
+            "name": "Standard Drei",
+            "file": "/icons/390_Herz_V1.svg",
+            "tags": []
+          },
           {
             "name": "Frage",
             "file": "/icons/519_wo_V1.svg",
@@ -94,6 +113,11 @@
               "wo",
               "Fragezeichen"
             ]
+          },
+      {
+            "name": "Sterne",
+            "file": "/icons/Standard_Sterne.svg",
+            "tags": []
           },
           {
             "name": "Gorilla",
@@ -3960,7 +3984,8 @@
             {
                 "target": ".pixgen-navbar",
                 "placement": "bottom",
-                "content": "Welcome!! Please spare a minute to learn about our page",
+                "content": "Herzlich willkommen, schön dass du da bist! Nimm dir einen Augenblick Zeit, in dem wir dir die wichtigsten Werkzeuge auf dem Weg zu deiner zauberhaften Wortcollage zeigen.",
+                "disableScrolling": true,
                 "disableBeacon": true,
                 "disableOverlayClose": true,
                 "hideCloseButton": true
@@ -3968,7 +3993,8 @@
             {
                 "target": ".pixgen-sidebar",
                 "placement": "right",
-                "content": "You add text here",
+                "content": "Hier gibst du die Worte ein. Das \"gemeinte Wort\" gehört in das erste Feld. Dann kannst du dir ein passendes Icon aussuchen und anschließend in das zweite Feld das \"gesprochene Wort\" eingeben. Im \"Titel\" kannst du der Collage eine Überschrift geben.",
+                "disableScrolling": true,
                 "disableBeacon": true,
                 "disableOverlayClose": true,
                 "hideCloseButton": true
@@ -3976,15 +4002,8 @@
             {
                 "target": ".pixgen-panel",
                 "placement": "left",
-                "content": "Setting panel",
-                "disableBeacon": true,
-                "disableOverlayClose": true,
-                "hideCloseButton": true
-            },
-            {
-                "target": ".pixgen-zoom-container",
-                "placement": "top",
-                "content": "Minimize and maximize canvas",
+                "content": "Hier kannst du Einstellungen verändern. a) Solltest du beim Gestalten deiner Collage feststellen, dass die gewählte Größe nicht passt, dann kannst du dir hier eine andere aussuchen oder sogar das Produkt verändern. Deine Eingaben bleiben bestehen. b) Die Hintergrundfarbe sowie die Schriftfarbe c) den Aufbau deiner Collage.",
+                "disableScrolling": true,
                 "disableBeacon": true,
                 "disableOverlayClose": true,
                 "hideCloseButton": true
@@ -3992,7 +4011,8 @@
             {
                 "target": ".pixgen-editor-frame",
                 "placement": "left",
-                "content": "Canvas Editor",
+                "content": "Hier kannst du per \"Drag&Drop\" die Wörter verschieben udn damit die Reihenfolge verändern. Zudem kannst du per Klick auf das Wort oberhalb der Collage die Schriftart verändern.",
+                "disableScrolling": true,
                 "disableBeacon": true,
                 "disableOverlayClose": true,
                 "hideCloseButton": true
@@ -4013,96 +4033,108 @@
                 "font": "marqueemoon",
                 "icon": "gorilla",
                 "realText": "Mama",
-                "spokenText": "Ma"
+                "spokenText": "Ma",
+                "fontSpacing": ""
             },
             {
                 "id": 2,
                 "font": "italianno",
                 "icon": "gorilla",
                 "realText": "Baby",
-                "spokenText": "Bahbi"
+                "spokenText": "Bahbi",
+                "fontSpacing": ""
             },
             {
                 "id": 3,
                 "font": "stripey",
                 "icon": "gorilla",
                 "realText": "Ball",
-                "spokenText": "Ball"
+                "spokenText": "Ball",
+                "fontSpacing": ""
             },
             {
                 "id": 4,
                 "font": "comfortaa",
                 "icon": "gorilla",
                 "realText": "Buch",
-                "spokenText": "Och"
+                "spokenText": "Och",
+                "fontSpacing": ""
             },
             {
                 "id": 5,
                 "font": "mexcellent",
                 "icon": "gorilla",
                 "realText": "Papa",
-                "spokenText": "Baba"
+                "spokenText": "Baba",
+                "fontSpacing": ""
             },
             {
                 "id": 6,
                 "font": "comfortaa",
                 "icon": "gorilla",
                 "realText": "Arbeit",
-                "spokenText": "Abeit"
+                "spokenText": "Abeit",
+                "fontSpacing": ""
             },
             {
                 "id": 7,
                 "font": "italianno",
                 "icon": "gorilla",
                 "realText": "Haben",
-                "spokenText": "Abi"
+                "spokenText": "Abi",
+                "fontSpacing": ""
             },
             {
                 "id": 8,
                 "font": "comfortaa",
                 "icon": "gorilla",
                 "realText": "Ja",
-                "spokenText": "Ja"
+                "spokenText": "Ja",
+                "fontSpacing": ""
             },
             {
                 "id": 9,
                 "font": "mexcellent",
                 "icon": "gorilla",
                 "realText": "Heiss",
-                "spokenText": "Aiss"
+                "spokenText": "Aiss",
+                "fontSpacing": ""
             },
             {
                 "id": 10,
                 "font": "italianno",
                 "icon": "gorilla",
                 "realText": "Meins",
-                "spokenText": "Maane"
+                "spokenText": "Maane",
+                "fontSpacing": ""
             },
             {
                 "id": 11,
                 "font": "stripey",
                 "icon": "gorilla",
                 "realText": "Toll",
-                "spokenText": "Dolla"
+                "spokenText": "Dolla",
+                "fontSpacing": ""
             },
             {
                 "id": 12,
                 "font": "marqueemoon",
                 "icon": "gorilla",
                 "realText": "Gucken",
-                "spokenText": "Gucki"
+                "spokenText": "Gucki",
+                "fontSpacing": ""
             }
         ]
     },
     "mail": {
         "apikey": "JKH6876JKHJK8768HK",
-        "apiurl": "http://apipixgen.vps2231243.fastwebserver.de/api/v1/mail"
+        "apiurl": "https://apipixgen.vps2231243.fastwebserver.de/api/v1/mail"
     },
     "wordpress": {
         "active": true,
         "baseUrl": "https://new.wordpix.de",
         "currency": "EUR",
-        "currencySymbol": "&euro;",
+        "currencySymbol": "€",
         "currencyPosition": "right_space",
         "cartSlug": "/warenkorb",
         "pluginPath": "/wp-content/plugins/pixgen-editor/pixgen",
