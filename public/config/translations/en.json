@@ -61,5 +61,11 @@
   "UnableToSaveEmptyCanvas": "Unable to save empty canvas",
   "ExportError": "Export Error",
   "IntendentWord": "The Intendent Word...",
-  "SpokenWord": "The Spoken Word..."
+  "SpokenWord": "The Spoken Word...",
+  "Next": "Next",
+  "Skip": "Skip",
+  "Orientation": "Orientation",
+  "Portrait": "Portrait",
+  "Landscape": "Landscape",
+  "Color": "Color"
 }
