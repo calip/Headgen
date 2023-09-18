@@ -19,6 +19,110 @@ function pixgen_editor_init() {
 
 add_action( 'init', 'pixgen_editor_init' );
 
+//pixgen plugin admin menu
+
+add_action('admin_menu', 'pixgen_plugin_setup_menu');
+ 
+function pixgen_plugin_setup_menu(){
+    wp_enqueue_script('wp-theme-plugin-editor');
+    wp_enqueue_style('wp-codemirror');
+    $cm_settings['codeEditor'] = wp_enqueue_code_editor(array('type' => 'application/json'));
+    wp_enqueue_script("pixgen-code-editor-js", plugins_url("pixgen-code-editor.js" , __FILE__ ) );
+    wp_localize_script('pixgen-code-editor-js', 'cm_settings', $cm_settings);  
+    add_menu_page( 'Pixgen Plugin', 'Pixgen Editor', 'manage_options', 'pixgen-plugin', 'pixgen_admin_init', 'dashicons-editor-insertmore' );
+}
+ 
+function pixgen_admin_init(){
+    // check user capabilities
+    if ( ! current_user_can( 'manage_options' ) ) {
+        return;
+    }
+
+    //Get the active tab from the $_GET param
+    $default_tab = null;
+    $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
+    ?>
+    <!-- Our admin page content should all be inside .wrap -->
+    <div class="wrap">
+        <!-- Print the page title -->
+        <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+        <!-- Here are our tabs -->
+        <nav class="nav-tab-wrapper">
+          <a href="?page=pixgen-plugin" class="nav-tab <?php if($tab===null):?>nav-tab-active<?php endif; ?>">Administrator</a>
+          <a href="?page=pixgen-plugin&tab=frontend" class="nav-tab <?php if($tab==='frontend'):?>nav-tab-active<?php endif; ?>">Frontend</a>
+        </nav>
+
+        <div class="tab-content">
+            <?php switch($tab) :
+              case 'frontend':
+                tab_content_frontend();
+                break;
+              default:
+                tab_content_admin();
+                break;
+            endswitch; ?>
+        </div>
+    </div>
+    <?php
+}
+
+function tab_content_admin(){
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $file = get_home_path(). "apps/pixgen/config/config.json";
+        file_put_contents($file, stripslashes($_POST["pixgen_admin"]));
+    }
+    ?>
+    <form name="pixgen_form_admin" id="template" action="#" method="post">
+        <div>
+            <p class="submit">
+                <input type="submit" name="submit" id="submit" class="button button-primary" value="Update File">
+            </p>
+        </div>
+        <div>
+            <textarea id="services_file" name="pixgen_admin" cols="70" rows="30">
+                <?php echo getJsonFile('apps/pixgen/config/config.json');?>
+            </textarea>
+        </div>
+     </form>
+     <?php
+}
+
+function tab_content_frontend() {
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $file = get_home_path(). "wp-content/plugins/pixgen-editor/pixgen/config/config.json";
+        file_put_contents($file, stripslashes($_POST["pixgen_frontend"]));
+    }
+    ?>
+    <form name="pixgen_form_frontend" id="template" action="#" method="post">
+        <div>
+            <p class="submit">
+               <input type="submit" name="submit" id="submit" class="button button-primary" value="Update File">
+            </p>
+        </div>
+        <div>
+            <textarea id="services_file" name="pixgen_frontend" cols="70" rows="30">
+                <?php echo getJsonFile('wp-content/plugins/pixgen-editor/pixgen/config/config.json');?>
+            </textarea>
+        </div>
+     </form>
+     
+     <?php
+}
+
+function isJson($string) {
+    json_decode($string);
+    return (json_last_error() == JSON_ERROR_NONE);
+}
+
+function read_plain_json($file){
+    $file = file(get_home_path() . $file);
+    return implode("",$file);
+}
+
+function getJsonFile($file){
+    echo read_plain_json($file);
+    die();
+}
 // Function for the short code that call React app
 function pixgen_editor() {
     wp_enqueue_script("pixgen_env_js", '1.0', true);
@@ -126,7 +230,7 @@ function pixgen_product_field( $loop, $variation_data, $variation ) {
         woocommerce_wp_select(
             array(
                 'id'            => 'pixgen_font_field[' . $loop . ']',
-                'name'          => 'pixgen_fonts[]',
+                'name'          => 'pixgen_fonts['.$loop.'][]',
                 'label'         => 'List of Fonts',
                 'wrapper_class' => 'form-row',
                 'value'         => get_post_meta( $variation->ID, 'pixgen_font_select', true ),
@@ -158,12 +262,43 @@ function pixgen_product_field( $loop, $variation_data, $variation ) {
 
 add_action( 'woocommerce_save_product_variation', 'pixgen_product_save_fields', 10, 2 );
 
+add_action('woocommerce_product_options_general_product_data', 'woocommerce_pixgen_product_disable');
+
+add_action( 'woocommerce_process_product_meta', 'woocommerce_pixgen_product_disable_save' );
+
+function woocommerce_pixgen_product_disable()
+{
+    global $post;
+    woocommerce_wp_checkbox(
+        array(
+            'id' => 'disable_product_pixgen',
+            'label' => __('Disabled in Pixgen', 'woocommerce' ),
+            // 'description' => __( 'Enable roast level!', 'woocommerce' )
+        )
+    );
+}
+
+function woocommerce_pixgen_product_disable_save($post_id){
+    // Custom Product Checkbox Field
+    $disable_product_pixgen = isset( $_POST['disable_product_pixgen'] ) ? 'yes' : 'no';
+    update_post_meta($post_id, 'disable_product_pixgen', esc_attr( $disable_product_pixgen ));
+}
+
 function pixgen_product_save_fields( $variation_id, $loop ) {
     $select_template_field = ! empty( $_POST[ 'pixgen_template_field' ][ $loop ] ) ? $_POST[ 'pixgen_template_field' ][ $loop ] : '';
     update_post_meta( $variation_id, 'pixgen_template_select', sanitize_text_field( $select_template_field ) );
 
-    $select_font_field = ! empty( $_POST[ 'pixgen_fonts' ] ) ? $_POST[ 'pixgen_fonts' ] : array();
-    update_post_meta( $variation_id, 'pixgen_font_select', $select_font_field);
+    if( isset( $_POST['pixgen_fonts'][$loop] ) ){
+        $select_font_field = $_POST['pixgen_fonts'][$loop];
+        // Multi data sanitization 
+        $sanitize_font_data = array();
+        if( is_array($select_font_field) && sizeof($select_font_field) > 0 ){
+            foreach( $select_font_field as $value ){
+                $sanitize_font_data[] = esc_attr( $value );
+            }
+        }
+        update_post_meta( $variation_id, 'pixgen_font_select', $sanitize_font_data);
+    }
 
     $checkbox_font_field = ! empty( $_POST[ 'pixgen_font_enable' ][ $loop ] ) ? 'yes' : 'no';
     update_post_meta( $variation_id, 'pixgen_font_check', $checkbox_font_field );
@@ -222,14 +357,27 @@ function display_admin_order_item_custom_button( $item_id, $item, $product ){
 
 add_action( 'wp', 'pixgen_remove_default_cart_button' );
 function pixgen_remove_default_cart_button(){
-    remove_action( 'woocommerce_single_variation','woocommerce_single_variation_add_to_cart_button', 20 );
-    add_action( 'woocommerce_after_single_variation', 'pixgen_custom_add_cart_button' );
+    global $product;
+
+    // If the WC_product Object is not defined globally
+    if ( ! is_a( $product, 'WC_Product' ) ) {
+        $product = wc_get_product( get_the_id() );
+    }
+
+    if($product) {
+        $product_disable = wc_string_to_bool( $product->get_meta('disable_product_pixgen') );
+
+        if (!$product_disable) {
+            remove_action( 'woocommerce_single_variation','woocommerce_single_variation_add_to_cart_button', 20 );
+            add_action( 'woocommerce_after_single_variation', 'pixgen_custom_add_cart_button' );
+        }
+    }   
 }
 
 function pixgen_custom_add_cart_button() {
     global $product;
 
-    echo '<a class="button download pix-editor-button" data-url="' . get_site_url() . '/pixeditor" data-product="' . $product->get_id() . '">' . __("Jetzt gestalten", "woocommerce") . '</a>';
+    echo '<a class="button download pix-editor-button" data-url="' . get_site_url() . '/pixeditor" data-product="' . $product->get_id() . '" style="cursor: not-allowed; opacity: 0.5;">' . __("Weiter", "woocommerce") . '</a>';
     ?>
     <script type="text/javascript">
     jQuery( function($){
@@ -238,20 +386,29 @@ function pixgen_custom_add_cart_button() {
             var url = $('.pix-editor-button').attr("data-url");
             var product = $('.pix-editor-button').attr("data-product");
             var variation = $('.pix-editor-button').attr("data-variation");
-            var param = {
-                "product_id":  parseInt(product),
-                "variation_id": parseInt(variation)
+            if (product && variation) {
+                var param = {
+                    "product_id":  parseInt(product),
+                    "variation_id": parseInt(variation)
+                }
+                var obj = JSON.stringify(param);
+                window.open(url + '?editor=' + window.btoa(obj), '_self');
+            } else {
+                alert("Bitte wähle die Produktoptionen, bevor du den Artikel in den Warenkorb legst.");
+                return;
             }
-            var obj = JSON.stringify(param);
-            window.open(url + '?editor=' + window.btoa(obj), '_self')
         });
         // On select variation display variation description
         $('form.variations_form').on('show_variation', function( event, data ){
             $('.pix-editor-button').attr("data-variation", data.variation_id);
+            $('.pix-editor-button').css("cursor", "pointer");
+            $('.pix-editor-button').css("opacity", "1");
         });
         // On unselect variation remove variation description
         $('form.variations_form').on('hide_variation', function(){
             $('.pix-editor-button').attr("data-variation", '');
+            $('.pix-editor-button').css("cursor", "not-allowed");
+            $('.pix-editor-button').css("opacity", "0.5");
         });
     });
     </script>
