@@ -12,6 +12,7 @@ import ErrorDialog from '../Dialog/ErrorDialog'
 import Dialog from '../Dialog/Dialog'
 import Zoom from '../Tools/Zoom/Zoom'
 import Joyride from 'react-joyride'
+import TourModal from '../Tools/Tour/TourModal'
 
 function Editor({ config, products, selectItem, currency }) {
   let format =
@@ -286,6 +287,7 @@ function Editor({ config, products, selectItem, currency }) {
           continuous={true}
           showProgress={true}
           showSkipButton={true}
+          tooltipComponent={TourModal}
         />
       ) : (
         <></>
