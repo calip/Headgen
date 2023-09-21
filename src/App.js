@@ -74,6 +74,19 @@ function App() {
                   })
                   .then((response) => {
                     if (response.status === 200) {
+                      const publishedProduct = response.data.filter((pro) => {
+                        const pixgenProduct = Helpers.getMetaProduct(
+                          pro.meta_data,
+                          'disable_product_pixgen'
+                        )
+                        const disableProduct = pixgenProduct
+                          ? Helpers.stringValueToBool(pixgenProduct.value)
+                          : false
+                        if (!disableProduct) {
+                          return pro
+                        }
+                      })
+
                       const search = window.location.search
                       const params = new URLSearchParams(search)
                       const editor = params.get('editor')
@@ -100,7 +113,7 @@ function App() {
                                     setCurrencyCode(wooSettings.settings.currency)
                                     setCurrencySymbol(wooSettings.settings.currency_symbol)
                                     setCurrencyPosition(wooSettings.settings.currency_position)
-                                    setProducts(response.data)
+                                    setProducts(publishedProduct)
                                     setLoading(false)
                                     Helpers.clearUrlHistory(result)
                                   }
@@ -114,7 +127,7 @@ function App() {
                             console.log(error)
                           })
                       } else {
-                        setProducts(response.data)
+                        setProducts(publishedProduct)
                         setCurrencyCode(wooSettings.settings.currency)
                         setCurrencySymbol(wooSettings.settings.currency_symbol)
                         setCurrencyPosition(wooSettings.settings.currency_position)

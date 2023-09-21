@@ -81,7 +81,9 @@ function SideBar({ toggle, isOpen, items, icons, template, config, admin, select
     if (!showDialog) {
       const items = Helpers.getInputItem(config)
       if (items) {
-        const url = `${window.location.origin}?pixgen=${Helpers.encodeJsonData(items)}`
+        const url = `${
+          config.wordpress.baseUrl
+        }${Helpers.getBaseUrl()}/?pixgen=${Helpers.encodeJsonData(items)}`
         setDataUrl(url)
       }
     }
