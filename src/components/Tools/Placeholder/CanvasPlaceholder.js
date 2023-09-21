@@ -23,6 +23,8 @@ function CanvasPlaceholder(props) {
           margin: `${props.padding}px`,
           display: 'table',
           tableLayout: 'fixed',
+          position: 'fixed',
+          height: `calc(100% - ${Math.abs(props.padding * 2)}px)`,
           width: `calc(100% - ${Math.abs(props.padding * 2)}px)`
         }}>
         <div
