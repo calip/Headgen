@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import './Panel.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCogs, faEraser, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
@@ -36,7 +36,9 @@ function Panel({
   resetSession,
   showTutorial
 }) {
+  const ORIENTATION = ['portrait', 'landscape']
   const currentTemplate = config.templates.find((item) => item.id === items.inputItem.template)
+  const currentOrientation = items.inputItem.orientation
   const currentWidth = items.inputItem.width
   const currentHeight = items.inputItem.height
   const currentFormat = items.inputItem.format
@@ -52,6 +54,7 @@ function Panel({
   const max = 10000
   const minPadding = 0
   const maxPadding = 100
+  const colorRef = useRef()
 
   useEffect(() => {
     if (items.initFormat) {
@@ -210,6 +213,24 @@ function Panel({
     Helpers.saveInputToLocalStorage(items, config, temp.items)
   }
 
+  const onOrientationChange = (eventKey) => {
+    let temp = items.inputItem
+    temp.orientation = eventKey
+    const tempWidth = temp.width
+    const tempHeight = temp.height
+
+    temp.width = tempHeight
+    temp.height = tempWidth
+    Helpers.saveInputToLocalStorage(items, config, temp.items)
+  }
+
+  const showColorPicker = () => {
+    const picker = colorRef.current
+    if (picker) {
+      picker.click()
+    }
+  }
+
   return (
     <div className={classNames('pixgen-panel', { 'is-open': isOpen })}>
       <div className="panel-button">
@@ -359,21 +380,71 @@ function Panel({
         ) : (
           <></>
         )}
-        <h6 className="mb-3">Color</h6>
+        <div className="panel-container">
+          <Row>
+            <Col>
+              <FormGroup className="mb-3">
+                <FormLabel>{i18n.t('Template')}</FormLabel>
+                <DropdownButton
+                  variant="outline-dark"
+                  className={'font-style-dropdown ps-1'}
+                  disabled={currentTemplate == null}
+                  id="font-space"
+                  size="sm"
+                  title={currentTemplate.name.substring(0, 8) ?? i18n.t('Template')}
+                  onSelect={onTemplateChange}>
+                  {template.templates.map((temp) => (
+                    <Dropdown.Item eventKey={temp.id} key={temp.id}>
+                      <label className={temp.id}>
+                        {temp.name} {JSON.stringify(temp.layout)}
+                      </label>
+                    </Dropdown.Item>
+                  ))}
+                </DropdownButton>
+              </FormGroup>
+            </Col>
+            <Col>
+              <FormGroup className="mb-3">
+                <FormLabel>{i18n.t('Oritentation')}</FormLabel>
+                <DropdownButton
+                  variant="outline-dark"
+                  className={'font-style-dropdown ps-1'}
+                  disabled={currentOrientation == null || currentWidth === currentHeight}
+                  id="canvas-orientation"
+                  size="sm"
+                  title={currentOrientation ?? i18n.t('Portrait')}
+                  onSelect={onOrientationChange}>
+                  {ORIENTATION.map((ori) => (
+                    <Dropdown.Item eventKey={ori} key={ori}>
+                      <label className={ori}>{ori}</label>
+                    </Dropdown.Item>
+                  ))}
+                </DropdownButton>
+              </FormGroup>
+            </Col>
+          </Row>
+        </div>
+        <hr />
+        <h6 className="mb-3">{i18n.t('Color')}</h6>
         <div className="panel-container">
           <Row>
             <Col>
               <FormGroup className="mb-3">
                 <FormLabel>{i18n.t('Background')}</FormLabel>
                 <InputGroup className="mb-3">
-                  <FormControl
-                    className={`form-control-sm ${
+                  <div
+                    className={`pixcolor-container ${
                       currentBackgroundColor === 'transparent' ? 'crossed' : ''
                     }`}
-                    type="color"
-                    value={currentBackgroundColor}
-                    onChange={onBackgroundColorChange}
-                  />
+                    onClick={showColorPicker}>
+                    <FormControl
+                      className="form-control-sm"
+                      type="color"
+                      ref={colorRef}
+                      value={currentBackgroundColor}
+                      onChange={onBackgroundColorChange}
+                    />
+                  </div>
                   <Button variant="outline-secondary" size="sm" onClick={onResetBackgroundColor}>
                     x
                   </Button>
@@ -397,26 +468,6 @@ function Panel({
               </FormGroup>
             </Col>
           </Row>
-        </div>
-        <hr />
-        <h6 className="mb-3">{i18n.t('Template')}</h6>
-        <div className="panel-container">
-          <DropdownButton
-            variant="outline-dark"
-            className={'font-style-dropdown ps-1'}
-            disabled={currentTemplate == null}
-            id="font-space"
-            size="sm"
-            title={currentTemplate.name ?? 'Templates'}
-            onSelect={onTemplateChange}>
-            {template.templates.map((temp) => (
-              <Dropdown.Item eventKey={temp.id} key={temp.id}>
-                <label className={temp.id}>
-                  {temp.name} {JSON.stringify(temp.layout)}
-                </label>
-              </Dropdown.Item>
-            ))}
-          </DropdownButton>
         </div>
         <hr />
         <div className="panel-container">
