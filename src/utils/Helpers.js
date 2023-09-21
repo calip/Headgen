@@ -197,6 +197,7 @@ const Helpers = {
       height: height,
       width: width,
       unit: unit,
+      orientation: height > width ? 'portrait' : 'landscape',
       backgroundColor: 'transparent',
       fontColor: '#000000',
       placeholder: false,
