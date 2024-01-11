@@ -67,5 +67,8 @@
   "Orientation": "Orientation",
   "Portrait": "Portrait",
   "Landscape": "Landscape",
-  "Color": "Color"
+  "Color": "Color",
+  "ItemOverlapCanvas": "Word entry overlapping the canvas, Please add more character or select bigger format!",
+  "AddWordEntryError": "You have reached limit for input word",
+  "AddWordEntryErrorDescription": "You have reached limit for input word, please select a bigger format"
 }
