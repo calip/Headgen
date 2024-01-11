@@ -8,7 +8,7 @@
   "NoSpacing": "Kein Abstand",
   "LowerQuality": "Schlechtere Qualität",
   "HighResolution": "Hohe Auflösung",
-  "Layout": "Layout",
+  "Layout": "Einstellungen",
   "Width": "Breite",
   "Height": "Höhe",
   "Padding": "Abstand",
@@ -33,7 +33,7 @@
   "Initializing": "Initialisiere...",
   "Format": "Produkt",
   "FormatSelection": "Größe",
-  "CannotSave": "Cannot Save",
+  "CannotSave": "Speichern fehlgeschlagen",
   "ContentIsEmpty": "Inhalt ist leer",
   "OK": "OK",
   "Back": "Zurück",
@@ -64,8 +64,11 @@
   "SpokenWord": "Das gesprochene Wort",
   "Next": "Weiter",
   "Skip": "Überspringen",
-  "Orientation": "Orientation",
-  "Portrait": "Portrait",
-  "Landscape": "Landscape",
-  "Color": "Color"
+  "Orientation": "Ausrichtung",
+  "Portrait": "Hochformat",
+  "Landscape": "Querformat",
+  "Color": "Farbe",
+  "ItemOverlapCanvas": "Word entry overlapping the canvas, Please add more character or select bigger format!",
+  "AddWordEntryError": "You have reached limit for input word",
+  "AddWordEntryErrorDescription": "You have reached limit for input word"
 }

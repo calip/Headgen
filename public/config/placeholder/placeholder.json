@@ -1,0 +1,221 @@
+[
+  {
+    "id": 1,
+    "name": "Portrait",
+    "template": 1,
+    "title": "ANTONIA",
+    "font": "mexcellent",
+    "items": [
+      {
+          "id": 1,
+          "font": "marqueemoon",
+          "icon": "gorilla",
+          "realText": "Mama",
+          "spokenText": "Ma",
+          "fontSpacing": ""
+      },
+      {
+          "id": 2,
+          "font": "mexcellent",
+          "icon": "gorilla",
+          "realText": "Baby",
+          "spokenText": "Bahbi",
+          "fontSpacing": ""
+      },
+      {
+          "id": 3,
+          "font": "stripey",
+          "icon": "gorilla",
+          "realText": "Ball",
+          "spokenText": "Ball",
+          "fontSpacing": ""
+      },
+      {
+          "id": 4,
+          "font": "comfortaa",
+          "icon": "gorilla",
+          "realText": "Buch",
+          "spokenText": "Och",
+          "fontSpacing": ""
+      },
+      {
+          "id": 5,
+          "font": "mexcellent",
+          "icon": "gorilla",
+          "realText": "Papa",
+          "spokenText": "Baba",
+          "fontSpacing": ""
+      },
+      {
+          "id": 6,
+          "font": "comfortaa",
+          "icon": "gorilla",
+          "realText": "Arbeit",
+          "spokenText": "Abeit",
+          "fontSpacing": ""
+      },
+      {
+          "id": 7,
+          "font": "mexcellent",
+          "icon": "gorilla",
+          "realText": "Haben",
+          "spokenText": "Abi",
+          "fontSpacing": ""
+      },
+      {
+          "id": 8,
+          "font": "comfortaa",
+          "icon": "gorilla",
+          "realText": "Ja",
+          "spokenText": "Ja",
+          "fontSpacing": ""
+      },
+      {
+          "id": 9,
+          "font": "mexcellent",
+          "icon": "gorilla",
+          "realText": "Heiss",
+          "spokenText": "Aiss",
+          "fontSpacing": ""
+      },
+      {
+          "id": 10,
+          "font": "mexcellent",
+          "icon": "gorilla",
+          "realText": "Meins",
+          "spokenText": "Maane",
+          "fontSpacing": ""
+      },
+      {
+          "id": 11,
+          "font": "stripey",
+          "icon": "gorilla",
+          "realText": "Toll",
+          "spokenText": "Dolla",
+          "fontSpacing": ""
+      },
+      {
+          "id": 12,
+          "font": "marqueemoon",
+          "icon": "gorilla",
+          "realText": "Gucken",
+          "spokenText": "Gucki",
+          "fontSpacing": ""
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Landscape",
+    "template": 1,
+    "title": "LEO",
+    "font": "mexcellent",
+    "items": [
+      {
+          "id": 1,
+          "font": "marqueemoon",
+          "icon": "gorilla",
+          "realText": "Mama",
+          "spokenText": "Ma",
+          "fontSpacing": ""
+      },
+      {
+          "id": 2,
+          "font": "mexcellent",
+          "icon": "gorilla",
+          "realText": "Baby",
+          "spokenText": "Bahbi",
+          "fontSpacing": ""
+      },
+      {
+          "id": 3,
+          "font": "stripey",
+          "icon": "gorilla",
+          "realText": "Ball",
+          "spokenText": "Ball",
+          "fontSpacing": ""
+      },
+      {
+          "id": 4,
+          "font": "comfortaa",
+          "icon": "gorilla",
+          "realText": "Buch",
+          "spokenText": "Och",
+          "fontSpacing": ""
+      },
+      {
+          "id": 5,
+          "font": "mexcellent",
+          "icon": "gorilla",
+          "realText": "Papa",
+          "spokenText": "Baba",
+          "fontSpacing": ""
+      },
+      {
+          "id": 6,
+          "font": "comfortaa",
+          "icon": "gorilla",
+          "realText": "Arbeit",
+          "spokenText": "Abeit",
+          "fontSpacing": ""
+      },
+      {
+          "id": 7,
+          "font": "mexcellent",
+          "icon": "gorilla",
+          "realText": "Haben",
+          "spokenText": "Abi",
+          "fontSpacing": ""
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Pixgen Placeholder",
+    "template": 2,
+    "title": "Antonia",
+    "font": "mexcellent",
+    "items": [
+      {
+          "id": 1,
+          "font": "marqueemoon",
+          "icon": "gorilla",
+          "realText": "Mama",
+          "spokenText": "Ma",
+          "fontSpacing": ""
+      },
+      {
+          "id": 2,
+          "font": "mexcellent",
+          "icon": "gorilla",
+          "realText": "Baby",
+          "spokenText": "Bahbi",
+          "fontSpacing": ""
+      },
+      {
+          "id": 3,
+          "font": "stripey",
+          "icon": "gorilla",
+          "realText": "Ball",
+          "spokenText": "Ball",
+          "fontSpacing": ""
+      },
+      {
+          "id": 4,
+          "font": "comfortaa",
+          "icon": "gorilla",
+          "realText": "Buch",
+          "spokenText": "Och",
+          "fontSpacing": ""
+      },
+      {
+          "id": 5,
+          "font": "mexcellent",
+          "icon": "gorilla",
+          "realText": "Papa",
+          "spokenText": "Baba",
+          "fontSpacing": ""
+      }
+    ]
+  }
+]
