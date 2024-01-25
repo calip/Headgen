@@ -133,7 +133,7 @@ const Canvas = forwardRef((props, ref) => {
       let temp = data.inputItem
       temp.font = fontType
       setData((prevState) => {
-        return { ...prevState, [data.inputItem.items]: temp.items }
+        return { ...prevState, items: temp.items }
       })
       props.items.setInputItem(data.inputItem)
       Helpers.storeInputItem(props.config, props.items.inputItem)
@@ -146,7 +146,7 @@ const Canvas = forwardRef((props, ref) => {
       let temp = data.inputItem
       temp.fontSpacing = fontSpacing
       setData((prevState) => {
-        return { ...prevState, [data.inputItem.items]: temp.items }
+        return { ...prevState, items: temp.items }
       })
       props.items.setInputItem(data.inputItem)
       Helpers.storeInputItem(props.config, props.items.inputItem)
@@ -184,7 +184,7 @@ const Canvas = forwardRef((props, ref) => {
         tempItems[curIndex] = arrItem
         temp.items = tempItems
         setData((prevState) => {
-          return { ...prevState, [data.inputItem.items]: temp.items }
+          return { ...prevState, items: temp.items }
         })
         props.items.setInputItem(data.inputItem)
         Helpers.storeInputItem(props.config, props.items.inputItem)
@@ -203,7 +203,7 @@ const Canvas = forwardRef((props, ref) => {
         tempItems[curIndex] = arrItem
         temp.items = tempItems
         setData((prevState) => {
-          return { ...prevState, [data.inputItem.items]: temp.items }
+          return { ...prevState, items: temp.items }
         })
         props.items.setInputItem(data.inputItem)
         Helpers.storeInputItem(props.config, props.items.inputItem)
@@ -232,7 +232,6 @@ const Canvas = forwardRef((props, ref) => {
   const [targetDrag, setTargetDrag] = useState()
 
   const handleDrag = (ev) => {
-    console.log(dragId)
     setDragId(Math.abs(ev.currentTarget.id))
   }
 
@@ -265,7 +264,7 @@ const Canvas = forwardRef((props, ref) => {
     let temp = data.inputItem
     temp.items = newBoxState
     setData((prevState) => {
-      return { ...prevState, [data.inputItem.items]: temp.items }
+      return { ...prevState, items: temp.items }
     })
 
     props.reload()
@@ -293,38 +292,13 @@ const Canvas = forwardRef((props, ref) => {
     let temp = data.inputItem
     temp.items = newBoxState
     setData((prevState) => {
-      return { ...prevState, [data.inputItem.items]: temp.items }
+      return { ...prevState, items: temp.items }
     })
 
     props.reload()
     props.items.setInputItem(data.inputItem)
     Helpers.storeInputItem(props.config, props.items.inputItem)
   }
-
-  useLayoutEffect(() => {
-    if (contentChanged) {
-      const childElement = contentRef.current
-      const titleElement = titleRef.current
-      const itemElement = itemRef.current
-      if (childElement && titleElement && itemElement) {
-        const initHeight = childElement.clientHeight
-        const initTitleHeight = titleElement.clientHeight
-        setTimeout(() => {
-          const titleHeight = titleElement.clientHeight
-          if (titleHeight > 0 && titleHeight !== initTitleHeight) {
-            const scaleHeight = childElement.clientHeight
-            const totalHeight = Math.abs(initHeight - titleHeight)
-            const totalPadding = Math.abs(padding * 2)
-            const totalFullHeight = Math.abs(totalHeight - totalPadding)
-            const totalItem = itemElement.childNodes.length
-            const scaleSize = Math.abs(totalFullHeight / totalItem)
-            const updateSize = scaleHeight >= initHeight ? scaleSize : itemSize
-            setItemSize(updateSize)
-          }
-        }, 0)
-      }
-    }
-  })
 
   useEffect(() => {
     if (props.parentRef.current && props.canvasRef.current) {
@@ -348,6 +322,16 @@ const Canvas = forwardRef((props, ref) => {
   useEffect(() => {
     initScaleSize()
   }, [])
+
+  useEffect(() => {
+    const parentRef = props.parentRef
+    if (parentRef.current) {
+      parentRef.current.scrollTo({
+        top: (parentRef.current.scrollHeight - parentRef.current.clientHeight) / 2,
+        behavior: 'smooth'
+      })
+    }
+  }, [props.zoomSize])
 
   const initScaleSize = () => {
     if (props.parentRef.current && props.canvasRef.current) {
@@ -377,6 +361,25 @@ const Canvas = forwardRef((props, ref) => {
     }
   }, [data.inputItem])
 
+  useLayoutEffect(() => {
+    if (contentChanged) {
+      const childElement = contentRef.current
+      const titleElement = titleRef.current
+      if (childElement && titleElement) {
+        const initHeight = childElement.clientHeight
+        const initTitleHeight = titleElement.clientHeight
+        setTimeout(() => {
+          const titleHeight = titleElement.clientHeight
+          if (titleHeight > 0 && titleHeight !== initTitleHeight) {
+            const maxSize =
+              data.inputItem?.width >= data.inputItem?.height ? Math.abs(initHeight / 2) : 512
+            setItemSize(maxSize)
+          }
+        }, 0)
+      }
+    }
+  })
+
   if (dataChanged) {
     return (
       <div className="pix-editor-canvas">
@@ -391,22 +394,54 @@ const Canvas = forwardRef((props, ref) => {
     return (
       <div className="pix-editor-canvas">
         {data?.inputItem?.placeholder ? (
-          <CanvasPlaceholder
-            width={width}
-            height={height}
-            border={border}
-            backgroundColor={backgroundColor}
-            fontColor={fontColor}
-            padding={padding}
-            placeholder={props.config.placeholder}
-            icons={icons}
-            itemSize={itemSize}
-            imgPath={imgPath}
-            currentTemplate={currentTemplate}
-            titleRef={titleRef}
-            contentRef={contentRef}
-            itemRef={itemRef}
-          />
+          // <CanvasPlaceholder
+          //   width={width}
+          //   height={height}
+          //   border={border}
+          //   backgroundColor={backgroundColor}
+          //   fontColor={fontColor}
+          //   padding={padding}
+          //   icons={icons}
+          //   imgPath={imgPath}
+          //   placeholder={data.inputItem.placeholderItem}
+          //   template={props.config.templates}
+          // />
+          <div
+            className="pix-canvas"
+            style={{
+              minWidth: `${width}px`,
+              maxWidth: `${width}px`,
+              minHeight: `${height}px`,
+              maxHeight: `${height}px`,
+              backgroundColor: `${backgroundColor}`,
+              color: `${fontColor}`
+            }}
+            ref={ref}>
+            <div
+              className={
+                border ? 'pixgen-canvas-container center-screen' : 'pixgen-canvas-container'
+              }
+              style={{
+                margin: `${padding}px`,
+                display: 'table',
+                tableLayout: 'fixed',
+                width: `calc(100% - ${Math.abs(padding * 2)}px)`,
+                filter: `invert(${backgroundColor === '#a5a5a5' ? '1' : '0'})`
+              }}>
+              <CanvasPlaceholder
+                width={width}
+                height={height}
+                border={border}
+                backgroundColor={backgroundColor}
+                fontColor={fontColor}
+                padding={padding}
+                icons={icons}
+                imgPath={imgPath}
+                placeholder={data.inputItem.placeholderItem}
+                template={props.config.templates}
+              />
+            </div>
+          </div>
         ) : (
           <div
             className="pix-canvas"
@@ -420,7 +455,9 @@ const Canvas = forwardRef((props, ref) => {
             }}
             ref={ref}>
             <div
-              className={border ? 'center-screen' : null}
+              className={
+                border ? 'pixgen-canvas-container center-screen' : 'pixgen-canvas-container'
+              }
               ref={contentRef}
               style={{
                 margin: `${padding}px`,
@@ -430,49 +467,69 @@ const Canvas = forwardRef((props, ref) => {
                 filter: `invert(${backgroundColor === '#a5a5a5' ? '1' : '0'})`
               }}
               onClick={removeSelectedItem}>
-              <div style={{ display: 'table-cell', verticalAlign: 'middle' }}>
-                {data.inputItem.title ? (
-                  <div ref={titleRef}>
-                    <div className="pix-title-container">
-                      {data.inputItem.title.length >= 3 ? (
-                        <div
-                          className={`pix-title ${titleSelected ? 'pix-title-selected' : ''}`}
-                          onClick={(e) => onTitleSelect(e)}>
-                          <FontStyled value={data.inputItem} multiline={false} maxSize={300} />
-                        </div>
-                      ) : (
-                        <div className="pix-title">
-                          <ItemLoader data={data.inputItem.title} />
-                        </div>
-                      )}
+              <div
+                style={{
+                  display: 'table-cell',
+                  verticalAlign: 'middle'
+                }}>
+                <div
+                  style={{
+                    overflow: 'hidden',
+                    display: 'block',
+                    padding: '1px',
+                    maxHeight: `${height - Math.abs(padding * 2)}px`
+                  }}>
+                  {data.inputItem?.title ? (
+                    <div className="pixgen-title-canvas" ref={titleRef}>
+                      <div className="pix-title-container">
+                        {data.inputItem.title.length >= 3 ? (
+                          <div
+                            key={itemSize}
+                            className={`pix-title ${titleSelected ? 'pix-title-selected' : ''}`}
+                            onClick={(e) => onTitleSelect(e)}>
+                            <FontStyled
+                              value={data.inputItem}
+                              multiline={false}
+                              maxSize={itemSize}
+                            />
+                          </div>
+                        ) : (
+                          <div className="pix-title">
+                            <ItemLoader data={data.inputItem.title} />
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <></>
-                )}
-                {data.inputItem.items ? (
-                  <div ref={itemRef}>
-                    <TableItem
-                      imgPath={imgPath}
-                      fontColor={fontColor}
-                      maxSize={itemSize}
-                      items={data.inputItem.items}
-                      icons={icons}
-                      template={currentTemplate}
-                      onItemSelect={onItemSelect}
-                      itemSelected={itemSelected}
-                      handleDrag={handleDrag}
-                      handleDragOver={handleDragOver}
-                      handleDrop={handleDrop}
-                      dragId={dragId}
-                      targetDrag={targetDrag}
-                      setDragId={setDragId}
-                      handleTouchTarget={handleTouchTarget}
-                    />
-                  </div>
-                ) : (
-                  <></>
-                )}
+                  ) : (
+                    <></>
+                  )}
+                  {data.inputItem.items ? (
+                    <div className="pixgen-item-canvas" ref={itemRef}>
+                      <TableItem
+                        imgPath={imgPath}
+                        fontColor={fontColor}
+                        items={data.inputItem.items.filter((e) => {
+                          return (
+                            e.realText.length > 0 || e.icon.length > 0 || e.spokenText.length > 0
+                          )
+                        })}
+                        icons={icons}
+                        template={currentTemplate}
+                        onItemSelect={onItemSelect}
+                        itemSelected={itemSelected}
+                        handleDrag={handleDrag}
+                        handleDragOver={handleDragOver}
+                        handleDrop={handleDrop}
+                        dragId={dragId}
+                        targetDrag={targetDrag}
+                        setDragId={setDragId}
+                        handleTouchTarget={handleTouchTarget}
+                      />
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
               </div>
             </div>
           </div>
