@@ -31,18 +31,6 @@ function FormatDialog(props) {
               price,
               meta_data
             }))
-            // const resData = productVarData.filter((variation) => {
-            //   const pixgenProduct = Helpers.getMetaProduct(
-            //     variation.meta_data,
-            //     'pixgen_disable_variation_check'
-            //   )
-            //   const disableProduct = pixgenProduct
-            //     ? Helpers.stringValueToBool(pixgenProduct.value)
-            //     : false
-            //   if (!disableProduct) {
-            //     return variation
-            //   }
-            // })
             const minPrice = resData.reduce((prev, curr) => {
               return parseFloat(prev.price) < parseFloat(curr.price) ? prev : curr
             })
@@ -58,7 +46,10 @@ function FormatDialog(props) {
                 ? `${props.currency.currencySymbol}${maxPrice.price}`
                 : `${maxPrice.price}${props.currency.currencySymbol}`
             setMinMaxPrice(`${strMinPrice} - ${strMaxPrice}`)
-            const variationData = Helpers.extractVariationAttributes(resData)
+            const variationData = Helpers.extractVariationAttributes(
+              resData,
+              others.config.wordpress.attributeSlug
+            )
             format.variations = variationData
             setFormatType(format)
           }
