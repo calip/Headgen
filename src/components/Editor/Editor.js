@@ -75,19 +75,23 @@ function Editor({ config, products, selectItem, currency }) {
 
   const [zoomSize, setZoomSize] = useState(null)
   const [clickOutCanvas, setClickOutCanvas] = useState(false)
+  const [downloading, setDownloading] = useState(false)
 
   const handleDownload = (quality) => () => {
     if (!exportRef.current) {
       showErrorExportDialog()
       return
     }
+    setDownloading(true)
     exportAsImage(
       exportRef.current,
       layoutDpc,
       config.appName,
       quality,
       items.inputItem?.backgroundColor
-    )
+    ).then(() => {
+      setDownloading(false)
+    })
   }
 
   const showConfirmCartDialog = () => {
@@ -123,16 +127,17 @@ function Editor({ config, products, selectItem, currency }) {
     setConfirmCart(false)
     clearSession()
     setLoadWordpress(true)
-    setTimeout(() => {
-      window.open(
-        `${config.wordpress.baseUrl}${config.wordpress.cartSlug}/?add-to-cart=${
-          items.inputItem.format.id
-        }&quantity=1&variation_id=${items.inputItem.variation.id}&pixgen=${Helpers.encodeJsonData(
-          contentData
-        )}`,
-        '_self'
-      )
-    }, 3000)
+    const encodeData = Helpers.encodeJsonData(contentData)
+    Helpers.fetchJson(`${config.wordpress.baseUrl}/wp-json/wc/store/cart`, true).then((key) => {
+      Helpers.postJson(
+        `${config.wordpress.baseUrl}/wp-json/wc/store/cart/add-item`,
+        items.inputItem.variation.id,
+        encodeData,
+        key
+      ).then(() => {
+        window.open(`${config.wordpress.baseUrl}${config.wordpress.cartSlug}`, '_self')
+      })
+    })
   }
 
   useEffect(() => {
@@ -144,12 +149,15 @@ function Editor({ config, products, selectItem, currency }) {
   useEffect(() => {
     const search = window.location.search
     const params = new URLSearchParams(search)
-    const data = params.get('pixgen')
-
-    if (data) {
-      Helpers.storeInputItem(config, Helpers.decodeJsonData(data))
-      loadLocalStorage(config)
-      Helpers.clearUrlHistory(config)
+    const pixgen = params.get('pixgen')
+    if (pixgen) {
+      const data = encodeURI(pixgen).replace(/%20/g, '+')
+      const result = Helpers.gzuncompress(data)
+      if (result) {
+        Helpers.storeInputItem(config, Helpers.decodeJsonData(result))
+        loadLocalStorage(config)
+        Helpers.clearUrlHistory(config)
+      }
     }
   }, [])
 
@@ -301,6 +309,7 @@ function Editor({ config, products, selectItem, currency }) {
         config={config}
         admin={admin}
         selectText={selectText}
+        downloading={downloading}
       />
 
       <div className="pixgen-editor-wrapper">
@@ -319,7 +328,11 @@ function Editor({ config, products, selectItem, currency }) {
         <div
           className="pixgen-editor"
           ref={editorRef}
-          onClick={() => setClickOutCanvas((clickOutCanvas) => !clickOutCanvas)}>
+          onClick={() => {
+            if (!items?.inputItem?.placeholder) {
+              setClickOutCanvas((clickOutCanvas) => !clickOutCanvas)
+            }
+          }}>
           <div className="pixgen-editor-padder" ref={canvasRef}>
             <div className="pixgen-editor-frame">
               <div className="device-container">
@@ -361,6 +374,7 @@ function Editor({ config, products, selectItem, currency }) {
         format={format}
         admin={admin}
         wp={wp}
+        setZoomSize={setZoomSize}
         selectItem={selectItem}
         currency={currency}
         resetSession={clearSession}
