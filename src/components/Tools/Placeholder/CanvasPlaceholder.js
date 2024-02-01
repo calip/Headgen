@@ -1,66 +1,84 @@
+import { useEffect, useState } from 'react'
 import FontStyled from '../../../utils/FontStyled'
 import TableItem from '../../Table/TableItem'
+import Helpers from '../../../utils/Helpers'
 
 function CanvasPlaceholder(props) {
+  const [loading, setLoading] = useState(true)
+  const [placeholder, setPlaceholder] = useState([])
+  const [templateItem, setTemplateItem] = useState(null)
+  const [itemSize, setItemSize] = useState(512)
   const onItemSelect = () => {}
 
-  const data = props.placeholder
-  return (
-    <div
-      className="pix-canvas"
-      style={{
-        minWidth: `${props.width}px`,
-        maxWidth: `${props.width}px`,
-        minHeight: `${props.height}px`,
-        maxHeight: `${props.height}px`,
-        backgroundColor: `${props.backgroundColor}`,
-        color: `${props.fontColor}`
-      }}>
+  useEffect(() => {
+    setLoading(true)
+    Helpers.fetchJson(`${Helpers.getBaseUrl()}/config/placeholder/placeholder.json`).then(
+      (result) => {
+        const emptyPlaceholder = Helpers.setEmptyPlaceholder(result)
+        const curOrientation = Helpers.getCurrentOrientation(props.height, props.width)
+        const initPlaceholder = props.placeholder.length > 0 ? props.placeholder : emptyPlaceholder
+        const curPlaceholder = initPlaceholder.find((c) => c.orientation === curOrientation)
+        const data = result.length > 0 && result.find((temp) => temp.id === curPlaceholder.value)
+        setPlaceholder(data)
+        const template = props.template.find((temp) => temp.id === data.template)
+        setTemplateItem(template)
+        if (curOrientation === 'landscape') {
+          const initHeight = props.height - Math.abs(props.padding * 2)
+          console.log(Math.abs(initHeight / 2))
+          setItemSize(Math.abs(initHeight / 2))
+        }
+        setLoading(false)
+      }
+    )
+  }, [])
+
+  if (!loading) {
+    return (
       <div
-        className={props.border ? 'center-screen' : null}
-        ref={props.contentRef}
         style={{
-          margin: `${props.padding}px`,
-          display: 'table',
-          tableLayout: 'fixed',
-          position: 'fixed',
-          height: `calc(100% - ${Math.abs(props.padding * 2)}px)`,
-          width: `calc(100% - ${Math.abs(props.padding * 2)}px)`
+          display: 'table-cell',
+          verticalAlign: 'middle',
+          opacity: '0.3',
+          pointerEvents: 'none'
         }}>
         <div
           style={{
-            display: 'table-cell',
-            verticalAlign: 'middle',
-            opacity: '0.3',
-            pointerEvents: 'none'
+            overflow: 'hidden',
+            display: 'block',
+            padding: '1px',
+            transition: '0.5s ease-out',
+            maxHeight: `${props.height - Math.abs(props.padding * 2)}px`
           }}>
-          <div ref={props.titleRef}>
-            <table className="pixgen-table">
-              <tbody>
-                <tr>
-                  <td>
-                    <FontStyled value={data} multiline={false} maxSize={300} placeholder={true} />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="pixgen-title-canvas">
+            <div className="pix-title-container">
+              <div className="pix-title" key={itemSize}>
+                <FontStyled
+                  value={placeholder}
+                  multiline={false}
+                  maxSize={itemSize}
+                  placeholder={true}
+                />
+              </div>
+            </div>
           </div>
-          <div ref={props.itemRef}>
+          <div>
             <TableItem
               imgPath={props.imgPath}
               fontColor={props.fontColor}
               maxSize={props.itemSize}
-              items={data.items}
+              items={placeholder.items.filter((e) => {
+                return e.realText.length > 0 || e.icon.length > 0 || e.spokenText.length > 0
+              })}
               icons={props.icons}
-              template={props.currentTemplate}
+              template={templateItem}
               onItemSelect={onItemSelect}
               itemSelected={null}
             />
           </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default CanvasPlaceholder
