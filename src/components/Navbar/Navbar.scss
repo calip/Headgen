@@ -11,6 +11,13 @@
   }
 }
 
+.font-style-dropdown {
+  button:focus {
+    background-color: #ffffff !important;
+    color: #212529 !important;
+  }
+}
+
 @media (min-width: 280px) and (max-width: 320px) {
   .switch-mode {
     display: none;
