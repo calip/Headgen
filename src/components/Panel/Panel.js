@@ -14,6 +14,7 @@ import {
   FormGroup,
   FormLabel,
   InputGroup,
+  OverlayTrigger,
   Row
 } from 'react-bootstrap'
 import Dialog from '../Dialog/Dialog'
@@ -31,6 +32,7 @@ function Panel({
   format,
   admin,
   wp,
+  setZoomSize,
   selectItem,
   currency,
   resetSession,
@@ -46,6 +48,8 @@ function Panel({
   const currentUnit = items.inputItem.unit
   const currentBackgroundColor = items.inputItem.backgroundColor
   const currentFontColor = items.inputItem.fontColor
+
+  const selectedFormat = Helpers.getSelectedFormat(format, currentFormat?.id)
 
   const [show, setShow] = useState(false)
   const [showFormat, setShowFormat] = useState(false)
@@ -182,12 +186,37 @@ function Panel({
       ? Helpers.stringValueToBool(productSpace.value)
       : config.toolbar.fontSpacing
 
+    let tempPlaceholder = []
+    const portraitPlaceholder = Helpers.getMetaProduct(
+      variation.metadata,
+      'pixgen_portrait_placeholder_select'
+    )
+
+    if (portraitPlaceholder) {
+      tempPlaceholder.push({
+        orientation: 'portrait',
+        value: parseInt(portraitPlaceholder.value)
+      })
+    }
+    const landscapePlaceholder = Helpers.getMetaProduct(
+      variation.metadata,
+      'pixgen_landscape_placeholder_select'
+    )
+
+    if (landscapePlaceholder) {
+      tempPlaceholder.push({
+        orientation: 'landscape',
+        value: parseInt(landscapePlaceholder.value)
+      })
+    }
+
     template.setInputTemplate(selectTemplate)
     layout.setLayoutFormat(inputFormat.id)
     layout.setLayoutWidth(variation.width)
     layout.setLayoutHeight(variation.height)
     layout.setLayoutUnit(variation.unit)
     items.setInitFormat(false)
+    setZoomSize(null)
 
     let temp = items.inputItem
     temp.format = inputFormat
@@ -196,6 +225,8 @@ function Panel({
     temp.height = variation.height
     temp.unit = variation.unit
     temp.placeholder = true
+    temp.placeholderItem = tempPlaceholder
+    temp.orientation = variation.height > variation.width ? 'portrait' : 'landscape'
     temp.template = selectTemplate.id
     temp.fonts = selectedProductFonts
     temp.fontSelection = selectedProductFont
@@ -205,23 +236,24 @@ function Panel({
   }
 
   const onTemplateChange = (eventkey) => {
-    const temp = template.templates.find((i) => i.id === Math.abs(eventkey))
-    template.setInputTemplate(temp)
-    let input = items.inputItem
-    input.template = temp.id
-
+    const currentTemplate = template.templates.find((i) => i.id === Math.abs(eventkey))
+    template.setInputTemplate(currentTemplate)
+    let temp = items.inputItem
+    temp.template = currentTemplate.id
     Helpers.saveInputToLocalStorage(items, config, temp.items)
   }
 
   const onOrientationChange = (eventKey) => {
     let temp = items.inputItem
-    temp.orientation = eventKey
-    const tempWidth = temp.width
-    const tempHeight = temp.height
+    if (temp.orientation !== eventKey) {
+      temp.orientation = eventKey
+      const tempWidth = temp.width
+      const tempHeight = temp.height
 
-    temp.width = tempHeight
-    temp.height = tempWidth
-    Helpers.saveInputToLocalStorage(items, config, temp.items)
+      temp.width = tempHeight
+      temp.height = tempWidth
+      Helpers.saveInputToLocalStorage(items, config, temp.items)
+    }
   }
 
   const showColorPicker = () => {
@@ -246,11 +278,15 @@ function Panel({
               <FormGroup className="mb-3">
                 <Card className="format-card" onClick={showFormatDialog}>
                   <Card.Body className="format-body">
-                    <div className="format-title">
-                      {Helpers.getSelectedFormat(format, currentFormat?.id)?.name}
-                    </div>
+                    <div className="format-title">{selectedFormat?.name}</div>
                     <div className="format-content">
-                      <img src={Helpers.getSelectedFormat(format, currentFormat?.id)?.preview} />
+                      <img
+                        src={
+                          selectedFormat?.preview
+                            ? selectedFormat?.preview
+                            : `${Helpers.getBaseUrl()}${config.layout.imagePlaceholder}`
+                        }
+                      />
                       {currentVariation?.price ? (
                         <div className="format-price" key={currentVariation?.price}>
                           {currency.currencyPosition === 'left_space' ? (
@@ -337,17 +373,7 @@ function Panel({
                     />
                   </FormGroup>
                 </Col>
-                <Col>
-                  <FormGroup className="mb-3">
-                    <FormLabel>{i18n.t('Border')}</FormLabel>
-                    <FormCheck
-                      type="switch"
-                      checked={layout.layoutBorder}
-                      onChange={onBorderChange}
-                      label={i18n.t('Border')}
-                    />
-                  </FormGroup>
-                </Col>
+                <Col></Col>
               </Row>
             </Fragment>
           ) : (
@@ -373,13 +399,24 @@ function Panel({
                     />
                   </FormGroup>
                 </Col>
-                <Col></Col>
+                <Col>
+                  <FormGroup className="mb-3">
+                    <FormLabel>{i18n.t('Border')}</FormLabel>
+                    <FormCheck
+                      type="switch"
+                      checked={layout.layoutBorder}
+                      onChange={onBorderChange}
+                      label={i18n.t('Border')}
+                    />
+                  </FormGroup>
+                </Col>
               </Row>
             </div>
           </>
         ) : (
           <></>
         )}
+        <hr />
         <div className="panel-container">
           <Row>
             <Col>
@@ -387,36 +424,38 @@ function Panel({
                 <FormLabel>{i18n.t('Template')}</FormLabel>
                 <DropdownButton
                   variant="outline-dark"
-                  className={'font-style-dropdown ps-1'}
+                  className={'pixgen-dropdown ps-1 '}
                   disabled={currentTemplate == null}
                   id="font-space"
                   size="sm"
-                  title={currentTemplate.name.substring(0, 8) ?? i18n.t('Template')}
+                  title={currentTemplate.name ?? i18n.t('Template')}
                   onSelect={onTemplateChange}>
                   {template.templates.map((temp) => (
                     <Dropdown.Item eventKey={temp.id} key={temp.id}>
-                      <label className={temp.id}>
-                        {temp.name} {JSON.stringify(temp.layout)}
-                      </label>
+                      <label className={temp.id}>{temp.name}</label>
                     </Dropdown.Item>
                   ))}
                 </DropdownButton>
               </FormGroup>
             </Col>
+          </Row>
+          <Row>
             <Col>
               <FormGroup className="mb-3">
-                <FormLabel>{i18n.t('Oritentation')}</FormLabel>
+                <FormLabel>{i18n.t('Orientation')}</FormLabel>
                 <DropdownButton
                   variant="outline-dark"
-                  className={'font-style-dropdown ps-1'}
+                  className={'pixgen-dropdown ps-1'}
                   disabled={currentOrientation == null || currentWidth === currentHeight}
                   id="canvas-orientation"
                   size="sm"
-                  title={currentOrientation ?? i18n.t('Portrait')}
+                  title={
+                    i18n.t(Helpers.capitalizeFirstLetter(currentOrientation)) ?? i18n.t('Portrait')
+                  }
                   onSelect={onOrientationChange}>
                   {ORIENTATION.map((ori) => (
-                    <Dropdown.Item eventKey={ori} key={ori}>
-                      <label className={ori}>{ori}</label>
+                    <Dropdown.Item eventKey={ori} key={ori} className="w-100">
+                      <label className={ori}>{i18n.t(Helpers.capitalizeFirstLetter(ori))}</label>
                     </Dropdown.Item>
                   ))}
                 </DropdownButton>
@@ -424,7 +463,6 @@ function Panel({
             </Col>
           </Row>
         </div>
-        <hr />
         <h6 className="mb-3">{i18n.t('Color')}</h6>
         <div className="panel-container">
           <Row>
@@ -470,16 +508,17 @@ function Panel({
           </Row>
         </div>
         <hr />
-        <div className="panel-container">
+        <div
+          className="panel-container"
+          style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Button variant="outline-secondary" size="sm" onClick={showDialog}>
             <FontAwesomeIcon icon={faEraser} /> {i18n.t('ClearSession')}
           </Button>
-        </div>
-        <hr />
-        <div className="panel-container">
-          <Button variant="outline-secondary" size="sm" onClick={showTutorial}>
-            <FontAwesomeIcon icon={faInfoCircle} /> {i18n.t('ShowTutorial')}
-          </Button>
+          <OverlayTrigger placement="top" overlay={Helpers.renderTooltip(i18n.t('ShowTutorial'))}>
+            <Button variant="outline-secondary" size="sm" onClick={showTutorial}>
+              <FontAwesomeIcon icon={faInfoCircle} />
+            </Button>
+          </OverlayTrigger>
         </div>
       </div>
       <Dialog
