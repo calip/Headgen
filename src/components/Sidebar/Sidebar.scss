@@ -1,4 +1,5 @@
 .list-icon {
+  margin-left: 5px !important;
   margin-right: 5px;
 }
 
@@ -47,8 +48,36 @@
   box-shadow: 0 0 0 3px rgba(21, 156, 228, 0.4);
 }
 
+.input-overlap-error {
+  outline: none;
+  box-shadow: 0 0 0 1px rgba(240, 0, 0, 0.4);
+}
+
+.error-overlap .tooltip-inner {
+  background-color: #b60000;
+}
+
+.error-overlap .tooltip-arrow::before {
+  border-right-color: #b60000;
+}
+
+.pix-field {
+  .input-group {
+    span {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      cursor: pointer;
+    }
+  }
+}
+
 .greyed-out {
   background: #fff;
+}
+
+.pixgen-word-entry {
+  padding: 0.5rem 0.5rem !important;
 }
 
 .pixgen-dropdown-btn:focus, .pixgen-dropdown-btn:hover {
