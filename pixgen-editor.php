@@ -198,9 +198,11 @@ function woocommerce_wp_select_multiple( $field ) {
 
 function pixgen_product_field( $loop, $variation_data, $variation ) {
     $config_path = WP_PLUGIN_DIR.'/pixgen-editor/pixgen/config/config.json';
+    $placeholder_path = WP_PLUGIN_DIR.'/pixgen-editor/pixgen/config/placeholder/placeholder.json';
     $config = wp_json_file_decode($config_path);
-
-    if($config) {
+    $placeholder = wp_json_file_decode($placeholder_path);
+    
+    if($config && $placeholder) {
         $templates = $config->templates;
         $fonts = $config->fonts;
         $toolbar = $config->toolbar;
@@ -215,6 +217,12 @@ function pixgen_product_field( $loop, $variation_data, $variation ) {
         foreach($fonts as $font)
         {
             $font_options[$font] = __(ucfirst($font),  'woocommerce' );    
+        }
+
+        $placeholder_options = array();
+        foreach($placeholder as $p)
+        {
+            $placeholder_options[$p->id] = __($p->name,  'woocommerce' );    
         }
 
         woocommerce_wp_select(
@@ -254,6 +262,26 @@ function pixgen_product_field( $loop, $variation_data, $variation ) {
                 'label'         => 'Enable Font Spacing',
                 'wrapper_class' => 'form-row',
                 'value'         => get_post_meta( $variation->ID, 'pixgen_space_check', true ),
+            )
+        );
+
+        woocommerce_wp_select(
+            array(
+                'id'            => 'pixgen_portrait_placeholder[' . $loop . ']',
+                'label'         => 'Placeholder - Portrait',
+                'wrapper_class' => 'form-row',
+                'value'         => get_post_meta( $variation->ID, 'pixgen_portrait_placeholder_select', true ),
+                'options'       => $placeholder_options
+            )
+        );
+
+        woocommerce_wp_select(
+            array(
+                'id'            => 'pixgen_landscape_placeholder[' . $loop . ']',
+                'label'         => 'Placeholder - Landscape',
+                'wrapper_class' => 'form-row',
+                'value'         => get_post_meta( $variation->ID, 'pixgen_landscape_placeholder_select', true ),
+                'options'       => $placeholder_options
             )
         );
     }
@@ -305,18 +333,74 @@ function pixgen_product_save_fields( $variation_id, $loop ) {
 
     $checkbox_space_field = ! empty( $_POST[ 'pixgen_space_enable' ][ $loop ] ) ? 'yes' : 'no';
     update_post_meta( $variation_id, 'pixgen_space_check', $checkbox_space_field );
-}   
 
-// Add custom pix as custom cart item data
-add_filter( 'woocommerce_add_cart_item_data', 'get_custom_product_note', 30, 2 );
-function get_custom_product_note( $cart_item_data, $product_id ){
-    if ( isset($_GET['pixgen']) && ! empty($_GET['pixgen']) ) {
-        $cart_item_data['pixgen_data'] = sanitize_text_field( $_GET['pixgen'] );
-        $cart_item_data['pixgen_key'] = md5( microtime().rand() );
-    }
-    return $cart_item_data;
+    $select_template_field = ! empty( $_POST[ 'pixgen_portrait_placeholder' ][ $loop ] ) ? $_POST[ 'pixgen_portrait_placeholder' ][ $loop ] : '';
+    update_post_meta( $variation_id, 'pixgen_portrait_placeholder_select', sanitize_text_field( $select_template_field ) );
+
+    $select_template_field = ! empty( $_POST[ 'pixgen_landscape_placeholder' ][ $loop ] ) ? $_POST[ 'pixgen_landscape_placeholder' ][ $loop ] : '';
+    update_post_meta( $variation_id, 'pixgen_landscape_placeholder_select', sanitize_text_field( $select_template_field ) );
 }
 
+//Customize the callback to your liking
+function get_custom_users_data(){
+    return is_admin(); //<- add this
+}   
+
+add_action( 'rest_api_init', 'add_pixgen_session' );
+function add_pixgen_session() {
+    $GLOBALS['user_id'] = get_current_user_id();
+    register_rest_route( 'pixgen', '/session', array(
+        'methods' => 'GET',
+        'callback' => 'generate_pixgen_nonce',
+    ));
+}
+
+function generate_pixgen_nonce($request_data){
+   return get_user_by( 'id', $GLOBALS['user_id']);
+}
+
+add_filter( 'woocommerce_store_api_add_to_cart_data', 'store_api_add_to_cart_data', 10, 2 );
+function store_api_add_to_cart_data( $add_to_cart_data, $request) {
+    if ( isset($request['pixgen']) && ! empty($request['pixgen']) ) {
+        $add_to_cart_data['cart_item_data']['pixgen_data'] = sanitize_text_field( $request['pixgen'] );
+    }
+    return $add_to_cart_data;
+}
+
+add_filter('woocommerce_rest_prepare_product_variation_object', 'custom_change_product_response', 20, 3);
+
+function custom_change_product_response($response, $object, $request) {
+    $variation                  = $response->get_data();
+    $product                    = new WC_Product_Variation($variation['id']);
+    $product_attribute          = $product->get_variation_attributes();
+    $attributes = array();
+    foreach ( $variation['attributes'] as $attribute_name => $attribute ) {
+        $slug = wc_get_attribute( $attribute['id'] )->slug;
+        $attributes[] = array(
+            'id'        => $attribute['id'],
+            'name'      => $attribute['name'],
+            'slug'      => $slug,
+            'option'    => $attribute['option'],
+            'term'      => get_term_by('slug', $product_attribute['attribute_' . $slug], $slug)
+        );
+    }
+    $variation['attributes'] = $attributes;
+    $response->set_data($variation);
+    return $response;
+}
+
+//disable for development purpose
+// add_filter( 'woocommerce_get_item_data', 'display_custom_item_data', 10, 2 );
+// function display_custom_item_data( $cart_item_data, $cart_item ) {
+//     if ( isset( $cart_item['pixgen_data'] ) ){
+//         $cart_item_data[] = array(
+//             'name' => "pixgen",
+//             'value' =>   $cart_item['pixgen_data'],
+//         );
+//     }
+//     return $cart_item_data;
+// }
+/////
 add_filter( 'woocommerce_order_item_get_formatted_meta_data', 'kia_hide_mnm_meta_in_emails' );
 function kia_hide_mnm_meta_in_emails( $meta ) {
     if( ! is_admin() ) {
@@ -351,7 +435,7 @@ function display_admin_order_item_custom_button( $item_id, $item, $product ){
 
     if( ! empty($data) ) {
         // Display a custom download button using custom meta for the link
-        echo '<a href="' . get_site_url() . '/apps/pixgen/?pixgen='.$data.'" target="_blank" class="button download">' . __("Editor", "woocommerce") . '</a>';
+        echo '<a href="' . get_site_url() . '/apps/pixgen/?pixgen='.base64_encode(gzcompress($data)).'" target="_blank" class="button download">' . __("Editor", "woocommerce") . '</a>';
     }
 }
 
