@@ -4,7 +4,6 @@ import FontStyled from '../../utils/FontStyled'
 const TableData = ({
   imgPath,
   fontColor,
-  maxSize,
   data,
   icons,
   onItemSelect,
@@ -167,7 +166,6 @@ const TableData = ({
           icons={icons}
           space={space}
           multiline={true}
-          maxSize={maxSize}
           imgPath={imgPath}
           fontColor={fontColor}
         />
