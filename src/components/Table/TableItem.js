@@ -4,7 +4,6 @@ import TableData from './TableData'
 const TableItem = ({
   imgPath,
   fontColor,
-  maxSize,
   items,
   icons,
   template,
@@ -34,7 +33,6 @@ const TableItem = ({
             <TableData
               imgPath={imgPath}
               fontColor={fontColor}
-              maxSize={maxSize}
               data={data}
               icons={icons}
               onItemSelect={onItemSelect}
