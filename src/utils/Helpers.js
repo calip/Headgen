@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react'
 import i18n from './i18n.js'
 import { Tooltip } from 'react-bootstrap'
 import { env } from './env.js'
+import zlib from 'react-zlib-js'
+import { Buffer } from 'buffer'
 
 const Helpers = {
   getBaseUrl: () => {
@@ -35,15 +37,60 @@ const Helpers = {
   getQuery: () => {
     return new URLSearchParams(window.location.search)
   },
+  getCurrentOrientation: (height, width) => {
+    const orientation = width >= height ? 'landscape' : 'portrait'
+    return orientation
+  },
+  validateWordpressRole: (role) => {
+    const roles = ['administrator', 'editor', 'author', 'shop_manager']
+    return roles.includes(role)
+  },
+  setEmptyPlaceholder: (data) => {
+    const placeholder = [
+      {
+        orientation: 'portrait',
+        value: data[0]?.id
+      },
+      {
+        orientation: 'landscape',
+        value: data[0]?.id
+      }
+    ]
+    return placeholder
+  },
   saveInputToLocalStorage: (items, config, value) => {
     items.setInputItem((prevState) => {
-      return { ...prevState, [items]: value }
+      return { ...prevState, items: value }
     })
     Helpers.storeInputItem(config, items.inputItem)
   },
-  fetchJson: async (url) => {
+  gzuncompress: (data) => {
+    const s = Buffer.from(data, 'base64')
+    const chunk = zlib.inflateSync(s)
+    return chunk.toString()
+  },
+  fetchJson: async (url, header = false) => {
     const response = await fetch(url, {
       method: 'GET'
+    })
+    if (header) {
+      return response.headers.get('x-wc-store-api-nonce')
+    }
+    const data = await response.json()
+    return data
+  },
+  postJson: async (url, productId, pixgen, key) => {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Nonce: key
+      },
+      body: JSON.stringify({
+        id: productId,
+        quantity: 1,
+        pixgen: pixgen
+      })
     })
     const data = await response.json()
     return data
@@ -63,6 +110,9 @@ const Helpers = {
   },
   stringValueToBool: (value) => {
     return value.toLowerCase() === 'yes'
+  },
+  capitalizeFirstLetter: (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1)
   },
   extractProducts: (products) => {
     return products.map((item) => {
@@ -94,25 +144,27 @@ const Helpers = {
     }
     return data
   },
-  extractVariationAttributes: (variations) => {
+  extractVariationAttributes: (variations, attributeSlug) => {
     return variations
       .map((item) => {
-        const attribute = item.attributes.find((attr) => attr.id === 1)
+        const attribute = item.attributes.find((attr) => attr.slug === attributeSlug)
         let data = null
-        if (attribute && attribute.option) {
-          const option = attribute.option.split('x')
-          const secOption = option[1].split(' ')
+        if (attribute && attribute.term) {
+          const initUnit = ['cm', 'inc', 'px']
+          const slug = attribute.term.slug.split('_')
+          const unit = slug[1].length > 0 && initUnit.includes(slug[1]) ? slug[1] : 'px'
+          const size = slug[0].split('x')
+          const height = parseFloat(size[0].replace('-', '.'))
+          const width = parseFloat(size[1].replace('-', '.'))
 
-          const height = parseInt(option[0])
-          const width = parseInt(secOption[0])
-          const unit = secOption[1] ? secOption[1] : 'px'
           data = {
             id: item.id,
             height: height,
             width: width,
             unit: unit,
             price: item.price,
-            metadata: item.meta_data
+            metadata: item.meta_data,
+            slug: attribute.term.slug
           }
         }
         return data
@@ -123,23 +175,25 @@ const Helpers = {
         return va - vb
       })
   },
-  extractVariation: (variation) => {
-    const attribute = variation.attributes.find((attr) => attr.id === 1)
+  extractVariation: (variation, attributeSlug) => {
+    const attribute = variation.attributes.find((attr) => attr.slug === attributeSlug)
     let data = null
     if (attribute && attribute.option) {
-      const option = attribute.option.split('x')
-      const secOption = option[1].split(' ')
+      const initUnit = ['cm', 'inc', 'px']
+      const slug = attribute.term.slug.split('_')
+      const unit = slug[1].length > 0 && initUnit.includes(slug[1]) ? slug[1] : 'px'
+      const size = slug[0].split('x')
+      const height = parseFloat(size[0].replace('-', '.'))
+      const width = parseFloat(size[1].replace('-', '.'))
 
-      const height = parseInt(option[0])
-      const width = parseInt(secOption[0])
-      const unit = secOption[1] ? secOption[1] : 'px'
       data = {
         id: variation.id,
         height: height,
         width: width,
         unit: unit,
         price: variation.price,
-        metadata: variation.meta_data
+        metadata: variation.meta_data,
+        slug: attribute.term.slug
       }
     }
     return data
@@ -201,6 +255,7 @@ const Helpers = {
       backgroundColor: 'transparent',
       fontColor: '#000000',
       placeholder: false,
+      placeholderItem: null,
       variation: null,
       items: [Helpers.setItems()]
     }

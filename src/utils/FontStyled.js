@@ -8,6 +8,8 @@ const FontContainer = styled(ReactFitty)`
   line-height: 100%;
   text-indent: ${(props) => props.spacing}em;
   text-align: center;
+  margin-bottom: ${(props) =>
+    props.font === 'mexcellent' || props.font === 'marqueemoon' ? '0' : '4%'};
   letter-spacing: ${(props) => props.spacing}em;
   font-family: ${(props) => props.font}-Wordpix;
 `
@@ -68,8 +70,7 @@ const FontStyled = (props) => {
           wrapText
           font={props.value.font}
           spacing={props.value.fontSpacing}
-          minSize={1}
-          maxSize={props.maxSize}>
+          minSize={1}>
           <div style={{ display: 'flex', width: '100%', height: '100%', boxSizing: 'border-box' }}>
             <div>
               {props.value.font === 'italianno' && props.value.realText.length > 0 ? (
