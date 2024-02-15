@@ -107,7 +107,10 @@ function App() {
                                 )
                                 .then((res) => {
                                   if (res.status === 200) {
-                                    const variation = Helpers.extractVariation(res.data)
+                                    const variation = Helpers.extractVariation(
+                                      res.data,
+                                      result.wordpress.attributeSlug
+                                    )
                                     setSelectedProduct(product)
                                     setSelectedVariation(variation)
                                     setCurrencyCode(wooSettings.settings.currency)
