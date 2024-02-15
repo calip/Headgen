@@ -4,7 +4,7 @@ import './TourModal.scss'
 const TourModal = ({ index, size, step, skipProps, primaryProps, tooltipProps, isLastStep }) => (
   <div {...tooltipProps} className="pixgen-tour">
     <div className="pixgen-tour-content">
-      <div>{step.content}</div>
+      <div style={{ whiteSpace: 'pre-line', textAlign: step.textAlignment }}>{step.content}</div>
     </div>
     <div className="pixgen-tour-footer">
       <div>
