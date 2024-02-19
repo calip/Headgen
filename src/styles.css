@@ -58,11 +58,11 @@ a:focus {
     SIDEBAR STYLE
 ----------------------------------------------------- */
 .pixgen-sidebar {
-  min-width: 400px;
-  max-width: 400px;
+  min-width: 460px;
+  max-width: 460px;
   background: #fff;
   color: #adb5bd;
-  margin-left: -400px;
+  margin-left: -460px;
   transition: all 0.5s;
 }
 
@@ -211,10 +211,6 @@ and (orientation: portrait) {
 
 .toolbar-btn.active {
   background-color: #21252945 !important;
-}
-
-.list-icon {
-  margin-left: 5px !important;
 }
 
 .dropdown-menu {
