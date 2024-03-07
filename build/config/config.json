@@ -1,77 +1,4317 @@
 {
   "appId": 1,
-  "appName": "Pixgen",
-  "language": "de",
+  "appName": "Pixgen Admin Panel",
+  "language": "en",
   "admin": true,
   "layout": {
-    "width": 4000,
-    "height": 6000,
-    "padding": 10,
-    "dpc": 100
+      "format": null,
+      "width": 40,
+      "height": 60,
+      "padding": 1,
+      "orientation": "portrait",
+      "unit": "px",
+      "dpc": 100,
+      "border": true,
+      "backgroundColor": "transparent",
+      "fontColor": "#000000",
+      "imagePlaceholder": "/img/placeholder.png"
   },
   "templates": [
-    {
-      "id": 1,
-      "name": "Multilines",
-      "layout": [2, 3, 2, 3, 2, 2],
-      "fontTitle": "mexcellent",
-      "fonts": ["stripey", "mexcellent", "italianno"]
-    },
-    {
-      "id": 2,
-      "name": "Simple",
-      "layout": [1, 2],
-      "fontTitle": "italianno",
-      "fonts": ["comfortaa", "italianno"]
-    },
-    {
-      "id": 3,
-      "name": "One Line",
-      "layout": [1],
-      "fontTitle": "comfortaa",
-      "fonts": ["mexcellent", "italianno"]
-    },
-    {
-      "id": 4,
-      "name": "Complex",
-      "layout": [3, 2, 1, 4, 3, 1, 2, 3],
-      "fontTitle": "comfortaa",
-      "fonts": ["italianno"]
-    }
+      {
+          "id": 1,
+          "name": "Mehrzeiler",
+          "layout": [
+              2,
+              3,
+              2,
+              3,
+              2,
+              2
+          ],
+          "fontTitle": "mexcellent",
+          "fonts": [
+              "stripey",
+              "mexcellent",
+              "comfortaa"
+          ]
+      },
+      {
+          "id": 2,
+          "name": "Einfach gehalten",
+          "layout": [
+              1,
+              2
+          ],
+          "fontTitle": "mexcellent",
+          "fonts": [
+              "stripey",
+              "mexcellent",
+              "comfortaa"
+          ]
+      },
+      {
+          "id": 3,
+          "name": "Einzeiler",
+          "layout": [
+              1
+          ],
+          "fontTitle": "mexcellent",
+          "fonts": [
+              "stripey",
+              "mexcellent",
+              "comfortaa"
+          ]
+      },
+      {
+          "id": 4,
+          "name": "Wildes Durcheinander",
+          "layout": [
+              3,
+              2,
+              1,
+              4,
+              3,
+              1,
+              2,
+              3
+          ],
+          "fontTitle": "comfortaa",
+          "fonts": [
+              "stripey",
+              "mexcellent",
+              "comfortaa"
+          ]
+      }
   ],
   "input": {
-    "max": null,
-    "defaultIcon": ["anker", "gorilla"],
-    "icons": [
-      {
-        "name": "gorilla",
-        "file": "./icons/516_Gorilla_V1.svg",
-        "tags": ["animal", "ape"]
-      },
-      {
-        "name": "kuschel",
-        "file": "./icons/501_kuscheln_V1.svg",
-        "tags": ["animal", "mami"]
-      },
-      {
-        "name": "anker",
-        "file": "./icons/503_Anker_V1.svg",
-        "tags": ["car", "mama"]
-      },
-      {
-        "name": "tannenzapfen",
-        "file": "./icons/511_Tannenzapfen_V1.svg",
-        "tags": ["toy", "motor"]
-      },
-      {
-        "name": "umarmen",
-        "file": "./icons/500_umarmen_V1.svg",
-        "tags": ["house"]
-      }
-    ]
+      "max": null,
+      "defaultIcon": [
+        "standard eins",
+    "standard zwei",
+    "standard drei"
+      ],
+      "showTitle": true,
+      "placeholderIcon": "Frage",
+      "icons": [
+    {
+          "name": "Standard Eins",
+          "file": "/icons/Standard_Sterne.svg",
+          "tags": []
+        },
+    {
+          "name": "Standard Zwei",
+          "file": "/icons/321_Seestern_V1.svg",
+          "tags": []
+        },
+    {
+          "name": "Standard Drei",
+          "file": "/icons/Standard_Doppelherz.svg",
+          "tags": []
+        },
+        {
+          "name": "Frage",
+          "file": "/icons/519_wo_V1.svg",
+          "tags": [
+            "wo",
+            "Fragezeichen",
+      "warum"
+          ]
+        },
+    {
+          "name": "Sterne",
+          "file": "/icons/Standard_Sterne.svg",
+          "tags": []
+        },
+        {
+          "name": "Gorilla",
+          "file": "/icons/516_Gorilla_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "kuscheln",
+          "file": "/icons/501_kuscheln_V1.svg",
+          "tags": [
+            "umarmen"
+          ]
+        },
+        {
+          "name": "Anker",
+          "file": "/icons/503_Anker_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Tannenzapfen",
+          "file": "/icons/511_Tannenzapfen_V1.svg",
+          "tags": [
+            "Zapfen"
+          ]
+        },
+        {
+          "name": "umarmen",
+          "file": "/icons/500_umarmen_V1.svg",
+          "tags": [
+            "Freundinnen",
+            "Freunde"
+          ]
+        },
+        {
+          "name": "Karotte",
+          "file": "/icons/01_Karotte_V2.svg",
+          "tags": [
+            "Möhre",
+            "Karotten",
+            "Möhren"
+          ]
+        },
+        {
+          "name": "Schaukel",
+          "file": "/icons/02_Schaukel_V2.svg",
+          "tags": [
+            "schaukeln"
+          ]
+        },
+        {
+          "name": "Rutsche",
+          "file": "/icons/03_Rutsche_V1.svg",
+          "tags": [
+            "rutschen"
+          ]
+        },
+        {
+          "name": "Ball",
+          "file": "/icons/04_Ball_V1.svg",
+          "tags": [
+            "Bälle"
+          ]
+        },
+        {
+          "name": "Flugzeug",
+          "file": "/icons/05_Flugzeug_V1.svg",
+          "tags": [
+            "Flugzeuge",
+            "Flug",
+            "fliegen"
+          ]
+        },
+        {
+          "name": "Glas",
+          "file": "/icons/06_Glas_V2.svg",
+          "tags": [
+            "Gläser"
+          ]
+        },
+        {
+          "name": "Vogel",
+          "file": "/icons/07_Vogel_V1.svg",
+          "tags": [
+            "Vögel",
+            "piep",
+            "fliegen"
+          ]
+        },
+        {
+          "name": "Mama",
+          "file": "/icons/23_Mama_V1.svg",
+          "tags": [
+            "Tante",
+            "Mami",
+            "Mutter",
+            "Mutti",
+            "Frau"
+          ]
+        },
+        {
+          "name": "Flasche",
+          "file": "/icons/08_Flasche_V1.svg",
+          "tags": [
+            "Flaschen"
+          ]
+        },
+        {
+          "name": "Schnuller",
+          "file": "/icons/09_Schnuller_V1.svg",
+          "tags": [
+            "Schnulli",
+            "Beruhigungssauger",
+            "Sauger"
+          ]
+        },
+        {
+          "name": "Buch",
+          "file": "/icons/10_Buch_V2.svg",
+          "tags": [
+            "Bücher",
+            "lesen"
+          ]
+        },
+        {
+          "name": "Schuh",
+          "file": "/icons/11_Schuh_V1.svg",
+          "tags": [
+            "Schuhe"
+          ]
+        },
+        {
+          "name": "Nase",
+          "file": "/icons/12_Nase_V1.svg",
+          "tags": [
+            "Nasen",
+            "riechen"
+          ]
+        },
+        {
+          "name": "Eis",
+          "file": "/icons/13_Eis_V2.svg",
+          "tags": [
+            "Waffeleis"
+          ]
+        },
+        {
+          "name": "Eisbecher",
+          "file": "/icons/13_Eisbecher_V1.svg",
+          "tags": [
+            "Eiskugel",
+            "Eiskugeln"
+          ]
+        },
+        {
+          "name": "Bonbon",
+          "file": "/icons/14_Bonbon_V1.svg",
+          "tags": [
+            "Bonbons",
+            "Süßigkeit",
+            "Süßigkeiten"
+          ]
+        },
+        {
+          "name": "Nudel",
+          "file": "/icons/15_Nudel_V2.svg",
+          "tags": [
+            "Nudeln",
+            "Farfalle",
+            "Flügelnudel"
+          ]
+        },
+        {
+          "name": "Auge",
+          "file": "/icons/18_Auge_V2.svg",
+          "tags": [
+            "Pupille"
+          ]
+        },
+        {
+          "name": "Augen",
+          "file": "/icons/18_Augen_V1.svg",
+          "tags": [
+            "Augenpaar"
+          ]
+        },
+        {
+          "name": "Zeitung",
+          "file": "/icons/19_Zeitung_V2.svg",
+          "tags": [
+            "Zeitungen ",
+            "lesen"
+          ]
+        },
+        {
+          "name": "Windel",
+          "file": "/icons/20_Windel_V1.svg",
+          "tags": [
+            "Windeln",
+            "wickeln"
+          ]
+        },
+        {
+          "name": "Löffel",
+          "file": "/icons/16_Löffel_V2.svg",
+          "tags": [
+            "Suppe"
+          ]
+        },
+        {
+          "name": "Brot",
+          "file": "/icons/17_Brot_V1.svg",
+          "tags": [
+            "Laib",
+            "Brotlaib"
+          ]
+        },
+        {
+          "name": "Toastbrot",
+          "file": "/icons/17_Brot_V2.svg",
+          "tags": [
+            "Brot"
+          ]
+        },
+        {
+          "name": "Papa",
+          "file": "/icons/24_Papa_V1.svg",
+          "tags": [
+            "Onkel",
+            "Papi",
+            "Vater",
+            "Vati"
+          ]
+        },
+        {
+          "name": "Mädchen",
+          "file": "/icons/25_Mädchen_V2.svg",
+          "tags": [
+            "Mädl"
+          ]
+        },
+        {
+          "name": "Kind",
+          "file": "/icons/25_Mädchen_V1.svg",
+          "tags": [
+            "Mädchen"
+          ]
+        },
+        {
+          "name": "Junge",
+          "file": "/icons/26_Junge_V2.svg",
+          "tags": [
+            "Bub",
+            "Bursche"
+          ]
+        },
+        {
+          "name": "Handy",
+          "file": "/icons/21_Handy_V1.svg",
+          "tags": [
+            "Handies",
+            "Handys",
+            "Telefon",
+            "Telephon",
+            "Smartphone",
+            "I-Phone"
+          ]
+        },
+        {
+          "name": "Dusche",
+          "file": "/icons/22_Dusche_V1.svg",
+          "tags": [
+            "Duschkopf",
+            "duschen"
+          ]
+        },
+        {
+          "name": "Badewanne",
+          "file": "/icons/27_Badewanne_V1.svg",
+          "tags": [
+            "Wanne",
+            "baden"
+          ]
+        },
+        {
+          "name": "Kopf",
+          "file": "/icons/28_Kopf_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Arm",
+          "file": "/icons/29_Arm_V1.svg",
+          "tags": [
+            "Arme"
+          ]
+        },
+        {
+          "name": "Hand",
+          "file": "/icons/32_Finger_V1.svg",
+          "tags": [
+            "Finger"
+          ]
+        },
+        {
+          "name": "Hände",
+          "file": "/icons/30_Hand_V1.svg",
+          "tags": [
+            "Hände schütteln",
+            "Handschlag",
+            "Einigkeit",
+            "vertragen",
+            "einigen"
+          ]
+        },
+        {
+          "name": "Bein",
+          "file": "/icons/31_Bein_V1.svg",
+          "tags": [
+            "Beine"
+          ]
+        },
+        {
+          "name": "Körper",
+          "file": "/icons/33_Körper_V1.svg",
+          "tags": [
+            "nackt",
+            "nackig"
+          ]
+        },
+        {
+          "name": "Kleid",
+          "file": "/icons/34_Kleid_V1.svg",
+          "tags": [
+            "Kleider"
+          ]
+        },
+        {
+          "name": "Pullover",
+          "file": "/icons/35_Pullover_V1.svg",
+          "tags": [
+            "Pulli"
+          ]
+        },
+        {
+          "name": "Rock",
+          "file": "/icons/36_Rock_V1.svg",
+          "tags": [
+            "Röcke"
+          ]
+        },
+        {
+          "name": "Latzhose",
+          "file": "/icons/37_Latzhose_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "T-Shirt",
+          "file": "/icons/38_T-shirt_V1.svg",
+          "tags": [
+            "Tshirt",
+            "Shirt"
+          ]
+        },
+        {
+          "name": "Jeans",
+          "file": "/icons/39_Jeans_V1.svg",
+          "tags": [
+            "Jeanshose"
+          ]
+        },
+        {
+          "name": "Unterhemd",
+          "file": "/icons/40_Unterhemd_V1.svg",
+          "tags": [
+            "Achselshirt",
+            "Hemdchen"
+          ]
+        },
+        {
+          "name": "Sandale",
+          "file": "/icons/41_Sandalen_V1.svg",
+          "tags": [
+            "Sandalen"
+          ]
+        },
+        {
+          "name": "Gummistiefel",
+          "file": "/icons/42_Gummistiefel_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Turnschuh",
+          "file": "/icons/43_Turnschuhe_V1.svg",
+          "tags": [
+            "Turnschuhe"
+          ]
+        },
+        {
+          "name": "Unterhose",
+          "file": "/icons/44_Unterhose_V2.svg",
+          "tags": [
+            "Bux"
+          ]
+        },
+        {
+          "name": "Schlafanzug",
+          "file": "/icons/45_Schlafanzug_V2.svg",
+          "tags": [
+            "Pyjama"
+          ]
+        },
+        {
+          "name": "Mantel",
+          "file": "/icons/46_Mantel_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "Fäustlinge",
+          "file": "/icons/47_Fäustlinge_V2.svg",
+          "tags": [
+            "Fäustling"
+          ]
+        },
+        {
+          "name": "Handschuhe",
+          "file": "/icons/47_Handschuhe_V1.svg",
+          "tags": [
+            "Handschuh"
+          ]
+        },
+        {
+          "name": "Socken",
+          "file": "/icons/48_Socken_V2.svg",
+          "tags": [
+            "Socke"
+          ]
+        },
+        {
+          "name": "Bäcker",
+          "file": "/icons/49_Bäcker_V1.svg",
+          "tags": [
+            "Bäckerin",
+            "Konditor",
+            "Konditorin",
+            "backen"
+          ]
+        },
+        {
+          "name": "Messer",
+          "file": "/icons/50_Messer_V1.svg",
+          "tags": [
+            "Klinge",
+            "schneiden"
+          ]
+        },
+        {
+          "name": "Gabel",
+          "file": "/icons/51_Gabel_V1.svg",
+          "tags": [
+            "Gabeln"
+          ]
+        },
+        {
+          "name": "Mülleimer",
+          "file": "/icons/52_Mülleimer_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Tasse",
+          "file": "/icons/53_Tasse_V1.svg",
+          "tags": [
+            "Teetasse"
+          ]
+        },
+        {
+          "name": "Teller",
+          "file": "/icons/54_Teller_V1.svg",
+          "tags": [
+            "Unterteller"
+          ]
+        },
+        {
+          "name": "Regal",
+          "file": "/icons/55_Regal_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "Radio",
+          "file": "/icons/56_Radio_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Kissen",
+          "file": "/icons/57_Kissen_V2.svg",
+          "tags": [
+            "Kopfkissen"
+          ]
+        },
+        {
+          "name": "Sofa",
+          "file": "/icons/58_Sofa_V1.svg",
+          "tags": [
+            "Couch"
+          ]
+        },
+        {
+          "name": "Handtuch",
+          "file": "/icons/59_Handtuch_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "Müsli",
+          "file": "/icons/60_Müsli_V2.svg",
+          "tags": [
+            "Cornflakes"
+          ]
+        },
+        {
+          "name": "Wassermelone",
+          "file": "/icons/61_Wassermelone_V1.svg",
+          "tags": [
+            "Melone"
+          ]
+        },
+        {
+          "name": "Chips",
+          "file": "/icons/62_Chips_V3_1.svg",
+          "tags": [
+            "Chipstüte"
+          ]
+        },
+        {
+          "name": "Saft",
+          "file": "/icons/63_Saft_V2.svg",
+          "tags": [
+            "Getränk",
+            "trinken",
+            "Strohhalm"
+          ]
+        },
+        {
+          "name": "Erbse",
+          "file": "/icons/64_Erbse_V1.svg",
+          "tags": [
+            "Erbsen"
+          ]
+        },
+        {
+          "name": "Schokolade",
+          "file": "/icons/65_Schokolade_V1.svg",
+          "tags": [
+            "Schokoladentafel"
+          ]
+        },
+        {
+          "name": "Ei",
+          "file": "/icons/66_Ei_V1.svg",
+          "tags": [
+            "oval"
+          ]
+        },
+        {
+          "name": "Weintraube",
+          "file": "/icons/67_Weintraube_V1.svg",
+          "tags": [
+            "Weintrauben",
+            "Traube",
+            "Trauben"
+          ]
+        },
+        {
+          "name": "Tomate",
+          "file": "/icons/68_Tomate_V1.svg",
+          "tags": [
+            "Tomaten"
+          ]
+        },
+        {
+          "name": "Hase",
+          "file": "/icons/69_Hase_V1.svg",
+          "tags": [
+            "Hasen",
+            "Kaninchen"
+          ]
+        },
+        {
+          "name": "Feuerwehr",
+          "file": "/icons/70_Feuerwehr_V1.svg",
+          "tags": [
+            "Feuerwehrauto"
+          ]
+        },
+        {
+          "name": "Polizei",
+          "file": "/icons/71_Polizei_V1.svg",
+          "tags": [
+            "Polizeiauto",
+            "tatütata"
+          ]
+        },
+        {
+          "name": "Krankenwagen",
+          "file": "/icons/72_Krankenwagen_V1.svg",
+          "tags": [
+            "Rettungswagen",
+            "Sanker"
+          ]
+        },
+        {
+          "name": "Trommel",
+          "file": "/icons/73_Trommel_V1.svg",
+          "tags": [
+            "trommeln"
+          ]
+        },
+        {
+          "name": "Spiel",
+          "file": "/icons/250_Spiel_V2.svg",
+          "tags": [
+            "spielen",
+            "Brettspiel",
+            "Gesellschaftsspiel"
+          ]
+        },
+        {
+          "name": "Eisenbahn",
+          "file": "/icons/139_Zug_V1.svg",
+          "tags": [
+            "Bahn",
+            "Zug",
+            "Brio"
+          ]
+        },
+        {
+          "name": "Schaukelpferd",
+          "file": "/icons/75_Schaukelpferd_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Traktor",
+          "file": "/icons/76_Traktor_V1.svg",
+          "tags": [
+            "Trecker"
+          ]
+        },
+        {
+          "name": "Bagger",
+          "file": "/icons/77_Bagger_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Lastwagen",
+          "file": "/icons/78_Lastwagen_V1.svg",
+          "tags": [
+            "LKW",
+            "Laster"
+          ]
+        },
+        {
+          "name": "Transporter",
+          "file": "/icons/386_LASTER_V1.svg",
+          "tags": [
+            "Sprinter"
+          ]
+        },
+        {
+          "name": "Bus",
+          "file": "/icons/79_Bus_V1.svg",
+          "tags": [
+            "Omnibus"
+          ]
+        },
+        {
+          "name": "Zweig",
+          "file": "/icons/80_Zweig_V1.svg",
+          "tags": [
+            "Ast"
+          ]
+        },
+        {
+          "name": "Feder",
+          "file": "/icons/81_Feder_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Bank",
+          "file": "/icons/82_Bank_V1.svg",
+          "tags": [
+            "Sitzbank"
+          ]
+        },
+        {
+          "name": "Gras",
+          "file": "/icons/83_Gras_V1.svg",
+          "tags": [
+            "Wiese"
+          ]
+        },
+        {
+          "name": "Fußball",
+          "file": "/icons/140_Ball_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Fußball spielen",
+          "file": "/icons/84_Fußball_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Picknick",
+          "file": "/icons/85_Picknick_V1.svg",
+          "tags": [
+            "Picknickkorb"
+          ]
+        },
+        {
+          "name": "Henne",
+          "file": "/icons/86_Huhn_V2.svg",
+          "tags": [
+            "Huhn"
+          ]
+        },
+        {
+          "name": "Küken",
+          "file": "/icons/87_Küken_V1.svg",
+          "tags": [
+            "Kücken"
+          ]
+        },
+        {
+          "name": "Kuh",
+          "file": "/icons/88_Kalb_V1.svg",
+          "tags": [
+            "Muh",
+            "Kalb"
+          ]
+        },
+        {
+          "name": "Schiene",
+          "file": "/icons/74_Schiene_V1.svg",
+          "tags": [
+            "Gleis"
+          ]
+        },
+        {
+          "name": "Eimer",
+          "file": "/icons/89_Eimer_V1.svg",
+          "tags": [
+            "Kübel"
+          ]
+        },
+        {
+          "name": "Pferd",
+          "file": "/icons/90_Pferd_V1.svg",
+          "tags": [
+            "Hüh",
+            "Hott",
+            "reiten"
+          ]
+        },
+        {
+          "name": "Nashorn",
+          "file": "/icons/91_Nashorn_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Kamel",
+          "file": "/icons/92_Kamel_V1.svg",
+          "tags": [
+            "Kamele"
+          ]
+        },
+        {
+          "name": "Kreis",
+          "file": "/icons/93_Kreis_V1.svg",
+          "tags": [
+            "rund"
+          ]
+        },
+        {
+          "name": "Geschenk",
+          "file": "/icons/94_Geschenk_V1.svg",
+          "tags": [
+            "schenken"
+          ]
+        },
+        {
+          "name": "Knopf",
+          "file": "/icons/95_Knopf_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Nest",
+          "file": "/icons/96_Nest_V1.svg",
+          "tags": [
+            "Vogelnest"
+          ]
+        },
+        {
+          "name": "Windrad",
+          "file": "/icons/97_Windrad_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Treppe",
+          "file": "/icons/98_Treppe_V1.svg",
+          "tags": [
+            "Treppen",
+            "Stufe",
+            "Stufen"
+          ]
+        },
+        {
+          "name": "Aufzug",
+          "file": "/icons/99_Aufzug_V1.svg",
+          "tags": [
+            "Elevator",
+            "Fahrstuhl"
+          ]
+        },
+        {
+          "name": "Gießkanne",
+          "file": "/icons/100_Gießkanne_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Harke",
+          "file": "/icons/101_Harke_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Schubkarre",
+          "file": "/icons/102_Schubkarre_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Besen",
+          "file": "/icons/103_Besen_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Koffer",
+          "file": "/icons/104_Koffer_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Urlaub",
+          "file": "/icons/105_Urlaub_V1.svg",
+          "tags": [
+            "Sonnenliege",
+            "chillen"
+          ]
+        },
+        {
+          "name": "Meer",
+          "file": "/icons/106_Meer_V1.svg",
+          "tags": [
+            "Welle",
+            "Wellen"
+          ]
+        },
+        {
+          "name": "See",
+          "file": "/icons/107_See_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Kuscheltier",
+          "file": "/icons/108_Kuscheltier_V2.svg",
+          "tags": [
+            "Teddybär",
+            "Teddy"
+          ]
+        },
+        {
+          "name": "Zahnbürste",
+          "file": "/icons/109_Zahnbürste_V1.svg",
+          "tags": [
+            "Zähne putzen"
+          ]
+        },
+        {
+          "name": "Haarbürste",
+          "file": "/icons/110_Haarbürste_V1.svg",
+          "tags": [
+            "bürsten",
+            "Haare bürsten",
+            "Bürste"
+          ]
+        },
+        {
+          "name": "Trampolin",
+          "file": "/icons/111_Trampolin_V1.svg",
+          "tags": [
+            "hüpfen",
+            "springen"
+          ]
+        },
+        {
+          "name": "Schnee",
+          "file": "/icons/112_Schnee_V1.svg",
+          "tags": [
+            "Schneeflocke",
+            "Winter"
+          ]
+        },
+        {
+          "name": "Nebel",
+          "file": "/icons/113_Nebel_V1.svg",
+          "tags": [
+            "neblig"
+          ]
+        },
+        {
+          "name": "Wolke",
+          "file": "/icons/114_Wolke_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Regenschirm",
+          "file": "/icons/115_Regenschirm_V1.svg",
+          "tags": [
+            "Schirm",
+            "Regen"
+          ]
+        },
+        {
+          "name": "Sonnenschirm",
+          "file": "/icons/116_Sonnenschirm_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Sonnencreme",
+          "file": "/icons/117_Sonnencreme_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Sonne",
+          "file": "/icons/118_Sonne_V1.svg",
+          "tags": [
+            "sonnig",
+            "sonnen"
+          ]
+        },
+        {
+          "name": "Wasser",
+          "file": "/icons/119_Wasser_V1.svg",
+          "tags": [
+            "Wassertropfen",
+            "Regen"
+          ]
+        },
+        {
+          "name": "Tasche",
+          "file": "/icons/120_Tasche_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Säge",
+          "file": "/icons/121_Säge_V1.svg",
+          "tags": [
+            "sägen"
+          ]
+        },
+        {
+          "name": "Hammer",
+          "file": "/icons/122_Hammer_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Zange",
+          "file": "/icons/123_Zange_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Nägel",
+          "file": "/icons/124_Nagel_V1.svg",
+          "tags": [
+            "Nagel"
+          ]
+        },
+        {
+          "name": "Kastanie",
+          "file": "/icons/125_Kastanie_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "Kappe",
+          "file": "/icons/126_Kappe_V1.svg",
+          "tags": [
+            "Kappie",
+            "Cappy",
+            "Cappie",
+            "Schirmmütze"
+          ]
+        },
+        {
+          "name": "Vogelscheuche",
+          "file": "/icons/127_Vogelscheuche_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Pony",
+          "file": "/icons/128_Pony_V1.svg",
+          "tags": [
+            "Ponie"
+          ]
+        },
+        {
+          "name": "Garten",
+          "file": "/icons/129_Garten_V1.svg",
+          "tags": [
+            "Gartenzaun",
+            "Zaun"
+          ]
+        },
+        {
+          "name": "Schuppen",
+          "file": "/icons/130_Schuppen_V1.svg",
+          "tags": [
+            "Gartenhaus",
+            "Garage"
+          ]
+        },
+        {
+          "name": "Laufrad",
+          "file": "/icons/131_Laufrad_V1.svg",
+          "tags": [
+            "Puky"
+          ]
+        },
+        {
+          "name": "Schlitten",
+          "file": "/icons/132_Schlitten_V2.svg",
+          "tags": [
+            "Bob",
+            "Holzschlitten"
+          ]
+        },
+        {
+          "name": "Iglu",
+          "file": "/icons/133_Iglu_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Vogelhaus",
+          "file": "/icons/134_Vogelhaus_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Schneemann",
+          "file": "/icons/135_Schneemann_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Krone",
+          "file": "/icons/136_Krone_V1.svg",
+          "tags": [
+            "König",
+            "Königin"
+          ]
+        },
+        {
+          "name": "Hocker",
+          "file": "/icons/137_Hocker_V1.svg",
+          "tags": [
+            "Schemel"
+          ]
+        },
+        {
+          "name": "Kugel",
+          "file": "/icons/305_Kugel_V2.svg",
+          "tags": [
+            "Murmel"
+          ]
+        },
+        {
+          "name": "Kugeln",
+          "file": "/icons/305_Kugel_V1.svg",
+          "tags": [
+            "Murmeln"
+          ]
+        },
+        {
+          "name": "Kamera",
+          "file": "/icons/141_Kamera_V1.svg",
+          "tags": [
+            "Fotoapparat"
+          ]
+        },
+        {
+          "name": "Weltkugel",
+          "file": "/icons/138_Globus_Welt_V1.svg",
+          "tags": [
+            "Globus",
+            "Welt"
+          ]
+        },
+        {
+          "name": "Straßenbahn",
+          "file": "/icons/139_Zug_V1.svg",
+          "tags": [
+            "Strassenbahn",
+            "S-Bahn"
+          ]
+        },
+        {
+          "name": "Nuss",
+          "file": "/icons/125_Nuss_V1.svg",
+          "tags": [
+            "Haselnuss"
+          ]
+        },
+        {
+          "name": "Küche",
+          "file": "/icons/142_Küche_V1.svg",
+          "tags": [
+            "kochen"
+          ]
+        },
+        {
+          "name": "Bad",
+          "file": "/icons/306_Bad_V1.svg",
+          "tags": [
+            "Badezimmer",
+            "Toilette",
+            "Klo"
+          ]
+        },
+        {
+          "name": "Schlittschuh",
+          "file": "/icons/144_Schlittschuh_V1.svg",
+          "tags": [
+            "Schlittschuhe",
+            "Schlittschuh fahren"
+          ]
+        },
+        {
+          "name": "Adventskranz",
+          "file": "/icons/145_Adventskranz_V1.svg",
+          "tags": [
+            "Advent",
+            "Weihnachten"
+          ]
+        },
+        {
+          "name": "Haus",
+          "file": "/icons/146_Haus_V1.svg",
+          "tags": [
+            "wohnen",
+            "Zuhause",
+            "heim",
+            "daheim"
+          ]
+        },
+        {
+          "name": "Tuch",
+          "file": "/icons/147_Tuch_V2.svg",
+          "tags": [
+            "Taschentuch"
+          ]
+        },
+        {
+          "name": "Brücke",
+          "file": "/icons/148_Brücke_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "Pfanne",
+          "file": "/icons/149_Pfanne_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Ofen",
+          "file": "/icons/150_Ofen_V1.svg",
+          "tags": [
+            "Backofen"
+          ]
+        },
+        {
+          "name": "Kaffee",
+          "file": "/icons/151_kaffee_V1.svg",
+          "tags": [
+            "Kaffeetasse",
+            "Kaffee trinken"
+          ]
+        },
+        {
+          "name": "Pinsel",
+          "file": "/icons/152_Pinsel_V1.svg",
+          "tags": [
+            "malen"
+          ]
+        },
+        {
+          "name": "Musik",
+          "file": "/icons/153_Musik_V1.svg",
+          "tags": [
+            "Note",
+            "Noten",
+            "singen",
+            "musizieren"
+          ]
+        },
+        {
+          "name": "Schublade",
+          "file": "/icons/154_Schublade_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "Kommode",
+          "file": "/icons/154_Schublade_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Fernseher",
+          "file": "/icons/155_Fernseher_V1.svg",
+          "tags": [
+            "fernsehen",
+            "Bildschirm"
+          ]
+        },
+        {
+          "name": "Schalter",
+          "file": "/icons/156_Schalter_V1.svg",
+          "tags": [
+            "Kippschalter"
+          ]
+        },
+        {
+          "name": "Kerze",
+          "file": "/icons/157_Kerze_V2.svg",
+          "tags": [
+            "auspusten",
+            "anzünden"
+          ]
+        },
+        {
+          "name": "Kerzen",
+          "file": "/icons/157_Kerze_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Kabel",
+          "file": "/icons/159_Schnur_V1.svg",
+          "tags": [
+            "Schnur"
+          ]
+        },
+        {
+          "name": "Fernbedienung",
+          "file": "/icons/160_Fernbedienung_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Tastatur",
+          "file": "/icons/161_Tastatur_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Steckdose",
+          "file": "/icons/162_Steckdose_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Stecker",
+          "file": "/icons/158_Stecker_V1.svg",
+          "tags": [
+            "Strom"
+          ]
+        },
+        {
+          "name": "Schere",
+          "file": "/icons/163_Schere_V1.svg",
+          "tags": [
+            "Scheren",
+            "schneiden"
+          ]
+        },
+        {
+          "name": "Frisör",
+          "file": "/icons/164_Frisör_V1.svg",
+          "tags": [
+            "Frisörin"
+          ]
+        },
+        {
+          "name": "Kleber",
+          "file": "/icons/165_Kleber_V1.svg",
+          "tags": [
+            "kleben",
+            "Leim"
+          ]
+        },
+        {
+          "name": "Decke",
+          "file": "/icons/166_Decke_V2.svg",
+          "tags": [
+            "zudecken"
+          ]
+        },
+        {
+          "name": "Schrank",
+          "file": "/icons/167_Schrank_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Bart",
+          "file": "/icons/168_Bart_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "Baby",
+          "file": "/icons/300_Robben_V1.svg",
+          "tags": [
+            "Babie",
+            "Geschwisterkind",
+            "Neugeborenes"
+          ]
+        },
+        {
+          "name": "Batterie",
+          "file": "/icons/170_Batterie_V1.svg",
+          "tags": [
+            "aufladen",
+            "Energie",
+            "Strom"
+          ]
+        },
+        {
+          "name": "Fön",
+          "file": "/icons/171_Fön_V1.svg",
+          "tags": [
+            "Föhn",
+            "föhnen",
+            "Haartrockner"
+          ]
+        },
+        {
+          "name": "Büro",
+          "file": "/icons/172_Büro_V2.svg",
+          "tags": [
+            "Schreibtisch",
+            "Arbeitsplatz",
+            "Arbeit"
+          ]
+        },
+        {
+          "name": "Monster",
+          "file": "/icons/173_Monster_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Spielplatz",
+          "file": "/icons/174_Spielplatz_V1.svg",
+          "tags": [
+            "Spielhaus"
+          ]
+        },
+        {
+          "name": "Zucchini",
+          "file": "/icons/175_Zucchini_V1.svg",
+          "tags": [
+            "Zuccini"
+          ]
+        },
+        {
+          "name": "Papier",
+          "file": "/icons/176_Papier_V1.svg",
+          "tags": [
+            "Blatt",
+            "Schriftstück"
+          ]
+        },
+        {
+          "name": "Stift",
+          "file": "/icons/177_Stift_V1.svg",
+          "tags": [
+            "Kugelschreiber",
+            "schreiben"
+          ]
+        },
+        {
+          "name": "Kreide",
+          "file": "/icons/178_Kreide_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Becher",
+          "file": "/icons/179_Becher_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Pflanze",
+          "file": "/icons/180_Pflanze_V1.svg",
+          "tags": [
+            "Blumentopf"
+          ]
+        },
+        {
+          "name": "Sonnenblume",
+          "file": "/icons/181_Sonnenblume_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Sonnenbrille",
+          "file": "/icons/182_Sonnenbrille_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Brille",
+          "file": "/icons/426_Brille_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Rahmen",
+          "file": "/icons/183_Rahmen_V1.svg",
+          "tags": [
+            "Bilderrahmen",
+            "Bild"
+          ]
+        },
+        {
+          "name": "Tankstelle",
+          "file": "/icons/184_Tankstelle_V1.svg",
+          "tags": [
+            "tanken"
+          ]
+        },
+        {
+          "name": "Brötchen",
+          "file": "/icons/185_Brötchen_V2.svg",
+          "tags": [
+            "Semmel"
+          ]
+        },
+        {
+          "name": "Marmelade",
+          "file": "/icons/186_Marmelade_V1.svg",
+          "tags": [
+            "Konfitüre"
+          ]
+        },
+        {
+          "name": "Nutella",
+          "file": "/icons/187_Nutella_V1.svg",
+          "tags": [
+            "Schokocreme"
+          ]
+        },
+        {
+          "name": "Käse",
+          "file": "/icons/188_Käse_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "Wurst",
+          "file": "/icons/189_Wurst_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Schinken",
+          "file": "/icons/190_Schinken_V1.svg",
+          "tags": [
+            "Keule"
+          ]
+        },
+        {
+          "name": "Matratze",
+          "file": "/icons/191_Matratze_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Pixie",
+          "file": "/icons/192_Pixie_V1.svg",
+          "tags": [
+            "Pixiebuch",
+            "Pixi"
+          ]
+        },
+        {
+          "name": "Kirsche",
+          "file": "/icons/193_Kirsche_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Obst",
+          "file": "/icons/194_Obst_V1.svg",
+          "tags": [
+            "Obstkorb"
+          ]
+        },
+        {
+          "name": "Gemüse",
+          "file": "/icons/195_Gemüse_V1.svg",
+          "tags": [
+            "Gemüsekiste"
+          ]
+        },
+        {
+          "name": "Babyphone",
+          "file": "/icons/196_Babyphone_V1.svg",
+          "tags": [
+            "Babyfon"
+          ]
+        },
+        {
+          "name": "Spüle",
+          "file": "/icons/197_Spülbecken_V1.svg",
+          "tags": [
+            "Spülbecken"
+          ]
+        },
+        {
+          "name": "Herd",
+          "file": "/icons/198_Herd_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Mikrowelle",
+          "file": "/icons/199_Mikrowelle_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Kamm",
+          "file": "/icons/200_Kamm_V1.svg",
+          "tags": [
+            "kämmen"
+          ]
+        },
+        {
+          "name": "Haargummi",
+          "file": "/icons/201_Haargummi_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "Märchen",
+          "file": "/icons/202_Märchen_V2.svg",
+          "tags": [
+            "Fee"
+          ]
+        },
+        {
+          "name": "Weihnachtsmann",
+          "file": "/icons/203_Weihnachtsmann_V1.svg",
+          "tags": [
+            "Nikolaus"
+          ]
+        },
+        {
+          "name": "Sternschnuppe",
+          "file": "/icons/204_Sternschnuppe_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Laptop",
+          "file": "/icons/205_Laptop_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Badewanne",
+          "file": "/icons/143_Badewanne_V1.svg",
+          "tags": [
+            "Wanne"
+          ]
+        },
+        {
+          "name": "Gebäude",
+          "file": "/icons/172_Gebäude_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Ring",
+          "file": "/icons/201_Ring_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Computer",
+          "file": "/icons/206_Computer_V1.svg",
+          "tags": [
+            "PC"
+          ]
+        },
+        {
+          "name": "Schürze",
+          "file": "/icons/207_Schürze_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Baustelle",
+          "file": "/icons/208_Baustelle_V1.svg",
+          "tags": [
+            "Absperrung"
+          ]
+        },
+        {
+          "name": "Sportwagen",
+          "file": "/icons/209_Sportwagen_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Rennwagen",
+          "file": "/icons/210_Rennwagen_V1.svg",
+          "tags": [
+            "Rennauto"
+          ]
+        },
+        {
+          "name": "Familie",
+          "file": "/icons/211_Familie_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Bruder",
+          "file": "/icons/212_Bruder_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Schwester",
+          "file": "/icons/213_Schwester_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Sand",
+          "file": "/icons/214_Sand_V1.svg",
+          "tags": [
+            "Sandhaufen",
+            "sandeln"
+          ]
+        },
+        {
+          "name": "Schaufel",
+          "file": "/icons/215_Schaufel_V1.svg",
+          "tags": [
+            "Schippe"
+          ]
+        },
+        {
+          "name": "Notarzt",
+          "file": "/icons/216_Notarzt_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "Patient",
+          "file": "/icons/217_Patient_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Krankenhaus",
+          "file": "/icons/218_Krankenhaus_V1.svg",
+          "tags": [
+            "Hospital"
+          ]
+        },
+        {
+          "name": "Waage",
+          "file": "/icons/219_Waage_V1.svg",
+          "tags": [
+            "Personenwaage",
+            "Gewicht"
+          ]
+        },
+        {
+          "name": "Hut",
+          "file": "/icons/220_Hut_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Sonnenhut",
+          "file": "/icons/221_Sonnenhut_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Mütze",
+          "file": "/icons/222_Mütze_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Schal",
+          "file": "/icons/223_Schal_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Leuchtturm",
+          "file": "/icons/224_Leuchttrum_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Turm",
+          "file": "/icons/224-1_Turm_v1.svg",
+          "tags": []
+        },
+        {
+          "name": "Segelboot",
+          "file": "/icons/225_Segelboot_V1.svg",
+          "tags": [
+            "segeln"
+          ]
+        },
+        {
+          "name": "Motorboot",
+          "file": "/icons/226_Motorboot_V1.svg",
+          "tags": [
+            "Boot"
+          ]
+        },
+        {
+          "name": "Surfer",
+          "file": "/icons/227_Surfer_V1.svg",
+          "tags": [
+            "Surferin",
+            "surfen"
+          ]
+        },
+        {
+          "name": "Möwe",
+          "file": "/icons/228_Möwe_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Motorsäge",
+          "file": "/icons/229_Motorsäge_V1.svg",
+          "tags": [
+            "Säge"
+          ]
+        },
+        {
+          "name": "Rasenmäher",
+          "file": "/icons/230_Rasenmäher_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Kindergarten",
+          "file": "/icons/231_Kindergarten_V2.svg",
+          "tags": [
+            "Kita",
+            "Krippe"
+          ]
+        },
+        {
+          "name": "Schule",
+          "file": "/icons/231_Schule_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Reifen",
+          "file": "/icons/232_Reifen_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Container",
+          "file": "/icons/233_Container_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "Karton",
+          "file": "/icons/234_Karton_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Kiste",
+          "file": "/icons/233_Kiste_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Wasserball",
+          "file": "/icons/235_Wasserball_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Schwimmbad",
+          "file": "/icons/236_Schwimmbad_V1.svg",
+          "tags": [
+            "Schwimmbecken",
+            "schwimmen",
+            "Pool"
+          ]
+        },
+        {
+          "name": "Topf",
+          "file": "/icons/237_Topf_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Deckel",
+          "file": "/icons/238_Deckel_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "Glashaube",
+          "file": "/icons/238_Glashaube_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Mauer",
+          "file": "/icons/239_Mauer_V1.svg",
+          "tags": [
+            "Steinmauer"
+          ]
+        },
+        {
+          "name": "Baustein",
+          "file": "/icons/241_Duplo_V2.svg",
+          "tags": [
+            "Bauklotz"
+          ]
+        },
+        {
+          "name": "Lego",
+          "file": "/icons/240_Lego_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Farbe",
+          "file": "/icons/242_Farbe_V1.svg",
+          "tags": [
+            "malern",
+            "streichen"
+          ]
+        },
+        {
+          "name": "Werkzeug",
+          "file": "/icons/307_Reparieren_V1.svg",
+          "tags": [
+            "reparieren"
+          ]
+        },
+        {
+          "name": "Duplo",
+          "file": "/icons/241_lego_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Hüpfpferd",
+          "file": "/icons/308_Hüpfpferd_V1.svg",
+          "tags": [
+            "Rody"
+          ]
+        },
+        {
+          "name": "Milch",
+          "file": "/icons/243_Milch_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Zucker",
+          "file": "/icons/244_Zucker_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "Mehl",
+          "file": "/icons/244_Mehl_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Salz",
+          "file": "/icons/245_Salz_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Pfeffer",
+          "file": "/icons/246_Pfeffer_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Paprika",
+          "file": "/icons/247_Paprika_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Motorroller",
+          "file": "/icons/248_Motoroller_V1.svg",
+          "tags": [
+            "Mofa"
+          ]
+        },
+        {
+          "name": "Busch",
+          "file": "/icons/249_Busch_V1.svg",
+          "tags": [
+            "Strauch"
+          ]
+        },
+        {
+          "name": "Helm",
+          "file": "/icons/251_Helm_V1.svg",
+          "tags": [
+            "Kopfschutz"
+          ]
+        },
+        {
+          "name": "Knie",
+          "file": "/icons/252_Knie_V1.svg",
+          "tags": [
+            "Knochen"
+          ]
+        },
+        {
+          "name": "Fuß",
+          "file": "/icons/253_Fuß_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Popo",
+          "file": "/icons/254_Popo_V1.svg",
+          "tags": [
+            "Hintern"
+          ]
+        },
+        {
+          "name": "Liege",
+          "file": "/icons/309_Liege_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Anhänger",
+          "file": "/icons/310_Anhänger_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Bully",
+          "file": "/icons/311_Wohnmobil_V1.svg",
+          "tags": [
+            "Bus",
+            "Camper"
+          ]
+        },
+        {
+          "name": "Wohnmobil",
+          "file": "/icons/385_Auto_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Wohnwagen",
+          "file": "/icons/312_Wohnwagen_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Mähdrescher",
+          "file": "/icons/313_Mähdrescher_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Kran",
+          "file": "/icons/314_Kran_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Hubschrauber",
+          "file": "/icons/315_Hubschrauber_V1.svg",
+          "tags": [
+            "Helikopter"
+          ]
+        },
+        {
+          "name": "Rosine",
+          "file": "/icons/316_Rosine_V1.svg",
+          "tags": [
+            "Rosinen"
+          ]
+        },
+        {
+          "name": "Krake",
+          "file": "/icons/317_Krake_V1.svg",
+          "tags": [
+            "Kraken",
+            "Oktopus"
+          ]
+        },
+        {
+          "name": "Hai",
+          "file": "/icons/318_Hai_V1.svg",
+          "tags": [
+            "Haie"
+          ]
+        },
+        {
+          "name": "Muschel",
+          "file": "/icons/319_Muschel_V1.svg",
+          "tags": [
+            "Muscheln"
+          ]
+        },
+        {
+          "name": "Qualle",
+          "file": "/icons/320_Qualle_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Seestern",
+          "file": "/icons/321_Seestern_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Seepferdchen",
+          "file": "/icons/322_Seepferdchen_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Seerobbe",
+          "file": "/icons/323_Seerobbe_V1.svg",
+          "tags": [
+            "Robbe",
+            "Seerobben",
+            "Robben"
+          ]
+        },
+        {
+          "name": "Schlange",
+          "file": "/icons/324_Schlange_V1.svg",
+          "tags": [
+            "Schlangen",
+            "tsssssss"
+          ]
+        },
+        {
+          "name": "Flamingo",
+          "file": "/icons/325_Flamingo_V1.svg",
+          "tags": [
+            "Flamingos"
+          ]
+        },
+        {
+          "name": "Krokodil",
+          "file": "/icons/326_Krokodil_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Pinguin",
+          "file": "/icons/327_Pinguin_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Videospiel",
+          "file": "/icons/250_Spiel_V1.svg",
+          "tags": [
+            "Controller",
+            "Playstation",
+            "PC-Spiel",
+            "Nintendo"
+          ]
+        },
+        {
+          "name": "Eisbär",
+          "file": "/icons/328_Eisbär.svg",
+          "tags": []
+        },
+        {
+          "name": "Zebra",
+          "file": "/icons/329_Zebra_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Polizist",
+          "file": "/icons/330_Polizist_V1.svg",
+          "tags": [
+            "Polizistin"
+          ]
+        },
+        {
+          "name": "Feuerwehrmann",
+          "file": "/icons/331_Feuerwehrmann_V1.svg",
+          "tags": [
+            "Feuerwehrfrau"
+          ]
+        },
+        {
+          "name": "Schlauch",
+          "file": "/icons/332_Schlauch_V1.svg",
+          "tags": [
+            "Wasserschlauch"
+          ]
+        },
+        {
+          "name": "Feuer",
+          "file": "/icons/333_Feuer_V1.svg",
+          "tags": [
+            "Flamme",
+            "Brand"
+          ]
+        },
+        {
+          "name": "Fenster",
+          "file": "/icons/334_Fenster_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Schild",
+          "file": "/icons/335_Schild_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Laterne",
+          "file": "/icons/336_Laterne_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Hagel",
+          "file": "/icons/337_Hagel_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Skateboard",
+          "file": "/icons/338_Skateboard_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Mülltonne",
+          "file": "/icons/339_Müll_V1.svg",
+          "tags": [
+            "Müll"
+          ]
+        },
+        {
+          "name": "Roller",
+          "file": "/icons/340_Roller_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Unfall",
+          "file": "/icons/341_Unfall_V1.svg",
+          "tags": [
+            "Crash"
+          ]
+        },
+        {
+          "name": "Rucksack",
+          "file": "/icons/342_Rucksack_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Seil",
+          "file": "/icons/343_Seil_V1.svg",
+          "tags": [
+            "Springseil"
+          ]
+        },
+        {
+          "name": "Lenker",
+          "file": "/icons/344_Lenker_V1.svg",
+          "tags": [
+            "Lenkrad"
+          ]
+        },
+        {
+          "name": "Tannenbaum",
+          "file": "/icons/345_Tannenbaum_V1.svg",
+          "tags": [
+            "Weihnachtsbaum",
+            "Christbaum"
+          ]
+        },
+        {
+          "name": "Kanarienvogel",
+          "file": "/icons/346_Kanarienvogel_V1.svg",
+          "tags": [
+            "Wellensittich"
+          ]
+        },
+        {
+          "name": "Papagei",
+          "file": "/icons/347_Papagei_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Igel",
+          "file": "/icons/348_Igel_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Maulwurf",
+          "file": "/icons/349_Maulwurf_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Regenwurm",
+          "file": "/icons/350_Regenwurm_V1.svg",
+          "tags": [
+            "Wurm"
+          ]
+        },
+        {
+          "name": "Schnecke",
+          "file": "/icons/351_Schnecke_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Spinne",
+          "file": "/icons/352_Spinne_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Fliege",
+          "file": "/icons/353_Fliege_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Grashüpfer",
+          "file": "/icons/354_Grashüpfer_V1.svg",
+          "tags": [
+            "Grille"
+          ]
+        },
+        {
+          "name": "Biene",
+          "file": "/icons/355_Biene_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Ameise",
+          "file": "/icons/356_Ameise_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Hummel",
+          "file": "/icons/357_Hummel_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Wespe",
+          "file": "/icons/358_Wespe_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Mücke",
+          "file": "/icons/359_Mücke_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Raupe",
+          "file": "/icons/360_Raupe_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Marienkäfer",
+          "file": "/icons/361_Marienkäfer_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "Käfer",
+          "file": "/icons/362_Käfer_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Hahn",
+          "file": "/icons/363_Hahn_V1.svg",
+          "tags": [
+            "kikeriki"
+          ]
+        },
+        {
+          "name": "Ferkel",
+          "file": "/icons/364_Ferkel_V1.svg",
+          "tags": [
+            "Schwein",
+            "Schweinchen"
+          ]
+        },
+        {
+          "name": "Pfau",
+          "file": "/icons/365_Pfau_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Specht",
+          "file": "/icons/366_Specht_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Eule",
+          "file": "/icons/367_Eule_V1.svg",
+          "tags": [
+            "schuhu"
+          ]
+        },
+        {
+          "name": "Fuchs",
+          "file": "/icons/368_Fuchs_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Wildschwein",
+          "file": "/icons/369_Wildschwein__V2.svg",
+          "tags": []
+        },
+        {
+          "name": "Fledermaus",
+          "file": "/icons/370_Fledermaus_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Waschbär",
+          "file": "/icons/371_Waschbär_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Dachs",
+          "file": "/icons/372_Dachs_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Reh",
+          "file": "/icons/373_Reh_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Angel",
+          "file": "/icons/374_Angel_V1.svg",
+          "tags": [
+            "angeln",
+            "fischen"
+          ]
+        },
+        {
+          "name": "Libelle",
+          "file": "/icons/375_Libelle_V1.svg",
+          "tags": [
+            "Liebelle"
+          ]
+        },
+        {
+          "name": "Schwan",
+          "file": "/icons/376_Schwan_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Biber",
+          "file": "/icons/377_Biber_V1.svg",
+          "tags": [
+            "Bieber"
+          ]
+        },
+        {
+          "name": "Frosch",
+          "file": "/icons/378_Frosch_V1.svg",
+          "tags": [
+            "Kröte",
+            "quak",
+            "quack"
+          ]
+        },
+        {
+          "name": "Gans",
+          "file": "/icons/379_Gans_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Krabbe",
+          "file": "/icons/380_Krabbe_V1.svg",
+          "tags": [
+            "Krebs"
+          ]
+        },
+        {
+          "name": "Motorrad",
+          "file": "/icons/381_Motorrad_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Kinderwagen",
+          "file": "/icons/382_Kinderwagen_V1.svg",
+          "tags": [
+            "Wagen",
+            "Karre"
+          ]
+        },
+        {
+          "name": "Bollerwagen",
+          "file": "/icons/383_Bollerwagen_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Fahrrad",
+          "file": "/icons/384_Fahrrad_V1.svg",
+          "tags": [
+            "Rad"
+          ]
+        },
+        {
+          "name": "Auto",
+          "file": "/icons/455_Auto_V1.svg",
+          "tags": [
+            "brumm"
+          ]
+        },
+        {
+          "name": "Dreieck",
+          "file": "/icons/387_Dreieck_V1.svg",
+          "tags": [
+            "Triangel"
+          ]
+        },
+        {
+          "name": "Quadrat",
+          "file": "/icons/388_Quadrat_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Rechteck",
+          "file": "/icons/389_Rechteck_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Herz",
+          "file": "/icons/390_Herz_V1.svg",
+          "tags": [
+            "Liebe"
+          ]
+        },
+        {
+          "name": "Körner",
+          "file": "/icons/391_Körner_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Bohnen",
+          "file": "/icons/392_Bohnen_V1.svg",
+          "tags": [
+            "Bohne"
+          ]
+        },
+        {
+          "name": "Taube",
+          "file": "/icons/393_Taube_V1.svg",
+          "tags": [
+            "Tauben"
+          ]
+        },
+        {
+          "name": "Pflaume",
+          "file": "/icons/394_Pflaume_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Maiskolben",
+          "file": "/icons/395_Mais_V1.svg",
+          "tags": [
+            "Mais"
+          ]
+        },
+        {
+          "name": "Rose",
+          "file": "/icons/396_Rose_V1.svg",
+          "tags": [
+            "Valentinstag"
+          ]
+        },
+        {
+          "name": "Toast",
+          "file": "/icons/397_Toast_V1.svg",
+          "tags": [
+            "Toastbrot"
+          ]
+        },
+        {
+          "name": "Schlüssel",
+          "file": "/icons/398_Schlüssel_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Schüssel",
+          "file": "/icons/399_Schüssel_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Zwerg",
+          "file": "/icons/400_Zwerge_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Erdbeere",
+          "file": "/icons/401_Erdbeere_V1.svg",
+          "tags": [
+            "Erdbeeren"
+          ]
+        },
+        {
+          "name": "Ente",
+          "file": "/icons/402_Ente_V1.svg",
+          "tags": [
+            "Enten"
+          ]
+        },
+        {
+          "name": "Zwiebel",
+          "file": "/icons/403_Zwiebel_V1.svg",
+          "tags": [
+            "Zwiebeln"
+          ]
+        },
+        {
+          "name": "Brokkoli",
+          "file": "/icons/404_Brokkoli_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Kartoffel",
+          "file": "/icons/405_Kartoffel_V1-51.svg",
+          "tags": [
+            "Erdapfel"
+          ]
+        },
+        {
+          "name": "Blumenkohl",
+          "file": "/icons/406_Blumenkohl_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Salat",
+          "file": "/icons/407_Salat_V1.svg",
+          "tags": [
+            "Salatschüssel"
+          ]
+        },
+        {
+          "name": "Lampe",
+          "file": "/icons/408_Lampe_V1.svg",
+          "tags": [
+            "Licht"
+          ]
+        },
+        {
+          "name": "Wecker",
+          "file": "/icons/409_Wecker_V1.svg",
+          "tags": [
+            "Alarm",
+            "klingeln"
+          ]
+        },
+        {
+          "name": "Teekanne",
+          "file": "/icons/410_Teekanne_V1.svg",
+          "tags": [
+            "Kanne"
+          ]
+        },
+        {
+          "name": "Kühlschrank",
+          "file": "/icons/411_Kühlschrank_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Kinderbett",
+          "file": "/icons/412_Kinderbett_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "Bett",
+          "file": "/icons/412_Kinderbett_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Tisch",
+          "file": "/icons/413_Tisch_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Sessel",
+          "file": "/icons/414_Sessel_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Roboter",
+          "file": "/icons/416_Roboter_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Luftballon",
+          "file": "/icons/415_Luftballon_V1.svg",
+          "tags": [
+            "Ballon"
+          ]
+        },
+        {
+          "name": "Puzzle",
+          "file": "/icons/417_Puzzle_V2.svg",
+          "tags": [
+            "Puzzleteil",
+            "Puzzleteile"
+          ]
+        },
+        {
+          "name": "Puppe",
+          "file": "/icons/418_Puppe_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Kreisel",
+          "file": "/icons/419_Kreisel_V1.svg",
+          "tags": [
+            "Brummkreisel"
+          ]
+        },
+        {
+          "name": "Kuchen",
+          "file": "/icons/420_Kuchen_V1.svg",
+          "tags": [
+            "Torte"
+          ]
+        },
+        {
+          "name": "Fisch",
+          "file": "/icons/421_Fisch_V1.svg",
+          "tags": [
+            "Fische",
+            "Goldfisch",
+            "blubb"
+          ]
+        },
+        {
+          "name": "Katze",
+          "file": "/icons/422_Katze_V1.svg",
+          "tags": [
+            "Katzen",
+            "miau"
+          ]
+        },
+        {
+          "name": "Affe",
+          "file": "/icons/423_Affe_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Hose",
+          "file": "/icons/424_Hose_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Ohr",
+          "file": "/icons/425_Ohr_V1.svg",
+          "tags": [
+            "hören"
+          ]
+        },
+        {
+          "name": "Opa",
+          "file": "/icons/427_Opa_V1.svg",
+          "tags": [
+            "Opi",
+            "Großvater",
+            "Großpapa"
+          ]
+        },
+        {
+          "name": "Oma",
+          "file": "/icons/428_Oma_V1.svg",
+          "tags": [
+            "Omi",
+            "Großmama",
+            "Großmutter"
+          ]
+        },
+        {
+          "name": "Banane",
+          "file": "/icons/429_Banane_V1.svg",
+          "tags": [
+            "Bananen"
+          ]
+        },
+        {
+          "name": "Butter",
+          "file": "/icons/430_Butter_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Keks",
+          "file": "/icons/431_Keks_V2.svg",
+          "tags": [
+            "Kekse",
+            "Gebäck"
+          ]
+        },
+        {
+          "name": "Maus",
+          "file": "/icons/432_Maus_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Bär",
+          "file": "/icons/433_Bär_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Bauch",
+          "file": "/icons/434_Bauch_V1.svg",
+          "tags": [
+            "Bauchnabel"
+          ]
+        },
+        {
+          "name": "Mund",
+          "file": "/icons/435_Mund_V1.svg",
+          "tags": [
+            "Zunge",
+            "Zähne"
+          ]
+        },
+        {
+          "name": "Stuhl",
+          "file": "/icons/436_Stuhl_V1.svg",
+          "tags": [
+            "Sitz"
+          ]
+        },
+        {
+          "name": "Haare",
+          "file": "/icons/437_Haare_V1.svg",
+          "tags": [
+            "Frisur"
+          ]
+        },
+        {
+          "name": "Uhr",
+          "file": "/icons/438_Uhr_V1.svg",
+          "tags": [
+            "Zeit",
+            "Uhrzeit"
+          ]
+        },
+        {
+          "name": "Gurke",
+          "file": "/icons/439_Gurke_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Schaf",
+          "file": "/icons/440_Schaf_V1.svg",
+          "tags": [
+            "mäh"
+          ]
+        },
+        {
+          "name": "Ziege",
+          "file": "/icons/441_Ziege_V1.svg",
+          "tags": [
+            "Zicke"
+          ]
+        },
+        {
+          "name": "Esel",
+          "file": "/icons/442_Esel_V1.svg",
+          "tags": [
+            "iah"
+          ]
+        },
+        {
+          "name": "Tiger",
+          "file": "/icons/443_Tiger_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Delfin",
+          "file": "/icons/444_Delfin_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Löwe",
+          "file": "/icons/445_Löwe_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Giraffe",
+          "file": "/icons/446_Girrafe_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Elefant",
+          "file": "/icons/447_Elefant_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Wal",
+          "file": "/icons/448_Wal_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Hamster",
+          "file": "/icons/449_Hamster_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Hund",
+          "file": "/icons/450_Hund_V1.svg",
+          "tags": [
+            "wuff",
+            "wau"
+          ]
+        },
+        {
+          "name": "Schildkröte",
+          "file": "/icons/451_Schildkröte_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Eichhörnchen",
+          "file": "/icons/452_Eichörnchen_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Blume",
+          "file": "/icons/453_Blume_V1.svg",
+          "tags": [
+            "Blüte"
+          ]
+        },
+        {
+          "name": "Schmetterling",
+          "file": "/icons/454_Schmetterling_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Vollmond",
+          "file": "/icons/456_Mond_V1.svg",
+          "tags": [
+            "Planet"
+          ]
+        },
+        {
+          "name": "Mond",
+          "file": "/icons/456_Mond_V2.svg",
+          "tags": [
+            "Mondsichel"
+          ]
+        },
+        {
+          "name": "Baum",
+          "file": "/icons/457_Baum_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Stern",
+          "file": "/icons/458_Stern_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Apfel",
+          "file": "/icons/459_Apfel_V1.svg",
+          "tags": [
+            "Khaki",
+            "Kaki"
+          ]
+        },
+        {
+          "name": "Blaubeeren",
+          "file": "/icons/460_Blaubeeren_V1.svg",
+          "tags": [
+            "Blaubeere"
+          ]
+        },
+        {
+          "name": "Pfirisch",
+          "file": "/icons/461_Pfirsich_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Orange",
+          "file": "/icons/462_Orange_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Ananas",
+          "file": "/icons/463_Ananas_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Birne",
+          "file": "/icons/464_Birne_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Jacke",
+          "file": "/icons/46_Skijacke_V1.svg",
+          "tags": [
+            "Skijacke"
+          ]
+        },
+        {
+          "name": "Einkaufsliste",
+          "file": "/icons/274_Liste_V1.svg",
+          "tags": [
+            "Liste",
+            "Wunschzettel"
+          ]
+        },
+        {
+          "name": "weniger",
+          "file": "/icons/465_Weniger_V2.svg",
+          "tags": [
+            "wenig",
+            "kleiner",
+            "klein"
+          ]
+        },
+        {
+          "name": "weiter",
+          "file": "/icons/466_weiter_V1.svg",
+          "tags": [
+            "fortsetzen"
+          ]
+        },
+        {
+          "name": "mehr",
+          "file": "/icons/466_Mehr_V2.svg",
+          "tags": [
+            "viel"
+          ]
+        },
+        {
+          "name": "nochmal",
+          "file": "/icons/467_Nochmal_V1.svg",
+          "tags": [
+            "erneut",
+            "wieder"
+          ]
+        },
+        {
+          "name": "anziehen",
+          "file": "/icons/468_Anziehen_V1.svg",
+          "tags": [
+            "ankleiden"
+          ]
+        },
+        {
+          "name": "ausziehen",
+          "file": "/icons/469_Ausziehen_V1.svg",
+          "tags": [
+            "umziehen"
+          ]
+        },
+        {
+          "name": "Figur",
+          "file": "/icons/470_Figur_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "da",
+          "file": "/icons/255_Dort_V1.svg",
+          "tags": [
+            "dort"
+          ]
+        },
+        {
+          "name": "tschüss",
+          "file": "/icons/256_Hallo_V1.svg",
+          "tags": [
+            "hallo",
+            "tschau tschau"
+          ]
+        },
+        {
+          "name": "winken",
+          "file": "/icons/285_Kuckuck_V1.svg",
+          "tags": [
+            "winke winke",
+            "hallo"
+          ]
+        },
+        {
+          "name": "Verletzung",
+          "file": "/icons/257_Schmerz_V1.svg",
+          "tags": [
+            "aua",
+            "Verband"
+          ]
+        },
+        {
+          "name": "heiß",
+          "file": "/icons/258_Heiß_V1.svg",
+          "tags": [
+            "schwitzen"
+          ]
+        },
+        {
+          "name": "frieren",
+          "file": "/icons/259_Kalt_V1.svg",
+          "tags": [
+            "kalt",
+            "zittern",
+            "bibbern"
+          ]
+        },
+        {
+          "name": "Tür",
+          "file": "/icons/260_Auf_V1.svg",
+          "tags": [
+            "Türe",
+            "offen",
+            "geöffnet",
+            "auf"
+          ]
+        },
+        {
+          "name": "zu",
+          "file": "/icons/261_Zu_V2.svg",
+          "tags": [
+            "verschlossen",
+            "geschlossen",
+            "Schloss"
+          ]
+        },
+        {
+          "name": "gesperrt",
+          "file": "/icons/261_Zu_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "ja",
+          "file": "/icons/262_Ja_V1.svg",
+          "tags": [
+            "okay",
+            "richtig",
+            "korrekt",
+            "super",
+            "klasse",
+            "spitze",
+            "gut",
+            "toll",
+            "fertig",
+            "passt",
+      "stimmt",
+      "wahr"
+          ]
+        },
+        {
+          "name": "nein",
+          "file": "/icons/263_Nein_V1.svg",
+          "tags": [
+            "falsch",
+            "schlecht",
+            "doof"
+          ]
+        },
+        {
+          "name": "leer",
+          "file": "/icons/264_Alle_leer_V2.svg",
+          "tags": [
+            "alle"
+          ]
+        },
+        {
+          "name": "danke",
+          "file": "/icons/265_Danke_V1.svg",
+          "tags": [
+            "beten",
+            "bitte"
+          ]
+        },
+        {
+          "name": "perfekt",
+          "file": "/icons/266_Bitte_V1.svg",
+          "tags": [
+            "Gefallen"
+          ]
+        },
+        {
+          "name": "rauf",
+          "file": "/icons/267_Rauf_V1.svg",
+          "tags": [
+            "herauf",
+            "hoch",
+            "hinauf",
+      "oben"
+          ]
+        },
+        {
+          "name": "runter",
+          "file": "/icons/268_Runter_V1.svg",
+          "tags": [
+            "herab",
+            "herunter",
+      "runter"
+          ]
+        },
+        {
+          "name": "aufpassen",
+          "file": "/icons/269_Aufpassen_V1.svg",
+          "tags": [
+            "Vorsicht",
+            "Obacht",
+            "Achtung"
+          ]
+        },
+        {
+          "name": "voll",
+          "file": "/icons/270_Voll_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "abbeißen",
+          "file": "/icons/271_Abbeißen_V1.svg",
+          "tags": [
+            "reinbeissen",
+            "abbeissen",
+            "reinbeißen"
+          ]
+        },
+        {
+          "name": "meins",
+          "file": "/icons/272_Meins_V2.svg",
+          "tags": [
+            "ich",
+            "eins"
+          ]
+        },
+        {
+          "name": "deins",
+          "file": "/icons/273_Yours_V1.svg",
+          "tags": [
+            "du"
+          ]
+        },
+        {
+          "name": "wollen",
+          "file": "/icons/275_Haben_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "geben",
+          "file": "/icons/274_geben_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "haben",
+          "file": "/icons/275_Haben_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "essen",
+          "file": "/icons/276_Essen_V1.svg",
+          "tags": [
+            "Hunger",
+            "lecker"
+          ]
+        },
+        {
+          "name": "Sanduhr",
+          "file": "/icons/277_Warten_V1.svg",
+          "tags": [
+            "Zeit",
+            "warten"
+          ]
+        },
+        {
+          "name": "laut",
+          "file": "/icons/278_Laut_V1.svg",
+          "tags": [
+            "Megafon",
+            "Megaphon"
+          ]
+        },
+        {
+          "name": "leise",
+          "file": "/icons/279_Leise_V1.svg",
+          "tags": [
+            "still",
+            "ruhig",
+            "Ruhe",
+            "schweigen"
+          ]
+        },
+        {
+          "name": "fröhlich",
+          "file": "/icons/280_Fröhlich_V1.svg",
+          "tags": [
+            "lachen",
+            "Freude",
+            "froh"
+          ]
+        },
+        {
+          "name": "traurig",
+          "file": "/icons/281_Traurig_V1.svg",
+          "tags": [
+            "Traurigkeit"
+          ]
+        },
+        {
+          "name": "angestrengt",
+          "file": "/icons/282_erschöpft_V1.svg",
+          "tags": [
+            "erschöpft"
+          ]
+        },
+        {
+          "name": "müde",
+          "file": "/icons/282_Müde_V2.svg",
+          "tags": [
+            "Müdigkeit"
+          ]
+        },
+        {
+          "name": "knien",
+          "file": "/icons/283_Knien_V1.svg",
+          "tags": [
+            "beten",
+            "Gebet"
+          ]
+        },
+        {
+          "name": "klatschen",
+          "file": "/icons/284_Klatschen_V1.svg",
+          "tags": [
+            "Applaus"
+          ]
+        },
+        {
+          "name": "kuckuck",
+          "file": "/icons/285_Kuckuck_V2.svg",
+          "tags": []
+        },
+        {
+          "name": "hocken",
+          "file": "/icons/286_Hocken_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "bücken",
+          "file": "/icons/287_Bücken_V1.jpg.svg",
+          "tags": []
+        },
+        {
+          "name": "strecken",
+          "file": "/icons/288_Strecken_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "liegen",
+          "file": "/icons/289_Liegen_V1.svg",
+          "tags": [
+            "schlafen"
+          ]
+        },
+        {
+          "name": "sitzen",
+          "file": "/icons/290_Sitzen_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "gehen",
+          "file": "/icons/291_Gehen_V1.svg",
+          "tags": [
+            "laufen",
+            "rennen"
+          ]
+        },
+        {
+          "name": "stillen",
+          "file": "/icons/292_Stillen_V1.svg",
+          "tags": [
+            "füttern"
+          ]
+        },
+        {
+          "name": "schieben",
+          "file": "/icons/293_Schieben_V1.svg",
+          "tags": [
+            "drücken"
+          ]
+        },
+        {
+          "name": "tragen",
+          "file": "/icons/294_Tragen_V1.svg",
+          "tags": [
+            "heben",
+            "halten"
+          ]
+        },
+        {
+          "name": "schreien",
+          "file": "/icons/295_Schreien_V1.svg",
+          "tags": [
+            "rufen"
+          ]
+        },
+        {
+          "name": "telefonieren",
+          "file": "/icons/296_telefonieren_V1.svg",
+          "tags": [
+            "anrufen"
+          ]
+        },
+        {
+          "name": "weinen",
+          "file": "/icons/297_Weinen_V1.svg",
+          "tags": [
+            "traurig",
+            "Trauer",
+            "wütend"
+          ]
+        },
+        {
+          "name": "schmatzen",
+          "file": "/icons/298_Schmatzen_V2.svg",
+          "tags": [
+            "reinbeissen",
+            "reinbeißen"
+          ]
+        },
+        {
+          "name": "drehen",
+          "file": "/icons/299_Drehen_V1.svg",
+          "tags": [
+            "Drehung",
+            "Tanz",
+            "tanzen"
+          ]
+        },
+        {
+          "name": "robben",
+          "file": "/icons/300_Robben_V2.svg",
+          "tags": [
+            "liegen"
+          ]
+        },
+        {
+          "name": "krabbeln",
+          "file": "/icons/301_Krabbeln_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "schütteln",
+          "file": "/icons/302_Schütteln_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "greifen",
+          "file": "/icons/303_Halten_V1.svg",
+          "tags": [
+            "halten"
+          ]
+        },
+        {
+          "name": "fahren",
+          "file": "/icons/304_Fahren_V1.svg",
+          "tags": [
+            "Bobbycar"
+          ]
+        },
+        {
+          "name": "loslassen",
+          "file": "/icons/470_Los lassen_V2.svg",
+          "tags": [
+            "los lassen",
+            "fallen lassen",
+            "fallenlassen"
+          ]
+        },
+        {
+          "name": "gucken",
+          "file": "/icons/471_Gucken_V1.svg",
+          "tags": [
+            "kucken",
+            "luschern",
+            "schauen"
+          ]
+        },
+        {
+          "name": "machen",
+          "file": "/icons/472_Machen_V1.svg",
+          "tags": [
+            "tun",
+            "erledigen"
+          ]
+        },
+        {
+          "name": "hören",
+          "file": "/icons/473_Hören_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "sehen ",
+          "file": "/icons/474_Sehen_V1.svg",
+          "tags": [
+            "Sicht"
+          ]
+        },
+        {
+          "name": "fühlen",
+          "file": "/icons/475_Fühlen_V1.svg",
+          "tags": [
+            "Gefühl",
+            "Emotion"
+          ]
+        },
+        {
+          "name": "wehtun",
+          "file": "/icons/476_Wehtun_V1.svg",
+          "tags": [
+            "Schmerz",
+            "Schmerzen",
+            "Aua",
+            "Rückenschmerzen"
+          ]
+        },
+        {
+          "name": "basteln",
+          "file": "/icons/477_Basteln_V1.svg",
+          "tags": [
+            "töpfern"
+          ]
+        },
+        {
+          "name": "klettern",
+          "file": "/icons/478_Klettern_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "schlafen",
+          "file": "/icons/479_Schlafen_V1.svg",
+          "tags": [
+            "dösen",
+            "ausruhen"
+          ]
+        },
+        {
+          "name": "kaputt",
+          "file": "/icons/480_Kaputt_V1.svg",
+          "tags": [
+            "zerbrochen"
+          ]
+        },
+        {
+          "name": "dunkel",
+          "file": "/icons/481_Dunkel_V1.svg",
+          "tags": [
+            "schwarz"
+          ]
+        },
+        {
+          "name": "hell",
+          "file": "/icons/482_Hell_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "warm",
+          "file": "/icons/483_Warm_V1.svg",
+          "tags": [
+            "Suppe"
+          ]
+        },
+        {
+          "name": "Eiswüfel",
+          "file": "/icons/484_Eiswürfel_V1.svg",
+          "tags": [
+            "Kälte",
+            "kalt"
+          ]
+        },
+        {
+          "name": "gerade",
+          "file": "/icons/485_Gerade_V1.svg",
+          "tags": [
+            "geradeaus",
+            "da entlang",
+            "Pfeil"
+          ]
+        },
+        {
+          "name": "schief",
+          "file": "/icons/486_Schief_V1.svg",
+          "tags": [
+            "Kurve",
+            "kurvig",
+            "abbiegen"
+          ]
+        },
+        {
+          "name": "hoch",
+          "file": "/icons/487_Hoch_V1.svg",
+          "tags": [
+            "Höhe",
+            "steigen",
+            "Anstieg"
+          ]
+        },
+        {
+          "name": "tief",
+          "file": "/icons/488_Tief_V1.svg",
+          "tags": [
+            "Tiefe",
+            "sinken"
+          ]
+        },
+        {
+          "name": "langsam",
+          "file": "/icons/520_Sanduhr_V1.svg",
+          "tags": [
+            "Zeit"
+          ]
+        },
+        {
+          "name": "boxen",
+          "file": "/icons/298_Schmatzen_V1.svg",
+          "tags": [
+            "hauen"
+          ]
+        },
+        {
+          "name": "schnell",
+          "file": "/icons/490_Schnell_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "klein",
+          "file": "/icons/491_klein_V1.svg",
+          "tags": [
+            "verkleinern",
+            "minimieren"
+          ]
+        },
+        {
+          "name": "groß",
+          "file": "/icons/492_Groß_V1.svg",
+          "tags": [
+            "gross",
+            "vergrößern",
+            "maximieren",
+            "vergrössern"
+          ]
+        },
+        {
+          "name": "dünn",
+          "file": "/icons/493_Dünn_V1.svg",
+          "tags": [
+            "schmal"
+          ]
+        },
+        {
+          "name": "dick",
+          "file": "/icons/494_Dick_V1.svg",
+          "tags": [
+            "breit",
+            "wachsen"
+          ]
+        },
+        {
+          "name": "arbeiten",
+          "file": "/icons/495_Arbeiten_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "rein",
+          "file": "/icons/496_Innen_V1.svg",
+          "tags": [
+            "innen",
+            "drinnen"
+          ]
+        },
+        {
+          "name": "raus",
+          "file": "/icons/497_Außen_V1.svg",
+          "tags": [
+            "draussen",
+            "außen",
+            "aussen",
+            "draußen"
+          ]
+        },
+        {
+          "name": "Kittel",
+          "file": "/icons/45_Kittel_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Maskottchen",
+          "file": "/icons/108_Maskottchen_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Engel",
+          "file": "/icons/498_Engel_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Ampel",
+          "file": "/icons/499_Ampel_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Fieberthermometer",
+          "file": "/icons/502_ Fieberthermometer_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Blatt",
+          "file": "/icons/510_Blatt_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Reißverschluss",
+          "file": "/icons/512_Reißverschluss_V1.svg",
+          "tags": [
+            "Reissverschluss"
+          ]
+        },
+        {
+          "name": "niesen",
+          "file": "/icons/513_Niesen_V1.svg",
+          "tags": [
+            "Schnupfen",
+            "Erkältung",
+            "hatschi"
+          ]
+        },
+        {
+          "name": "auch",
+          "file": "/icons/504_ Auch_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Zahlen",
+          "file": "/icons/505_ zählen_V2-06.svg",
+          "tags": [
+            "zählen",
+            "1, 2, 3",
+            "Eins, zwei, drei"
+          ]
+        },
+        {
+          "name": "Staubsauger",
+          "file": "/icons/506_Staubsauger_V1.svg",
+          "tags": [
+            "saugen",
+            "staubsaugen"
+          ]
+        },
+        {
+          "name": "Dreck",
+          "file": "/icons/514_Staub_V1.svg",
+          "tags": [
+            "Staub",
+            "dreckig",
+            "staubig"
+          ]
+        },
+        {
+          "name": "Nilpferd",
+          "file": "/icons/507_Nilpferd_V1.svg",
+          "tags": [
+            "Nielpferd"
+          ]
+        },
+        {
+          "name": "an",
+          "file": "/icons/518_an_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "aus",
+          "file": "/icons/517_aus_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "fertig",
+          "file": "/icons/515_fertig_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "aufräumen",
+          "file": "/icons/509_Aufräumen_V1.svg",
+          "tags": [
+            "sortieren"
+          ]
+        },
+        {
+          "name": "Leiter",
+          "file": "/icons/508_Leiter_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "zählen",
+          "file": "/icons/505_ zählen_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Glocke",
+          "file": "/icons/521_Glocke_V1.svg",
+          "tags": [
+            "Glöckchen",
+            "Klingel",
+            "klingeling",
+            "dingdong",
+            "Alarm"
+          ]
+        },
+        {
+          "name": "lesen",
+          "file": "/icons/10_Buch_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "asiatisch",
+          "file": "/icons/15_Nudel_V1.svg",
+          "tags": [
+            "Nudelsuppe"
+          ]
+        },
+        {
+          "name": "Nikolausstrumpf",
+          "file": "/icons/48_Socken_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Weihnachtsmannschlitten",
+          "file": "/icons/132_Schlitten_V1.svg",
+          "tags": [
+            "Schlitten"
+          ]
+        },
+        {
+          "name": "Taschentuch",
+          "file": "/icons/147_Tuch_V1.svg",
+          "tags": []
+        }
+      ]
   },
+  "format": [
+      {
+          "id": 1,
+          "name": "Canvas",
+          "slug": "canvas",
+          "preview": "/img/canvas.png",
+          "variations": [
+              {
+                  "id": 1,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 20,
+                  "width": 20,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 2,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 30,
+                  "width": 20,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 3,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 40,
+                  "width": 40,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 4,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 60,
+                  "width": 40,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 5,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 80,
+                  "width": 60,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 6,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 100,
+                  "width": 75,
+                  "unit": "cm",
+                  "price": "0.0"
+              }
+          ],
+          "images": [
+              "/img/canvas.png",
+              "/img/canvas-1.png",
+              "/img/canvas-2.png",
+              "/img/canvas-3.png"
+          ]
+      },
+      {
+          "id": 2,
+          "name": "Picture in frame",
+          "slug": "wallboard",
+          "preview": "./img/frame.png",
+          "variations": [
+              {
+                  "id": 1,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 40,
+                  "width": 30,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 2,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 60,
+                  "width": 40,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 3,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 90,
+                  "width": 60,
+                  "unit": "cm",
+                  "price": "0.0"
+              }
+          ],
+          "images": [
+              "/img/frame.png",
+              "/img/frame-1.png",
+              "/img/frame-2.png",
+              "/img/frame-3.png"
+          ]
+      },
+      {
+          "id": 3,
+          "name": "Wallboard",
+          "slug": "wallboard",
+          "preview": "/img/wallboard.png",
+          "variations": [
+              {
+                  "id": 1,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 20,
+                  "width": 20,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 2,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 30,
+                  "width": 20,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 3,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 40,
+                  "width": 40,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 4,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 60,
+                  "width": 40,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 5,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 80,
+                  "width": 60,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 6,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 100,
+                  "width": 75,
+                  "unit": "cm",
+                  "price": "0.0"
+              }
+          ],
+          "images": [
+              "/img/wallboard.png",
+              "/img/wallboard-1.png",
+              "/img/wallboard-2.png",
+              "/img/wallboard-3.png"
+          ]
+      }
+  ],
+  "tutorial": {
+      "active": true,
+      "steps": [
+           {
+              "content": "Herzlich willkommen, schön dass du da bist! Wir zeigen dir kurz die wichtigsten Werkzeuge auf dem Weg zu deiner zauberhaften Wortcollage.",
+              "placement": "center",
+              "target": "body"
+          },
+          {
+              "target": ".pixgen-sidebar",
+              "placement": "right",
+              "content": "Hier gibst du die Worte ein. \n\n Das \"gemeinte Wort\" gehört in das erste Feld. \n\n Dann kannst du dir ein passendes Icon aussuchen und anschließend in das zweite Feld das \"gesprochene Wort\" eingeben. \n\n Im \"Titel\" kannst du der Collage eine Überschrift geben.",
+              "disableScrolling": true,
+              "disableBeacon": true,
+              "disableOverlayClose": true,
+              "hideCloseButton": true
+          },
+          {
+              "target": ".pixgen-panel",
+              "placement": "left",
+              "content": "Hier kannst du Einstellungen verändern. \n\n a) Solltest du beim Gestalten deiner Collage feststellen, dass die gewählte Größe nicht passt, dann kannst du dir hier eine andere aussuchen oder sogar das Produkt verändern. Deine Eingaben bleiben bestehen. \n\n b) Die Hintergrundfarbe sowie die Schriftfarbe \n\n c) den Aufbau deiner Collage.",
+              "TextAlignment": "left",
+              "disableScrolling": true,
+              "disableBeacon": true,
+              "disableOverlayClose": true,
+              "hideCloseButton": true
+          },
+          {
+              "target": ".pixgen-editor-frame",
+              "placement": "left",
+              "content": "Hier kannst du per \"Drag&Drop\" die Wörter verschieben und damit die Reihenfolge verändern. Zudem kannst du per Klick auf das Wort oberhalb der Collage die Schriftart verändern.",
+              "disableScrolling": true,
+              "disableBeacon": true,
+              "disableOverlayClose": true,
+              "hideCloseButton": true
+          }
+      ]
+  },
+  "fonts": ["comfortaa", "mexcellent", "stripey", "marqueemoon"],
   "toolbar": {
-    "fontFamily": true,
-    "fontSpacing": true
+      "fontFamily": true,
+      "fontSpacing": true
+  },
+  "mail": {
+      "apikey": "JKH6876JKHJK8768HK",
+      "apiurl": "https://apipixgen.vps2231243.fastwebserver.de/api/v1/mail"
+  },
+  "wordpress": {
+      "active": false,
+      "baseUrl": "https://new.wordpix.de",
+      "currency": "EUR",
+      "currencySymbol": "€",
+      "currencyPosition": "right_space",
+      "cartSlug": "/warenkorb",
+      "attributeSlug": "pa_size",
+      "pluginPath": "/wp-content/plugins/pixgen-editor/pixgen",
+      "consumerKey": "ck_7e58e70e77db57648b0b3476586b3263b5d3fb22",
+      "consumerSecret": "cs_45471bc5f7ee555f92b149e8cda4def4d9cf7f5d"
   }
 }
