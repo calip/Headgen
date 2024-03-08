@@ -1,0 +1,632 @@
+{
+  "appId": 102,
+  "appName": "Pixgen Admin Panel",
+  "language": "en",
+  "admin": true,
+  "layout": {
+      "format": null,
+      "width": 40,
+      "height": 60,
+      "padding": 1,
+      "orientation": "portrait",
+      "unit": "px",
+      "dpc": 100,
+      "border": true,
+      "backgroundColor": "transparent",
+      "fontColor": "#000000",
+      "imagePlaceholder": "/img/placeholder.png"
+  },
+  "templates": [
+      {
+          "id": 1,
+          "name": "Mehrzeiler",
+          "layout": [
+              2,
+              3,
+              2,
+              3,
+              2,
+              2
+          ],
+          "fontTitle": "mexcellent",
+          "fonts": [
+              "stripey",
+              "mexcellent",
+              "comfortaa"
+          ]
+      },
+      {
+          "id": 2,
+          "name": "Einfach gehalten",
+          "layout": [
+              1,
+              2
+          ],
+          "fontTitle": "mexcellent",
+          "fonts": [
+              "stripey",
+              "mexcellent",
+              "comfortaa"
+          ]
+      },
+      {
+          "id": 3,
+          "name": "Einzeiler",
+          "layout": [
+              1
+          ],
+          "fontTitle": "mexcellent",
+          "fonts": [
+              "stripey",
+              "mexcellent",
+              "comfortaa"
+          ]
+      },
+      {
+          "id": 4,
+          "name": "Wildes Durcheinander",
+          "layout": [
+              3,
+              2,
+              1,
+              4,
+              3,
+              1,
+              2,
+              3
+          ],
+          "fontTitle": "comfortaa",
+          "fonts": [
+              "stripey",
+              "mexcellent",
+              "comfortaa"
+          ]
+      }
+  ],
+  "input": {
+      "max": null,
+      "defaultIcon": [
+        "standard eins",
+    "standard zwei",
+    "standard drei"
+      ],
+      "showTitle": true,
+      "placeholderIcon": "Frage",
+      "icons": [
+        {
+          "name": "Standard Eins",
+          "file": "/icons/Standard_Sterne.svg",
+          "tags": []
+        },
+        {
+          "name": "Standard Zwei",
+          "file": "/icons/Standard_Stern.svg",
+          "tags": []
+        },
+        {
+          "name": "Standard Drei",
+          "file": "/icons/Standard_Welle.svg",
+          "tags": []
+        },
+        {
+          "name": "Frage",
+          "file": "/icons/519_wo_V1.svg",
+          "tags": [
+            "wo",
+            "Fragezeichen",
+            "warum"
+          ]
+        },
+        {
+          "name": "kuscheln",
+          "file": "/icons/501_kuscheln_V1.svg",
+          "tags": [
+            "umarmen"
+          ]
+        },
+        {
+          "name": "umarmen",
+          "file": "/icons/500_umarmen_V1.svg",
+          "tags": [
+            "Freundinnen",
+            "Freunde"
+          ]
+        },
+        {
+          "name": "Anker",
+          "file": "/icons/503_Anker_V1.svg",
+          "tags": []
+        },
+        {
+          "name": "Tannenzapfen",
+          "file": "/icons/511_Tannenzapfen_V1.svg",
+          "tags": [
+            "Zapfen"
+          ]
+        },
+        {
+          "name": "Gorilla",
+          "file": "/icons/516_Gorilla_V1.svg",
+          "tags": []
+        }
+      ]
+  },
+  "format": [
+      {
+          "id": 1,
+          "name": "Canvas",
+          "slug": "canvas",
+          "preview": "/img/canvas.png",
+          "variations": [
+              {
+                  "id": 1,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 20,
+                  "width": 20,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 2,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 30,
+                  "width": 20,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 3,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 40,
+                  "width": 40,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 4,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 60,
+                  "width": 40,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 5,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 80,
+                  "width": 60,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 6,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 100,
+                  "width": 75,
+                  "unit": "cm",
+                  "price": "0.0"
+              }
+          ],
+          "images": [
+              "/img/canvas.png",
+              "/img/canvas-1.png",
+              "/img/canvas-2.png",
+              "/img/canvas-3.png"
+          ]
+      },
+      {
+          "id": 2,
+          "name": "Picture in frame",
+          "slug": "wallboard",
+          "preview": "./img/frame.png",
+          "variations": [
+              {
+                  "id": 1,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 40,
+                  "width": 30,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 2,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 60,
+                  "width": 40,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 3,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 90,
+                  "width": 60,
+                  "unit": "cm",
+                  "price": "0.0"
+              }
+          ],
+          "images": [
+              "/img/frame.png",
+              "/img/frame-1.png",
+              "/img/frame-2.png",
+              "/img/frame-3.png"
+          ]
+      },
+      {
+          "id": 3,
+          "name": "Wallboard",
+          "slug": "wallboard",
+          "preview": "/img/wallboard.png",
+          "variations": [
+              {
+                  "id": 1,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 20,
+                  "width": 20,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 2,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 30,
+                  "width": 20,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 3,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 40,
+                  "width": 40,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 4,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 60,
+                  "width": 40,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 5,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 80,
+                  "width": 60,
+                  "unit": "cm",
+                  "price": "0.0"
+              },
+              {
+                  "id": 6,
+                  "metadata": [
+                    {
+                      "key": "pixgen_template_select",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pixgen_font_select",
+                      "value": ["comfortaa", "italianno", "mexcellent", "stripey", "marqueemoon"]
+                    },
+                    {
+                      "key": "pixgen_font_check",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "pixgen_space_check",
+                      "value": "yes"
+                    }
+                  ],
+                  "height": 100,
+                  "width": 75,
+                  "unit": "cm",
+                  "price": "0.0"
+              }
+          ],
+          "images": [
+              "/img/wallboard.png",
+              "/img/wallboard-1.png",
+              "/img/wallboard-2.png",
+              "/img/wallboard-3.png"
+          ]
+      }
+  ],
+  "tutorial": {
+      "active": true,
+      "steps": [
+           {
+              "content": "Herzlich willkommen, schön dass du da bist! Wir zeigen dir kurz die wichtigsten Werkzeuge auf dem Weg zu deiner zauberhaften Wortcollage.",
+              "placement": "center",
+              "target": "body"
+          },
+          {
+              "target": ".pixgen-sidebar",
+              "placement": "right",
+              "content": "Hier gibst du die Worte ein. \n\n Das \"gemeinte Wort\" gehört in das erste Feld. \n\n Dann kannst du dir ein passendes Icon aussuchen und anschließend in das zweite Feld das \"gesprochene Wort\" eingeben. \n\n Im \"Titel\" kannst du der Collage eine Überschrift geben.",
+              "disableScrolling": true,
+              "disableBeacon": true,
+              "disableOverlayClose": true,
+              "hideCloseButton": true
+          },
+          {
+              "target": ".pixgen-panel",
+              "placement": "left",
+              "content": "Hier kannst du Einstellungen verändern. \n\n a) Solltest du beim Gestalten deiner Collage feststellen, dass die gewählte Größe nicht passt, dann kannst du dir hier eine andere aussuchen oder sogar das Produkt verändern. Deine Eingaben bleiben bestehen. \n\n b) Die Hintergrundfarbe sowie die Schriftfarbe \n\n c) den Aufbau deiner Collage.",
+              "TextAlignment": "left",
+              "disableScrolling": true,
+              "disableBeacon": true,
+              "disableOverlayClose": true,
+              "hideCloseButton": true
+          },
+          {
+              "target": ".pixgen-editor-frame",
+              "placement": "left",
+              "content": "Hier kannst du per \"Drag&Drop\" die Wörter verschieben und damit die Reihenfolge verändern. Zudem kannst du per Klick auf das Wort oberhalb der Collage die Schriftart verändern.",
+              "disableScrolling": true,
+              "disableBeacon": true,
+              "disableOverlayClose": true,
+              "hideCloseButton": true
+          }
+      ]
+  },
+  "fonts": ["comfortaa", "mexcellent", "stripey", "marqueemoon"],
+  "toolbar": {
+      "fontFamily": true,
+      "fontSpacing": true
+  },
+  "mail": {
+      "apikey": "XXXXXXXXXXX",
+      "apiurl": "https://demo.pixgen/api/v1/mail"
+  },
+  "wordpress": {
+      "active": false,
+      "baseUrl": "https://demo.pixgen",
+      "currency": "EUR",
+      "currencySymbol": "€",
+      "currencyPosition": "right_space",
+      "cartSlug": "/warenkorb",
+      "attributeSlug": "pa_size",
+      "pluginPath": "/wp-content/plugins/pixgen-editor/pixgen",
+      "consumerKey": "XXXXXXXXXXX",
+      "consumerSecret": "XXXXXXXXXXX"
+  }
+}
